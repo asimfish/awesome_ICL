@@ -1,0 +1,1965 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><title>One-Shot 技能习得调研全文</title><style>
+@page{size:A4;margin:22mm 18mm 20mm 18mm}
+body{font-family:"PingFang SC","Hiragino Sans GB",sans-serif;color:#1a2332;line-height:1.75;font-size:10.5pt;max-width:none;margin:0}
+h1{font-size:17pt;color:#0b3a53;border-bottom:2.5px solid #0e7490;padding-bottom:8px;margin:0 0 14px;line-height:1.4;page-break-before:always}
+h1.first{page-break-before:avoid}
+h2{font-size:13pt;color:#0e7490;margin:20px 0 8px}
+h3{font-size:11pt;color:#1a2332;margin:14px 0 6px}
+blockquote{border-left:3px solid #0e7490;background:#f0f7fa;padding:8px 14px;margin:10px 0;color:#41586b;font-size:9.5pt}
+blockquote p{margin:2px 0}
+table{border-collapse:collapse;width:100%;font-size:9pt;margin:10px 0}
+th{background:#0b3a53;color:#fff;padding:5px 8px;text-align:left;font-weight:600}
+td{border:1px solid #cdd9e1;padding:4.5px 8px;vertical-align:top}
+tr:nth-child(even) td{background:#f4f8fa}
+code{background:#eef2f5;padding:1px 5px;border-radius:3px;font-size:9pt;font-family:Menlo,monospace}
+strong{color:#0b3a53}
+li{margin-bottom:3px}
+p{margin:6px 0}
+hr{border:none;border-top:1px solid #dde5ea;margin:16px 0}
+.cover{page-break-after:always;padding-top:180px;text-align:left}
+.cover .t1{font-size:26pt;font-weight:700;color:#0b3a53;line-height:1.35;margin-bottom:14px}
+.cover .t2{font-size:13pt;color:#41586b;margin-bottom:40px;line-height:1.7}
+.cover .meta{font-size:10.5pt;color:#6b7f8f;line-height:2.1}
+.toc{page-break-after:always}
+.toc h1{page-break-before:avoid}
+.toc ol{font-size:11pt;line-height:2.3;color:#1a2332;padding-left:1.4em}
+</style></head><body>
+<div class="cover">
+  <div class="t1">机器人 One-Shot 技能习得<br>调研全文报告</div>
+  <div class="t2">HOST（arXiv 2607.20033）× GEN-1.5 及同期 10 项工作的深度解读与趋势洞察<br>从「训练问题」到「提示问题」的范式拐点</div>
+  <div class="meta">调研日期：2026-08-31<br>论文范围：HOST · GEN-0/1/1.5 · Instant Policy · ICRT · RoboTTT · BPP · RICL · Vid2Robot · ViVLA · π0.5 · Wall-OSS · EgoScale · Fast-WAM<br>配套材料：12 篇论文中英对照 PDF · 19 页汇总 PPT（survey_slides.html / .pdf）</div>
+</div>
+<div class="toc"><h1 class="first" style="page-break-before:avoid">目录</h1><ol><li>HOST 深度解读：机器人从一段人类视频里秒级习得操作技能</li><li>GEN 系列深度解读：Generalist AI 的具身基础模型三部曲</li><li>Instant Policy 深度解读：把 in-context 模仿学习变成图扩散，用仿真伪演示喂出即时策略</li><li>ICRT 深度解读：next-token prediction 原教旨主义的机器人 in-context learning 配方</li><li>RoboTTT 深度解读：把 Test-Time Training 装进机器人策略，上下文扩到 8K 步</li><li>BPP 深度解读：一条演示当 prompt，任务多样性是 in-context 操作的第一驱动力</li><li>RICL 深度解读：给预训练 VLA 事后注入 in-context 学习能力</li><li>Vid2Robot 深度解读：端到端视频条件策略的 Google 规模实践</li><li>外围论文速览：one-shot 技能习得调研的五个坐标</li><li>趋势与洞察：机器人 One-Shot 技能习得的 2026 拐点</li></ol></div>
+<article id="ch1"><h1 class="first" id="host-深度解读机器人从一段人类视频里秒级习得操作技能">HOST
+深度解读：机器人从一段人类视频里秒级习得操作技能</h1>
+<blockquote>
+<p><strong>HOST: Robots Acquire Manipulation Skills in Seconds from a
+Single Human Video</strong> arXiv 2607.20033v4（2026-08-20 更新）·
+北京理工大学 + X SQUARE ROBOT（自变量机器人）+ 清华大学 作者：Guangyan
+Chen 等；项目负责：Xiaofan Li；通讯：Hao Wang、Mengyin Fu、Yi
+Yang、Yufeng Yue 2026-08-03 起论文、代码、模型权重全部开源（GitHub /
+HuggingFace）</p>
+</blockquote>
+<hr />
+<h2 id="1-一句话定位">1. 一句话定位</h2>
+<p>HOST
+把「教机器人一个新技能」从训练环节挪到了推理环节：给一段人类演示视频（不需要遥操作、不需要微调、不更新任何参数），机器人平均
+29 秒后就能执行这个新任务，50 个未见任务平均成功率
+62%，同时已掌握的旧技能一点不丢。</p>
+<p>对照今天的主流做法——每个新任务先遥操作采集几十条演示、再离线微调几小时、还会把旧技能冲掉——HOST
+相当于把「学费」从 4.0-4.9 小时/任务压到 29 秒/任务（507
+倍加速），把数据需求从 50 条机器人演示压到 1 段人类视频（50
+倍缩减），成功率还反超微调基线 6 个百分点（62% vs Wall-OSS+SFT 的
+56%）。</p>
+<h2 id="2-要解决的问题训练环节循环的三重代价">2.
+要解决的问题：训练环节循环的三重代价</h2>
+<p>当前教机器人新技能的标准流程是一个「训练环节循环」（training-time
+loop）：</p>
+<ol type="1">
+<li><strong>贵</strong>：熟练操作员遥操作实体机器人采集专用演示，消耗专家人力和稀缺的机器人时间；</li>
+<li><strong>慢</strong>：离线微调把演示灌进策略要几个小时，新技能才可用；</li>
+<li><strong>自毁</strong>：微调覆写跨技能共享的参数，每学一个新技能都会侵蚀旧技能（灾难性遗忘）。论文实测：π0.5+SFT
+微调后旧任务只保留 20% 原性能，HOST-base+SFT 保留 22%，最好的
+Wall-OSS+SFT 也只保留 43%。</li>
+</ol>
+<p>强化学习路线更不可行：任务特定奖励在实体机器人上难设计、交互慢、样本效率低，而且同样会退化旧技能。</p>
+<p>人类的对照组是显性的：看别人做一遍，把观察到的动作适配到自己身体上，不需要反复物理排练。这个设定在学术上叫
+one-shot visual imitation（OSVI），可以追溯到 Kuniyoshi 1994
+年的「learning by watching」愿景，但三十年来一直没做通——此前最强 OSVI
+方法在 HOST 的评测里只有 19% 成功率（HOST 62%，+43%）。</p>
+<h2 id="3-为什么-osvi-一直做不通视频与执行的结构性错配">3. 为什么 OSVI
+一直做不通：视频与执行的结构性错配</h2>
+<p>论文对失败根源的分析是全文最有洞察力的部分。以往方法把演示视频当条件输入直接回归动作，预测目标锚定在执行轨迹的固定时间偏移上。这有三个结构性问题：</p>
+<p><strong>（1）时间错位把视频降格为被动上下文。</strong>
+视频演示和机器人执行是两个独立进程，速度天然不同步。把预测目标绑定在机器人轨迹的固定时间偏移上，等于让目标和视频内容解耦——模型学到的是「忽略视频照常预测」，推理时自然无法从新视频里学到新技能。</p>
+<p><strong>（2）状态差异阻碍行为到动作的转译。</strong>
+整段视频一次性喂给模型，充斥着与当前阶段无关的状态；即使在对应片段上，人类视频和机器人轨迹在具身、视角、外观上差异巨大。从高维视频直接回归低维动作，模型要一步跨过所有这些鸿沟。</p>
+<p><strong>（3）成对监督稀缺。</strong>
+人类视频很多、机器人轨迹也很多，但「同一行为的人类-机器人配对数据」极少，可靠的跨具身技能习得学不出来。</p>
+<h2 id="4-host-的两大机制">4. HOST 的两大机制</h2>
+<h3 id="41-机制一把预测目标耦合到演示上target-coupling">4.1
+机制一：把预测目标耦合到演示上（Target Coupling）</h3>
+<p>核心思想：预测目标不再是「执行轨迹上固定时间偏移处的片段」，而是「与视频未来进展逐步对应的机器人轨迹动态片段」——视频从被动条件变成预测的主动驱动者。</p>
+<p>实现靠一个自监督对齐模块，把视频演示和机器人轨迹映射到<strong>共享任务进度流形</strong>上：</p>
+<ul>
+<li>帧嵌入模型基于
+Qwen3-VL-Embedding-8B，端到端训练，多视角观测拼成图像序列，取 [EOS]
+位置隐状态经线性投影 + L2 归一化得到帧嵌入；</li>
+<li>用负平方 L2 距离建相似度矩阵，列向 log-softmax
+归一化成代价矩阵；</li>
+<li><strong>Smooth
+DTW</strong>（可微分动态时间规整）前向-后向动态规划恢复单调软匹配概率，配合<strong>时间循环一致性损失（TCC）</strong>（每帧经软最近邻循环回自身，惩罚偏差）和
+DTW 全局对齐损失，完全不需要帧级标注；</li>
+<li>得到双向帧对应后，对机器人时刻 t：先映射到视频对应帧，取视频后续 H
+帧，再映射回机器人轨迹，得到的 H 个机器人时刻片段就是预测目标。</li>
+</ul>
+<p>对齐质量的硬数字：按时钟时间匹配的进度误差为
+0.079±0.062，进度流形对齐为
+<strong>0.006±0.008，一个数量级的改善</strong>（以人工标注事件为参照）。</p>
+<p>消融链条证明每个成分都必要（50 个新任务平均成功率）：</p>
+<ul>
+<li>整段视频直接条件化：0.21</li>
+<li>按时间戳选窗口：0.29</li>
+<li>按任务进度选窗口：0.45</li>
+<li>目标耦合到视频未来进展（完整机制）：<strong>0.62</strong></li>
+</ul>
+<h3 id="42-机制二自接地预测级联self-grounded-prediction">4.2
+机制二：自接地预测级联（Self-Grounded Prediction）</h3>
+<p>模仿人类观察学习的认知级联（检索任务相关片段→内部模拟动作→转译为执行），HOST
+把执行拆成单一自回归扩散模型内的三级因果级联：</p>
+<ol type="1">
+<li><strong>定位</strong>：机器人当前处在演示流程的哪个阶段（输出标量进度
+p）；</li>
+<li><strong>未来观测预测</strong>：把视频即将发生的进展转译成<strong>机器人自己视角、自己具身</strong>的未来观测（这一步完成跨域翻译）；</li>
+<li><strong>动作生成</strong>：从预测的未来观测导出动作。</li>
+</ol>
+<p>关键架构细节：</p>
+<ul>
+<li>所有视觉元素（视频窗口、近期机器人观测、目标未来观测）用 <strong>Wan
+VAE</strong> 编码到共享隐空间；</li>
+<li>主干是<strong>双专家 Mixture-of-Transformers</strong>：视频专家从
+Wan2.2
+视频扩散模型初始化（负责定位+未来观测预测），动作专家同深度但更窄（动作分布复杂度低）；两专家在每层拼接
+QKV 共享自注意力，FFN 各自独立；</li>
+<li>语言指令经 UMT5-XXL 编码 + 本体状态投影，作为每层 cross-attention
+条件；</li>
+<li><strong>自回归 flow matching</strong>：每个生成目标表示为（噪声
+token，干净 token）对，因果注意力掩码强制 p→o→a 顺序，训练时干净 token
+用真值（detach 梯度）+
+小幅高斯噪声弥合训练-推理差距，三个目标在单次前向里联合优化；</li>
+<li>推理时视频窗口按预测进度自主推进（w_{t+1} = 定位帧 - L/2），执行 H
+步动作块后进入下一轮。</li>
+</ul>
+<p>消融链条（同样 50 任务）：</p>
+<ul>
+<li>视频直接映射动作（保留目标耦合）：0.34</li>
+<li><ul>
+<li>定位级：0.43</li>
+</ul></li>
+<li><ul>
+<li>视觉预测级（与动作并行）：0.55</li>
+</ul></li>
+<li><ul>
+<li>因果级联（动作从预测观测导出）：<strong>0.62</strong></li>
+</ul></li>
+</ul>
+<p>两条消融合起来读：<strong>目标耦合贡献 0.21→0.62
+里的大头，级联在耦合基础上再贡献 0.34→0.62</strong>。定位精度 MAE
+0.013（归一化进度），预测的未来观测能跨物体外观和初始配置变化保持准确。</p>
+<h3 id="43-两阶段训练绕开成对数据稀缺">4.3
+两阶段训练：绕开成对数据稀缺</h3>
+<ul>
+<li><strong>Stage 1（同具身预训练）</strong>：193,462 条机器人轨迹、229
+个任务。同任务的不同 episode
+天然构成「演示-执行」对（一条当视频，另一条提供目标观测和动作），教会模型「跟随演示流程」的能力，完全不涉及跨具身。</li>
+<li><strong>Stage 2（跨具身适配）</strong>：5,847
+条自采人类视频，与同任务机器人轨迹配对。目标仍来自机器人轨迹，只是条件视频换成人类视频。</li>
+</ul>
+<p>数据配比是
+33:1——同具身数据便宜管够，人类-机器人配对只要一小撮。消融证明 Stage 1
+数据量单调提升最终性能，0% Stage 1（只用 Stage 2
+数据）性能很差。<strong>这个两阶段设计是 HOST
+能落地的工程关键</strong>：它把「跨具身技能习得」这个难题分解成「跟随演示」（数据充裕）+「跨域适配」（数据稀缺但需求量小）。</p>
+<h3 id="44-技能持久化视频即技能库">4.4 技能持久化：视频即技能库</h3>
+<p>习得的技能以视频形式存在外部记忆里（不写进权重）：每段视频连同指令文本嵌入和初始场景嵌入（均由
+Qwen3-VL-Embedding-8B 编码）入库；新任务来了按「指令相似度 ω +
+场景相似度 (1-ω)」加权检索，超过阈值 δ
+就复用库存视频，否则请求新演示。实测：召回旧任务和识别新任务在很宽的阈值带内同时保持高位；用检索视频执行
+≈ 用新录视频执行。</p>
+<p>这个设计把「持续学习」的灾难性遗忘问题直接架空了——技能在上下文里而不在参数里，自然谈不上遗忘。</p>
+<h2 id="5-实验结果全景">5. 实验结果全景</h2>
+<p>平台：双臂 ARX R5（各 6 轴 + 平行夹爪），3 个 RGB 相机（双腕装 +
+一个第三人称固定位），20 维双臂动作空间。每任务 20
+次试验，随机初始物体位姿，人工判定成功。任务集覆盖放水果、堆碗、擦盘子、插笔等
+50 项训练阶段未见的桌面操作。</p>
+<table>
+<thead>
+<tr>
+<th>对比对象</th>
+<th>条件</th>
+<th>成功率</th>
+<th>HOST 优势</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>HOST</td>
+<td>1 段人类视频，零参数更新</td>
+<td><strong>62%</strong></td>
+<td>—</td>
+</tr>
+<tr>
+<td>Vid2Robot / AWDA（OSVI）</td>
+<td>同样 1 段人类视频</td>
+<td>≤19%</td>
+<td>+43%</td>
+</tr>
+<tr>
+<td>π0.5 / Wall-OSS（零样本 IL）</td>
+<td>语言指令</td>
+<td>≤17%</td>
+<td>+45%</td>
+</tr>
+<tr>
+<td>Wall-OSS+SFT（最强微调基线）</td>
+<td>50 条遥操作演示 + LoRA 微调</td>
+<td>56%</td>
+<td>+6%，数据 1/50，速度 507 倍</td>
+</tr>
+</tbody>
+</table>
+<p>细节值得注意：OSVI 基线的条件机制被移植到 HOST
+同款主干上评测（排除主干差异），π0.5 和 Wall-OSS
+则从各自大规模预训练权重继续在同一批 193k
+轨迹上训练——对比是公平口径。</p>
+<p><strong>鲁棒性</strong>（四种部署扰动下保留大部分性能）：光照/颜色偏移
+-1%、未见物体替换 -4%、场景替换 -6%、执行中人为移动物体
+-9%。最后一项最有说服力：人在机器人执行中途移动物体，模型的定位级会感知进度倒退，重新对齐视频对应阶段并纠正执行——这是级联结构的直接红利。</p>
+<h2 id="6-局限作者自认--延伸批判">6. 局限（作者自认 + 延伸批判）</h2>
+<p>作者列了三条：单一双臂平台未验证跨机器人形态迁移；视频不携带接触力信息，精细操作受限（提出可穿戴触觉手套方向）；技能库检索在指令/场景细微差异时可能混淆。</p>
+<p>延伸几条论文没明说的：</p>
+<ol type="1">
+<li><strong>62% 离部署仍远</strong>。20
+次试验的成功判定是人工的，任务多为桌面短程操作；与 GEN-1 后训练后的 99%
+相比，one-shot
+范式给出的是「快速可用的初始能力」，不是「精通」。二者互补：HOST
+类方法快速冷启动，再用 GEN-1 类后训练冲精通。</li>
+<li><strong>29 秒的口径</strong>是「录制视频 +
+推理准备」的均值，不含用户走到机器人面前摆放场景的时间；但即便宽松计算，与
+4 小时的差距仍是数量级的。</li>
+<li><strong>对齐模块依赖任务进度单调性假设</strong>。SDTW
+的单调路径约束意味着演示里若有来回往复、可选分支、失败重试，进度流形可能失效——这类非单调任务是天然边界。</li>
+<li><strong>Stage 2 的 5,847
+条人类视频仍是自采的</strong>。虽然比遥操作便宜得多，但说「彻底摆脱数据采集」还早；真正的下一步是像
+Vid2Robot 那样直接吃野生 YouTube 视频。</li>
+</ol>
+<h2 id="7-意义与位置">7. 意义与位置</h2>
+<p>HOST 出现在一个有趣的时间点：同月（2026-08）Generalist AI 发布
+GEN-1.5，宣布 one-shot 物理技能学习作为<strong>涌现能力</strong>出现在
+50 万小时数据预训练的大模型里。HOST
+则证明<strong>不需要那个数据量级</strong>——用聪明的归纳偏置（进度流形对齐
++ 自接地级联），193k 机器人轨迹 + 6k 人类视频就能把 one-shot 做到
+62%，还比 GEN-1.5 的 59%（10 任务）在更大任务集（50 任务）上略高。</p>
+<p>两条路线构成上下界：GEN 系证明数据够大能力自己长出来，HOST
+证明数据不够可以靠结构设计补。对绝大多数没有 50
+万小时私有数据的团队，HOST
+给出的配方是可复制的：先在自己的机器人数据上做同具身「跟随」预训练，再用少量跨域配对适配——这个模式不限于人类视频，理论上可以推广到任何演示模态（仿真轨迹、其他机器人、甚至动画）。</p>
+<p>而且这个配方是真开源：2026-08-03 起论文、代码和模型权重全部上线
+GitHub（X-Square-Robot 组织）与 HuggingFace。发布方自变量机器人（X
+SQUARE ROBOT，C 轮）把 HOST
+定位为其「推理时技能获取」战略的公开落子——该公司同时维护 WALL-A（百亿级
+VLA+世界模型旗舰）、Wall-OSS（开源 VLA，即 HOST 论文里最强微调基线）和
+X-Tokenizer（SRQ 动作分词器，2.4M
+轨迹预训练）等产品线。学术界拿到的不只是一篇论文，而是一套可以直接跑的推理时技能习得栈。</p>
+<p>方法论上最值得借鉴的两点：<strong>把「对齐」从隐式期望变成显式模块</strong>（用
+SDTW+TCC 学进度流形，而不是指望 transformer
+自己领悟时间对应），以及<strong>把跨域翻译从动作空间挪到观测空间</strong>（先预测「我自己做这件事会看到什么」，再从观测导出动作——比直接回归动作多了一个自我参照的中间表征）。</p>
+</article><article id="ch2"><h1 id="gen-系列深度解读generalist-ai-的具身基础模型三部曲">GEN
+系列深度解读：Generalist AI 的具身基础模型三部曲</h1>
+<blockquote>
+<p><strong>GEN-0</strong>（2025-11）· <strong>GEN-1</strong>（2026-04）·
+<strong>GEN-1.5</strong>（2026-08） Generalist AI（官方博客发布，非
+arXiv 论文） 原文：generalistai.com/blog/gen-0 · /gen-1 · /gen-1.5</p>
+</blockquote>
+<hr />
+<h2 id="1-一句话定位">1. 一句话定位</h2>
+<p>GEN 系列用九个月时间把机器人学习从「验证 scaling law
+存在」（GEN-0）推到「简单任务 99% 精通」（GEN-1），再推到「one-shot
+上下文学习涌现」（GEN-1.5）——最后这一步意味着：给模型看 3-12
+秒的一段演示，不做任何梯度更新，机器人几秒钟后就开始执行新任务，10
+个任务平均成功率 59%。</p>
+<p>这是目前唯一一条公开验证了「物理交互数据规模化预训练 → 类 GPT-3
+涌现能力」完整路径的工作线。GPT-3 当年靠 few-shot prompting
+宣告语言模型进入基础模型时代；GEN-1.5
+试图为机器人复刻同一时刻——他们自己称之为 "physical
+prompting"（物理提示）。</p>
+<h2 id="2-三部曲时间线每一代解决一个问题">2.
+三部曲时间线：每一代解决一个问题</h2>
+<table>
+<thead>
+<tr>
+<th>代际</th>
+<th>发布</th>
+<th>数据规模</th>
+<th>核心命题</th>
+<th>关键数字</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>GEN-0</td>
+<td>2025-11</td>
+<td>27 万小时真实操作数据</td>
+<td>机器人存在 scaling law 吗？——存在</td>
+<td>7B 参数出现「智能相变」；每周新增 1 万小时数据</td>
+</tr>
+<tr>
+<td>GEN-1</td>
+<td>2026-04</td>
+<td>50 万+ 小时</td>
+<td>规模化能到商用精度吗？——能</td>
+<td>6 任务平均 99% 成功率（GEN-0 基线 64%）；速度 3 倍于
+SOTA；每任务只需约 1 小时机器人数据</td>
+</tr>
+<tr>
+<td>GEN-1.5</td>
+<td>2026-08</td>
+<td>持续预训练 8 个月</td>
+<td>适应成本能压到零吗？——接近零</td>
+<td>one-shot in-context 59%；10 梯度步 + 5 分钟数据 83%；权重变化
+&lt;0.15%</td>
+</tr>
+</tbody>
+</table>
+<p>三代模型背后是同一台「数据引擎」：不用遥操作、不用仿真，而是给人类戴上低成本手持夹爪设备，在上千个家庭、仓库、工厂里采集日常操作活动。GEN-0
+时是 27 万小时，GEN-1 时超 50 万小时，采集速度每周 1
+万小时且在加速。预训练数据里<strong>没有一条机器人数据</strong>——机器人执行是靠人类数据预训练
++ 少量后训练迁移出来的。</p>
+<h2 id="3-gen-0机器人版-scaling-law-与智能相变">3. GEN-0：机器人版
+scaling law 与「智能相变」</h2>
+<h3 id="31-主张">3.1 主张</h3>
+<p>GEN-0
+是直接在高保真物理交互数据上做多模态训练的具身基础模型，架构原生面向「人类级反射与物理常识」设计。核心机制叫
+<strong>Harmonic Reasoning（谐波推理）</strong>：感知 token 流和动作
+token
+流异步、连续时间地交织训练——物理世界不会暂停等你思考，所以模型必须边想边动。这让它不依赖
+System1/System2 双系统架构就能扩展到大参数量。</p>
+<h3 id="32-最重要的发现7b-相变ossification">3.2 最重要的发现：7B
+相变（ossification）</h3>
+<ul>
+<li><strong>1B
+模型</strong>：预训练中出现「骨化」（ossification）——权重逐渐丧失吸收新信息的能力，数据越喂越多，模型反而卡死。</li>
+<li><strong>6B 模型</strong>：开始受益于预训练，多任务能力显现。</li>
+<li><strong>7B+
+模型</strong>：能内化大规模机器人预训练数据，下游任务只需几千步后训练。</li>
+</ul>
+<p>这是机器人领域首次观察到 ossification。LLM 文献里这个现象出现在
+O(10M) 参数量级，机器人却要 O(1B) 才跨过门槛——作者用 Moravec
+悖论解释：人类觉得毫不费力的感知与灵巧操作，计算复杂度远高于抽象推理。<strong>物理智能的「激活阈值」比语言智能高一个数量级以上</strong>。这个观察对整个行业有定价意义：低于
+7B 的端侧小模型路线在高数据机制下可能存在天花板。</p>
+<h3 id="33-可预测的-scaling-law">3.3 可预测的 scaling law</h3>
+<p>固定下游任务和微调预算，验证误差随预训练数据量 D 呈幂律：L(D) =
+(D_c/D)^α。这让「还要采多少数据才能到目标性能」变成可计算问题——例如服装整理任务，给定
+10 亿条动作轨迹就能预测模型表现。16
+个任务集（乐高搭建、快餐打包、"anything"
+类泛化任务）全部单调受益于更多预训练。</p>
+<p>真机 A/B 盲测确认趋势外推到实体：仅用 5.6
+小时任务数据后训练，预训练越多成功率越高；预训练 + 550
+小时任务数据时部分任务峰值达 99%。</p>
+<h3 id="34-数据科学细节">3.4 数据科学细节</h3>
+<p>大规模消融的结论是<strong>质量和多样性比体量重要</strong>。他们把数据按采集模式分类（Class
+1 特定任务 / Class 3 自由活动 / Class 2 介于两者），跨数据供应商 A/B
+测试，用两个指标筛数据：验证 MSE（低→适合 SFT）和 reverse
+KL（低→分布多峰、适合 RL 后训练）。数据引擎每天能吸收 6.85
+年的真实世界操作经验。</p>
+<h2 id="4-gen-1把精通定义成可测量的三件事">4.
+GEN-1：把「精通」定义成可测量的三件事</h2>
+<h3 id="41-mastery--可靠性--速度--即兴智能">4.1 Mastery = 可靠性 × 速度
+× 即兴智能</h3>
+<p>GEN-1 的贡献不在架构（仍是 GEN-0 基础的继续 scaling +
+算法改进），而在证明了规模化路线能跨过<strong>商用门槛</strong>，并把「精通」操作化为三个可测维度：</p>
+<p><strong>可靠性</strong>：6 个任务平均 99% 成功率。对照：GEN-0 微调
+64%，从头训练 19%。实测视频包括连续 1 小时汽车零件配套、连续折 86 件 T
+恤、连续 200+ 次维护扫地机器人、连续 1800 次装箱、连续 200
+次折纸箱、连续 100 次装手机——全程无人工干预。</p>
+<p><strong>速度</strong>：折纸箱 12.1 秒，此前 SOTA（GEN-0 和 π0
+在相同纸箱上）约 34 秒，快 2.8
+倍。关键是模型能<strong>超过演示速度</strong>执行——速度提升来自经验学习（RL）+
+Harmonic Reasoning 推理演进 +
+数据引擎天然包含高速人类操作（遥操作数据因延迟和缺乏力反馈天然偏慢，人类穿戴设备数据没有这个问题）。</p>
+<p><strong>即兴智能</strong>：垫圈被碰离抓取位置时，模型会放回重抓、或部分插入槽位借助外部灵巧性（extrinsic
+dexterity）调整、或换另一只手双手协同重抓——这些行为都在训练分布之外。</p>
+<h3 id="42-值得注意的工程事实">4.2 值得注意的工程事实</h3>
+<ul>
+<li>每个 99% 任务只用了约 1
+小时机器人数据。预训练零机器人数据，所以后训练是同时在适应「这个任务」和「这台机器人」。</li>
+<li>GEN-1 是「系统」而非单纯权重：推理基础设施（自研 paged attention
+变体支撑实时推理）、后训练技术（RL + 多模态人类引导）、模型 harness
+共同贡献性能。</li>
+<li>数据效率：某些测试中 GEN-1 用 1/10 的任务数据和微调步数达到 GEN-0
+同等性能。</li>
+</ul>
+<h3 id="43-gen-1-提出的新问题具身对齐">4.3 GEN-1
+提出的新问题：具身对齐</h3>
+<p>涌现即兴是双刃剑：模型会自发「抖动袋子让物体归位」「重新整理放错的物品」——但物理动作有真实后果，机器人的「成功」定义是任务、工作流、用户三层特定的。<strong>不该做什么和该做什么同样重要</strong>。这段讨论预示了具身模型的对齐研究会成为独立方向。</p>
+<h2 id="5-gen-15one-shot-学习涌现机器人的-gpt-3-时刻">5.
+GEN-1.5：one-shot 学习涌现——机器人的 GPT-3 时刻</h2>
+<h3 id="51-能力清单">5.1 能力清单</h3>
+<p>GEN-1.5 是一个处理视频输入（30 秒记忆窗口 + 传感器 + 语言 +
+本体感知）、输出 100Hz 动作轨迹的大型多模态模型。它展示的能力：</p>
+<ol type="1">
+<li><strong>One-shot 上下文学习</strong>：3-12
+秒单段演示插入上下文窗口，无训练，几秒后开始执行。10
+个任务（拉链、开罐、从钱包取钱等）平均成功率 59%（±10%）。</li>
+<li><strong>组合泛化</strong>：两个独立录制的物理提示放进上下文，模型自动串成连续长程行为，中间的重定位、换抓、纠错动作<strong>两段演示里都没有</strong>。</li>
+<li><strong>零样本
+sim-to-real</strong>：预训练完全没有仿真数据，但仿真里录的演示（脚本策略
+/ RL agent /
+仿真遥操作）可以直接提示真机执行，且泛化到不同手、新物体位置与尺寸。</li>
+<li><strong>人类到机器人
+ICL</strong>：某些情况下人直接用自己的手在机器人相机前演示，机器人立刻复现——跨具身差距的上下文迁移。</li>
+<li><strong>极少梯度步适应</strong>：1-10 步梯度下降 + 1-5 分钟数据（约
+10-50 条演示）即可微调新任务。10 步 + 5 分钟数据达 83%（±9%）；极限 1 步
++ 1 分钟数据达 66.5%。</li>
+<li><strong>工具即兴</strong>：微调「用刷子扫积木进碗」后，给香蕉会拿香蕉当刷子；给簸箕会改变策略——用簸箕铲起积木倒进碗里。这个接触序列在微调数据和预训练数据里都不存在（他们用语言最近邻搜索在
+189 万个场景里核对过）。</li>
+</ol>
+<h3 id="52-最关键的科学事实这些能力是涌现的不是设计的">5.2
+最关键的科学事实：这些能力是涌现的，不是设计的</h3>
+<p>原文的表述值得逐字记录："We did not explicitly train GEN-1.5 for
+in-context learning"——没有为 ICL 做架构修改、没有 meta-learning
+内外环、没有鼓励即兴的辅助目标、测试任务没有事先工程进预训练数据。物理提示在时间上是不连续的拼接（模型在训练中从未见过这种跳变），但模型能理解并执行。</p>
+<p>为什么涌现？博客给了两个假说（均类比语言模型 ICL 文献）：</p>
+<ul>
+<li>物理观测与动作的分布可能具有 <strong>burstiness 和 Zipfian
+结构</strong>（Chan et al. 2022 证明这类数据分布特性驱动 transformer 的
+ICL 涌现）；</li>
+<li>物理劳动包含<strong>自然重复循环</strong>，模型学会了检测并延续模式（类比
+Mirchandani et al. 2023 "LLM as general pattern machines"）。</li>
+</ul>
+<h3 id="53-few-step-adaptation-的深层含义">5.3 few-step adaptation
+的深层含义</h3>
+<p>10 个梯度步只改变权重不到
+0.15%——作者的解读是：<strong>微调不是在建立新表征，而是在轻微重新配置已有知识</strong>。「更像是提醒模型它几乎已经知道的事，而不是传统意义上的任务训练。」</p>
+<p>一个反直觉发现：即兴能力随微调步数减少而<strong>增强</strong>——轻度适应的模型更贴近预训练先验，遇到偏离演示的情形时能调用更广的行为库。这和
+LLM 领域「过度微调损伤通用能力」的经验完全同构。</p>
+<h3 id="54-physical-prompt-engineering新的交互范式">5.4 physical prompt
+engineering：新的交互范式</h3>
+<p>拖放界面选择演示片段插入上下文窗口，现场录像展示了背靠背教两个任务（拉开笔袋拉链→取出钱）。组合提示意味着：<strong>长程任务可以从短小可复用的物理提示库里组装</strong>，而不必采集完整复合任务的演示——这是语言
+prompt chaining 的物理类比。</p>
+<h2 id="6-批判性评估">6. 批判性评估</h2>
+<p><strong>这是博客不是论文。</strong> 没有 peer
+review，没有完整方法细节（模型参数量、上下文编码方式、动作头设计全部未公开），数字无法独立复现。GEN-0
+声称的 scaling law 图表没有给出原始数据，GEN-1.5 的 10
+任务评测协议（每任务试验次数、初始条件随机化程度）未披露。对照 HOST 论文
+50 任务 × 13 基线的公开评测，GEN 系列的证据强度低一档——但其数据规模（50
+万小时）和涌现现象的定性展示（视频）又是学术界拿不出来的。</p>
+<p><strong>任务是「简单短视界」的，作者自己承认。</strong> 59% 的
+one-shot 成功率意味着五分之二的失败率，离部署很远。ICL
+学到的技能「比微调模型更脆」。</p>
+<p><strong>私有数据引擎是核心壁垒也是核心不可验证点。</strong> 27→50
+万小时人类穿戴设备数据，成本量级估计在数千万美元。学术界无法复现这条路线，只能走
+HOST
+式的「聪明架构弥补数据稀缺」路线——这构成了本调研最重要的产业-学术分野（见
+insight 报告）。</p>
+<p><strong>「预训练零机器人数据」的说法要小心读。</strong>
+预训练全是人类手持夹爪数据，但后训练/微调仍需机器人数据（每任务约 1
+小时）。GEN-1.5 的 one-shot
+物理提示可以是人类数据，但效果最稳的仍是机器人自身 rollout。</p>
+<h2 id="7-与-host-的正面对照">7. 与 HOST 的正面对照</h2>
+<table>
+<thead>
+<tr>
+<th>维度</th>
+<th>GEN-1.5</th>
+<th>HOST</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>路线</td>
+<td>大数据涌现（50 万小时私有数据）</td>
+<td>架构设计（共享任务进度流形 + 自接地预测级联）</td>
+</tr>
+<tr>
+<td>ICL 机制</td>
+<td>隐式，从预训练涌现</td>
+<td>显式，SDTW 对齐 + 目标耦合设计进架构</td>
+</tr>
+<tr>
+<td>演示形式</td>
+<td>人类手持夹爪 / 机器人 rollout / 仿真</td>
+<td>纯人类视频（第三人称 RGB）</td>
+</tr>
+<tr>
+<td>适应耗时</td>
+<td>秒级（in-context）或 1-10 梯度步</td>
+<td>平均 29 秒（无梯度更新）</td>
+</tr>
+<tr>
+<td>成功率</td>
+<td>59%（10 任务，one-shot）</td>
+<td>62%（50 任务，one-shot）</td>
+</tr>
+<tr>
+<td>旧技能保持</td>
+<td>未量化报告</td>
+<td>显式验证不遗忘</td>
+</tr>
+<tr>
+<td>可复现性</td>
+<td>不可（私有数据+闭源）</td>
+<td>完全开源（2026-08-03 起代码+权重上线 GitHub/HuggingFace）</td>
+</tr>
+<tr>
+<td>证据形式</td>
+<td>博客 + 视频</td>
+<td>arXiv 论文 + 13 基线对比</td>
+</tr>
+</tbody>
+</table>
+<p>两者在 2026 年 8
+月同月发布，从两条完全不同的路线逼近同一个目标——「看一次就会」。GEN
+证明数据规模足够时该能力自己长出来；HOST
+证明数据不够时可以用归纳偏置把它设计出来。这不是竞争关系，是上下界关系：HOST
+类方法给出了小数据机制的性能下界，GEN
+类方法给出了大数据机制的涌现上界。</p>
+<h2 id="8-给从业者的判断">8. 给从业者的判断</h2>
+<ol type="1">
+<li><strong>scaling law
+在机器人领域成立已是多方验证的事实</strong>（GEN-0、π 系列、字节 GR
+系列都有印证），争论已转移到「数据从哪来」：人类穿戴设备（Generalist）、遥操作（多数公司）、人类视频（HOST/Vid2Robot
+学术线）、仿真（NVIDIA
+线）四条数据路线的成本-质量权衡是当前最重要的开放问题。</li>
+<li><strong>7B
+相变</strong>如果被独立复现，对端侧部署路线是坏消息，对云端推理/蒸馏路线是好消息。</li>
+<li><strong>ICL
+涌现把「任务适应」从训练问题变成提示工程问题</strong>——physical prompt
+engineering 可能催生类似 LLM prompt
+工程师的新工种，以及「物理提示库」这种新资产形态。</li>
+<li>GEN-1 强调的<strong>速度维度</strong>（3x
+SOTA）长期被学术评测忽视——成功率之外，任务完成时间会成为下一个军备竞赛指标。</li>
+</ol>
+</article><article id="ch3"><h1
+id="instant-policy-深度解读把-in-context-模仿学习变成图扩散用仿真伪演示喂出即时策略">Instant
+Policy 深度解读：把 in-context
+模仿学习变成图扩散，用仿真伪演示喂出即时策略</h1>
+<blockquote>
+<p><strong>Instant Policy: In-Context Imitation Learning via Graph
+Diffusion</strong> arXiv 2411.12633v2（2025-04-25 更新）· ICLR 2025 ·
+Imperial College London, The Robot Learning Lab 作者：Vitalis Vosylius,
+Edward Johns</p>
+</blockquote>
+<hr />
+<h2 id="1-一句话定位">1. 一句话定位</h2>
+<p>Instant Policy 把「给 1-2
+条演示就立即会做新任务」拆成两个可解的子问题：用异构图 + 扩散过程给
+In-Context Imitation
+Learning（ICIL）注入空间结构归纳偏置，用程序化生成的仿真「伪演示」（pseudo-demonstrations）提供近乎无限的训练数据。结果是一个基础版完全不碰真实数据的模型，真机
+16 个日常任务平均成功率 88.75%，比同数据训练的 BC-Z/Vid2Robot/GPT2
+式基线（34.4%-40.6%）高一倍以上；每个新任务只需现场动觉示教 1-2
+条，零训练、零微调。</p>
+<h2 id="2-要解决的问题">2. 要解决的问题</h2>
+<p>ICL 在
+NLP/视觉里是海量数据喂出来的涌现能力，机器人没有这个数据条件。要在机器人上做
+ICIL，卡在两点：</p>
+<ol type="1">
+<li><strong>数据效率</strong>：以往 ICIL 方法（BC-Z
+的隐嵌入条件化、Vid2Robot 的 Perceiver + cross-attention、GPT2
+式因果序列建模）把演示当扁平向量或 token 序列处理，3D
+空间结构全靠网络自己领悟，数据不够就悟不出来——在本文的 RLBench
+评测里这三类方法平均只有 0.34-0.38；</li>
+<li><strong>数据来源</strong>：人工采集机器人演示贵且慢，靠真实数据堆不出
+ICIL 需要的任务多样性。</li>
+</ol>
+<p>作者的关键观察是概念性的：BC 的权重编码「特定任务的策略」，而 ICIL
+的权重编码的是「解读上下文并照做」这个任务无关的元能力。所以训练数据不必是真实任务，只需要「语义一致的轨迹集合」——这直接解锁了第二个卡点。</p>
+<h2 id="3-方法">3. 方法</h2>
+<h3 id="31-表征三层异构图">3.1 表征：三层异构图</h3>
+<p><strong>局部图 Gl</strong>：分割点云（降采样到 2048
+点、变换到末端执行器坐标系）经最远点采样 + PointNet++ Set Abstraction
+编码成 M=16 个节点，特征来自一个在 ShapeNet
+上预训练、训练策略时冻结的占据网络（occupancy
+network）编码器，保证特征描述局部几何（端到端训练或微调它反而显著变差）。夹爪表示为
+6 个刚性变换的关键点节点，特征编码节点身份 +
+开合状态。场景节点与夹爪节点连边，边属性用 NeRF 式 sin/cos
+高频位置嵌入表示相对位置。</p>
+<p><strong>上下文图 Gc</strong>：演示轨迹是局部图序列（每条演示降采样到
+L=10 个
+waypoint，保留起止点、夹爪开合切换点和减速点），跨时刻夹爪节点连「相对运动」边，所有演示夹爪节点连到当前观测的夹爪节点。边数随演示条数
+N 和长度 L 线性增长，任意 N、L 都能处理。</p>
+<p><strong>动作图 Gla</strong>：未来 T=8 步动作（SE(3) 位移 +
+夹爪开合）表示成「假装执行后」的局部图——把动作的空间后果直接画进图里，而不是当抽象向量回归。当前与未来夹爪节点之间的边编码相对运动。</p>
+<h3 id="32-学习图上的扩散">3.2 学习：图上的扩散</h3>
+<p>把 ICIL 建模为图生成：前向过程在动作上加噪（SE(3) 经 Logmap
+投影到切空间加高斯噪声再 Expmap 回来），反向过程由异构图 transformer
+预测每个夹爪节点的去噪方向 ε ∈ R^7。三个关键设计：</p>
+<ul>
+<li><strong>平移/旋转解耦的流（flow）表示</strong>：去噪方向拆成质心平移
++ 绕质心旋转两个分量，避免大平移淹没小旋转。消融：不解耦
+-15%，换四元数表示 -37%，换轴角 -21%；</li>
+<li><strong>SVD 恢复 SE(3)</strong>：DDIM
+更新节点位置后，利用已知点对应用 SVD
+求出对齐变换作为该步动作更新——动作始终以点集形式存在于图空间，与观测同构；</li>
+<li><strong>三级子网络级联</strong> σ→φ→ψ（各 2 层、隐维 1024、16
+头），分别负责局部几何传播、上下文汇聚、动作节点更新。换成单个大网络或全连接图（等价于稠密自注意力
+transformer）都显著变差——结构化信息流是必需品，不是锦上添花。φ
+的输出在当前观测的夹爪节点上形成信息瓶颈，后面的下游应用靠它。</li>
+</ul>
+<p>扩散本身也不可省：去掉扩散直接回归动作 -29%。预测时域 T=1 时
+-52%，T=8 为基准。</p>
+<h3 id="33-数据伪演示引擎">3.3 数据：伪演示引擎</h3>
+<p>生成流程：ShapeNet 随机放 2 个物体 → 在物体上/附近采样 2-6 个
+waypoint 构成「伪任务」→ 虚拟移动 Robotiq
+夹爪网格依次到达、开合时刚性吸附/释放最近物体 → PyRender
+三个仿真深度相机录制点云。同一伪任务换物体位姿、换起始位姿重复生成，就得到语义一致的演示集合。轨迹不需要动力学甚至运动学可行——动力学和可行抓取由推理时的真实演示（上下文）定义。</p>
+<p>细节决定成败：一半样本偏向常见技能（抓取、抓放、开合）采样，一半全随机；30%
+轨迹注入局部扰动 + 回归参考轨迹的修正动作（催生恢复行为）；10%
+样本翻转当前夹爪状态输入——不加这条，策略永远学不会松手后重抓。动作归一化到每步
+≤1cm/3°。</p>
+<p>训练 2.5M 步（约等价 700K
+条独立轨迹，边生成边训练、样本不重复），AdamW lr 1e-5、float16，单张 RTX
+3080-ti 约 5 天。这个成本在同类工作里低得反常。</p>
+<h2 id="4-实验结果">4. 实验结果</h2>
+<p><strong>仿真（RLBench，24 任务 × 100 rollout，Franka
+Panda）</strong>：纯伪演示训练平均 0.71，基线 0.34-0.38。追加 12
+个任务各 20 条真演示微调（PD++）后，见过的 12 任务 0.97，未见的 12 任务
+0.82（基线
+0.31-0.43）。注意力可视化显示模型确实在追踪任务阶段并选择性聚合上下文对应片段。</p>
+<p><strong>真机（Sawyer + Robotiq 2F-85，2 个 RealSense D415，SAM +
+XMem++ 分割，动觉示教）</strong>：16 个日常任务 × 10 rollout，平均
+88.75%（16 项中 7 项 10/10），对 BC-Z* 34.38%、Vid2Robot* 40.63%、GPT2*
+36.88%。基线全部移植到同一点云编码器、同参数量、去掉语言辅助损失，口径公平。部署前用
+5 个评测外任务的演示混合伪演示 co-finetune 了 100K
+步以适应真实噪声。</p>
+<p><strong>新几何泛化（涌现能力）</strong>：上下文里放不同几何物体的演示、测试完全没见过的同类物体，成功率随演示数单调上涨：N=1
+时 40%，N=2 时 52.5%，N=3 时 85%，N=4 时
+90%。训练时从未构造过跨几何上下文——这是图表征 +
+结构化注意力的涌现红利。</p>
+<p><strong>Scaling</strong>：69M→117M
+参数，平台期成功率显著上升；117M→178M
+只有边际改善，瓶颈转移到数据多样性。验证损失随训练算力和容量持续下降。</p>
+<p><strong>推理参数</strong>：扩散步数从 4 砍到 2 只掉 2%；演示长度
+L=1（只给最终目标）暴跌 71%，L=5 仍掉
+26%——上下文必须够稠密，因为任务信息不在权重里；演示数 N=2 够用（N=1 掉
+12%，N=3 仅 +2%）。</p>
+<p><strong>下游应用</strong>：人手演示跨具身迁移（MediaPipe
+关键点手工映射到夹爪位姿，简单抓放可用）；利用 φ 输出的信息瓶颈 +
+Sentence-BERT +
+对比学习，小规模语言标注数据即可零样本执行语言指令任务。</p>
+<h2 id="5-局限">5. 局限</h2>
+<p>作者自认六条：依赖分割点云；点云无颜色和语义；短视野 Markov
+假设；对演示质量和降采样敏感；无碰撞规避、不控制完整构型空间；精度不足以做低容差和富接触任务。</p>
+<p>延伸批判：</p>
+<ol type="1">
+<li><strong>分割是真机最大单点故障</strong>。SAM + XMem++
+遮挡即崩，分割混入桌面或机器人点会直接污染图节点。方法主体的鲁棒性建立在一个比它脆弱的感知前置上；</li>
+<li><strong>88.75% 不是纯仿真训练的数字</strong>。真机评测用的是
+co-finetune
+后的模型，纯伪演示模型的真机成绩未单独报告，「零真实数据」的宣称要打个折扣；</li>
+<li><strong>伪演示的先验圈定了任务空间</strong>：刚性吸附抓取、2-6 个
+waypoint、每步
+1cm/3°，实际把能力限制在准静态位移操作。铰接体开合能做（微波炉 0.23/0.56
+已是全表最低分之一），柔性物、动态操作、力控任务出圈；</li>
+<li><strong>失败模式印证了 Markov
+假设的代价</strong>：演示信息冲突或状态歧义时策略停滞或振荡，作者也承认要把历史观测加进图里。</li>
+</ol>
+<h2 id="6-与-host--gen-15-的关系">6. 与 HOST / GEN-1.5 的关系</h2>
+<p>Instant Policy 和 HOST 同属「结构派」：都赌 one-shot
+能力可以靠归纳偏置在小数据下做出来，不必等 50
+万小时数据的涌现。差别在结构加在哪一维——Instant Policy
+加在<strong>空间</strong>（图表征 + 3D 点云 + SE(3) 扩散），HOST
+加在<strong>时间</strong>（进度流形对齐 +
+自接地级联）。两者对基线的诊断也互相印证：Vid2Robot 式扁平
+cross-attention 条件化在 HOST 评测里 ≤19%（对 HOST 62%），在这里真机
+40.63%（对
+88.75%）——「演示被当成被动上下文」是两篇论文共同指认的病灶，只是开的药方不同。</p>
+<p>按调研坐标系逐条摆放：</p>
+<ul>
+<li><strong>演示模态线</strong>：Instant Policy
+原生要机器人自己的演示（动觉/遥操作），人手演示只是靠 MediaPipe
+手工映射的附加实验，精细任务映射即失效。HOST 用 Stage 2
+学习的跨具身适配原生消化人类视频，这条线上 Instant Policy
+被明确超越；</li>
+<li><strong>数字口径</strong>：88.75%（16 任务，演示与测试同物体）vs
+HOST 62%（50 任务，人类视频跨具身）vs GEN-1.5 59%（10
+任务）不可直接比大小——三者的泛化难度不在同一层级，Instant Policy
+的设定最宽松；</li>
+<li><strong>对 GEN-1.5</strong>：本文的 scaling 实验是 GEN
+路线的小尺度预演——性能随仿真数据和容量增长、178M
+后卡在数据多样性上。「需要更多样、更接近真实任务的数据」这个结论，GEN-1.5
+用 50 万小时真实数据给出了暴力解，Instant Policy
+给出的是程序化生成解；</li>
+<li><strong>独特剩余价值</strong>：一是伪演示引擎——证明 ICIL
+元能力可以与任务语义完全解耦、用零真实成本的仿真数据训练，这个思想至今没有被
+HOST/GEN 任何一方吸收（HOST 的 Stage 1 仍烧 193k
+条真实轨迹，二者能否用伪演示替代是开放问题）；二是图注意力提供了 ICIL
+内部机理最干净的可解释窗口（模型在哪个演示片段上聚合，直接可视化）；三是
+N=1→40%、N=4→90%
+的跨几何插值曲线，是「上下文内泛化」能力最干净的行为学证据。</li>
+</ul>
+</article><article id="ch4"><h1
+id="icrt-深度解读next-token-prediction-原教旨主义的机器人-in-context-learning-配方">ICRT
+深度解读：next-token prediction 原教旨主义的机器人 in-context learning
+配方</h1>
+<blockquote>
+<p><strong>In-Context Imitation Learning via Next-Token
+Prediction</strong> arXiv 2408.15980v2（2024-09-27 更新）· ICRA 2025 ·
+UC Berkeley AUTOLAB/BAIR + Autodesk Research 作者：Letian (Max) Fu*,
+Huang Huang*, Gaurav Datta*, Lawrence Yunliang Chen, Will Panitch,
+Fangchen Liu, Hui Li, Ken Goldberg</p>
+</blockquote>
+<hr />
+<h2 id="1-一句话定位">1. 一句话定位</h2>
+<p>ICRT 用最朴素的配方验证机器人 ICL 成立：一个随机初始化的 Llama2
+架构因果 transformer（12 层、768
+维），对原始感知运动轨迹（图像、本体状态、动作）做 next-token
+prediction，测试时把新任务的遥操作演示轨迹直接当 prompt
+喂进去，权重不动即可执行——12 个未见任务平均 79.2%，同期最强的微调后 Octo
+9.2%、OpenVLA 7.5%、goal-conditioned 基线
+20.0%。核心发现不在架构而在数据：让 ICL
+出现的是「同一初始观测下存在多个可能任务」的数据结构（自采 ICRT-MT 仅
+1098 条轨迹），不是数据量——只用 DROID 子集训练的对照组成功率为 0%。</p>
+<h2 id="2-要解决的问题">2. 要解决的问题</h2>
+<p>多任务机器人基础模型预训练完仍教不会新任务：新任务要再采遥操作数据、再微调一轮，流程复杂到难以落地。LLM/LVM
+已经示范了另一条路——in-context learning，prompt
+里给例子、权重不动就适配新任务。本文问的是：ICL 是语言/视觉独有的，还是
+next-token prediction 框架的普适性质，能否直接搬到真机连续控制上。</p>
+<p>已有 few-shot IL 方法各有拖累：对比学习式上下文编码器与 NTP
+框架难以整合；DOME 需要额外的物体分割模型；KAT 要把轨迹转成 3D 关键点
+token 借用 LLM 的少样本能力；Vid2Robot 靠一堆辅助损失；One-Shot
+Imitation Learning（Duan et al. 2017）和 Prompting Decision Transformer
+只在仿真 + 全状态 + 已知奖励下成立。ICRT
+的立场是做减法：无关键点、无分割、无辅助损失、无奖励建模，原始轨迹进、动作出，单一
+L1 损失。</p>
+<h2 id="3-方法">3. 方法</h2>
+<h3 id="31-数据构造真正的贡献所在">3.1 数据构造（真正的贡献所在）</h3>
+<ul>
+<li><strong>DROID 预训练子集</strong>：76k 条真实演示，过滤（保留 30-450
+步）后采样 10k 条，按语言指令的 CLIP 文本嵌入余弦相似度 ≥0.9
+分组、每组至少 4 条轨迹（保证能互为 prompt），最终约 2k 条可用；</li>
+<li><strong>ICRT-MT 自采数据集</strong>：1098 条轨迹、29 个任务、6
+个动作原语（抓取、抓放、堆叠、推、戳、开关抽屉），采集协议的核心约束是<strong>每个场景至少存在
+2 个可行任务</strong>。单任务场景（DROID
+大量如此）会让模型学捷径——只看当前观测就能唯一确定动作，prompt
+沦为摆设；多任务同场景把「读 prompt」从可选变成必需。这一条解释了
+DROID-only 训练全零的结果。</li>
+</ul>
+<p><strong>序列构造</strong>：同任务轨迹随机洗牌拼接，截取 L=512 个
+(state, action) 步的子序列（约容纳 5 条轨迹），随机取前 k 条标为
+prompt（至少含一条完整轨迹）。传统 BC 用短序列建模轨迹内部行为，ICRT
+用长序列建模<strong>轨迹之间</strong>的模式。</p>
+<h3 id="32-架构">3.2 架构</h3>
+<ul>
+<li><strong>视觉编码器</strong>：ViT-Base，用 CrossMAE 在 ImageNet +
+Open X-Embodiment
+各半的混合上预训练（专门缩小与含机器人/夹爪图像的域差），训练 ICRT
+时冻结；</li>
+<li><strong>模态投影</strong>：每个相机的全部视觉 token
+与本体嵌入（MLP）做 attention pooling，多相机结果拼接成单个 state
+token；动作经 MLP 成 action token。每个时间步只占 2 个 token，这是 512
+步长上下文能塞下 5 条轨迹的前提；</li>
+<li><strong>主干</strong>：Llama2 架构随机初始化，12 层、768 维；输入
+state/action 交替序列，在 state 位置解码未来 h=16 步动作（L1
+损失），执行时时间集成 + 后退视野控制取 10 步；</li>
+<li><strong>参数化</strong>：本体 = 绝对末端位姿（xyz +
+旋转矩阵前两行展平的 6D 旋转 + 连续夹爪），动作 = 相对当前位姿的增量位姿
++ 绝对夹爪，各 10 维。</li>
+</ul>
+<h3 id="33-两个反直觉的训练决策">3.3 两个反直觉的训练决策</h3>
+<ol type="1">
+<li><strong>prompt 部分不算损失</strong>（借鉴 Vicuna 等多轮对话模型只对
+response 算损失）：对 prompt 也算损失的对照组从 79.2% 崩到
+22.5%。机制：prompt
+位置没有上下文可依赖，强迫模型在此做无条件生成，等于训练它「不看 prompt
+也要输出」，这个习惯会泄漏到 prompt 之后；</li>
+<li><strong>两阶段而非混合训练</strong>：DROID 预训练（4 epoch，56
+分钟）→ ICRT-MT 微调（125 epoch，18 小时），4×A100。单阶段混训只有
+6.7%——DROID 约 200 任务对 MT 29 任务的失衡淹没了 MT 的结构信号。</li>
+</ol>
+<h3 id="34-推理">3.4 推理</h3>
+<p>KV cache 流式推理，每步只算新 token，复杂度从二次降到线性，实测 39.6
+Hz（3090Ti），支持真机实时闭环。演示以「与训练数据完全同格式」的传感运动轨迹给入，无任何转换环节。</p>
+<h2 id="4-实验结果">4. 实验结果</h2>
+<p>平台：Franka Emika，固定侧视 + 腕装相机。评测协议设计得很尖锐：2
+个原语（抓放、戳）× 各 6 个未见任务（3 个训练见过的物体 + 3
+个全新物体）× 5 个难度层（0-3 个干扰物、干扰放置位），每层 1 次尝试共 60
+试验；prompt 场景与测试场景不同摆放，防止照抄动作；抓放计分「抓对 0.5 /
+放对 1.0」，25 秒内可重试。</p>
+<p>主结果（平均成功率 ± 标准误）：goal-conditioned 20.0%（±4.3），Octo
+微调后 9.2%（±3.5），OpenVLA 微调 + 16 步 chunk 后 7.5%（±2.9），ICRT
+79.2%（±4.6），其中抓放 65.0%、戳
+93.3%。戳任务是照妖镜：目标图像与初始状态几乎无差别，goal-conditioned
+直接失明（6.7%）；OpenVLA 常把戳做成抓（3.3%）——只有轨迹 prompt
+能无歧义地传达「用什么运动模式」。</p>
+<p>消融（Table II）：</p>
+<ul>
+<li><strong>ICRT-Llama2-7B</strong>（LoRA r=32
+微调）：58.3%，比从头训练的 Base 低 21 个点。训练损失更低但推理只有 10.7
+Hz（对 39.6
+Hz），实时性拖垮闭环表现；语言预训练先验在感知运动序列上没有兑现；</li>
+<li><strong>ICRT (DROID
+only)</strong>：0.0%——数据结构不对，多少数据都白搭；</li>
+<li><strong>ICRT (MT only)</strong>：73.3%，只比完整版低 6
+个点。大规模预训练有正贡献（尤其戳原语 70% 对 93.3%）但远非决定性；</li>
+<li><strong>prompt 类型鲁棒</strong>：换不同类型
+prompt（无/有干扰物、干扰放置位）或 1-3 条 prompt，成功率稳定在
+60-80%；</li>
+<li><strong>重复性</strong>：两个任务各 25 次试验，标准差 0.5% 和
+3.2%；</li>
+<li><strong>近似新原语</strong>：grasp-and-drop（40-80%）、放到某物右侧（80%）可以泛化；与训练原语无相似性的动作不行。</li>
+</ul>
+<h2 id="5-局限">5. 局限</h2>
+<p>作者自认：无法泛化到完全未见的动作原语，只能在 6
+个训练原语的邻域内换物体、换布局；假设固定形态 +
+固定阻抗控制器，跨形态迁移未涉及；ICRT-Llama2 推理太慢。</p>
+<p>延伸批判：</p>
+<ol type="1">
+<li><strong>评测统计功效弱</strong>：60 次总试验、每个难度层只测 1
+次，与 HOST 的 50 任务 × 20 试验相比薄得多；重复性实验只覆盖 2
+个任务，无法完全打消方差疑虑；</li>
+<li><strong>「未见任务」定义宽松</strong>：新物体 + 旧原语 +
+新摆放。原语级技能空间在训练时就封闭了（6 个），这与 HOST 意义上 50
+个未见任务的任务级泛化不是一个难度层级；</li>
+<li><strong>同具身假设是隐性成本</strong>：prompt
+必须是本机器人的遥操作轨迹，每个新任务仍要专家上手采 1-3
+条——比人类视频（HOST
+的输入）的采集门槛高一个量级，「免微调」不等于「免专家」；</li>
+<li><strong>冻结视觉编码器的代价已现形</strong>：同色异形干扰物会导致抓错，作者自己承认需要微调视觉编码器——细粒度视觉表征是明确短板。</li>
+</ol>
+<h2 id="6-与-host--gen-15-的关系">6. 与 HOST / GEN-1.5 的关系</h2>
+<p>ICRT 是「规模派」的最小可行原型：与 GEN-1.5 共享同一信念——ICL 是
+next-token prediction 的普适性质，不需要机器人特有的结构设计。GEN-1.5 用
+50 万小时数据把这个配方推到涌现（59%），ICRT 用约 3k
+条轨迹证明配方本身成立，并揭示了小数据下的苛刻前提：<strong>数据结构必须强迫模型读
+prompt</strong>（多任务同场景 + prompt
+免损失），否则模型必然走捷径。</p>
+<p>这个前提恰好是 HOST 论点的实证注脚。HOST
+批判以往方法「时间错位把演示降格为被动上下文，模型学会忽略演示」；ICRT
+的两个消融从数据侧复现了同一病灶——prompt 算损失就崩（79.2% 到
+22.5%），单任务数据就归零。差别在药方：ICRT
+用<strong>数据工程</strong>绕开（精心构造逼模型读 prompt
+的训练分布），HOST
+用<strong>结构工程</strong>正面解决（目标耦合让演示主动驱动预测目标）。数据可控时前者便宜，数据来源不可控（野生人类视频）时只有后者可行。GEN-1.5
+则暗示第三条路：数据量大到自然覆盖多任务歧义时，强迫函数可能自动出现——但这只是从其涌现结果反推的猜想，50
+万小时对 1098 条，成本差五个数量级。</p>
+<p>坐标定位：</p>
+<ul>
+<li><strong>演示模态线</strong>：ICRT
+只吃同具身遥操作轨迹，被原生消化人类视频的 HOST（62%/50 任务/29
+秒习得）明确超越；</li>
+<li><strong>规模线</strong>：被 GEN-1.5
+沿完全相同的技术路线（自回归序列模型 + 轨迹
+prompt）用三个数量级的数据碾过；</li>
+<li><strong>独特剩余价值</strong>：一是 39.6 Hz KV-cache
+流式闭环，是本调研涉及方法中唯一把「prompt 不重算、逐 token
+增量推理」工程化并报告实时数字的；二是「数据结构大于数据量」的定量证据（1098
+条精构轨迹从 0% 做到 73.3%，10k 条 DROID 是 0%），对任何 ICIL
+数据预算分配是直接可操作的结论；三是 LLM 初始化的负结果（7B 反而低 21
+个点）——「拿语言先验白嫖机器人控制」在这个数据尺度不成立，且失败原因（推理延迟拖垮闭环）提醒所有人：机器人
+ICL 的模型选型受实时性硬约束，这条约束在语言域不存在。</li>
+</ul>
+</article><article id="ch5"><h1
+id="robottt-深度解读把-test-time-training-装进机器人策略上下文扩到-8k-步">RoboTTT
+深度解读：把 Test-Time Training 装进机器人策略，上下文扩到 8K 步</h1>
+<blockquote>
+<p><strong>RoboTTT: Context Scaling for Robot Policies</strong> arXiv
+2607.15275v1（2026-07-16）· NVIDIA GEAR + Stanford + UT Austin
+作者：Yunfan Jiang 等；共同指导：Li Fei-Fei、Yuke Zhu、Linxi "Jim"
+Fan</p>
+</blockquote>
+<h2 id="1-一句话定位">1. 一句话定位</h2>
+<p>RoboTTT 把 Test-Time Training（TTT）层插进 VLA 模型（GR00T
+N1.7），用「推理时也做梯度下降的 fast
+weights」充当循环状态，把视觉运动上下文从单步扩到 8K 时间步（30Hz 下约 5
+分钟）——比现有 SOTA
+长三个数量级，推理延迟却不随上下文增长。这个长度解锁四种能力：从一段
+in-context 人类视频 one-shot 模仿新装配配置（6/10
+成功，基线全灭）；DAgger Distillation
+带来的在线自我改进（+36%）；外部扰动恢复（83% vs 最强短上下文基线
+53%）；长程任务总分比单步基线高 87%，且是唯一完成 5 分钟 10 阶段 Gear
+Bot 装配的方法。更大的发现是：预训练上下文从 128 扩到
+8K，闭环性能单调上升无饱和（8K 比 1K 高
+63%）——上下文长度是机器人基础模型的一条新 scaling 轴。</p>
+<h2 id="2-要解决的问题">2. 要解决的问题</h2>
+<p>主流机器人基础模型（π0、OpenVLA、GR00T、RDT 等）只吃单步或 2-8
+帧短历史，而 LLM 那边上下文长度早已是核心 scaling
+轴。长视觉运动上下文对三类能力不可绕过：one-shot in-context
+模仿、从自身部署历史在线改进、多阶段长程任务的闭环执行（视觉相似的阶段造成状态混叠，短上下文策略会跳步或重复做）。</p>
+<p>做长上下文有三个结构性障碍。一是容量：RNN
+的向量状态压不住几千步的稠密观测流。二是利用：朴素拼接历史帧会引入虚假相关（causal
+confusion），论文实测 GR00T N1.7 加一帧历史后在 Pup Go Car 上从 57% 掉到
+39.5%——历史不但没帮忙反而有毒。三是成本：Transformer 即便有 KV
+cache，解码延迟仍随上下文线性涨，5 分钟 @30Hz
+的近万步历史在真机上不可行。</p>
+<h2 id="3-方法">3. 方法</h2>
+<h3 id="31-ttt-层用梯度下降当记忆写入">3.1 TTT
+层：用梯度下降当记忆写入</h3>
+<p>fast weights W 参数化一个小网络 f_W（两层
+MLP）。每个时间步先「update」：对当前键值对做一步梯度下降，最小化
+||f_W(K_t) -
+V_t||^2（学习率可学习），把上下文写进参数空间；再「apply」：O_t =
+f_{W_t}(Q_t) 读出。训练与推理都执行这套 update-then-apply。QKV
+投影矩阵与初始权重 W_0 由外层任务损失端到端学习，W_0 走 MAML
+式二阶梯度元学习——更新规则本身是学出来的，这是它与 Gated DeltaNet
+等线性递归记忆的本质区别。</p>
+<h3 id="32-与-vla-的融合">3.2 与 VLA 的融合</h3>
+<p>主干是 GR00T N1.7（VLM + 16 层 DiT flow-matching 动作头）。每层 DiT
+的自/交叉注意力后插一个 TTT 层：注意力只处理单步内 token（N=16 个可学
+register token、本体 token、噪声动作 token，cross-attend 该步的视觉语言
+token），TTT 层沿时间维跨步整合。视觉语言 token 不直接过
+TTT（省算力），靠 register token 携带其信息跨时间。tanh 门控 O = tanh(a)
+* O_TTT + O_attn，a 初始化 0.001，让 TTT
+贡献从近零起步、不冲垮预训练能力。</p>
+<h3 id="33-训练配方两个使长上下文可训的技巧">3.3
+训练配方：两个使长上下文可训的技巧</h3>
+<p><strong>Sequence action forcing</strong>：序列内每个动作块独立采样
+flow-matching 噪声水平，t =
+s(1-u)，u~Beta(1.5,1)，s=0.999。共享一个噪声水平会让整条序列同等难/易，训练不稳定（呼应
+Diffusion Forcing 的发现）；消融显示去掉它闭环性能崩塌。</p>
+<p><strong>TBPTT（截断式沿时间反传）</strong>：序列切段，梯度只在段内流动，fast
+weights 跨段传递但 detach
+梯度。显存由段长而非总长决定，训练上下文可任意加长；W_0
+仍从首段获得梯度。</p>
+<p>预训练：桌面双臂机器人数据 + 第一视角人类数据混合，上下文逐步升到
+8K，30K 步 x 16 张 GB200。每个下游任务再以 1K 上下文 post-train 20K
+步。</p>
+<h3 id="34-两种上下文玩法">3.4 两种上下文玩法</h3>
+<p>把 flow-matching 损失在选定时间步 mask
+掉，这些步就成了纯上下文（只更新 fast
+weights、不当模仿目标）。由此派生两个能力：</p>
+<p><strong>one-shot
+视频模仿</strong>：训练时把同配置的（人类演示视频，机器人轨迹）拼成一条序列，视频段
+mask 损失。所有配置共用同一句指令「assemble
+circuit」，目标配置只能从视频认出。测试时喂一段未见配置的人类视频即可复现装配。</p>
+<p><strong>DAgger Distillation</strong>：DAgger
+轨迹里机器人错误动作和人类纠正交错。标准 DAgger
+只在纠正上微调、丢掉错误动作；RoboTTT 让完整历史（含错误动作）更新 fast
+weights，损失只算人类纠正段——失败当上下文、纠正当目标，把「失败到纠正」的映射蒸馏进
+fast weights，是 Algorithm Distillation
+在机器人上的实例化。测试时模型自己犯错自己纠，无需人在环。</p>
+<h2 id="4-实验结果">4. 实验结果</h2>
+<p>平台：YAM 双臂 + 4 RGB 相机（顶、底、双腕）。三个装配任务：Pup Go
+Car（平均 2 分钟，8 小时数据）、Circuit（1 分钟，80 个配置训 20 测 60，6
+小时）、Gear Bot（5 分钟 10 阶段，5 小时）。</p>
+<p>主结果：平均任务完成分 RoboTTT 79%，GR00T N1.7 42%（相对
++87%），GDN（把 TTT 换成 Gated DeltaNet
+线性递归记忆的对照）56%（+41%）。三任务全成功数 9/20、13/20、2/10；Gear
+Bot 上 RoboTTT 是唯一有全成功的方法，所有基线 0/10。</p>
+<p>上下文 scaling：预训练上下文 128 到 8K，RoboTTT 闭环分数单调升到
+71.5%，比 1K 版（43.9%）高 63%、比最强短上下文基线（45.6%）高
+57%，无饱和迹象；GDN 完全没有此趋势。作者归因：梯度下降更新加元学习的
+W_0
+与更新动力学能被更长的训练序列塑形，线性关联状态没有这个元学习空间。1K
+以下 RoboTTT 变弱的原因也给了：rollout 时长超过训练窗口，fast weights
+被推到训练没见过的更新步数、位置编码外推。</p>
+<p>one-shot 模仿：Circuit 未见配置 6/10 成功（完成分 65%），GDN
+0/10（33%）——GDN
+拿错部件或装错顺序，说明递归记忆「能编码但不会用」上下文；RoboTTT
+靠测试时梯度更新的 fast model 按需检索演示配置。</p>
+<p>扰动恢复：执行中人为拆掉已装好的顶棚/轮胎，RoboTTT 恢复 15/20 和
+18/20，GDN 13/20 和 18/20，短上下文基线最高 10/20（含 30
+分钟扰动数据共训）。</p>
+<p>DAgger Distillation：100 条 DAgger 轨迹（RoboTTT 与 GR00T 各采 50
+条）训练所有方法。标准 DAgger 平均提升 9%；蒸馏版平均 +33%（RoboTTT
++36%、GDN +29%）。关键对照：把含错误动作的完整轨迹直接微调
+GR00T，结果与只用纠正段完全相同（都
+57%）——错误动作作为模仿目标零价值，作为上下文才值钱。定性看增益主要来自「做错后重试」：钻头没对准螺丝，抬臂、重新对准、再钻，最多重试两轮后成功。</p>
+<p>消融（Pup Go Car）：linear fast model 比 MLP 差
+27%（非线性容量是关键）；TTT 只吃 state token 起步，加 action token 相对
++23%（感知自身过去动作有助建模环境动力学），再加 register token 又
++18%；同样的 register token 加给 GR00T N1.7 无任何提升——它只在配合 TTT
+时序建模时才有用。</p>
+<h2 id="5-局限">5. 局限</h2>
+<p>作者自认三条：训练成本随上下文长度上涨（可引入 TNT 等更省的 TTT
+训练法）；TTT
+层沿用通用键值重建目标、未做机器人特化；不能覆盖全部失败模式，接 RL
+直接优化任务成功率是下一步。</p>
+<p>延伸批判：</p>
+<ol type="1">
+<li><strong>one-shot 的口径远窄于字面</strong>。评测只在 Circuit
+单一任务族的未见配置上进行，且训练用了该任务族的成对数据（每配置 5-20
+段人类视频）。这是「配置级」泛化——同一装配任务换目标布局——不是跨任务的技能级
+one-shot。</li>
+<li><strong>每个下游任务仍要 20K 步
+post-training</strong>。新任务族的部署门槛没有消除，one-shot 只发生在
+post-train 覆盖的分布内。</li>
+<li><strong>人类视频与机器人执行同场景同相机</strong>（机器人
+idle、人上手装配），跨具身鸿沟被采集设定大幅压缩；换成第三人称视角或野生视频能否成立未验证。</li>
+<li>「延迟不随上下文增长」是相对声明，正文未报告 TTT
+每步梯度更新的绝对推理开销，常数项多大不明。</li>
+</ol>
+<h2 id="6-与-host--gen-15-的关系">6. 与 HOST / GEN-1.5 的关系</h2>
+<p>三条 one-shot 路线在此完整成形：HOST
+靠<strong>显式结构</strong>（进度流形对齐 + 自接地级联，零参数更新，50
+任务 62%）；GEN-1.5 靠<strong>数据规模涌现</strong>（50
+万小时预训练，ICL 59%，1-10 梯度步适应 83%）；RoboTTT
+给出第三条——<strong>架构机制</strong>：让模型在推理时继续做元学习过的梯度下降，但只在
+fast weights 上。它恰好落在 HOST（零更新）与 GEN-1.5
+适应模式（全模型梯度步）之间：参数确实在测试时变，但变的只是被设计成「记忆」的那一小块，且更新规则是预训练里学好的。</p>
+<p>按 one-shot 广度比，RoboTTT 被 HOST
+明确压制：6/10（60%）只覆盖单任务族的配置变化，HOST 62% 覆盖 50
+个不同任务且跨具身（第三人称人类视频、不同场景）。但 RoboTTT 有三块 HOST
+与 GEN-1.5 都没有的独特价值：一是<strong>长程</strong>，5 分钟 10
+阶段任务的闭环执行与状态消歧，HOST 任务多为桌面短程；二是 <strong>DAgger
+Distillation</strong>，「失败当上下文、纠正当目标」的在线自我改进机制——HOST
+的定位级只能感知进度倒退后重对齐，没有学习过的纠错行为分布；三是<strong>上下文长度
+scaling 律的首次实证</strong>，这条轴与 GEN-1.5
+的数据小时数轴正交，两轴原则上可叠加。</p>
+<p>对本调研的定位：RoboTTT
+提供的是<strong>基础设施层</strong>答案（长上下文怎么做、值不值得做），HOST
+提供的是<strong>跨具身翻译层</strong>答案（人类视频怎么变机器人动作）。两者不互斥——把
+HOST 式进度对齐与预测级联装在 RoboTTT 式 TTT
+主干上，是一条明显的合流方向。</p>
+</article><article id="ch6"><h1
+id="bpp-深度解读一条演示当-prompt任务多样性是-in-context-操作的第一驱动力">BPP
+深度解读：一条演示当 prompt，任务多样性是 in-context
+操作的第一驱动力</h1>
+<blockquote>
+<p><strong>Behavior Prompting Policy: Demonstrations as Prompts for
+Manipulation</strong> arXiv 2606.30457v1（2026-06-29）· Stanford（Shuran
+Song REAL Lab）+ UC Berkeley 作者：Austin Patel、Ben Pekarek、Joel
+Enrique Castro Hernandez、Shuran Song</p>
+</blockquote>
+<h2 id="1-一句话定位">1. 一句话定位</h2>
+<p>BPP 把一条与机器人同传感运动空间的演示（观测 + 本体 + 动作序列，称
+behavior
+prompt）直接喂给策略，推理时零参数更新执行新任务；配套交付三件东西：受控数据研究（固定预算下任务多样性远比每任务演示数重要，2000
+任务 x 5 demos 是配方）、采集硬件 iPhUMI（UMI 夹爪的 GoPro 换成
+iPhone，ARKit 免建图 + 无线传
+prompt）、两个新基准（DrawAnything、LIBERO-Gen）。未见画作重建误差比
+goal-image 条件低 80.7%、比 ICRT 低 33.3%；LIBERO-Gen
+上无任何基础预训练即追平 LoRA 微调 10 万步的 π0.5。</p>
+<h2 id="2-要解决的问题">2. 要解决的问题</h2>
+<p>教机器人新技能要重训或微调；语言与 goal image
+作为任务描述天生残缺——语言说得清「做什么」说不清「怎么做」（低层轨迹、抓取策略、空间细节），goal
+image 只有终态没有过程，「画一幅任意图」这类任务两者都原理性失灵。VLA
+的零样本泛化集中在新环境、新物体，对新低层行为基本无效。</p>
+<p>演示条件化的 in-context 路线早已存在（Duan 2017 的 one-shot
+IL、Vid2Robot、ICRT），但最相关的 ICRT 只在 29 任务、1098 条轨迹、6
+种运动原语的规模上验证过。留下的开放问题：prompting 能力如何随任务多样性
+scale、又能解锁什么测试时能力？现有基准撑不起这个问题——要么任务多样性不足，要么只测语义/视觉适应而不测动作适应。</p>
+<h2 id="3-方法">3. 方法</h2>
+<h3 id="31-behavior-prompt-与架构">3.1 behavior prompt 与架构</h3>
+<p>prompt 是一条完整演示（环境配置与执行时不同），同时提供 what 与
+how。BPP = prompt encoder + action decoder：</p>
+<ul>
+<li><strong>分块编码</strong>：观测/本体降采样到
+1Hz，动作不降采样以保留完整行为序列；每块 {o, q, a} 经 attention pooling
+合成单个 chunk embedding，一举完成同时刻模态关联与序列长度压缩；</li>
+<li><strong>prompt encoder</strong>：transformer decoder，当前观测 token
+对 prompt chunk 序列做 cross-attention，按当前所处阶段抽取相关 prompt
+信息；学习式位置编码，LIBERO-Gen 版本另加 attention sink token；</li>
+<li><strong>action decoder</strong>：Diffusion Policy 的 CNN + FiLM
+架构，条件是当前观测、抽取的 prompt 信息与扩散步
+k，迭代去噪出动作块。</li>
+</ul>
+<p>推理效率设计：chunk embedding 每回合只算一次并缓存；prompt
+信息抽取每控制步一次，与 K 步去噪解耦——去噪循环不必反复扫整条
+prompt。</p>
+<h3 id="32-训练不要任何对应标注">3.2 训练：不要任何对应标注</h3>
+<p>每个训练步采一条演示当
+prompt，再从<strong>同任务的其它演示</strong>采 receding-horizon
+观测与未来动作块当监督目标。两条演示环境配置不同，模型必须端到端学会
+prompt
+与当前观测之间的时间对应与空间差异——不需要任何显式时空对齐标注。这意味着
+BPP 可直接吃现成多任务模仿学习数据集，零额外采集。任务分组粒度决定
+prompt 能控制什么：想让 prompt
+指定抓取策略，就得把不同抓法分成不同任务组。</p>
+<h3 id="33-iphumi-与基准">3.3 iPhUMI 与基准</h3>
+<p>iPhUMI 保留 UMI 手持夹爪设计，把 GoPro 换成 iPhone 15 Pro：ARKit 实时
+SLAM 免掉建图步骤，App
+无线把演示传给工作站即刻条件化策略——同一设备既采训练数据、又在部署时出
+prompt。</p>
+<p>四个基准：DrawAnything-Sim（2000 个程序生成画图任务 x 5 demos，测 50
+条人手采集的未见画作，rollout 时画板朝向与 prompt
+不同，逼策略做空间换算）；DrawAnything-Real（ARX 臂 + iPhone 腕相机 +
+马克笔，1000 任务 = 200 人采 + 800 脚本生成，6DoF 动作）；LIBERO-Gen
+Combination（LIBERO Spatial 从 10 扩到 174 任务，两只同款碗与 9
+个放置位，held-out 10
+个「拆开都见过、合起来没见过」的取放组合）；LIBERO-Gen Chain（LIBERO
+Goal 从 10 扩到 321 任务，两步链式任务含开抽屉/推盘子/开灶台，held-out
+10 个未见链）。</p>
+<h2 id="4-实验结果">4. 实验结果</h2>
+<p><strong>画图</strong>：未见画作上 BPP 比 Goal-Image 降 80.7% Chamfer
+误差、比 ICRT 降 33.3%。Goal-Image
+在训练画作上尚可、在未见画作上退化成不成形的笔画（真机上其 Chamfer
+误差看似中等，实为无意义涂抹恰好盖住目标区域）；ICRT 把整条 rollout
+历史留在模型上下文里，被虚假相关拖出分布。真机上 BPP 能从一条 iPhUMI
+演示重建未见画作。</p>
+<p><strong>LIBERO-Gen</strong>：BPP 全面超过 Goal-Image 与 Language
+基线，且无预训练即追平微调后的 π0.5。Chain
+上去掉「第二步单独任务」的消融（策略从未见过抽屉已开时怎么放酒瓶这类接续状态）让
+BPP 对 Language 的优势从 +10.7% 扩大到
++20.8%——越是训练分布覆盖不到的状态接续，prompt
+的逐步引导越值钱。总结律：任务的时序复杂度越高（单步取放 → 两步链式 →
+连续画图），更富时序信息的任务描述符（goal image → 语言 → behavior
+prompt）收益越大。</p>
+<p><strong>机制可视化</strong>：prompt encoder
+注意力在画图任务里连续追踪与当前观测最接近的 prompt 段，在 LIBERO-Gen
+里离散跳向下一个「里程碑」（下一个交互物体、放置点、任务切换）。结论：BPP
+的适应机制是把 prompt
+当<strong>密集子目标序列</strong>用——比从单张终态图反推全过程容易得多。</p>
+<p><strong>表征消融</strong>（DrawAnything-Sim）：观测必需（锚定检索）；动作有用（填补
+1Hz
+降采样间隙的时序过渡）；本体无用（光标已在图像中可见）；观测降采样低于
+1Hz 显著劣化；attention pooling 优于每模态独立 token。</p>
+<p><strong>数据消融（全文核心科学结论）</strong>：固定演示预算下，多任务
+x 少演示显著优于少任务 x 多演示；训练任务数单调提升未见任务性能，每任务
+5 条演示就够；只训 1-3 部件的简单画作适应不了复杂未见画，只训 4-6
+部件复杂画效果最好（代价是演示数据量大涨）。</p>
+<p><strong>诚实负结果（叠衣案例）</strong>：3 个双臂叠衣任务、每任务约
+150 条演示加共约 1000 条纠错演示的低多样性设定下，语言条件 96-100%
+成功，BPP 分别 76%、100%、60%（fold bottom up
+常做成别的任务，右臂抓对了底边、左臂却去叠袖子）。低任务多样性时 prompt
+的时长与空间变化不再携带区分信息、反而是噪声，作者怀疑模型过拟合了背景等虚假任务线索。原版
+LIBERO 上 BPP 97.48% 与 Language DP 96.23%、π0.5 97.15%
+打平——旧基准已饱和，测不出范式差异，这也是要造 LIBERO-Gen 的原因。</p>
+<h2 id="5-局限">5. 局限</h2>
+<p>作者自认：很多任务语言或 goal image
+就够用且更便宜（愿景是多描述符灵活切换）；需要可观的训练任务多样性；<strong>桌面操作上没有证据能适应全新动作原语</strong>；低多样性
+regime 任务条件化弱于语言；实验里 prompt 与执行同环境，跨环境 prompt
+未测。</p>
+<p>延伸批判：</p>
+<ol type="1">
+<li><strong>「新任务」的实质是组合泛化</strong>。LIBERO-Gen
+的未见任务是已见原语的新组合/新排序，DrawAnything
+的未见画是已见笔画部件（线、圆、Bezier）的新拼接。技能级
+one-shot（全新原语）明确不在能力范围内。</li>
+<li><strong>实验主体在仿真</strong>。真机只有画图（10
+个评测任务）和叠衣（3 任务且以负结果为主），真机操作类任务的 prompt
+适应未验证。</li>
+<li><strong>prompt 不是自由人类视频</strong>。iPhUMI 演示在 UMI
+传感运动空间里，跨具身问题被硬件在采集端消解——免学跨域翻译是优点，但出
+prompt 必须手持专用夹爪，普适性低于「拍段视频就行」。</li>
+<li>π0.5 对照单 seed、100K LoRA 步；DrawAnything
+上的消融结论作者自己声明不保证迁移到其它域。</li>
+</ol>
+<h2 id="6-与-host--gen-15-的关系">6. 与 HOST / GEN-1.5 的关系</h2>
+<p>放进调研坐标系，三者代表三种杠杆：HOST
+是<strong>结构派</strong>（进度流形对齐 + 自接地级联，50 真机任务
+62%，29 秒习得，跨具身人类视频）；GEN-1.5 是<strong>规模派</strong>（50
+万小时预训练涌现 ICL 59%，1-10 梯度步适应 83%）；BPP
+是<strong>数据配方派</strong>——架构全是标准件（cross-attention prompt
+encoder 加 Diffusion Policy
+decoder），真正的贡献是那条受控结论：<strong>驱动 in-context
+能力的是任务多样性，不是数据总量</strong>。这条结论 HOST（229 任务 19.3
+万条轨迹）和 GEN-1.5（50 万小时）都隐含依赖但都没有单独验证，BPP 用 2000
+任务 x 5 demos 的受控设定把它钉死了。</p>
+<p>prompt 模态光谱上三者各占一格：HOST
+吃第三人称人类视频（跨具身鸿沟最大，靠观测空间预测级联跨越）；BPP 吃 UMI
+空间传感运动演示（硬件消解跨具身，换来信息最全的
+prompt——自带动作真值）；GEN-1.5 吃机器人自身经验上下文。演示获取成本 BPP
+居中：比遥操作便宜，比拍人类视频贵。</p>
+<p>被谁超越：真机任务级 one-shot 的广度与难度上被 HOST 全面压制（50
+个真机任务、跨具身 62%，对比 BPP 真机只有画图与叠衣负例）；能力上限被
+GEN-1.5 的涌现路线展示（BPP 结语自己也展望 foundation-level pretraining
+与 behavior prompting 的结合）。</p>
+<p>剩余独特价值有四：任务多样性配方直接指导任何 one-shot
+系统的采集预算分配，对 HOST 的 Stage 1 同样适用；DrawAnything 是「语言与
+goal image 原理性失灵、prompt 不可替代」的最干净论证——HOST 的 50
+任务里没有这类连续指令跟随任务；LIBERO-Gen 把 in-context
+操作研究变成可复现、免工业级数据的科学问题；叠衣负结果划出了适用边界——低任务多样性时
+prompt 反而不如语言，这对 HOST 类方法是同样成立却未被 HOST
+测试过的预警。</p>
+</article><article id="ch7"><h1 id="ricl-深度解读给预训练-vla-事后注入-in-context-学习能力">RICL
+深度解读：给预训练 VLA 事后注入 in-context 学习能力</h1>
+<blockquote>
+<p><strong>RICL: Adding In-Context Adaptability to Pre-Trained
+Vision-Language-Action Models</strong> arXiv 2508.02062 · CoRL
+2025（首尔）· 宾夕法尼亚大学 + 不列颠哥伦比亚大学 作者：Kaustubh
+Sridhar、Souradeep Dutta、Dinesh Jayaraman、Insup Lee ·
+代码与权重开源（ricl-vla.github.io）</p>
+</blockquote>
+<hr />
+<h2 id="1-一句话定位">1. 一句话定位</h2>
+<p>RICL（读作 rickle）用 400
+条演示做一次「检索增强式后训练」，给本不具备 in-context
+learning（ICL）能力的 π0-FAST-DROID
+事后装上这个能力：此后每个新任务只需采 10-20
+条演示放进检索库，零参数更新，完整任务成功率从基线的 2.5% 升到
+31.25%，追平「基线+微调」的 31.67%；若再在这 20
+条演示上做检索增强微调，达到
+61.67%，几乎是普通微调的两倍。这是第一个开源（代码+权重齐全）的通用操作
+ICL 接口。</p>
+<h2 id="2-要解决的问题">2. 要解决的问题</h2>
+<p>LLM 好用的一半原因是
+ICL+RAG：例子放进上下文，不动参数就学会新任务。VLA
+没有这个接口——模仿学习目标 + 相对窄的演示分布，训不出 ICL
+涌现。于是今天改进预训练 VLA
+的唯一路径是收数据再微调参数，终端用户玩不转。</p>
+<p>已有的机器人 ICL 尝试两边都有硬伤：</p>
+<ul>
+<li>用现成 LLM/VLM 做 ICL（keypoint 表征、代码策略、in-context value
+function）：被迫开环或近开环执行，纯语言通道还丢视觉细节，闭环适应能力差；</li>
+<li>从零训练自带 ICL 的 agent（MTT、ICRT、REGENT）：都不建立在通用机器人
+VLA 之上，覆盖面限于游戏、仿真或单一平台设定。</li>
+</ul>
+<p>RICL 的定位是拼接两边优点：拿一个已能真机部署的 SOTA
+VLA（π0-FAST-DROID = SigLIP 视觉编码器 + Gemma 3B + FAST 动作
+tokenizer，经 DROID 数据集微调），事后教会它使用上下文。</p>
+<h2 id="3-方法">3. 方法</h2>
+<h3 id="31-上下文组织与检索">3.1 上下文组织与检索</h3>
+<p>查询 = 当前时刻三视角图像（top/side/wrist）+ 语言指令 + 本体状态（7
+关节角 + 夹爪位置）。上下文 = 检索到的 4
+组近邻，每组含三视角图像、状态和动作块，按相似度从近到远排在查询左侧。检索键刻意做到极简：只取
+top 相机图像的 DINOv2 嵌入，ℓ2 距离 + FAISS 索引，单次检索低于 1
+毫秒。</p>
+<h3 id="32-动作插值层检索先验的硬编码">3.2
+动作插值层：检索先验的硬编码</h3>
+<p>最终动作不是 LLM 输出直接用，而是与最近邻动作 a′ 做距离加权插值（对
+FAST tokenizer 的每个动作 token 独立进行）：输出 = e^(−λd)·one-hot(a′) +
+(1−e^(−λd))·softmax(LLM 输出)，λ=10，d 为查询与最近邻 top 图像的 DINO
+嵌入距离。d 趋近 0 时输出坍缩为复制最近邻（1-NN 行为），d 大时交还 LLM
+自主预测。该层继承自同组前作 REGENT（ICLR
+2025），是「查询与演示够像就直接抄」的显式归纳偏置。</p>
+<h3 id="33-priming-训练配方">3.3 Priming 训练配方</h3>
+<ul>
+<li>数据：Franka DROID 平台自采 20 个 pick-place 任务 × 每任务 20 条 =
+400 条演示，15 Hz 采集；</li>
+<li>序列构造：每条演示的每个状态当查询，从同任务其余 19 条里检索 4
+组近邻拼训练序列——训练形态与部署形态完全一致；</li>
+<li>只全量微调 Gemma LLM，冻结 SigLIP 图像编码器；损失只对查询的动作块算
+cross-entropy（REGENT 连检索到的动作一起算，RICL 砍掉）；</li>
+<li>超参：3 epochs，峰值学习率 2.5e-5 余弦衰减，batch 16，2 张
+A100；动作块 15 步（实测优于 10 步），执行时先取前 3
+步、检测到夹爪动作后改取 8 步。</li>
+</ul>
+<h3 id="34-两档用法">3.4 两档用法</h3>
+<p>档位一（纯 ICL）：新任务采 20
+条演示进检索库，不做任何训练。档位二（RICL-finetuned）：在同 20 条上按
+RICL 同款检索增强目标再微调 1000 步——finetune like you
+pretrain。推理开销：token 数变 4 倍，实际 rollout 时长仅为 π0-FAST 的约
+1.33 倍。</p>
+<h2 id="4-实验结果">4. 实验结果</h2>
+<p>评测设定：8
+个任务（pokeball、idliplate、squeegee、sink-idliplate、sink-squeegee、toaster、door、bagel），覆盖全新物体、全新动作、新场景（厨房水槽区，相机重摆无标定）与训练分布长尾；物体/动作已核查不在
+DROID 和 priming 数据中；每任务 10 次 rollout，初始位姿全桌面随机。</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>目标任务参数更新</th>
+<th>完整成功率</th>
+<th>检查点完成率</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>π0-FAST-DROID</td>
+<td>无</td>
+<td>2.5%</td>
+<td>至多 21.25%</td>
+</tr>
+<tr>
+<td>RICL-π0-FAST-DROID</td>
+<td>无</td>
+<td><strong>31.25%</strong></td>
+<td>至多 83.75%</td>
+</tr>
+<tr>
+<td>π0-FAST-DROID + 微调</td>
+<td>有</td>
+<td>31.67%</td>
+<td>—</td>
+</tr>
+<tr>
+<td>RICL + 检索增强微调</td>
+<td>有</td>
+<td><strong>61.67%</strong></td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<p>四个可以单独记住的结论：</p>
+<ol type="1">
+<li>纯
+ICL（31.25%）追平基线微调（31.67%）：零梯度更新打平了动参数的对手。Retrieve-and-play（1-NN）与从零训练的
+Diffusion Policy
+在最简单的三个任务上就已明显落后，被提前淘汰出后续对比。</li>
+<li>检索增强微调几乎两倍于普通微调（61.67% vs 31.67%）。作者的解释：RAG
+化的模型不必用容量背数据，专注学「在检索到的状态-动作间插值」，与 RAG
+LLM 的参数效率结论一致。</li>
+<li>演示数量消融（idliplate）：5 条时 RICL
+退化成基线行为（同样去抓干扰物苹果），10
+条起效，随演示数增加逼近微调版；RICL-finetuned
+在每个演示数量档位都显著高于普通微调。</li>
+<li>能力无损：把检索库换成随机 priming 演示，在 3 个基线本来会做的任务上
+RICL 版本 80% 成功率与原版持平——注入 ICL 没有毁掉零样本能力。</li>
+</ol>
+<p>另有一个计划外现象：idliplate 的 20
+条演示全是「夹爪伸进盘子凹槽拖动」，RICL
+却自己走到盘子左侧、闭合夹爪把盘子推过去（toaster
+任务同样观察到）。作者称之为 elicited latent
+actions：上下文触发了基座潜藏的操作知识，而非复制演示。</p>
+<h2 id="5-局限">5. 局限</h2>
+<p>作者自认四条：(1) 教不会离基座能力太远的任务，评测因此局限在
+pick-place 变体，网球正手这类大幅新动作失败；(2) 每个新任务仍要 10-20
+条遥操作演示，跨场景不可扩展，作者点名人类视频（R+X 路线）是出路；(3)
+相机视角/场景大变时检索失效（priming 阶段未见过此类扰动）；(4)
+性能仍有空间，寄望于扩大 priming 任务数与参数量。</p>
+<p>延伸批判：</p>
+<ol type="1">
+<li>评测样本量小：8 任务 × 10 rollouts，无置信区间，31.25% 与 31.67%
+的「追平」在这个样本量下统计上很脆。</li>
+<li>检索键太弱：只用单视角单帧的 DINO
+嵌入，语言指令不参与检索，场景相似但任务不同时必然串台——这是最容易被打穿的工程点。</li>
+<li>priming 分布只有 20 个 pick-place 任务，注入的与其说是通用
+ICL，不如说是「pick-place 域内的插值能力」，与 LLM 跨域 ICL
+有本质距离；作者用网球例子自己承认了这一点。</li>
+<li>每任务 20
+条遥操作的成本没有消失，只是从「微调机时」换成「采数据人时」；对比 HOST
+的 1 段人类视频，数据接口贵 20 倍且必须占用真机。</li>
+</ol>
+<h2 id="6-与-hostgen-15-的关系">6. 与 HOST/GEN-1.5 的关系</h2>
+<p>三条路线获得 ICL 的方式不同：GEN-1.5 用 50 万小时数据把
+ICL「养」出来（涌现，one-shot 59%）；HOST 用结构归纳偏置把
+ICL「设计」出来（进度流形对齐 + 自接地级联，1 段人类视频、29 秒、50 任务
+62%）；RICL 用后训练把 ICL「注入」现成 VLA（400 条 priming 演示，每任务
+10-20 条，ICL-only 31.25%）。</p>
+<p>RICL 与 HOST 最本质的差别在演示接口：RICL
+的上下文吃同具身遥操作演示（自带动作标签），检索-插值机制依赖「上下文里有可直接参照的动作」；HOST
+吃跨具身人类视频（无动作标签），靠观测预测级联完成跨域翻译。RICL
+绕开了跨具身鸿沟，代价是数据贵；HOST
+直面它，代价是需要专门的对齐机制。RICL 未被 HOST
+评测（平台、任务、演示模态都不同），二者不构成直接胜负；但按「降低新技能习得成本」这条主轴，HOST
+的接口成本（1 段视频、29 秒、零遥操作）明显低于 RICL（20
+条遥操作演示）。</p>
+<p>RICL 保留的独特价值有三点：(1) 生态位——唯一开源、可直接架在 π0 系 VLA
+上的 ICL 接口，工程复用性最强；(2) 「检索增强微调约 2
+倍于普通微调」的发现独立于 ICL 本身，对所有做少样本 VLA
+适配的团队都可用；(3) 能力保持性验证（随机上下文不掉点）为「后训练注入
+ICL 不伤基座」给出第一份证据。elicited latent actions 现象与 HOST
+的「先预测自己视角的未来观测」殊途同归：有效的 ICL
+不是复制上下文，而是用上下文激活模型内部已有的知识。两条线显然的合流点是把
+RICL 的检索式后训练配方接上人类视频演示接口——作者在 limitations
+里自己指了这个方向。</p>
+</article><article id="ch8"><h1
+id="vid2robot-深度解读端到端视频条件策略的-google-规模实践">Vid2Robot
+深度解读：端到端视频条件策略的 Google 规模实践</h1>
+<blockquote>
+<p><strong>Vid2Robot: End-to-end Video-conditioned Policy Learning with
+Cross-Attention Transformers</strong> arXiv 2403.12943 · RSS 2024 ·
+Google DeepMind Robotics + CMU + 多伦多大学 作者：Vidhi Jain（Google
+实习成果）、Maria Attarian 等；末位作者 Debidatta Dwibedi 是 TCC
+损失的原作者 · vid2robot.github.io</p>
+</blockquote>
+<hr />
+<h2 id="1-一句话定位">1. 一句话定位</h2>
+<p>Vid2Robot 是 2024 年初 Google DeepMind
+交出的端到端视频条件策略：看一段人类演示视频（语言不输入策略），直接在真机上输出动作复现同一任务。9
+个任务上人类视频提示成功率 52.8%，比 BC-Z 基线（30.6%）高 22
+个点；并首次系统展示「跨物体动作迁移」这一涌现能力——提示视频里的动作可以施加到场景中完全不同的物体上（34.2%
+vs BC-Z 的 17.5%）。</p>
+<h2 id="2-要解决的问题">2. 要解决的问题</h2>
+<p>语言条件策略（RT-1/RT-2/RT-X）的任务接口有两个结构缺陷：一是多义性，open
+drawer / open jar / open cabinet
+共享动词但运动控制完全不同，语言嵌入分不清「何时该泛化、何时不该」；二是「怎么做」缺失，目标图像条件下
+hold the flag 与 wave the flag 的终态图一样。视频同时携带 what 和
+how，是更稠密的任务规范。</p>
+<p>但 2024
+年初的视频条件策略要么假设演示与执行在同一工作区、变化有限，要么性能明显落后语言条件策略（BC-Z
+口径）。作者归纳三大障碍：视频维度高（算力/显存压力）、人-机配对数据稀缺、人类演示在速度和风格上差异大。</p>
+<h2 id="3-方法">3. 方法</h2>
+<h3 id="31-三层配对数据90-是免费的">3.1 三层配对数据：90% 是免费的</h3>
+<p>训练需要「提示视频-机器人轨迹」对。Vid2Robot
+按成本递增拼三种来源，共约 38 万对：</p>
+<ul>
+<li>Robot-Robot（占混合比 90%）：把已有 RT-1/RT-2
+机器人数据按语言指令配对——同指令、不同场景的两条轨迹互为提示。12
+万条轨迹 × 每条采 3 个提示 = 36 万对，零新增采集成本；</li>
+<li>Hindsight Human-Robot（5%）：按机器人数据集的既有指令，让 1-5
+名人类在机器人视角相机前演示，5 千条人类视频得 1.5
+万对，不需要新遥操作；</li>
+<li>Co-located
+Human-Robot（5%）：人和机器人在同一工作区（客厅、会议室、厨房、工具台等）各演示一遍，金标准但最费人力，仅
+5 千对。</li>
+</ul>
+<p>语言指令只用于配对和辅助损失，不进策略输入——这是它与语言条件策略的分界线。</p>
+<h3 id="32-架构四模块全-cross-attention">3.2 架构：四模块全
+cross-attention</h3>
+<p>策略 π(a_t | S_t, V) 由四个模块组成：</p>
+<ol type="1">
+<li>提示视频编码器：逐帧 ViT-B/16 + Perceiver Resampler（2 层、64 个
+latent token）；</li>
+<li>机器人状态编码器：共享同一个 ViT + 独立 Resampler，输入当前帧加近 7
+帧（k=8）；</li>
+<li>状态-提示编码器：4 层 cross-attention，状态 token 当 query、提示
+token 当 key/value，输出 prompt-aware state
+tokens——按视频内容决定关注状态里的哪个物体；</li>
+<li>动作解码器：4 层 cross-attention，可学习的动作位置嵌入当 query（ACT
+式一次前向，不做 RT 系的自回归多次前向），输出 11 维动作（模式 +
+夹爪位姿与开合 + 底盘）× 每维 256 bins，argmax 执行，预测视野 4
+步。</li>
+</ol>
+<p>Cross-attention 是显存上的胜负手：16 帧提示 + 8 帧状态在 ViT-B/16
+下共 4704 个 token，全自注意力矩阵约 2200 万项；两个 64-latent Resampler
+把它压到约 30 万项，缩减 70 倍，配对视频训练才跑得动。</p>
+<h3 id="33-一主三辅四损失">3.3 一主三辅四损失</h3>
+<p>总损失是四项等权平均：</p>
+<ol type="1">
+<li>动作 cross-entropy（主损失，端到端行为克隆）；</li>
+<li>TCC 时间循环一致性：对提示/机器人视频的逐帧嵌入（经 2 层 MLP
+alignment pooling）做软最近邻
+cycle-back，强制两段视频的帧级进度互相对应，逼图像编码器对具身、光照、背景、视角保持不变、只编码任务进度；</li>
+<li>视频-视频对比（VVCL）：attention pooling 得到整段视频嵌入，SigLIP
+损失拉近同任务的提示-机器人视频对、推远批内其他对；</li>
+<li>视频-文本对比（VTCL）：与冻结文本编码器的指令嵌入做 SigLIP，即 BC-Z
+式语言辅助监督。</li>
+</ol>
+<p>实现：Jax，20 万步，batch 2048，AdamW 峰值 8e-5 余弦衰减至
+1e-6。平台：Google Robot 移动机械臂（7
+自由度、双指软夹爪、自我中心相机），客户端-服务器部署，推理 5-7 Hz。</p>
+<h2 id="4-实验结果">4. 实验结果</h2>
+<p>评测协议先记住：人工评估员按 reach→grasp→release→terminate
+四个检查点判定，全过程正确才算成功——规则式终态判定会把「抓取失败但瓶子恰好倒成目标姿态」误判为成功。主表
+288 次真机 rollout（9 任务 × 8 次 × 4 行）。</p>
+<table>
+<thead>
+<tr>
+<th>提示来源</th>
+<th>BC-Z</th>
+<th>Vid2Robot</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>机器人视频</td>
+<td>52.6%</td>
+<td>54.9%</td>
+</tr>
+<tr>
+<td>人类视频</td>
+<td>30.6%</td>
+<td><strong>52.8%</strong></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>关键读法：机器人提示下两者打平（训练对 90%
+是机器人-机器人，都吃饱了）；换成人类提示后 BC-Z 掉 22 个点、Vid2Robot
+只掉 2 个点——TCC 加对比损失学出的具身不变表征在这里兑现。</li>
+<li>扩大样本的统计版（限 2 个任务、共 314 次 rollout）：Vid2Robot
+43.4±7.2% vs BC-Z 30.2±7.1%，13 个点的差距在更大样本下保持。</li>
+<li>分阶段成功率：够到正确物体 78%（高出基线 8 个点）；抓取 65% vs
+45%——差距最大的环节，也是整个 rollout 成败的关键；正确释放与自主终止约
+57%（BC-Z 没有终止动作，只能跑满固定步数）。</li>
+<li>跨物体动作迁移（240 次 rollout）：用「把可乐罐立起来」等 5
+个提示对绿罐、薯片袋、订书机、毛绒玩具等 6 种无关物体执行同一动作，总体
+34.2% vs 17.5%；place-into 类 54.2% vs 29.2%，knock-over 29.2% vs
+0%，从抽屉取放到台面 25% vs 0%。训练配对里从未出现「提示物体 ≠
+场景物体」的样本，纯属涌现；模型还表现出隐式语用推理——场景里有绿罐时优先选最接近可乐罐的它下手。</li>
+<li>无提示消融（120 次 rollout）：空白视频提示下 Vid2Robot 23%、BC-Z
+5%，远低于有提示的约
+55%/52.6%——策略确实在读视频，不是拿场景先验猜任务。</li>
+<li>辅助损失消融（162 次 rollout）：全损失约 61%，只留动作损失约
+45%；单去掉视频-文本对比仅降 1-2 个点。涨点主要来自 TCC
+对齐与视频-视频对比；BC-Z 引以为核心的语言辅助监督几乎不贡献。</li>
+<li>免费的长程能力：串接多段提示视频（开抽屉→放入物体→关抽屉），terminate
+信号触发切换下一段，不需要任何长程训练数据。</li>
+</ul>
+<h2 id="5-局限">5. 局限</h2>
+<p>作者自认三类：自遮挡（IK
+解可能把机械臂横在相机前）、抓取失败（透明/可变形物体、抽屉把手等易碰撞区域）、干扰物误识别；单目
+RGB 隐式学深度，遮挡时失效，需要多模态传感融合；训练视频全部是精心采集的
+5-20 秒短指令视频，长程演示与真正 in-the-wild
+网络视频需要新的配对策略。</p>
+<p>延伸批判：</p>
+<ol type="1">
+<li>评测任务全部来自训练指令集（视频未见、任务本身见过），真正 unseen
+task 的能力没有测——与 HOST/RICL
+测全新物体+全新动作的口径不可比；跨物体迁移的 34.2% 才是它最接近 unseen
+设定的数字。</li>
+<li>绝对天花板低：最好设定 54.9%，跨物体 34.2%，离可部署有代差。</li>
+<li>配对完全依赖语言标注，可扩展性受限于「带指令标签的机器人数据」，与它自己批评语言接口的立场构成微妙张力（XSkill
+等免配对路线针对的正是这点）。</li>
+<li>视频是被动条件：16 帧均匀采样一次性喂进
+Resampler，推理时没有执行进度与视频进度的显式对齐，TCC
+只做训练期正则——这是后来被 HOST 点名的结构性死穴。</li>
+</ol>
+<h2 id="6-与-hostgen-15-的关系">6. 与 HOST/GEN-1.5 的关系</h2>
+<p>Vid2Robot 在本调研坐标系里是「被超越的直接前辈」：HOST 论文把它当
+OSVI 基线复现（条件机制移植到 HOST 同款主干上以排除主干差异），在 50
+个未见任务上只有约 19%，被 HOST 的 62% 拉开 43 个点。</p>
+<p>失败根源可以用它自己的设计解释：整段视频压成 64 个 token
+当被动上下文，动作监督锚定在机器人轨迹的固定时间步——HOST
+诊断的「时间错位让模型学会忽略视频」三宗罪，在 Vid2Robot
+架构上全部成立。修复路径有清晰的师承：Vid2Robot 的末位作者 Dwibedi 正是
+TCC 原作者，Vid2Robot 把 TCC 用作辅助正则（只塑造表征）；HOST 把同一个
+TCC 加上 Smooth DTW
+升级成显式进度流形，推理时用它主动选择预测目标。同一个工具从「训练期损失」变成「推理期机制」，one-shot
+成功率从 19% 走到 62%——这是本调研里最干净的一组对照。</p>
+<p>对 GEN-1.5 路线，Vid2Robot 是数据曲线上的早期点位：约 10
+万条机器人轨迹 + 约 1
+万条人类视频，用显式配对监督练出视频跟随能力；GEN-1.5 用 50
+万小时数据把同类能力做成免显式配对的涌现 ICL（59%）。Vid2Robot
+留下两笔至今独特的资产：三层配对数据构造法（90% 免费的 Robot-Robot 配对
++ 少量 hindsight 人类演示）是跨具身训练的省钱配方原型——HOST
+的两阶段训练（193k 同具身轨迹 + 5.8k
+人类视频配对）本质上是同一思想的放大版；提示视频串接做长程任务的组合技，至今仍是视频条件策略的零成本红利。跨物体动作迁移（动词与宾语解耦）则预演了
+HOST 鲁棒性实验中「未见物体替换只掉 4 个点」的能力来源。</p>
+</article><article id="ch9"><h1
+id="外围论文速览one-shot-技能习得调研的五个坐标">外围论文速览：one-shot
+技能习得调研的五个坐标</h1>
+<blockquote>
+<p>配合 <code>01_HOST_zh.md</code>（HOST, arXiv 2607.20033）与
+<code>02_GEN_series_zh.md</code>（GEN-0/1/1.5）阅读。</p>
+</blockquote>
+<p>本合集的五篇论文各占调研版图的一个坐标。ViVLA 是 HOST
+一作团队（Guangyan Chen / Yufeng Yue）的直系前作，代表「隐动作端到端」的
+one-shot 视频模仿路线，与 HOST 的「显式对齐 + 级联」构成方法演化链。π0.5
+与 Wall-OSS 是 HOST 评测的两类基线：前者是语言条件零样本 IL
+的上限（≤17%），后者是最强 SFT 微调基线（56%），且与 HOST 同属 X SQUARE
+ROBOT。EgoScale 代表与 HOST 结构路线对照的「人类数据规模化」路线，用 2
+万小时第一人称数据给出 scaling law 与 one-shot 适配能力，呼应 GEN-1.5
+的涌现叙事。Fast-WAM 是 HOST-base
+引用的世界动作模型架构来源，其「视频建模的收益在训练时而非测试时」的受控结论，是
+HOST 主干选型（双专家 MoT + Wan2.2 + flow matching）的实证支撑。</p>
+<hr />
+<h2
+id="1-vivlasee-once-then-act-vision-language-action-model-with-task-learning-from-one-shot-video-demonstrations">1.
+ViVLA（See Once, Then Act: Vision-Language-Action Model with Task
+Learning from One-Shot Video Demonstrations）</h2>
+<blockquote>
+<p>arXiv 2512.07582 · 北京理工大学 + LimX Dynamics · arXiv
+preprint（2025-12）</p>
+</blockquote>
+<p><strong>一句话定位</strong>：测试时给一段专家示范视频（含人类视频）、零参数更新学会新操作任务的
+VLA；一作 Guangyan Chen 与通讯 Yufeng Yue 即 HOST 团队，可视为 HOST
+的直系前作。</p>
+<p><strong>核心方法</strong>：基于 Qwen2.5-VL
+联合处理示范视频与机器人观测，同时预测示范中的动作序列和机器人后续动作。跨具身动作空间靠
+latent action tokenizer
+统一：仅从视觉学隐动作，专家视频与机器人轨迹联合训练，加 action-centric
+cycle consistency
+正则与局部-全局判别器防止解码器把隐动作信息泄漏回编码器。动作生成用并行解码替代自回归（START
+token 指定并行数量，单次前向出全部动作 token），避免 shortcut learning
+并压低推理延迟；temporal-spatial masking 削减视频 token 冗余。数据侧自建
+expert-agent 配对管线：7,421 条人类视频（100+ 任务）经 3D Gaussian
+Splatting 渲染成机器人执行同任务的 4D 场景，得到 Human2Robot 数据集
+89,736 对，训练总量 892,911 对样本。</p>
+<p><strong>关键结果</strong>：unseen LIBERO 任务成功率较基线提升超
+30%，跨具身示范视频条件下保持 35% 以上增益，真机上从人类视频学 unseen
+任务提升超 38%。</p>
+<p><strong>在本调研中的角色</strong>：HOST 的方法学前身。ViVLA
+把跨具身翻译埋在隐动作空间、把视频-执行时间对应交给 transformer
+隐式学习；HOST 恰好把这两处换成显式模块（SDTW+TCC
+进度流形对齐、定位-未来观测-动作级联）。对照读能看清 HOST
+每个设计选择的动机来源。</p>
+<h2
+id="2-π05π05-a-vision-language-action-model-with-open-world-generalization">2.
+π0.5（π0.5: a Vision-Language-Action Model with Open-World
+Generalization）</h2>
+<blockquote>
+<p>arXiv 2504.16054 · Physical Intelligence · arXiv
+preprint（2025-04）</p>
+</blockquote>
+<p><strong>一句话定位</strong>：用异构数据 co-training
+做开放世界泛化的旗舰 VLA，首个在完全未见过的真实家庭里完成 10-15
+分钟长程操作（清洁厨房/卧室）的端到端系统。</p>
+<p><strong>核心方法</strong>：同一模型分层推理——先以文本预测语义子任务（如「拿起砧板」），再条件于子任务输出低层动作块。预训练混合移动机器人真实家庭数据（约
+400 小时）、非移动机器人多环境数据、实验室跨具身数据（含
+OXE）、高层子任务标注与网页多模态数据，首阶段 97.6%
+的样本不来自移动操作本体；离散 token 预训练 280k 步后，后训练 80k 步加入
+flow matching action
+expert，并用「语言遥操作」采集的口头指令示范训练高层子任务选择。控制侧
+50 Hz 输出 18-19 维动作（双 6-DoF 臂 + 夹爪 + 全向底盘 +
+躯干升降）。</p>
+<p><strong>关键结果</strong>：在三个训练集外真实家庭的厨房/卧室清洁任务上一致成功，mock
+环境评测与真实家庭表现吻合；泛化能力随训练环境数量持续 scaling。</p>
+<p><strong>在本调研中的角色</strong>：HOST 评测的零样本 IL 基线。在与
+HOST 相同的 193k 轨迹上继续训练后，π0.5 面对 50 个新任务仅 ≤17%
+成功率（HOST 62%）——语言指令给得出任务语义，给不出新技能的运动细节，这
+45 个百分点的差距是「视频演示携带执行信息」价值的直接量化。它同时也是
+Fast-WAM 的主要参照（RoboTwin 79.8% vs Fast-WAM
+91.8%），在本调研中是贯穿多篇论文的公共基线。</p>
+<h2 id="3-wall-osswall-oss-igniting-vlms-toward-the-embodied-space">3.
+Wall-OSS（WALL-OSS: Igniting VLMs toward the Embodied Space）</h2>
+<blockquote>
+<p>arXiv 2509.11766 · X SQUARE ROBOT（自变量机器人）· arXiv
+preprint（2025-09），代码开源（wall-x）</p>
+</blockquote>
+<p><strong>一句话定位</strong>：X SQUARE ROBOT 的开源具身基础模型，针对
+VLM 到 VLA 的三重 gap 给出紧耦合 MoE + 统一跨层级 CoT 的配方；在 HOST
+评测中既是零样本基线也是最强微调基线，与 HOST 同公司。</p>
+<p><strong>核心方法</strong>：先诊断 VLM 迁移到动作空间的三个
+gap——模态与数据规模（动作缺大规模对齐语料）、预训练分布（第一人称/鱼眼/自遮挡视角
+vs 网络图像）、训练目标（离散 next-token vs
+连续高频轨迹）。对应解法：紧耦合 MoE
+在不同训练阶段激活不同专家，Inspiration 阶段以 FAST 离散 token 向 VLM
+输出空间注入粗动作先验并补具身 VQA，Integration 阶段用 flow matching
+训高频连续控制再联合优化；Uni-CoT
+把指令推理、子目标分解、细粒度动作合成放进单一可微框架，推理时可自适应决定是否展开
+CoT、可边推理边执行。数据超 10,000 小时：自采多平台真机数据 + 24
+个开源动作数据集（AgiBot World、DROID、BC-Z 等）+ 通用/具身 VQA。基座
+Qwen2.5-VL-3B。</p>
+<p><strong>关键结果</strong>：具身
+VQA（场景描述/目标定位/动作规划）显著超原基座；六个操作任务（其中
+set-table、tidy-bedroom、place-by-color 三个 unseen）超 π0
+等基线，长程任务与指令跟随增益最大。</p>
+<p><strong>在本调研中的角色</strong>：HOST 的双重对照。零样本口径
+≤17%；加 50 条遥操作演示 + LoRA 微调后 56%，是 HOST
+论文全部微调基线中最强的，但仍低于 HOST 用 1 段人类视频、零参数更新的
+62%，且 SFT 后旧技能仅保留
+43%。同公司出品让这个对照排除了「挑弱基线」的质疑——HOST 打赢的是自家最强
+SFT 配方。</p>
+<h2
+id="4-egoscaleegoscale-scaling-dexterous-manipulation-with-diverse-egocentric-human-data">4.
+EgoScale（EgoScale: Scaling Dexterous Manipulation with Diverse
+Egocentric Human Data）</h2>
+<blockquote>
+<p>arXiv 2602.16710 · NVIDIA GEAR + UC Berkeley + University of Maryland
+· arXiv preprint（2026-02）</p>
+</blockquote>
+<p><strong>一句话定位</strong>：用 20,854
+小时动作标注的第一人称人类视频（较此前工作大 20 倍以上）预训练灵巧手
+VLA，给出人类数据的 log-linear scaling law，one-shot
+任务适配作为副产品出现。</p>
+<p><strong>核心方法</strong>：把人类视频转成显式动作监督——相对腕部 SE(3)
+运动（消除相机全局运动依赖）+ retarget
+到高自由度手关节，而非学任务无关的视觉特征。三阶段流程：2
+万小时人类数据预训练 flow-based VLA；50 小时人类 + 4 小时机器人的对齐
+play 数据
+mid-training（匹配桌面场景与视角，把表征接地到机器人传感与控制）；下游任务
+post-training。</p>
+<p><strong>关键结果</strong>：验证损失随数据量呈 log-linear：L = 0.024 −
+0.003·ln(D)，拟合 R² = 0.9983，且直接预测真机表现——1k 到 20k
+小时，五任务平均完成度从 0.30 升到 0.71，无饱和迹象。22-DoF
+灵巧手五个任务（衬衫卷叠/卡片分拣/夹钳取物/拧瓶盖/注射器移液）上比无预训练基线平均成功率提升
+54%；单条机器人示范适配 unseen 衬衫折叠任务达 88% 平均成功；迁移到
+Unitree G1 三指手仍有 30% 以上绝对提升。</p>
+<p><strong>在本调研中的角色</strong>：与 HOST 构成「数据 vs
+结构」的路线对照。EgoScale 与 GEN-1.5 同属规模化路线——GEN-1.5 用 50
+万小时遥操作数据让 one-shot 涌现，EgoScale 用 2
+万小时人类视频给出可外推的定量 scaling law；HOST 则证明 193k 轨迹 + 6k
+人类视频靠归纳偏置也能做到 62%。另需辨析：EgoScale 的 one-shot
+是「单示范 post-train」（更新参数），HOST 是「in-context 零更新」，两种
+one-shot 语义不同，这是本调研需要区分的核心概念。</p>
+<h2
+id="5-fast-wamfast-wam-do-world-action-models-need-test-time-future-imagination">5.
+Fast-WAM（Fast-WAM: Do World Action Models Need Test-time Future
+Imagination?）</h2>
+<blockquote>
+<p>arXiv 2603.16666 · 清华大学 IIIS + Galaxea AI · arXiv
+preprint（2026-03）</p>
+</blockquote>
+<p><strong>一句话定位</strong>：用受控消融回答世界动作模型（WAM）的根本问题——收益来自训练时的视频建模目标，还是测试时的未来想象？答案是前者：保留视频协同训练、砍掉测试时未来生成，性能基本不掉、延迟降
+4 倍。</p>
+<p><strong>核心方法</strong>：Mixture-of-Transformers 架构——Wan2.2-5B
+视频 DiT + 1B action expert（hidden 1024）共享注意力，总参数
+6B，双分支同用 flow matching（10
+步去噪）。训练时联合优化视频预测与动作目标；推理时视频 DiT
+仅对观测上下文做单次前向、充当 world
+encoder，只去噪动作分支。构造三个对照变体隔离变量：Fast-WAM-Joint（未来视频与动作联合去噪）、Fast-WAM-IDM（先生成未来视频再条件出动作）、无视频协同训练版。</p>
+<p><strong>关键结果</strong>：RoboTwin 2.0 上
+91.8%（不用具身预训练），超 π0.5（79.8%）与带预训练的
+Motus（87.8%），持平带预训练的 LingBot-VA（92.2%）。变体对照：Joint
+90.6%、IDM 91.3%、无视频协同训练 83.8%——测试时想象最多贡献 1.2
+个点，视频协同训练贡献 8 个点。LIBERO 平均 97.6%（去掉协同训练跌至
+93.5%）。真机延迟 190 ms，比 imagine-then-execute 类 WAM 快 4
+倍以上。</p>
+<p><strong>在本调研中的角色</strong>：HOST 论文中 HOST-base
+基线引用的架构来源；HOST 主干的双专家 MoT、视频专家从 Wan2.2
+初始化、共享注意力、flow matching 设计与 Fast-WAM 同构。Fast-WAM
+的结论也为 HOST 的选型提供实证：HOST
+的「未来观测预测」级不做迭代视频去噪的完整想象，而是级联内单次自回归
+flow matching 的中间表征——视频先验的承重在训练目标而非测试时生成，与
+Fast-WAM 的发现互为印证。</p>
+</article><article id="ch10"><h1
+id="趋势与洞察机器人-one-shot-技能习得的-2026-拐点">趋势与洞察：机器人
+One-Shot 技能习得的 2026 拐点</h1>
+<blockquote>
+<p>本报告基于对 HOST（arXiv 2607.20033）、GEN-0/1/1.5、Instant
+Policy、ICRT、RoboTTT、BPP、RICL、Vid2Robot、EgoScale、π0.5、Wall-OSS、Fast-WAM
+等工作的深度解读，以及 2026 年 8
+月底的扩展检索（ManiLong-Shot/RLBench-Oneshot、ICLR
+视觉推理、EgoSteer/EgoSmith、Ego2Robot 等）。 写作时间：2026-08-31</p>
+</blockquote>
+<hr />
+<h2 id="0-一页结论">0. 一页结论</h2>
+<p>2026 年 8
+月是机器人技能习得范式的分水岭：<strong>「教机器人」正在从训练问题变成提示问题</strong>。同月内，Generalist
+AI 宣布 one-shot 上下文学习作为涌现能力出现在 50 万小时数据预训练的
+GEN-1.5 里（59%，10 任务），自变量机器人开源了用架构设计达成同等能力的
+HOST（62%，50 任务，29
+秒/技能）。两条完全不同的路线在同一个月、同一个能力点上汇合——这不是巧合，是领域相变的信号。</p>
+<p>类比语言模型的历史坐标：这就是机器人的 GPT-3
+时刻。GPT-3（2020）之后，NLP
+的重心从「为每个任务微调」转向「为每个任务写
+prompt」；机器人正在进入同一转折——physical prompting（物理提示）取代
+per-task fine-tuning。</p>
+<h2 id="1-领域快照通往-2026-08-的时间线">1. 领域快照：通往 2026-08
+的时间线</h2>
+<table>
+<thead>
+<tr>
+<th>时间</th>
+<th>事件</th>
+<th>意义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1994</td>
+<td>Kuniyoshi "learning by watching"</td>
+<td>OSVI 愿景起点</td>
+</tr>
+<tr>
+<td>2017-2018</td>
+<td>MAML 系 one-shot 模仿（Finn、Yu）</td>
+<td>元学习路线，泛化受限</td>
+</tr>
+<tr>
+<td>2024-03</td>
+<td>Vid2Robot（DeepMind）</td>
+<td>端到端视频条件策略，跨注意力+辅助对比损失</td>
+</tr>
+<tr>
+<td>2024-08</td>
+<td>ICRT（Berkeley）</td>
+<td>机器人 ICL 用 next-token prediction 形式化</td>
+</tr>
+<tr>
+<td>2024-11</td>
+<td>Instant Policy（Imperial）</td>
+<td>图扩散 ICL，伪演示无限生成</td>
+</tr>
+<tr>
+<td>2025-04</td>
+<td>π0.5（Physical Intelligence）</td>
+<td>VLA 开放世界泛化的代表</td>
+</tr>
+<tr>
+<td>2025-08</td>
+<td>RICL</td>
+<td>给预训练 VLA 后装 ICL 能力的通用配方</td>
+</tr>
+<tr>
+<td>2025-09</td>
+<td>Wall-OSS 开源（自变量）</td>
+<td>中国开源 VLA 基座</td>
+</tr>
+<tr>
+<td>2025-11</td>
+<td>GEN-0（27 万小时）</td>
+<td>机器人 scaling law + 7B 相变</td>
+</tr>
+<tr>
+<td>2026-01</td>
+<td>ManiLong-Shot / RLBench-Oneshot</td>
+<td>OSIL 标准仿真基准出现</td>
+</tr>
+<tr>
+<td>2026-02</td>
+<td>EgoScale（NVIDIA GEAR）</td>
+<td>20,854 小时第一人称人类视频，log-linear scaling law</td>
+</tr>
+<tr>
+<td>2026-04</td>
+<td>GEN-1</td>
+<td>6 任务 99% 精通 + 3x 速度</td>
+</tr>
+<tr>
+<td>2026-06</td>
+<td>BPP</td>
+<td>行为提示策略</td>
+</tr>
+<tr>
+<td>2026-07</td>
+<td>RoboTTT（NVIDIA GEAR + Stanford）</td>
+<td>TTT 快权重把上下文扩到 8K timestep（3 个数量级）</td>
+</tr>
+<tr>
+<td>2026-08-03</td>
+<td><strong>HOST 开源</strong></td>
+<td>架构派 one-shot：62%，29 秒，零参数更新，不遗忘</td>
+</tr>
+<tr>
+<td>2026-08</td>
+<td><strong>GEN-1.5</strong></td>
+<td>涌现派 one-shot：59%，physical prompting 命名确立</td>
+</tr>
+</tbody>
+</table>
+<h2 id="2-六大趋势">2. 六大趋势</h2>
+<h3
+id="趋势一icl-正在成为机器人学习的新范式轴四条实现路线并行">趋势一：ICL
+正在成为机器人学习的新范式轴，四条实现路线并行</h3>
+<p>「从演示上下文即时学习、不更新参数」这一目标，2026
+年有四条技术路线同时逼近：</p>
+<ol type="1">
+<li><strong>涌现派（GEN-1.5）</strong>：什么都不设计，靠 50
+万小时数据预训练让 ICL 自己长出来。上限最高（还能组合泛化、sim2real
+提示、跨具身提示），但不可复现、需要天价数据引擎。</li>
+<li><strong>架构派（HOST、Instant
+Policy）</strong>：把「对齐」「跨域翻译」显式设计进模型。HOST 用
+SDTW+TCC 学共享任务进度流形 + 三级自接地级联；Instant Policy 用图扩散把
+ICL 结构化。小数据可达（HOST 只用 193k 轨迹 + 5.8k
+人类视频），完全开源。</li>
+<li><strong>上下文扩展派（RoboTTT、ICRT）</strong>：把 LLM
+的长上下文/TTT 技术搬到机器人。RoboTTT 用 TTT
+快权重（每个传感器读数触发内部小模型一次梯度步，把历史压缩进权重空间）把上下文从约
+10 timestep 扩到 8,000（30Hz 下约 5 分钟），推理成本不变；8K
+上下文预训练比 1K 好 62%，比单步基线好 87%，且 context scaling curve
+无饱和迹象。</li>
+<li><strong>VLA 加装派（RICL、BPP）</strong>：不动预训练 VLA 基座，通过
+retraining recipe 后装 ICL 能力。工程上最务实——所有已部署的 π0/OpenVLA
+类模型都可以走这条路升级。</li>
+</ol>
+<p>判断：四条路线会合流。终局形态大概率是「大规模预训练基座（涌现派的数据）+
+显式对齐结构（架构派的归纳偏置）+ TTT
+长上下文（扩展派的机制）」的混合体。RoboTTT 已经是雏形——它把 ICL
+和梯度更新的界限直接消掉了：上下文处理本身就是梯度步。</p>
+<h3
+id="趋势二上下文长度成为机器人-scaling-的新轴">趋势二：上下文长度成为机器人
+scaling 的新轴</h3>
+<p>GEN-0 证明了数据轴（27 万小时→幂律），GEN-1.5 的 30
+秒记忆窗口装下一段演示，RoboTTT 则把「上下文长度」独立成第三条 scaling
+轴：128→8K timestep 单调提升闭环性能、无饱和。Jim Fan
+的表述值得记录："What LLM enjoys, robotics should too. Soon, even 1M
+context is not a fantasy."</p>
+<p>上下文变长的直接后果：能装进上下文的东西从「一段演示」变成「多段演示
++ 自己的执行历史 + 纠错记录」。RoboTTT 已展示 on-the-fly
+self-improvement——机器人中途失败后的自我修正会进入上下文、改进后续动作。<strong>上下文即记忆，记忆即学习</strong>。</p>
+<h3
+id="趋势三数据路线四分天下人类数据-scaling-law-已被量化">趋势三：数据路线四分天下，人类数据
+scaling law 已被量化</h3>
+<p>「数据从哪来」是当前最重要的产业分歧，四条路线的 2026 版图：</p>
+<table>
+<thead>
+<tr>
+<th>路线</th>
+<th>代表</th>
+<th>规模</th>
+<th>优势</th>
+<th>短板</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>穿戴设备/手持夹爪</td>
+<td>Generalist（GEN 系）</td>
+<td>50 万小时，每周 +1 万</td>
+<td>高保真动作标签、天然高速</td>
+<td>私有、成本数千万美元级</td>
+</tr>
+<tr>
+<td>第一人称人类视频</td>
+<td>EgoScale、EgoSteer</td>
+<td>EgoScale 20,854 小时；公开 ego 视频存量约 11.6 万小时</td>
+<td>log-linear scaling law 已验证；embodiment-agnostic motor prior</td>
+<td>需 4D 重建提取动作，误差累积</td>
+</tr>
+<tr>
+<td>合成/重定向</td>
+<td>Ego2Robot</td>
+<td>18,561 小时、15 种机器人形态</td>
+<td>一次采集多形态复用</td>
+<td>渲染真实差距</td>
+</tr>
+<tr>
+<td>人类视频直接条件化</td>
+<td>HOST、Vid2Robot</td>
+<td>HOST 仅 5.8k 段</td>
+<td>零标注、用户可产生</td>
+<td>无力信息、依赖对齐质量</td>
+</tr>
+</tbody>
+</table>
+<p>EgoScale 的贡献是把第二条路线的收益变成可预测的：人类数据规模 vs
+验证损失呈 log-linear，且验证损失强相关于真机性能——22-DoF 灵巧手
++54%（对比无预训练）。这意味着人类视频数据的采购决策可以像 GEN-0
+的机器人数据一样精算了。</p>
+<h3
+id="趋势四涌现-vs-设计bitter-lesson-的新回合但这次两边都赢">趋势四：涌现
+vs 设计——bitter lesson 的新回合，但这次两边都赢</h3>
+<p>Sutton 的 bitter lesson 预言通用方法+算力终将碾压手工设计。GEN-1.5
+是教科书式验证（不为 ICL 做任何设计，它自己涌现）。但 HOST 用 1/100
+量级的数据靠归纳偏置达到了同等成功率——在数据受限机制下，设计仍然是不可替代的杠杆。</p>
+<p>真正的洞察在于两者的成功率惊人接近（59% vs 62%）：<strong>one-shot
+学习的瓶颈可能已经不在方法，而在信息论层面</strong>——一段演示视频本身承载的任务信息有上限（初始条件覆盖、力信息缺失、意图歧义）。如果这个判断对，那么下一波提升不会来自更好的
+ICL 机制，而会来自：(a) 多模态提示（视频+语言+力反馈）；(b)
+交互式澄清（机器人执行中要求补充演示）；(c) 提示组合（GEN-1.5 的 prompt
+chaining 方向）。</p>
+<h3
+id="趋势五评测严重滞后62和59不可直接比">趋势五：评测严重滞后，「62%」和「59%」不可直接比</h3>
+<ul>
+<li>GEN-1.5：10 个任务、试验次数未披露、任务自选、无第三方复核；</li>
+<li>HOST：50 个任务、每任务 20 试验、13 个基线对照，但平台单一（ARX R5
+双臂）、成功判定人工；</li>
+<li>仿真侧 RLBench-Oneshot（ManiLong-Shot, AAAI 2026）刚出现：30
+任务（10 短程 + 20 长程分三档）、25 试验 × 5 种子，是 OSIL
+第一个像样的标准协议，但仿真结果与真机相关性未知。</li>
+</ul>
+<p><strong>真机 one-shot
+评测没有共同基准</strong>，是当前论文数字通胀的根源。谁先建立被广泛采纳的真机
+OSVI 评测协议（固定任务集 + 固定扰动协议 +
+第三方复核），谁就拿到定义领域进展的话语权。</p>
+<h3
+id="趋势六开源在加速吃掉先发优势">趋势六：开源在加速吃掉先发优势</h3>
+<p>2026 年的开源节奏：AgiBot World 数据集（智元）→
+Wall-OSS/Wall-OSS-0.5（自变量）→ X-Tokenizer（自变量，SRQ 动作分词器）→
+EgoSmith 数据流水线（开源，9 倍于 HaWoR 吞吐）→ HOST
+全栈（论文+代码+权重）。闭源阵营只剩数据壁垒（Generalist 的 50
+万小时、Physical Intelligence 的采集网络）。</p>
+<p>自变量的策略清晰可读：用开源抢生态位。HOST
+开源意味着任何拥有中等规模机器人数据（10
+万条轨迹级）的团队都能复刻推理时技能获取——这直接把「one-shot
+能力」从竞争壁垒降格为公共基础设施，逼迫闭源玩家在数据规模和工程系统上继续拉开差距。</p>
+<h2 id="3-七条核心洞察">3. 七条核心洞察</h2>
+<p><strong>Insight
+1：技能的存储位置从参数空间迁移到上下文空间，技能因此变成资产。</strong>
+HOST 的技能库=视频库（外部记忆，检索复用，永不遗忘）；GEN-1.5
+的技能=物理提示片段（可拖放、可组合）。当技能不再固化在权重里，它就变成了可存储、可传播、可交易的数字资产。可预见的衍生形态：机器人技能商店（上传一段演示视频=发布一个技能）、技能版本管理、跨机器人技能市场。灾难性遗忘这个困扰持续学习二十年的问题，被「技能外置」直接架空而非解决。</p>
+<p><strong>Insight 2：physical prompt engineering
+会成为真实工种。</strong> GEN-1.5 已有拖放式提示界面；提示的选择（哪
+3-12 秒）、组合（A+B
+串联）、质量（视角/速度/清晰度）显著影响成功率。类比 2021-2023 年 LLM
+prompt 工程师的出现轨迹，12-24
+个月内会出现：物理提示设计指南、提示库标准格式、提示质量自动评估工具。HOST
+的检索阈值 δ 调优就是这个工种的雏形工作内容。</p>
+<p><strong>Insight 3：ICL 与梯度适应的边界正在消失。</strong> GEN-1.5 的
+1 梯度步（权重变化 &lt;0.15%）效果接近 ICL；RoboTTT
+干脆把「处理上下文」实现为「对内部快权重做梯度步」。二者是同一枚硬币：都是把新信息以极低成本注入模型。理论含义：ICL
+可能本来就是隐式的元优化（LLM
+文献已有此论），机器人给了这个假说一个物理验证场。工程含义：未来的适应接口不会区分「提示」和「微调」，只有一个连续的「适应预算」旋钮（0
+步=纯 ICL，1-10 步=轻适应，1000+ 步=后训练冲精通）。</p>
+<p><strong>Insight 4：one-shot 的下一个瓶颈是信息，不是算法。</strong>
+59-62% 的汇合（趋势四）+ HOST 扰动实验（人为干扰只掉
+9%）说明现有方法已经能高效榨取单段视频的信息。剩下 38%
+失败里，相当比例来自视频根本没携带的信息：接触力大小、被遮挡的接触点、演示者的隐含意图（「轻放」还是「随便放」）。三个补救方向都已有先行者：触觉手套采集（HOST
+作者自己提的方向）、多模态提示融合、执行中交互式请求补充演示。</p>
+<p><strong>Insight
+5：「跟随演示」与「跨具身翻译」的解耦是可推广的方法论。</strong> HOST
+两阶段训练（193k 同具身对预训练「跟随」+ 5.8k 跨域对适配「翻译」，配比
+33:1）本质上发现了：模仿能力的大头可以从廉价数据学，昂贵的配对数据只需教「翻译」。EgoScale
+独立验证了同构配方（human 预训练 + aligned
+mid-training）。这个模式适用于一切跨域模仿设定——仿真到真机、机器人到机器人、甚至动画到机器人。</p>
+<p><strong>Insight 6：具身对齐将从脚注变成独立研究方向。</strong> GEN-1
+首次把它说透：涌现即兴是能力也是风险（机器人自发「整理」你故意摆的东西）。ICL
+加剧了这个问题——技能来自用户随手拍的视频，模型对「不该做什么」的理解为零。物理世界没有
+undo。预计 12 个月内出现第一批「physical prompt
+injection」攻击研究（恶意演示视频诱导危险行为）和对应的提示过滤/行为约束工作。</p>
+<p><strong>Insight
+7：中国团队第一次在范式定义层面与美国头部并跑。</strong>
+此前中国具身智能的叙事是「跟随+工程化」（复现 π0、复现 RT-2）。HOST
+是范式级原创：问题定义（推理时技能获取 vs
+训练时循环）、机制设计（进度流形+自接地级联）、评测口径（50
+任务+遗忘验证）都是第一手的，且抢在 GEN-1.5
+博客前几天开源。自变量「模型全家桶 + 关键能力开源」的打法，对照
+Generalist「数据引擎 +
+全闭源」，是两种生态战略的对照实验，值得持续跟踪。</p>
+<h2 id="4-可证伪的预测12-24-个月">4. 可证伪的预测（12-24 个月）</h2>
+<ol type="1">
+<li><strong>2027 年中前出现 1M timestep
+上下文的机器人模型</strong>（RoboTTT 路线延伸，Jim Fan 已预告）。</li>
+<li><strong>物理提示标准格式出现</strong>：类似 LLM 的
+ChatML，会有一个「演示片段+传感器流+元数据」的封装格式被 2
+家以上机构采纳。</li>
+<li><strong>真机 OSVI
+标准评测协议建立</strong>：固定任务集+扰动协议+第三方复核，HOST 的 50
+任务集是最可能的种子。</li>
+<li><strong>one-shot 成功率在 12 个月内突破 80%</strong>（多模态提示 +
+交互式澄清驱动，非纯 ICL 改进）。</li>
+<li><strong>第一起 physical prompt injection
+安全研究发表</strong>，具身对齐成为独立 workshop 议题。</li>
+<li><strong>技能视频库产品化</strong>：至少一家公司推出「录视频→机器人技能」的消费级/企业级产品（自变量是最近的候选）。</li>
+</ol>
+<h2 id="5-开放问题清单研究机会">5. 开放问题清单（研究机会）</h2>
+<ul>
+<li><strong>非单调演示</strong>：SDTW
+单调假设失效的任务（含重试、可选分支、循环子任务）如何对齐？</li>
+<li><strong>力信息缺口</strong>：纯视觉演示如何推断接触力策略？触觉手套数据能否以
+HOST 的 33:1 模式低成本融入？</li>
+<li><strong>长程组合的自动分解</strong>：GEN-1.5 的 prompt chaining
+靠人工选段；谁来自动把长任务分解成提示库里的原子技能？（ManiLong-Shot 的
+VLM 交互分解是仿真侧的初步答案）</li>
+<li><strong>ICL 技能的脆性根源</strong>：GEN-1.5 承认 ICL
+技能比微调脆；脆在哪（视觉分布？动作精度？时序漂移？）缺乏系统研究。</li>
+<li><strong>上下文 vs
+参数的容量边界</strong>：技能外置到上下文后，模型参数里到底存了什么？哪些技能成分必须进权重？</li>
+<li><strong>评测的初始条件协议</strong>：20
+次试验的「随机初始位姿」各家定义不同，扰动幅度需要标准化度量。</li>
+</ul>
+</article>
+</body></html>

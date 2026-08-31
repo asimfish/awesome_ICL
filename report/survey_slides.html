@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>One-Shot 技能习得调研 · HOST × GEN-1.5</title>
+<style>
+:root{
+  --bg:#0a0e14; --panel:#10161f; --panel2:#151d29; --line:#1f2a3a;
+  --txt:#e6edf3; --dim:#8b98a9; --faint:#5a6675;
+  --cyan:#22d3ee; --cyan-dim:#0e7490;
+  --amber:#fbbf24; --amber-dim:#b45309;
+  --green:#34d399; --red:#f87171; --violet:#a78bfa;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{background:#000;color:var(--txt);font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;-webkit-font-smoothing:antialiased}
+.num{font-family:"SF Mono",Menlo,Consolas,monospace;font-variant-numeric:tabular-nums}
+.deck{width:100vw;height:100vh;overflow:hidden;position:relative}
+.slide{position:absolute;inset:0;display:none;background:var(--bg);padding:52px 68px 64px}
+.slide.active{display:flex;flex-direction:column}
+.slide-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:18px;color:var(--faint);font-size:13px;letter-spacing:.08em}
+.slide h1{font-size:30px;font-weight:700;line-height:1.32;margin-bottom:20px;letter-spacing:.01em}
+.slide h1 .hl-c{color:var(--cyan)} .slide h1 .hl-a{color:var(--amber)}
+.kicker{font-size:13px;color:var(--cyan);letter-spacing:.22em;margin-bottom:10px;font-weight:600}
+.body{flex:1;display:flex;flex-direction:column;min-height:0}
+.foot{position:absolute;left:68px;right:68px;bottom:22px;display:flex;justify-content:space-between;color:var(--faint);font-size:11.5px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:18px 20px}
+.card h3{font-size:15.5px;margin-bottom:8px;font-weight:600}
+.card p,.card li{font-size:13.5px;line-height:1.62;color:var(--dim)}
+.card .big{font-size:34px;font-weight:700;color:var(--txt)}
+strong{color:var(--txt);font-weight:600}
+.tag{display:inline-block;padding:2px 9px;border-radius:99px;font-size:11px;font-weight:600;letter-spacing:.05em;vertical-align:2px}
+.tag-c{background:rgba(34,211,238,.12);color:var(--cyan);border:1px solid rgba(34,211,238,.35)}
+.tag-a{background:rgba(251,191,36,.12);color:var(--amber);border:1px solid rgba(251,191,36,.35)}
+.tag-g{background:rgba(52,211,153,.12);color:var(--green);border:1px solid rgba(52,211,153,.35)}
+.tag-v{background:rgba(167,139,250,.12);color:var(--violet);border:1px solid rgba(167,139,250,.35)}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th{color:var(--dim);font-weight:600;text-align:left;padding:8px 10px;border-bottom:1.5px solid var(--line);white-space:nowrap;font-size:12px}
+td{padding:7px 10px;border-bottom:1px solid var(--line);color:var(--txt);line-height:1.5;vertical-align:top}
+td.dim{color:var(--dim)} tr:last-child td{border-bottom:none}
+.bar-row{display:flex;align-items:center;gap:10px;margin:7px 0}
+.bar-label{width:210px;font-size:13px;color:var(--dim);text-align:right;flex-shrink:0}
+.bar-track{flex:1;height:22px;background:var(--panel2);border-radius:4px;overflow:hidden;position:relative}
+.bar-fill{height:100%;border-radius:4px;display:flex;align-items:center;justify-content:flex-end;padding-right:8px;font-size:12px;font-weight:700;min-width:34px}
+.nav-hint{position:fixed;right:20px;top:10px;color:var(--faint);font-size:11px;z-index:99}
+.progress{position:fixed;top:0;left:0;height:2.5px;background:linear-gradient(90deg,var(--cyan),var(--amber));z-index:100;transition:width .25s}
+.pageno{position:fixed;left:50%;transform:translateX(-50%);bottom:18px;color:var(--faint);font-size:12px;z-index:99}
+.center-slide{justify-content:center;align-items:flex-start}
+ul.tight{list-style:none} ul.tight li{padding-left:1.15em;position:relative;margin-bottom:7px}
+ul.tight li::before{content:"";position:absolute;left:0;top:.62em;width:6px;height:6px;border-radius:2px;background:var(--cyan)}
+ul.tight.amber li::before{background:var(--amber)}
+.callout{border-left:3px solid var(--cyan);background:var(--panel);padding:13px 18px;border-radius:0 8px 8px 0;margin-top:auto}
+.callout p{font-size:14px;color:var(--txt);line-height:1.6}
+.src{color:var(--faint);font-size:11px;margin-top:8px}
+@page{size:1280px 720px;margin:0}
+@media print{
+  .nav-hint,.progress,.pageno{display:none!important}
+  html,body{background:var(--bg)}
+  .deck{width:auto;height:auto;overflow:visible}
+  .slide{display:flex!important;flex-direction:column;position:relative;page-break-after:always;width:1280px;height:720px;padding:52px 68px 64px}
+  .foot{position:absolute}
+}
+</style>
+</head>
+<body>
+<div class="progress" id="prog"></div>
+<div class="pageno num" id="pageno"></div>
+<div class="nav-hint">← → 翻页 · F 全屏</div>
+<div class="deck" id="deck">
+
+<!-- ═══ Slide 1: 封面 ═══ -->
+<section class="slide active">
+  <div class="body center-slide" style="justify-content:center">
+    <div style="font-size:13px;letter-spacing:.3em;color:var(--cyan);margin-bottom:26px;font-weight:600">调研报告 · 2026-08-31</div>
+    <h1 style="font-size:52px;line-height:1.25;margin-bottom:26px">机器人技能习得的范式拐点<br><span style="font-size:30px;color:var(--dim);font-weight:500">从「训练问题」到「提示问题」——One-Shot 技能习得全景调研</span></h1>
+    <div style="display:flex;gap:14px;margin-bottom:38px">
+      <span class="tag tag-c" style="font-size:14px;padding:6px 16px">HOST · 结构派 · 开源</span>
+      <span class="tag tag-a" style="font-size:14px;padding:6px 16px">GEN-1.5 · 规模派 · 涌现</span>
+      <span class="tag tag-g" style="font-size:14px;padding:6px 16px">12 篇论文 · 5 条路线</span>
+    </div>
+    <div style="color:var(--dim);font-size:15px;line-height:2">
+      核心对象：HOST（arXiv 2607.20033）× GEN-1.5（Generalist AI）<br>
+      同期工作：Instant Policy · ICRT · RoboTTT · BPP · RICL · Vid2Robot · ViVLA · π0.5 · Wall-OSS · EgoScale · Fast-WAM
+    </div>
+  </div>
+  <div class="foot"><span>one_shot_skill_survey</span><span>数据截至 2026-08-31</span></div>
+</section>
+
+<!-- ═══ Slide 2: 执行摘要 ═══ -->
+<section class="slide">
+  <div class="slide-head"><span>执行摘要</span><span class="num">02</span></div>
+  <h1>2026 年 8 月，两条互不相识的路线在同一能力点汇合：<br>「教机器人」正在从训练问题变成<span class="hl-c">提示问题</span></h1>
+  <div class="body">
+    <div class="grid2" style="margin-bottom:16px">
+      <div class="card" style="border-color:rgba(34,211,238,.4)">
+        <h3><span class="tag tag-c">结构派</span>&nbsp; HOST（北理工 + 自变量 + 清华，开源）</h3>
+        <p style="margin:8px 0"><span class="big num">62%</span>&nbsp;&nbsp;<span style="color:var(--dim)">50 个未见真机任务</span></p>
+        <p>看一段<strong>第三人称人类视频</strong>，零参数更新，平均 <strong class="num">29 秒</strong>后开始执行新任务；旧技能保持率不降。用架构设计（进度流形对齐 + 预测级联）<strong>造出</strong> one-shot 能力。</p>
+      </div>
+      <div class="card" style="border-color:rgba(251,191,36,.4)">
+        <h3><span class="tag tag-a">规模派</span>&nbsp; GEN-1.5（Generalist AI，闭源）</h3>
+        <p style="margin:8px 0"><span class="big num">59%</span>&nbsp;&nbsp;<span style="color:var(--dim)">10 个评测任务</span></p>
+        <p>给 <strong class="num">3–12 秒</strong>演示当 prompt，无梯度更新，几秒后执行新任务。<strong class="num">50 万小时</strong>真实数据预训练后，one-shot 上下文学习作为<strong>涌现能力</strong>出现。</p>
+      </div>
+    </div>
+    <div class="callout">
+      <p><strong>为什么是拐点：</strong>两条路线方法论完全相反（归纳偏置 vs 数据暴力），却在同月、同一能力点交付了可用结果——范式转移不再依赖单一路线成立，这是领域相变的信号。调研的其余 10 篇论文提供了这场汇合的完整证据链。</p>
+    </div>
+  </div>
+  <div class="foot"><span>来源：notes/01、02；insights/10 §0</span><span class="num">02 / 19</span></div>
+</section>
+
+<!-- ═══ Slide 3: Situation ═══ -->
+<section class="slide">
+  <div class="slide-head"><span>背景 · SITUATION</span><span class="num">03</span></div>
+  <h1>旧范式下，每个新技能都是一次小型科研项目：<br>数百条遥操作 + 数小时微调 + 旧技能坍塌</h1>
+  <div class="body">
+    <div class="grid3" style="margin-bottom:16px">
+      <div class="card">
+        <h3>数据成本</h3>
+        <p><span class="big num">50–300 条</span></p>
+        <p>遥操作演示起步。专家 + 真机独占，采集一个任务以小时计；RICL 口径 20 条/任务已算「少」，仍比拍一段人类视频贵一个量级。</p>
+      </div>
+      <div class="card">
+        <h3>适配门槛</h3>
+        <p><span class="big num">10 万步</span></p>
+        <p>BPP 对照中 π0.5 的 LoRA 微调步数。GPU 机时 + 调参专业知识，把「教机器人」锁定为算法工程师的工作，终端用户不可及。</p>
+      </div>
+      <div class="card">
+        <h3>灾难性遗忘</h3>
+        <p><span class="big num">43%</span></p>
+        <p>Wall-OSS 经 SFT 学会新任务后，旧技能只保留 43%（HOST 论文实测）。每教一个新技能，都在赌之前的投入不清零。</p>
+      </div>
+    </div>
+    <div class="callout">
+      <p>与此同时，LLM 那边「教模型」早已是提示工程：例子放进上下文、权重不动。机器人界的问题变成：<strong>ICL 是语言独有的运气，还是感知运动序列上同样成立的普适性质？</strong>——12 篇论文用五条不同路线回答了它。</p>
+    </div>
+  </div>
+  <div class="foot"><span>来源：notes/01 §2、06 §4、07 §4、09 §3</span><span class="num">03 / 19</span></div>
+</section>
+
+<!-- ═══ Slide 4: Complication ═══ -->
+<section class="slide">
+  <div class="slide-head"><span>问题解剖 · COMPLICATION</span><span class="num">04</span></div>
+  <h1>此前的视频模仿为什么不 work：<br>演示被当成「被动上下文」，模型学会了忽略它</h1>
+  <div class="body">
+    <div class="grid3" style="margin-bottom:16px">
+      <div class="card">
+        <h3><span style="color:var(--red)">病灶 ①</span> 时间错位</h3>
+        <p>把整段视频压成固定 token（Vid2Robot：64 个）当条件，动作监督锚定机器人轨迹固定时间步——演示进度与执行进度从不对齐，梯度不流经「读视频」路径。</p>
+      </div>
+      <div class="card">
+        <h3><span style="color:var(--red)">病灶 ②</span> 捷径学习</h3>
+        <p>ICRT 实证：单任务场景数据下，当前观测已唯一决定动作，prompt 沦为摆设——DROID 1 万条训练，测试 <strong class="num">0%</strong>；对 prompt 也算损失，79.2% 崩到 22.5%。</p>
+      </div>
+      <div class="card">
+        <h3><span style="color:var(--red)">病灶 ③</span> 跨具身鸿沟</h3>
+        <p>人手 ≠ 夹爪：外观、运动学、速度全不同。隐动作空间（ViVLA）翻译不透明；硬件消解（BPP 的 iPhUMI）要用户手持专用夹爪，普适性打折。</p>
+      </div>
+    </div>
+    <div class="callout" style="border-color:var(--amber)">
+      <p><strong>共同的问题（QUESTION）：</strong>怎样让演示从「被动参考」变成「主动驱动执行的信号」？——结构派的答案是把对齐做成显式机制（HOST），规模派的答案是让数据多到捷径不存在（GEN-1.5），中间还有数据配方（BPP/ICRT）、架构机制（RoboTTT）、事后注入（RICL）三条路。</p>
+    </div>
+  </div>
+  <div class="foot"><span>来源：notes/01 §3、04 §3.3、08 §5、03 §6</span><span class="num">04 / 19</span></div>
+</section>
+
+<!-- ═══ Slide 5: HOST vs GEN-1.5 对照 ═══ -->
+<section class="slide">
+  <div class="slide-head"><span>两大主角</span><span class="num">05</span></div>
+  <h1><span class="hl-c">HOST</span> 与 <span class="hl-a">GEN-1.5</span>：方法论镜像，能力点重合</h1>
+  <div class="body">
+    <table style="margin-bottom:14px">
+      <tr><th style="width:150px"></th><th style="color:var(--cyan)">HOST（2026-08-03 开源）</th><th style="color:var(--amber)">GEN-1.5（2026-08 博客发布）</th></tr>
+      <tr><td class="dim">能力来源</td><td>架构<strong>设计</strong>：进度流形对齐 + 自接地预测级联</td><td>规模<strong>涌现</strong>：50 万小时真实操作数据预训练</td></tr>
+      <tr><td class="dim">演示接口</td><td>第三人称<strong>人类视频</strong>（跨具身，无动作标签）</td><td>3–12 秒演示做「physical prompting」</td></tr>
+      <tr><td class="dim">one-shot 成绩</td><td><strong class="num">62%</strong> · 50 个未见任务 · 每技能约 29 秒</td><td><strong class="num">59%</strong> · 10 个评测任务 · 秒级生效</td></tr>
+      <tr><td class="dim">few-shot 升级</td><td>—（论文范围外）</td><td>1–10 个梯度步适应后 <strong class="num">83%</strong></td></tr>
+      <tr><td class="dim">技能保持</td><td>零参数更新，旧技能<strong>无损</strong>（对照 SFT 保留 43%）</td><td>上下文模式无更新；梯度步模式未公布保持率</td></tr>
+      <tr><td class="dim">训练成本</td><td>193k 轨迹（229 任务）+ 5.8k 人类视频配对，两阶段</td><td>50 万小时多具身数据（约为 HOST 数据量数百倍）</td></tr>
+      <tr><td class="dim">可验证性</td><td>论文 + 代码 + 权重全开源，口径可复查</td><td>博客数字，无论文、无第三方复现渠道</td></tr>
+    </table>
+    <div class="callout">
+      <p><strong>读法警告：</strong>62% 与 59% 不可直接比大小——任务集、难度、判定口径都不同。真正的信息是：两条成本结构完全不同的路线，都把 one-shot 从论文指标做成了可演示能力。</p>
+    </div>
+  </div>
+  <div class="foot"><span>来源：notes/01 §1/§7、02 §5</span><span class="num">05 / 19</span></div>
+</section>
+
+<!-- ═══ Slide 6: HOST 机制 ═══ -->
+<section class="slide">
+  <div class="slide-head"><span>HOST 深拆 · 机制</span><span class="num">06</span></div>
+  <h1>HOST 的两个机制，分别对准两个病灶：<br>时间错位用「目标耦合」治，跨具身鸿沟用「自接地级联」治</h1>
+  <div class="body">
+    <div class="grid2" style="margin-bottom:14px">
+      <div class="card" style="border-color:rgba(34,211,238,.4)">
+        <h3>机制 ① 目标耦合 —— 演示与执行共享任务进度流形</h3>
+        <p style="margin-bottom:8px">Qwen3-VL 逐帧嵌入 → 投影到进度流形，<strong>SDTW + TCC</strong> 训练对齐。推理时实时定位机器人执行进度在人类视频里的对应位置，把「演示接下来的样子」动态选为预测目标。</p>
+        <p style="color:var(--faint);font-size:12.5px">≈ 把 Vid2Robot 里只在训练期起效的 TCC 正则，升级成推理期的主动机制——进度倒退可感知、可重对齐。</p>
+      </div>
+      <div class="card" style="border-color:rgba(34,211,238,.4)">
+        <h3>机制 ② 自接地预测级联 —— 三级跨越具身鸿沟</h3>
+        <p style="margin-bottom:8px">级联三步：<strong>定位</strong>（进度对齐）→ <strong>预测自己视角的未来观测</strong>（把人类动作翻译成机器人世界的图像）→ <strong>解码动作</strong>。翻译发生在观测空间而非隐动作空间，每级可检查。</p>
+        <p style="color:var(--faint);font-size:12.5px">主干：双专家 MoT（视频专家自 Wan2.2 初始化）+ flow matching——与 Fast-WAM 同构，「视频先验承重在训练目标」有独立实证支撑。</p>
+      </div>
+    </div>
+    <div class="card" style="background:var(--panel2)">
+      <p style="font-size:13.5px"><strong>两阶段训练：</strong>Stage 1 用 193k 同具身轨迹练「预测-执行」基本功；Stage 2 用 5.8k 组（人类视频, 机器人轨迹）配对练跨具身对齐——演化自 ViVLA（同团队前作）：把前作埋在隐动作空间的翻译、交给 transformer 隐式学的对应，全部换成显式模块。</p>
+    </div>
+  </div>
+  <div class="foot"><span>来源：notes/01 §4/§5、09 §1/§5</span><span class="num">06 / 19</span></div>
+</section>
+
+<!-- ═══ Slide 7: HOST 证据 ═══ -->
+<section class="slide">
+  <div class="slide-head"><span>HOST 深拆 · 证据</span><span class="num">07</span></div>
+  <h1>同一批 50 个未见任务上的成功率阶梯：<br>语言 17 → 视频被动条件 19 → SFT 56 → <span class="hl-c">HOST 62</span></h1>
+  <div class="body">
+    <div style="margin-bottom:18px">
+      <div class="bar-row"><div class="bar-label">π0.5（语言条件，零样本）</div><div class="bar-track"><div class="bar-fill num" style="width:22%;background:var(--faint);color:#000">≤17%</div></div></div>
+      <div class="bar-row"><div class="bar-label">Vid2Robot 式（视频被动条件）</div><div class="bar-track"><div class="bar-fill num" style="width:24.5%;background:var(--faint);color:#000">≤19%</div></div></div>
+      <div class="bar-row"><div class="bar-label">Wall-OSS + 50 条遥操作 SFT</div><div class="bar-track"><div class="bar-fill num" style="width:72%;background:var(--amber-dim);color:#fff">56%</div></div></div>
+      <div class="bar-row"><div class="bar-label"><strong style="color:var(--cyan)">HOST（1 段人类视频，零更新）</strong></div><div class="bar-track"><div class="bar-fill num" style="width:80%;background:var(--cyan);color:#000">62%</div></div></div>
+    </div>
+    <div class="grid3">
+      <div class="card"><h3>阶梯的含义</h3><p>17→19：被动看视频几乎无增益；19→62：同样的视频，换成主动对齐机制，+43 个点——增益全部来自<strong>机制</strong>而非模态本身。</p></div>
+      <div class="card"><h3>压过自家最强 SFT</h3><p>Wall-OSS 与 HOST 同属自变量机器人：56% 是自家最强微调配方 + 50 条遥操作的成绩，仍低于 1 段人类视频 + 零更新的 62%，且 SFT 旧技能只剩 43%。排除了「挑弱基线」质疑。</p></div>
+      <div class="card"><h3>鲁棒性</h3><p>未见物体替换只掉约 4 个点；演示与执行场景不同、第三人称视角均可工作。50 任务 × 20 次试验的口径，是本调研里统计功效最强的真机评测。</p></div>
+    </div>
+  </div>
+  <div class="foot"><span>来源：notes/01 §6、09 §2/§3</span><span class="num">07 / 19</span></div>
+</section>
+
+<!-- ═══ Slide 8: GEN 三部曲 ═══ -->
+<section class="slide">
+  <div class="slide-head"><span>GEN 系列 · 规模派叙事</span><span class="num">08</span></div>
+  <h1>GEN 三部曲九个月走完：验证 scaling law → 99% 精通 → <span class="hl-a">ICL 涌现</span></h1>
+  <div class="body">
+    <div style="display:flex;gap:14px;margin-bottom:16px">
+      <div class="card" style="flex:1;border-top:3px solid var(--amber-dim)">
+        <h3><span class="num" style="color:var(--faint)">2025-11</span> · GEN-0</h3>
+        <p><strong>验证存在性。</strong>27 万小时数据、10B+ 模型上确立机器人操作的 scaling law：算力与数据翻倍，能力可预测地上升；提出「intelligence phase transition」——足够规模后突然出现的能力跃迁。</p>
+      </div>
+      <div class="card" style="flex:1;border-top:3px solid var(--amber)">
+        <h3><span class="num" style="color:var(--faint)">2026-04</span> · GEN-1</h3>
+        <p><strong>兑现精通。</strong>简单操作任务成功率推到 <span class="num">99%</span> 级别（mastery 定义：连续长时间无失败运行）。证明 scaling 不只涨曲线，能落到可靠性。</p>
+      </div>
+      <div class="card" style="flex:1;border-top:3px solid var(--amber);background:linear-gradient(180deg,rgba(251,191,36,.06),transparent)">
+        <h3><span class="num" style="color:var(--faint)">2026-08</span> · GEN-1.5</h3>
+        <p><strong>涌现 ICL。</strong><span class="num">50 万小时</span>数据后，one-shot 从演示学新任务的能力<strong>未经专门设计而出现</strong>：3–12 秒演示 prompt → 10 任务 59%；加 1–10 个梯度步 → 83%。</p>
+      </div>
+    </div>
+    <div class="callout" style="border-color:var(--amber)">
+      <p><strong>谨慎读数：</strong>全部数字来自公司博客——10 个评测任务（对 HOST 的 50 个）、无同行评审、无开源复现渠道。GEN-1.5 的价值不在数字本身，而在它给出「ICL 会随规模自然出现」的存在性证明，与 ICRT 在 3k 条轨迹上的最小可行原型（79.2%）首尾呼应：配方相同，规模差五个数量级。</p>
+    </div>
+  </div>
+  <div class="foot"><span>来源：notes/02 §2–§6、04 §7</span><span class="num">08 / 19</span></div>
+</section>
+
+<!-- ═══ Slide 9: 方法族谱 ═══ -->
+<section class="slide">
+  <div class="slide-head"><span>全景 · 五条路线</span><span class="num">09</span></div>
+  <h1>同一个目标，五条路线：one-shot 能力可以被设计、被喂出、<br>被配方化、被机制化、被事后注入</h1>
+  <div class="body">
+    <table>
+      <tr><th style="width:120px">路线</th><th style="width:200px">代表工作</th><th>核心赌注</th><th style="width:265px">代表性结果</th></tr>
+      <tr>
+        <td><span class="tag tag-c">结构派</span></td>
+        <td><strong>HOST</strong> · Instant Policy · ViVLA</td>
+        <td>归纳偏置能在小数据下造出 one-shot：HOST 加在<strong>时间</strong>维（进度对齐），Instant Policy 加在<strong>空间</strong>维（图 + SE(3) 扩散）</td>
+        <td class="num">HOST 62%（50 任务）；IP 88.75%（16 任务、宽松口径）</td>
+      </tr>
+      <tr>
+        <td><span class="tag tag-a">规模派</span></td>
+        <td><strong>GEN-1.5</strong> · EgoScale</td>
+        <td>数据够大 ICL 自然涌现；EgoScale 给出人类视频的 log-linear scaling law（R²=0.998）</td>
+        <td class="num">GEN-1.5 59%（10 任务）；EgoScale 单示范适配 88%</td>
+      </tr>
+      <tr>
+        <td><span class="tag tag-g">数据配方派</span></td>
+        <td><strong>BPP</strong> · ICRT</td>
+        <td>驱动 ICL 的不是数据量而是<strong>数据结构</strong>：任务多样性 + 强迫读 prompt 的分布设计</td>
+        <td class="num">ICRT 1098 条轨迹 → 79.2%；BPP：2000 任务 × 5 demos 配方</td>
+      </tr>
+      <tr>
+        <td><span class="tag tag-v">架构机制派</span></td>
+        <td><strong>RoboTTT</strong></td>
+        <td>推理时在 fast weights 上继续做元学习过的梯度下降，上下文扩到 8K 步且延迟不涨</td>
+        <td class="num">长程 +87%；上下文 128→8K 单调上升无饱和</td>
+      </tr>
+      <tr>
+        <td><span class="tag tag-v">事后注入派</span></td>
+        <td><strong>RICL</strong></td>
+        <td>预训练 VLA 缺 ICL 不必重训：400 条演示检索增强后训练即可装上</td>
+        <td class="num">π0-FAST-DROID 2.5% → 31.25%（零更新）</td>
+      </tr>
+    </table>
+  </div>
+  <div class="foot"><span>来源：notes/03–07、09；insights/10 §2</span><span class="num">09 / 19</span></div>
+</section>
+
+<!-- ═══ Slide 10: 全景对照表 ═══ -->
+<section class="slide">
+  <div class="slide-head"><span>全景 · 论文矩阵</span><span class="num">10</span></div>
+  <h1>12 篇论文一页对照：演示接口决定成本，机制决定上限</h1>
+  <div class="body">
+    <table style="font-size:11.8px">
+      <tr><th>工作</th><th>时间/出处</th><th>演示接口</th><th>参数更新</th><th>关键数字</th><th>本调研角色</th></tr>
+      <tr><td><strong>HOST</strong> <span class="tag tag-c" style="font-size:9.5px">主角</span></td><td class="dim num">2026-08 · 开源</td><td>人类视频×1</td><td>零</td><td class="num">50 任务 62% · 29 秒</td><td class="dim">结构派答案</td></tr>
+      <tr><td><strong>GEN-1.5</strong> <span class="tag tag-a" style="font-size:9.5px">主角</span></td><td class="dim num">2026-08 · 博客</td><td>3–12 秒演示</td><td>零 / 1–10 步</td><td class="num">10 任务 59% / 83%</td><td class="dim">规模派答案</td></tr>
+      <tr><td>Instant Policy</td><td class="dim num">ICLR 2025</td><td>动觉示教 1–2 条</td><td>零</td><td class="num">16 任务 88.75%（同物体）</td><td class="dim">空间结构派</td></tr>
+      <tr><td>ICRT</td><td class="dim num">ICRA 2025</td><td>遥操作轨迹 1–3 条</td><td>零</td><td class="num">12 任务 79.2%（6 原语内）</td><td class="dim">NTP 最小原型</td></tr>
+      <tr><td>RoboTTT</td><td class="dim num">2026-07 · NVIDIA</td><td>人类视频（同场景）</td><td>仅 fast weights</td><td class="num">one-shot 6/10 · 长程 +87%</td><td class="dim">上下文 scaling 轴</td></tr>
+      <tr><td>BPP</td><td class="dim num">2026-06 · Stanford</td><td>iPhUMI 演示×1</td><td>零</td><td class="num">画图误差 −80.7% vs goal-image</td><td class="dim">任务多样性定律</td></tr>
+      <tr><td>RICL</td><td class="dim num">CoRL 2025</td><td>遥操作 10–20 条</td><td>零（可选微调）</td><td class="num">2.5→31.25%；微调 61.67%</td><td class="dim">ICL 事后注入</td></tr>
+      <tr><td>Vid2Robot</td><td class="dim num">RSS 2024 · Google</td><td>人类视频×1</td><td>零</td><td class="num">9 任务 52.8%；HOST 口径 19%</td><td class="dim">被超越的前辈</td></tr>
+      <tr><td>ViVLA</td><td class="dim num">2025-12 · 北理工</td><td>专家视频×1</td><td>零</td><td class="num">LIBERO unseen +30%</td><td class="dim">HOST 直系前作</td></tr>
+      <tr><td>π0.5</td><td class="dim num">2025-04 · PI</td><td>语言指令</td><td>零样本</td><td class="num">HOST 口径 ≤17%</td><td class="dim">语言条件上限</td></tr>
+      <tr><td>Wall-OSS</td><td class="dim num">2025-09 · 自变量</td><td>遥操作 50 条</td><td>LoRA SFT</td><td class="num">56%，旧技能存留 43%</td><td class="dim">最强 SFT 对照</td></tr>
+      <tr><td>EgoScale</td><td class="dim num">2026-02 · NVIDIA</td><td>单条机器人示范</td><td>post-train</td><td class="num">2 万小时 · L=0.024−0.003lnD</td><td class="dim">人类数据 scaling</td></tr>
+    </table>
+    <p class="src">各行成功率的任务集与判定口径互不相同，禁止跨行直接比大小；详见各篇 notes 的「延伸批判」节。</p>
+  </div>
+  <div class="foot"><span>来源：notes/01–09</span><span class="num">10 / 19</span></div>
+</section>
+
+<!-- ═══ Slide 11: 证据链 1 ═══ -->
+<section class="slide">
+  <div class="slide-head"><span>证据链 ①</span><span class="num">11</span></div>
+  <h1>决定 ICL 成败的不是数据量，是数据结构：<br>「强迫模型读演示」是所有路线的共同前提</h1>
+  <div class="body">
+    <div class="grid3" style="margin-bottom:16px">
+      <div class="card">
+        <h3>ICRT：1098 条 &gt; 10000 条</h3>
+        <p>自采 1098 条「同场景多任务」轨迹 → <span class="num">73.3%</span>；1 万条单任务场景的 DROID → <span class="num">0%</span>。单任务场景下观测唯一决定动作，模型必然走捷径无视 prompt。</p>
+      </div>
+      <div class="card">
+        <h3>BPP：多样性 &gt; 密度</h3>
+        <p>固定预算下 2000 任务 × 5 条完胜少任务 × 多条；任务数单调提升未见任务性能，每任务 <strong class="num">5 条</strong>就够。叠衣负例：低多样性时 prompt 反而不如语言条件。</p>
+      </div>
+      <div class="card">
+        <h3>ICRT：prompt 免损失</h3>
+        <p>对 prompt 段也算模仿损失 = 训练模型「没上下文也要输出」，79.2% 崩到 <span class="num">22.5%</span>。HOST 的目标耦合、RoboTTT 的损失 mask，都是同一原理的不同实现。</p>
+      </div>
+    </div>
+    <div class="callout">
+      <p><strong>对 GEN-1.5 的反推：</strong>50 万小时数据「自然」覆盖了多任务歧义场景——规模派的涌现，可能只是数据配方派的强迫函数在大数据下自动满足。这条假设可以用 BPP 式受控实验在中等规模上证伪。</p>
+    </div>
+  </div>
+  <div class="foot"><span>来源：notes/04 §3/§5、06 §4/§5；insights/10 §3</span><span class="num">11 / 19</span></div>
+</section>
+
+<!-- ═══ Slide 12: 证据链 2 ═══ -->
+<section class="slide">
+  <div class="slide-head"><span>证据链 ②</span><span class="num">12</span></div>
+  <h1>上下文长度是与数据量正交的第二条 scaling 轴：<br>128 → 8K 步，性能单调上升，尚未见顶</h1>
+  <div class="body">
+    <div class="grid2" style="margin-bottom:16px">
+      <div class="card">
+        <h3>RoboTTT 的 scaling 实证</h3>
+        <div style="margin:10px 0">
+          <div class="bar-row"><div class="bar-label" style="width:130px">上下文 128</div><div class="bar-track"><div class="bar-fill num" style="width:30%;background:var(--panel2);border:1px solid var(--violet);color:var(--dim)">~30%</div></div></div>
+          <div class="bar-row"><div class="bar-label" style="width:130px">上下文 1K</div><div class="bar-track"><div class="bar-fill num" style="width:44%;background:rgba(167,139,250,.35);color:#fff">43.9%</div></div></div>
+          <div class="bar-row"><div class="bar-label" style="width:130px">上下文 8K</div><div class="bar-track"><div class="bar-fill num" style="width:72%;background:var(--violet);color:#000">71.5%</div></div></div>
+        </div>
+        <p>8K 比 1K 高 <strong class="num">63%</strong>，无饱和迹象；对照组 GDN（线性递归记忆）完全没有此趋势——<strong>能存上下文 ≠ 会用上下文</strong>，元学习过的更新规则才是关键。</p>
+      </div>
+      <div class="card">
+        <h3>为什么这条轴重要</h3>
+        <ul class="tight">
+          <li>朴素加历史帧是<strong>毒药</strong>：GR00T N1.7 加 1 帧历史，57% → 39.5%（causal confusion）——长上下文必须配对齐机制或记忆机制</li>
+          <li>8K 步 ≈ 30Hz 下 5 分钟：够放一整段演示视频 + 自身执行历史 + 纠错记录（DAgger 蒸馏 +36% 即来自「失败当上下文」）</li>
+          <li>与 GEN-1.5 的数据小时数轴<strong>正交</strong>：两轴原则上可叠加，是最直接的合流方向</li>
+        </ul>
+      </div>
+    </div>
+    <div class="callout" style="border-color:var(--violet)">
+      <p><strong>推论：</strong>「HOST 式显式对齐」与「RoboTTT 式长上下文 TTT 主干」不互斥——把进度流形装进 8K 上下文的 fast weights 架构，是本调研看到的最明确的下一代系统蓝图。</p>
+    </div>
+  </div>
+  <div class="foot"><span>来源：notes/05 §1/§4/§6；insights/10 §3</span><span class="num">12 / 19</span></div>
+</section>
+
+<!-- ═══ Slide 13: 证据链 3 TCC 演化 ═══ -->
+<section class="slide">
+  <div class="slide-head"><span>证据链 ③</span><span class="num">13</span></div>
+  <h1>全场最干净的对照：同一个工具（TCC），<br>从「训练期正则」升级为「推理期机制」，19% → 62%</h1>
+  <div class="body">
+    <div style="display:flex;align-items:stretch;gap:0;margin-bottom:18px">
+      <div class="card" style="flex:1;border-color:rgba(139,152,169,.4)">
+        <h3 style="color:var(--dim)">Vid2Robot（RSS 2024，Google DeepMind）</h3>
+        <p style="margin-bottom:6px">TCC 作为<strong>辅助损失</strong>：训练期逼视频编码器只编码任务进度、对具身不变。推理时视频压成 64 个 token 被动喂入，无任何执行-演示对齐。</p>
+        <p><span class="big num" style="color:var(--dim)">19%</span>&nbsp;<span style="font-size:12px;color:var(--faint)">HOST 50 任务口径（原文 9 任务 52.8%）</span></p>
+      </div>
+      <div style="display:flex;align-items:center;padding:0 18px;color:var(--cyan);font-size:26px;font-weight:700">→</div>
+      <div class="card" style="flex:1;border-color:rgba(34,211,238,.5)">
+        <h3 style="color:var(--cyan)">HOST（2026-08，北理工 + 自变量）</h3>
+        <p style="margin-bottom:6px">同款 TCC + SDTW 升级为<strong>显式进度流形</strong>：推理时实时定位执行进度在演示中的位置，动态选择预测目标，进度倒退可感知、可重对齐。</p>
+        <p><span class="big num" style="color:var(--cyan)">62%</span>&nbsp;<span style="font-size:12px;color:var(--faint)">同一 50 任务集，+43 个点</span></p>
+      </div>
+    </div>
+    <div class="grid2">
+      <div class="card"><h3>师承有据</h3><p>Vid2Robot 末位作者 Dwibedi 正是 TCC 原作者。工具早就存在，差的是「把对齐从损失函数搬进推理循环」这一步认知——两年时间、43 个点。</p></div>
+      <div class="card"><h3>方法论启示</h3><p>「训练期学到的好表征」不等于「推理期被用起来的能力」。同一原理的第三个实例：RoboTTT 把「记忆」从静态权重搬进推理期梯度更新的 fast weights。</p></div>
+    </div>
+  </div>
+  <div class="foot"><span>来源：notes/08 §5/§6、01 §4</span><span class="num">13 / 19</span></div>
+</section>
+
+<!-- ═══ Slide 14: 六大趋势 ═══ -->
+<section class="slide">
+  <div class="slide-head"><span>趋势</span><span class="num">14</span></div>
+  <h1>六大趋势：范式、scaling 轴、数据、路线、评测、生态</h1>
+  <div class="body">
+    <div class="grid3" style="grid-template-rows:1fr 1fr;height:100%">
+      <div class="card"><h3><span class="num" style="color:var(--cyan)">T1</span> ICL 成为新范式轴</h3><p>四条实现路线并行（涌现/结构/配方/注入），全部在 18 个月内交付真机结果。「新任务 = 新一轮训练」的默认假设已被推翻。</p></div>
+      <div class="card"><h3><span class="num" style="color:var(--cyan)">T2</span> 上下文长度成为新 scaling 轴</h3><p>RoboTTT：128→8K 单调上升无饱和；与数据小时数轴正交可叠加。Jim Fan 预告 1M timestep。</p></div>
+      <div class="card"><h3><span class="num" style="color:var(--cyan)">T3</span> 数据路线四分天下</h3><p>遥操作（GEN）、人类视频（HOST/EgoScale）、仿真伪演示（Instant Policy）、UMI 硬件（BPP）；EgoScale 把人类数据价值量化成 log-linear 律（R²=0.998）。</p></div>
+      <div class="card"><h3><span class="num" style="color:var(--amber)">T4</span> 涌现 vs 设计：两边都赢</h3><p>bitter lesson 新回合打成平手：62% ≈ 59%，但成本结构完全不同——结构派数据便宜三个数量级，规模派上限随数据继续涨。合流（结构 + 规模）是必然。</p></div>
+      <div class="card"><h3><span class="num" style="color:var(--amber)">T5</span> 评测严重滞后</h3><p>各家任务集/口径互不兼容，62% vs 59% 无法直接比；ManiLong-Shot、RLBench-Oneshot 等标准化基准 2026 下半年才起步。谁定义评测，谁定义下一轮叙事。</p></div>
+      <div class="card"><h3><span class="num" style="color:var(--amber)">T6</span> 开源在吃掉先发优势</h3><p>HOST 论文+代码+权重全开源，抢在 GEN-1.5 博客前数日；π0 系、GR00T、Wall-OSS 全线开源。闭源数据引擎的护城河窗口正在收窄。</p></div>
+    </div>
+  </div>
+  <div class="foot"><span>来源：insights/10 §2</span><span class="num">14 / 19</span></div>
+</section>
+
+<!-- ═══ Slide 15: 洞察 1-4 ═══ -->
+<section class="slide">
+  <div class="slide-head"><span>核心洞察 · 上</span><span class="num">15</span></div>
+  <h1>洞察 1–4：技能变成资产，提示变成工种，<br>ICL 与微调的边界正在消失</h1>
+  <div class="body">
+    <div class="grid2" style="grid-template-rows:1fr 1fr;height:100%">
+      <div class="card"><h3><span class="num" style="color:var(--green)">I1</span> 技能从参数空间迁移到上下文空间，因此变成资产</h3><p>HOST 的技能库 = 视频库（外部记忆、检索复用、永不遗忘）；GEN-1.5 的技能 = 可拖放的提示片段。灾难性遗忘被「技能外置」<strong>架空</strong>而非解决。可预见：机器人技能商店、技能版本管理、跨机器人技能交易。</p></div>
+      <div class="card"><h3><span class="num" style="color:var(--green)">I2</span> physical prompt engineering 会成为真实工种</h3><p>提示的选择（哪 3–12 秒）、组合（A+B 串联）、质量（视角/速度）显著影响成功率；GEN-1.5 已有拖放式界面。对标 2021–2023 LLM 提示工程师的出现轨迹。</p></div>
+      <div class="card"><h3><span class="num" style="color:var(--green)">I3</span> ICL 与梯度适应是同一枚硬币</h3><p>GEN-1.5 单梯度步（权重变化 &lt;0.15%）≈ ICL 效果；RoboTTT 干脆把「读上下文」实现为「对 fast weights 做梯度步」。未来只有一个连续的「适应预算」旋钮：0 步 = ICL，1–10 步 = 轻适应，1000+ 步 = 冲精通。</p></div>
+      <div class="card"><h3><span class="num" style="color:var(--green)">I4</span> 下一个瓶颈是信息，不是算法</h3><p>59–62% 汇合 + HOST 抗扰实验说明单段视频的信息已被高效榨取；剩余失败相当比例来自视频<strong>根本没携带</strong>的信息——接触力、被遮挡接触点、隐含意图。出路：触觉采集、多模态提示、交互式补充演示。</p></div>
+    </div>
+  </div>
+  <div class="foot"><span>来源：insights/10 §3</span><span class="num">15 / 19</span></div>
+</section>
+
+<!-- ═══ Slide 16: 洞察 5-7 ═══ -->
+<section class="slide">
+  <div class="slide-head"><span>核心洞察 · 下</span><span class="num">16</span></div>
+  <h1>洞察 5–7：解耦配方可推广，具身对齐将独立成科，<br>中国团队首次在范式定义层并跑</h1>
+  <div class="body">
+    <div class="grid3" style="margin-bottom:16px">
+      <div class="card"><h3><span class="num" style="color:var(--green)">I5</span> 「跟随」与「翻译」解耦是可推广配方</h3><p>HOST 两阶段（193k 廉价同具身对练「跟随」+ 5.8k 昂贵跨域对练「翻译」，配比 <span class="num">33:1</span>）；EgoScale 独立验证同构配方。适用于一切跨域模仿：仿真→真机、机器人→机器人、动画→机器人。</p></div>
+      <div class="card"><h3><span class="num" style="color:var(--green)">I6</span> 具身对齐将从脚注变成研究方向</h3><p>技能来自用户随手拍的视频，模型对「不该做什么」理解为零，物理世界没有 undo。预计 12 个月内出现 physical prompt injection 攻击研究（恶意演示诱导危险行为）与对应防御。</p></div>
+      <div class="card"><h3><span class="num" style="color:var(--green)">I7</span> 范式定义层的中美并跑</h3><p>HOST 的问题定义、机制设计、评测口径均为第一手原创，抢在 GEN-1.5 博客前数日开源。自变量「模型全家桶 + 关键能力开源」vs Generalist「数据引擎 + 全闭源」，是两种生态战略的对照实验。</p></div>
+    </div>
+    <div class="callout" style="border-color:var(--green)">
+      <p><strong>一句话收拢：</strong>当「教机器人」的成本从数百条遥操作跌到一段手机视频，瓶颈就从算法转移到信息、安全和生态——这三个新战场目前几乎无人占位。</p>
+    </div>
+  </div>
+  <div class="foot"><span>来源：insights/10 §3</span><span class="num">16 / 19</span></div>
+</section>
+
+<!-- ═══ Slide 17: 可证伪预测 ═══ -->
+<section class="slide">
+  <div class="slide-head"><span>预测 · 12–24 个月</span><span class="num">17</span></div>
+  <h1>五条可证伪的预测：把判断写成可以被打脸的形式</h1>
+  <div class="body">
+    <table style="margin-bottom:14px;font-size:13.5px">
+      <tr><th style="width:56px">编号</th><th>预测</th><th style="width:300px">依据 / 验证方式</th></tr>
+      <tr><td class="num" style="color:var(--cyan)">P1</td><td>2027 年中前出现 <strong class="num">1M timestep</strong> 上下文的机器人模型</td><td class="dim">RoboTTT 8K 无饱和 + TTT 延迟不随上下文涨；Jim Fan 已公开预告</td></tr>
+      <tr><td class="num" style="color:var(--cyan)">P2</td><td>「物理提示」出现标准封装格式（演示片段 + 传感器流 + 元数据），≥2 家机构采纳</td><td class="dim">对标 LLM 的 ChatML 出现轨迹；GEN-1.5 拖放界面是雏形</td></tr>
+      <tr><td class="num" style="color:var(--cyan)">P3</td><td>真机 OSVI 标准评测协议建立（固定任务集 + 扰动协议 + 第三方复核）</td><td class="dim">HOST 开源的 50 任务集是最可能的种子；ManiLong-Shot 已在仿真侧起步</td></tr>
+      <tr><td class="num" style="color:var(--cyan)">P4</td><td>one-shot 成功率 12 个月内突破 <strong class="num">80%</strong></td><td class="dim">驱动力是多模态提示 + 交互式澄清（洞察 I4），而非纯 ICL 改进</td></tr>
+      <tr><td class="num" style="color:var(--cyan)">P5</td><td>第一起 physical prompt injection 安全研究发表，具身对齐成为独立 workshop 议题</td><td class="dim">洞察 I6；技能接口开放给任意视频输入后，攻击面随之打开</td></tr>
+    </table>
+    <div class="callout"><p>每条预测都指定了时间窗与可观察事件——12 个月后回看本页，错了的部分同样有信息量。</p></div>
+  </div>
+  <div class="foot"><span>来源：insights/10 §4</span><span class="num">17 / 19</span></div>
+</section>
+
+<!-- ═══ Slide 18: 开放问题 ═══ -->
+<section class="slide">
+  <div class="slide-head"><span>开放问题 · 研究机会</span><span class="num">18</span></div>
+  <h1>六个无人占位的研究缺口，每个都可以直接立项</h1>
+  <div class="body">
+    <div class="grid3" style="grid-template-rows:1fr 1fr;height:100%">
+      <div class="card"><h3>非单调演示对齐</h3><p>SDTW 的单调假设覆盖不了含重试、可选分支、循环子任务的演示。真实人类演示恰恰充满这三样。</p></div>
+      <div class="card"><h3>力信息缺口</h3><p>纯视觉演示推断不出接触力策略。触觉手套数据能否按 HOST 的 33:1 解耦配方低成本融入，是最具体的切入点。</p></div>
+      <div class="card"><h3>长程任务自动分解</h3><p>GEN-1.5 的 prompt chaining 靠人工选段。把长任务自动分解成提示库里的原子技能，仿真侧刚有初步答案（ManiLong-Shot），真机侧空白。</p></div>
+      <div class="card"><h3>ICL 技能的脆性根源</h3><p>GEN-1.5 自己承认 ICL 技能比微调后的脆。脆在视觉分布、动作精度还是时序漂移？无系统研究。</p></div>
+      <div class="card"><h3>上下文 vs 参数的容量边界</h3><p>技能外置到上下文后，权重里到底还存什么？哪些技能成分必须进参数？这是 ICL 理论在具身域的核心问题。</p></div>
+      <div class="card"><h3>评测初始条件协议</h3><p>「随机初始位姿」各家定义不同，扰动幅度无标准化度量——这是 62% vs 59% 不可比的技术根源，也是 P3 的前置工作。</p></div>
+    </div>
+  </div>
+  <div class="foot"><span>来源：insights/10 §5</span><span class="num">18 / 19</span></div>
+</section>
+
+<!-- ═══ Slide 19: 交付物 ═══ -->
+<section class="slide">
+  <div class="slide-head"><span>附录 · 调研交付物</span><span class="num">19</span></div>
+  <h1>本调研仓库：12 篇论文中英对照 PDF + 10 份深度解读 + 本报告</h1>
+  <div class="body">
+    <div class="grid2" style="margin-bottom:16px">
+      <div class="card">
+        <h3>仓库结构 <span class="num" style="color:var(--faint)">one_shot_skill_survey/</span></h3>
+        <p style="font-family:'SF Mono',Menlo,monospace;font-size:12.5px;line-height:1.9;color:var(--dim)">
+        papers/pdf/&nbsp;&nbsp;&nbsp;— 12 篇英文原版 PDF<br>
+        papers/zh/&nbsp;&nbsp;&nbsp;&nbsp;— 12 篇中文翻译 PDF（super_translate）<br>
+        notes/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;— 9 份深度解读（01–09）<br>
+        insights/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;— 趋势与洞察报告（10）<br>
+        report/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;— 本 HTML PPT + PDF 版 + 全文报告 PDF<br>
+        tools/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;— super_translate 等 6 个工具仓库</p>
+      </div>
+      <div class="card">
+        <h3>论文索引（arXiv）</h3>
+        <p style="font-size:12.5px;line-height:1.95;color:var(--dim)">
+        HOST <span class="num">2607.20033</span> · Instant Policy <span class="num">2411.12633</span> · ICRT <span class="num">2408.15980</span> · RoboTTT <span class="num">2607.15275</span> · BPP <span class="num">2606.30457</span> · RICL <span class="num">2508.02062</span> · Vid2Robot <span class="num">2403.12943</span> · ViVLA <span class="num">2512.07582</span> · π0.5 <span class="num">2504.16054</span> · Wall-OSS <span class="num">2509.11766</span> · EgoScale <span class="num">2602.16710</span> · Fast-WAM <span class="num">2603.16666</span><br>
+        GEN-0/1/1.5：generalistai.com/blog（非 arXiv）</p>
+      </div>
+    </div>
+    <div class="callout">
+      <p><strong>推荐阅读顺序：</strong>本 PPT → insights/10（趋势全文）→ notes/01（HOST）+ notes/02（GEN 系列）→ 按兴趣进入其余 7 份解读；每份解读的「延伸批判」与「与 HOST/GEN-1.5 的关系」两节是与摘要差异最大的增量内容。</p>
+    </div>
+  </div>
+  <div class="foot"><span>one_shot_skill_survey · 2026-08-31</span><span class="num">19 / 19</span></div>
+</section>
+
+</div>
+<script>
+const slides=[...document.querySelectorAll('.slide')];let cur=0;
+function show(i){cur=Math.max(0,Math.min(slides.length-1,i));slides.forEach((s,j)=>s.classList.toggle('active',j===cur));
+document.getElementById('prog').style.width=((cur+1)/slides.length*100)+'%';
+document.getElementById('pageno').textContent=(cur+1)+' / '+slides.length;}
+addEventListener('keydown',e=>{if(['ArrowRight','ArrowDown','PageDown',' '].includes(e.key))show(cur+1);
+else if(['ArrowLeft','ArrowUp','PageUp'].includes(e.key))show(cur-1);
+else if(e.key==='Home')show(parseInt(location.hash.slice(1))-1||0);else if(e.key==='End')show(slides.length-1);
+else if(e.key==='f'||e.key==='F'){document.fullscreenElement?document.exitFullscreen():document.documentElement.requestFullscreen()}});
+addEventListener('click',e=>{if(e.clientX>innerWidth*0.66)show(cur+1);else if(e.clientX<innerWidth*0.33)show(cur-1)});
+show(parseInt(location.hash.slice(1))-1||0);
+</script>
+</body>
+</html>

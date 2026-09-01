@@ -1,6 +1,6 @@
 import subprocess, pathlib, datetime
 
-repo = pathlib.Path.home() / "Desktop/research/one_shot_skill_survey"
+repo = pathlib.Path.home() / "Desktop/research/awesome_ICL"
 files = sorted((repo/"notes").glob("*.md")) + [repo/"insights/10_trends_insights_zh.md"]
 
 CSS = """

@@ -45,8 +45,8 @@ toc_html = "".join(f"<li>{t}</li>" for t in toc_titles)
 doc = f"""<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><title>One-Shot 技能习得调研全文</title><style>{CSS}</style></head><body>
 <div class="cover">
   <div class="t1">机器人 One-Shot 技能习得<br>调研全文报告</div>
-  <div class="t2">HOST（arXiv 2607.20033）× GEN-1.5 及同期 10 项工作的深度解读与趋势洞察<br>从「训练问题」到「提示问题」的范式拐点</div>
-  <div class="meta">调研日期：2026-08-31<br>论文范围：HOST · GEN-0/1/1.5 · Instant Policy · ICRT · RoboTTT · BPP · RICL · Vid2Robot · ViVLA · π0.5 · Wall-OSS · EgoScale · Fast-WAM<br>配套材料：12 篇论文中英对照 PDF · 19 页汇总 PPT（survey_slides.html / .pdf）</div>
+  <div class="t2">HOST（arXiv 2607.20033）× GEN-1.5 × S1 及同期 15 项工作的深度解读与趋势洞察<br>从「训练问题」到「提示问题」的范式拐点，以及「涌现 vs 机制」之争</div>
+  <div class="meta">调研日期：2026-08-31（增补 S1 与四篇 EICL 论文后修订）<br>论文范围：HOST · GEN-0/1/1.5 · S1 · Instant Policy · ICRT · RoboTTT · WAM-TTT · StellaVLA · Zero-WAM · BPP · RICL · Vid2Robot · ViVLA · π0.5 · Wall-OSS · EgoScale · EgoWAM · WALL-WM · Fast-WAM（LLM 背景：GPT-3 / Emergent Abilities / Mirage）<br>配套材料：17 篇论文中英对照 PDF · 22 页汇总 PPT（survey_slides.html / .pdf）</div>
 </div>
 <div class="toc"><h1 class="first" style="page-break-before:avoid">目录</h1><ol>{toc_html}</ol></div>
 {"".join(bodies)}

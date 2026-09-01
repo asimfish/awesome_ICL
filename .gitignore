@@ -1,3 +1,4 @@
 tools/
 papers/cache/
 .DS_Store
+logs/

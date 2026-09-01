@@ -1,0 +1,326 @@
+Introducing S1: In-Context Learning for Robotics | Skild AI
+
+0:00 / 0:00
+
+1×
+
+# Introducing S1: In-Context Learning for Robotics
+
+Unseen tasks10-minute horizonsOne video promptNo post-training
+
+13-minute read
+
+## Introduction
+
+The evolution of language modeling provides a blueprint for turning capable models into useful general-purpose tools. Earlier approaches based on transformers, such as BERT (Devlin et al., 2019), proved effective at understanding language, but each new application still demanded additional data collection and fine-tuning of the model. The pivotal transition from such early language models to ChatGPT was driven by the emergence of a fundamentally different learning paradigm, a phenomenon that came to be known as in-context learning (ICL) — or, outside technical circles, prompting. This capability is what separates research prototypes like GPT-1 and GPT-2 from current frontier language models: a user can introduce a novel concept entirely through the prompt, and the model can produce reasonable responses without fine-tuning of the model weights.
+
+Robotics thus far has been stuck in the BERT era. The past few years of robotics research have shown that we can learn a range of complex behaviors using deep neural networks. However, robustly executing a new task still requires us to collect hours of data and fine-tune a specialist policy. Although widely accepted, this paradigm sweeps an uncomfortable truth under the rug. To learn robust policies for moderately complex tasks, post-training data must reach tens to hundreds of hours in deployment conditions. Furthermore, research has shown that when post-training data is sufficiently large and provides dense coverage of the task, even policies trained from scratch with no pre-training can match the peak performance of a post-trained foundation model (Oh et al., 2026). Obvious in hindsight, this raises the question: what is the point of pre-training?
+
+Pre-trainingonceTask-specific collectiondays of teleoperationFine-tuned specialistone taskevery new task starts here again
+
+Fig. 1The conventional robot learning pipeline. Every new task requires data collection and fine-tuning.
+
+We believe the main purpose of pre-training — if not the only one — is to enable, for robotics, the same shift we saw from BERT to GPT-3 (Brown et al., 2020): in-context learning, or the ability to learn immediately from one or a few examples.
+
+One year ago, we released an in-context learner for locomotion that adapts by accumulating live experience in its prompt (Liu et al., 2025). Today we are sharing manipulation results from our flagship robotic foundation model S1, built from the ground up as an in-context learner. Show it a video of a task, short or long, seen or unseen, and it executes.
+
+This post is the first in a series we will release over the coming months; today's focus is on analyzing the in-context learning capabilities of S1, and future posts will go into depth on how S1 is trained.
+
+## Why In-Context Learning for Robotics?
+
+TL;DR — Tasks are specified by a video demonstration, not language. Pre-training across diverse tasks forces the model to learn intent from demonstration — yielding one set of weights that executes unseen tasks without fine-tuning.
+
+The goal of in-context learning for robotics is no different from that of language models: show the task, and the robot should execute — even if it has never seen the task. The hard question is not what in-context learning means; it is how we, as a field, evaluate a model's in-context capabilities. When we ask a person to do simple, atomic actions, language alone is usually sufficient. "Hand me the mug" needs no elaboration. But once a task becomes delicate, nuanced, or long-horizon, we stop describing and start showing. We don't learn from a sentence how to fold a fitted sheet, whisk egg whites to stiff peaks, or tie a knot. Similarly, in robotics, if a foundation model is performing an atomic action, it usually doesn't need to be shown a video and can just be prompted with language. This community wisdom was eloquently articulated by Jim Fan:
+
+Once you have enough data, many behaviors can actually be zero-shot. For example, you don't even need fine-tuning to pick up a novel object. The model "just knows" what to do given a similar scene in the training distribution. Whether in-context learning truly works or not also depends on how far away the test is from training.
+
+Therefore, it is imperative to understand ICL along two separate axes:
+
+Whether the demonstrated tasks are seen during pre-training (aka in-distribution tasks) or completely unseen during training (aka out-of-distribution tasks).
+
+Whether the demonstrated tasks are short-horizon and atomic (5-25 seconds long) or long-horizon, requiring new skills to be learned or composed in previously unseen ways.
+
+We find that concurrent approaches to in-context learning in manipulation (Generalist AI, 2026), (Jiang et al., 2026) largely cover tasks which are short-horizon or already present in the pre-training distribution. This is the first time that a robotics foundation model, S1, has shown in-context learning on extremely long-horizon tasks (up to 10 minutes) that were never seen during pre-training.
+
+## S1: An In-Context Learner
+
+TL;DR — S1 translates an in-context video demonstration of the desired task to robot actions.
+
+Our high-level training recipe is conceptually simple. We pre-train on episodic data where the task is specified only through an in-context demonstration. Since the demonstration may come from a different scene, viewpoint, or embodiment, the policy must implicitly learn the demonstrator's intent, functional correspondences, and task progress to predict the appropriate actions. S1 is built on NVIDIA AI infrastructure, which provides the accelerated computing foundation needed to train at scale across our diverse mix of robotics data.
+
+Video prompt
+
+Record the prompt
+
+S1
+
+Replay
+
+Fig. 2The task demonstration enters the context window and the policy translates it to its own embodiment and current scene.
+
+Task diversity and scale drive the emergence of these foundational ICL capabilities. In the high-diversity regime, scene ambiguity must be resolved by attending to the context, incentivizing the model to learn how to learn from demonstrations. In meta-learning terms, pre-training is the outer loop that teaches the policy how to learn from context; at inference time, the demonstration drives the inner loop without changing any weights. The result is a single policy that can perform both familiar behaviors in novel configurations and previously unseen behaviors through in-context learning. No fine-tuning, no post-training. The same model weights produced every example shown in this blog.
+
+### What does S1 learn from context?
+
+The two axes of difficulty along which S1's in-context learning shines are skill novelty and task horizon. By showing a video demonstration through a prompt, S1 can (1) perform new atomic skills that were not present during pretraining, and (2) solve long-horizon tasks over 10 minutes long by composing atomic skills in previously unseen ways. We evaluate S1's ICL capability for both of these.
+
+Learning out-of-distribution skills. Robotics data remains scarce and expensive, leaving many important tasks outside the pre-training distribution. Out-of-distribution ICL is therefore essential for general-purpose robot policies. The rich video context from ICL pre-training encourages an emergent implicit mapping from demonstration to actions that enables test-time learning of novel behaviors.
+
+Composing across long-horizon tasks. Executing a 10-minute-long task from context requires several proficiencies that are not robustly evaluated at short horizons: chaining together new sequences of manipulation primitives, tracking progress, and recovering from mistakes. These abilities are naturally aligned with well-configured ICL pre-training and are required to successfully execute extended tasks.
+
+## The Data Engine
+
+TL;DR — No single data source wins on scalability, diversity, and hardware proximity, so we scale all of them and combine strategically.
+
+High-quality data is at the core of any foundation model. The challenge for robotics is that no single source is optimal across the three axes that matter.
+
+Hardware proximity: how closely data resembles the deployment hardware.
+
+Diversity: how many tasks, scenes, and behaviors data covers.
+
+Scalability: how costly it is to collect more data.
+
+Every major source of robotics data makes a trade-off between these three axes. Teleoperation sits closest to the robot and scales worst. Egocentric video scales best but has the largest domain gap from the robot. Nothing wins on all three, which is why betting on a single source is short-sighted. Skild has been scaling all of them in-house. More on this soon.
+
+Hardware proximity
+
+Diversity
+
+Scalability
+
+Robot teleop
+
+High
+
+Low
+
+Low
+
+UMI
+
+Moderate
+
+Moderate
+
+Moderate
+
+Egocentric video
+
+Low
+
+High
+
+High
+
+Simulation
+
+Moderate
+
+Low
+
+High
+
+Fig. 3Every source of robot data trades off among the three axes that matter. Teleoperation sits closest to the hardware and scales worst; egocentric video is the mirror image.
+
+## S1 In Action
+
+TL;DR — S1 performs tasks that run up to ten minutes and do not appear in the training data. ICL scaling gains over language prompting are moderate for seen tasks, but unseen tasks experience a 7× performance improvement.
+
+### Seen tasks
+
+Our broad base of manipulation pre-training tasks grants a wide array of capabilities. The in-distribution rollouts below sample primitives taught directly by the pre-training pool, which S1 can later compose to perform unseen tasks.
+
+0:00 / 0:00
+
+1×
+
+0:00 / 0:00
+
+1×
+
+S1 autonomous execution across a wide range of tasks.
+
+### Long-horizon unseen tasks
+
+Below are four tasks S1 was never trained on: plant potting, pancake cooking, pour-over coffee making, and kit assembly. The tasks run for up to ten minutes, span dozens of manipulation steps, and are driven by a single visual demonstration. S1 demonstrates both strong compositionality and completely novel test-time behaviors, including digging into soil to make room for a plant, pressing a coffee filter into a funnel, and flipping a pancake.
+
+0:00 / 0:00
+
+1×
+
+Promptthe one demonstration it was shown
+
+0:00 / 0:00
+
+1×
+
+Pancake flipping
+
+Coffee brewing
+
+Kit assembly
+
+Plant repotting
+
+With conventional workflows, deploying a policy for a new manipulation task begins with hours of teleoperation and a task-specific fine-tuning run. Teaching S1 something new takes minutes. We reproduce below our timeline for the plant potting task. Our ICL experiment started at 8:54 PM, when soil, a pot, a watering can, and a plant arrived at the office. Most of our time was spent moving furniture and setting up the scene. The time from demonstration to autonomous execution was 11 minutes.
+
+8:54 PM
+
+Soil, a pot, a watering can, and a plant arrive at the office.
+
+9:16 PM
+
+Scene set up, recording starts.
+
+9:22 PM
+
+One egocentric human video demonstration recorded.
+
+9:27 PM
+
+S1 begins executing the task autonomously on hardware.
+
+### ICL scaling laws
+
+This section compares ICL-style demonstration prompting with the language prompting popularized by conventional VLAs. We conducted a controlled study on a filtered subset of our pre-training data pool, training both ICL and language-conditioned VLA policies on datasets from 1k to 100k hours. Both models use identical data, architectures (besides the prompt embedding), and compute. The quality of our dataset is paramount, as blindly scaling with low-quality or noisy data can be actively harmful. For every dollar we spend on collecting data, we spend three on quality control. Every data point entering pre-training is screened for low-level precision, task coherence, and annotation fidelity.
+
+We evaluate on two internal benchmark suites: one comprising tasks drawn from the pre-training distribution, and another built from unseen tasks. We report the average of cumulative per-step success rate across all tasks. The tasks are long-horizon (4-8 minutes long). To ensure all steps are graded cumulatively, we use human intervention to recover from failures during policy rollouts. This intervention is mainly used for the VLA baseline because otherwise the baseline scores zero and doesn't complete the full long unseen task even once.
+
+Fig. 4Success rate against pre-training scale, for in-context learning and language-prompted VLA policies.
+
+Seen tasks. Conventional VLAs work at their best when the task is seen during pretraining (Fig. 4, left plot). In fact, at 1k hours of pretraining, the language-conditioned policy achieved a 53% success rate compared with 43% for ICL. This is consistent with VLA task specification being compressed into language tokens, while in-context models can overfit to a small amount of high-dimensional conditioning data. However, S1's ICL outperforms conventional VLAs as we scale pretraining to achieve 96% accuracy, which is very high for long-horizon tasks. This is an encouraging sign that ICL outperforms VLA even for seen tasks. We attribute this success over VLA to ambiguity in language. Language instructions can admit many valid executions, while a demonstration specifies a clear way to perform the task.
+
+Unseen tasks. The dramatic difference between the two prompting approaches emerges on out-of-distribution tasks as pre-training data is scaled. Language prompting performance increases slowly with pre-training, hitting a 9% success rate at 100k hours of data. Our ICL model absorbs data far more efficiently, with a 66% success rate at the same dataset size. The surprising part is that the gap between ICL and VLA widens exponentially as pre-training data increases - this gives great hope for scaling laws of ICL. We attribute this to two main advantages.
+
+Novel skills. A novel action primitive, like flipping a pancake, is exactly where language prompting lacks grounding in actions. ICL instead relies on broad visual correspondences that transfer better to new behaviors.
+
+Compositionality. Language is often too coarse to specify a novel chaining of known primitives, as there may be no concise instruction for a behavior the model has never been asked to perform. Conversely, a demonstration spells out the composition directly.
+
+These results provide an optimistic view for data scaling. Every additional hour of data buys more robust primitives and better synthesis.
+
+## Emergent Properties
+
+TL;DR — S1 withstands perturbations, exhibits common-sense reasoning, recovers from errors, and occasionally even improves upon the demonstration. We quantify robustness and compare single-shot ICL performance with SFT on a pre-trained policy. Our single-shot performance is comparable to roughly 380 post-training episodes.
+
+### Robustness and common-sense behavior
+
+We provide qualitative examples of behaviors that emerge from ICL pre-training.
+
+Robustness to perturbations. Perturbing a scene mid-execution provides evidence of whether a policy is overfit to training conditions or the prompt itself. We slid objects away from the robot as it approached, swapped objects, and changed the lighting. None of these perturbations were shown in the prompt. S1 completed the task regardless.
+
+0:00 / 0:00
+
+1×
+
+0:00 / 0:00
+
+1×
+
+Mistake recovery. When S1 fails, it often tries again rather than blindly proceeding. Although any strong policy should exhibit recovery behavior, this is usually incorporated through targeted data collection. We observed recoveries off the shelf, even for out-of-distribution tasks such as assembling a skateboard wheel.
+
+0:00 / 0:00
+
+1×
+
+Common-sense behavior. S1 shows signs of common-sense physical understanding. In one example, the prompt waters a plant with a watering can, but only a cup of water is available. S1 uses the cup instead. In another, the prompt fills a glass with juice, but the glass is already nearly full. S1 just tops it off.
+
+0:00 / 0:00
+
+1×
+
+0:00 / 0:00
+
+1×
+
+Demonstration correction. Sometimes prompts themselves can contain errors. We noticed that S1 often improves upon these flawed demonstrations. For example, in one prompt, the demonstrator drops an egg prematurely and makes a mess, while S1 performs the same step with a controlled motion. It treats the demonstration as a specification of the goal, not a trajectory to reproduce.
+
+0:00 / 0:00
+
+1×
+
+0:00 / 0:00
+
+1×
+
+### Quantifying ICL robustness to distribution shifts
+
+In the ICL scaling laws study, task identity was split discretely: a task is either drawn from the pre-training distribution or it is not. Deployment conditions live on a spectrum. For ICL, distribution shifts can be measured along two axes — distance from the training conditions and distance from the demonstration held in context. To measure the first axis, we selected a known task with a narrow data distribution and evaluated across five levels of increasing displacement from pre-training conditions. L2 and L3 perturb object poses with increasing magnitude, L4 substitutes objects of matched affordance, and L5 forces half the actions onto the opposite arm.
+
+What L1–L5 mean L1Same objects, same placement as the training distribution. L2All objects randomly shifted by 15 cm and 30°. L3All objects randomly shifted by 30 cm and 45°. L4All objects swapped for different ones with the same affordances, plus ~15 cm vertical shifts. L5Placement chosen so that half the robot’s actions have to be executed with the opposite arm.
+
+Fig. 5Success rate as the deployment scene deviates from the training conditions, for in-context learning and language-prompted VLA policies.
+
+Under L5 disturbances, the language-prompted VLA degrades up to three times as much as the ICL policy. VLA policies are robust to small variations in object pose, but they fail to generalize once novel motions are required — whether because new objects are introduced or because the placement demands a new execution plan. In-context policies, however, can be easily prompted with an execution plan appropriate to the deployment conditions.
+
+The second axis is robustness to shifts in the prompt. We measure this by varying the distance between the deployment scene and the demonstration. ICL is robust to mismatches in object positioning and even to substituted objects (L4); it only degrades significantly once the demonstration implies a substantially different execution plan, as in L5, where actions must switch to the opposite arm.
+
+What L1–L5 mean L1Same objects and placement as the in-context demonstration. L2All objects randomly shifted by 15 cm and 30°. L3All objects randomly shifted by 30 cm and 45°. L4All objects swapped for different ones with the same affordances, plus ~15 cm vertical shifts. L5Placement chosen so that half the robot’s actions have to be executed with the opposite arm.
+
+Fig. 6Success rate as the deployment scene deviates from the in-context demonstration. Training conditions are held fixed.
+
+### ICL demonstration efficiency
+
+The gap between ICL and language prompting on unseen tasks can also be expressed as a demonstration count: how many post-training episodes does a VLA policy need to reach what an in-context policy attains from a single demonstration? We post-trained the VLA policy on unseen tasks using 1 to 2,000 teleop demonstrations. The in-context policy is not post-trained and appears as a horizontal reference at its single-demonstration success rate.
+
+Fig. 7Success rate against the number of post-training demonstrations on a new unseen task. The in-context learning policy is flat because it never trains — it is given one demonstration in its prompt. For long-horizon tasks (over four minutes), collecting 380 demonstrations takes 50–100 hours of teleoperation.
+
+A single demonstration in context is worth roughly 380 post-training examples (the exact crossing was estimated by interpolating between measured points). To collect these 380 long-horizon demos (4-10 minutes long), it took 50-100 hours of teleoperation. The in-context policy is never post-trained on the task, yet one example in context puts it at a 66% success rate. Post-training does pass it eventually — achieving an 86% success rate with 2,000 demonstrations — but we expect this gap to shrink as we continue to scale ICL pre-training and/or perform ICL post-training. We highlight that this performance is achieved on tasks not seen during pretraining with a single video example. For seen tasks, as discussed earlier in Figure 4, ICL reaches ~96% accuracy.
+
+## Closing Remarks
+
+TL;DR — ICL's rapid deployment and strong scaling laws fuel our data flywheel.
+
+Demand for robots is rapidly expanding beyond controlled settings. Real-world requirements vary daily and new tasks appear constantly. If every change requires repeated iterations of data collection, policy fine-tuning, and validation, robots will never keep pace with the environments in which they operate. Instead, robots should acquire new behaviors the same way people do: by observing a single demonstration.
+
+Last year, we established that large-scale in-context learning is viable for locomotion (Liu et al., 2025). Even when thrown into an unseen embodiment and environment, LocoFormer adapts dynamically by accumulating experience in its prompt. Recent work has attempted similar ideas in manipulation (Jiang et al., 2026), (Generalist AI, 2026), but remains constrained to short horizons, in-distribution tasks, or both. Since LocoFormer, we've been transferring our lessons learned to the manipulation domain. We first saw signs of life for short-horizon tasks about six months ago and have since iterated on our data and training recipes to unlock long-horizon capabilities in unseen environments. The historical timeline is documented in Fig. 8.
+
+Our predictable ICL scaling laws compound the benefits of rapid deployment. Setting up new tasks within minutes enables bootstrapping from real-world robot interactions, feeding live experience back into the pre-training pipeline. S1 is already at work with our commercial partners, and we're excited to push its capabilities even further.
+
+Locomotion from context. The policy is never told which body it is driving.
+
+In-distribution pick-and-place. Video prompt to encode human preference.
+
+The first pancake, out of distribution and read straight off the prompt.
+
+Introducing S1, our new foundation model that learns from one example.
+
+September 2025 LocoFormer
+
+February 2026 First In-Domain ICL Results
+
+May 2026 S1 flips first pancake
+
+August 2026 S1 release
+
+Fig. 8Four steps to in-context manipulation. Each stop holds the result that moved the next one within reach.
+
+## References
+
+Tom B. Brown, Benjamin Mann, Nick Ryder, Melanie Subbiah, Jared Kaplan, et al. Language Models are Few-Shot Learners. NeurIPS, 2020.
+
+Jacob Devlin, Ming-Wei Chang, Kenton Lee, and Kristina Toutanova. BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding. NAACL, 2019.
+
+Generalist AI, Embodied foundation models are one-shot learners. 2026.
+
+Yunfan Jiang, Yevgen Chebotar, Ruijie Zheng, Fengyuan Hu, Yunhao Ge, et al. RoboTTT: Context Scaling for Robot Policies. arXiv:2607.15275, 2026.
+
+Min Liu, Deepak Pathak, and Ananye Agarwal. LocoFormer: Generalist Locomotion via Long-context Adaptation. arXiv:2509.23745, 2025.
+
+Steven Oh, Jason Jingzhou Liu, Tony Tao, Philip Han, Kenneth Shaw, Satoshi Funabashi, Ruslan Salakhutdinov, and Deepak Pathak. FACTR 2: Learning External Force Sensing for Commodity Robot Arms Improves Policy Learning. arXiv:2606.12406, 2026.
+
+## Citation
+
+Please cite this article as:
+
+Skild AI. Introducing S1: In-Context Learning for Robotics. August 2026. https://skild.ai/blogs/s1
+
+```
+@article{skild2026s1,
+  author = {Skild AI},
+  title  = {Introducing S1: In-Context Learning for Robotics},
+  year   = {2026},
+  month  = {August},
+  url    = {https://skild.ai/blogs/s1},
+}
+
+```

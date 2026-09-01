@@ -1,16 +1,16 @@
-# One-Shot 技能习得调研：HOST × GEN-1.5 与同期工作全景
+# One-Shot 技能习得调研：HOST × GEN-1.5 × S1 与同期工作全景
 
 > 调研日期：2026-08-31 · 核心问题：**「教机器人一个新技能」正在从训练问题变成提示问题吗？**
 
-2026 年 8 月，两条方法论完全相反的路线在同一能力点汇合：**HOST**（北理工 + 自变量机器人 + 清华，开源）用架构设计让机器人看一段人类视频、29 秒后执行新任务（50 个未见任务 62%）；**GEN-1.5**（Generalist AI，闭源）用 50 万小时数据预训练让 one-shot 上下文学习作为涌现能力出现（10 任务 59%）。本仓库是对这场汇合的完整调研：12 篇论文的深度解读、中英对照 PDF、趋势洞察与汇总报告。
+2026 年 8 月，三家互不相识的机构在 16 天窗口内汇合于同一能力点：**HOST**（北理工 + 自变量机器人 + 清华，开源）用架构设计让机器人看一段人类视频、29 秒后执行新任务（50 个未见任务 62%）；**GEN-1.5**（Generalist AI，闭源）用 50 万小时数据预训练让 one-shot 上下文学习作为涌现能力出现（10 任务 59%）；**S1**（Skild AI，闭源）把主张推到最远——一条视频演示执行预训练从未见过、最长 10 分钟的任务（66%，语言提示同规模仅 9%）。同月，四篇学术论文（WAM-TTT / RoboTTT / StellaVLA / Zero-WAM）用消融证据一致反对「ICL 免费涌现」叙事。本仓库是对这场汇合与争论的完整调研：18 项工作的深度解读、中英对照 PDF、趋势洞察与汇总报告。
 
 ## 快速入口
 
 | 交付物 | 路径 |
 |---|---|
-| **汇总 PPT**（19 页，浏览器打开，← → 翻页） | `report/survey_slides.html` |
+| **汇总 PPT**（22 页，浏览器打开，← → 翻页） | `report/survey_slides.html` |
 | 汇总 PPT 的 PDF 版 | `report/survey_slides.pdf` |
-| **全文报告 PDF**（45 页，10 章合订） | `report/survey_full_report.pdf` |
+| **全文报告 PDF**（16 章合订） | `report/survey_full_report.pdf` |
 | 趋势与洞察报告（六大趋势 + 七条洞察 + 可证伪预测） | `insights/10_trends_insights_zh.md` |
 
 ## 目录结构
@@ -19,11 +19,12 @@
 one_shot_skill_survey/
 ├── README.md                  ← 本文件
 ├── papers/
-│   ├── pdf/                   ← 12 篇英文原版 PDF
-│   ├── zh/                    ← 12 篇中文翻译 PDF（super_translate，DeepSeek 后端）
+│   ├── pdf/                   ← 21 篇英文原版 PDF（含 LLM 背景 3 篇）
+│   ├── zh/                    ← 17 篇中文翻译 PDF（super_translate，DeepSeek 后端）
 │   └── cache/                 ← 翻译块级缓存（可续跑）
-├── notes/                     ← 9 份深度解读（中文）
-├── insights/                  ← 趋势与洞察报告
+├── notes/                     ← 15 份深度解读（01–09、11–16，中文）
+├── insights/                  ← 趋势与洞察报告（10）
+├── sources/                   ← S1 博客与微信深度综述存档
 ├── report/                    ← 汇总 HTML PPT / PPT PDF / 全文报告 HTML+PDF
 ├── scripts/                   ← 翻译队列脚本
 └── tools/                     ← 6 个工具仓库（super_translate、ppt-master 等）
@@ -46,13 +47,23 @@ one_shot_skill_survey/
 | 11 | Wall-OSS | 2509.11766 · 自变量 | 同上 §3 | `papers/pdf/WallOSS_2509.11766.pdf` | `papers/zh/WallOSS_2509.11766_zh.pdf` |
 | 12 | EgoScale | 2602.16710 · NVIDIA | 同上 §4 | `papers/pdf/EgoScale_2602.16710.pdf` | `papers/zh/EgoScale_2602.16710_zh.pdf` |
 | 13 | Fast-WAM | 2603.16666 · 清华 IIIS | 同上 §5 | `papers/pdf/FastWAM_2603.16666.pdf` | `papers/zh/FastWAM_2603.16666_zh.pdf` |
+| 14 | EgoWAM | 2607.08436 · Georgia Tech | `notes/11_EgoWAM_zh.md` | `papers/pdf/EgoWAM_2607.08436.pdf` | `papers/zh/EgoWAM_2607.08436_zh.pdf` |
+| 15 | Zero-WAM | 2608.26103 · Robbyant+港科广 | `notes/12_ZeroWAM_zh.md` | `papers/pdf/ZeroWAM_2608.26103.pdf` | `papers/zh/ZeroWAM_2608.26103_zh.pdf` |
+| 16 | WALL-WM | 2606.01955 · 自变量 | `notes/13_WALLWM_zh.md` | `papers/pdf/WALLWM_2606.01955.pdf` | `papers/zh/WALLWM_2606.01955_zh.pdf` |
+| 17 | WAM-TTT | 2607.06988 · 北大+银河通用 | `notes/14_WAMTTT_zh.md` | `papers/pdf/WAMTTT_2607.06988.pdf` | `papers/zh/WAMTTT_2607.06988_zh.pdf` |
+| 18 | StellaVLA | 2608.11671 · StellarEdge AI | `notes/15_StellaVLA_zh.md` | `papers/pdf/StellaVLA_2608.11671.pdf` | `papers/zh/StellaVLA_2608.11671_zh.pdf` |
+| 19 | **S1**（主角·未见长时程） | skild.ai 博客（2026-08-18） | `notes/16_S1_EICL_wave_zh.md` | —（无论文，博客存档于 `sources/`） | — |
+| 20 | GPT-3（LLM 背景） | NeurIPS 2020 · 2005.14165 | `notes/16` §5 | `papers/pdf/GPT3_fewshot_2005.14165.pdf` | —（背景文献不翻译） |
+| 21 | Emergent Abilities（LLM 背景） | TMLR 2022 · 2206.07682 | `notes/16` §5 | `papers/pdf/EmergentAbilities_2206.07682.pdf` | — |
+| 22 | Emergence Mirage（LLM 背景） | NeurIPS 2023 · 2304.15004 | `notes/16` §5 | `papers/pdf/EmergenceMirage_2304.15004.pdf` | — |
 
 ## 推荐阅读顺序
 
-1. `report/survey_slides.html` — 19 页 PPT，15 分钟拿到全部结论
-2. `insights/10_trends_insights_zh.md` — 趋势全文（六大趋势、七条洞察、可证伪预测、开放问题）
-3. `notes/01_HOST_zh.md` + `notes/02_GEN_series_zh.md` — 两大主角深拆
-4. 其余解读按需取用；每份的「延伸批判」与「与 HOST/GEN-1.5 的关系」两节是与论文摘要差异最大的增量内容
+1. `report/survey_slides.html` — 22 页 PPT，15 分钟拿到全部结论
+2. `insights/10_trends_insights_zh.md` — 趋势全文（六大趋势、八条洞察、七条可证伪预测、开放问题）
+3. `notes/01_HOST_zh.md` + `notes/02_GEN_series_zh.md` + `notes/16_S1_EICL_wave_zh.md` — 三大主角与涌现之争
+4. `notes/12_ZeroWAM_zh.md` + `notes/14_WAMTTT_zh.md` + `notes/15_StellaVLA_zh.md` +（已有的）`notes/05_RoboTTT_zh.md` — 四篇 EICL 论文的完整拼图
+5. 其余解读按需取用；每份的「延伸批判」与「关系定位」两节是与论文摘要差异最大的增量内容
 
 ## 解读报告的写作口径
 
@@ -63,8 +74,9 @@ one_shot_skill_survey/
 ## 复现本仓库的生成流程
 
 ```bash
-# 论文翻译（DeepSeek 后端，块级缓存可续跑）
+# 论文翻译（DeepSeek 后端，块级缓存可续跑；queue2 为第二批新增论文）
 bash scripts/translate_queue.sh
+bash scripts/translate_queue2.sh
 
 # 全文报告 PDF（pandoc 合并 md → HTML → Chrome headless 打印）
 python3 scripts/build_full_report.py
@@ -76,3 +88,5 @@ python3 scripts/build_full_report.py
 ```
 
 工具致谢：[super_translate](https://github.com/asimfish/super_translate)（PDF 翻译）· [ppt-master](https://github.com/hugohe3/ppt-master)（PPT 叙事模式参考，本 PPT 采用其 pyramid 模式）· anti-defensive-writing / shuorenhua（写作风格约束）
+
+> 注：用户提供的知乎文章（p/2077872253551878182，涌现之争主题）因知乎 JS 反爬无法存档正文，其引用文献 [1]–[8] 已全部纳入调研（见上表 #14–22 与 `notes/16`）；两篇微信深度文章已存档于 `sources/`。

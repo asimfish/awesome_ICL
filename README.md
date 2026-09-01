@@ -174,7 +174,7 @@ WAM 底座层：不直接做 ICL，决定 ICL 的上限——监督单元、世�
 awesome_ICL/
 ├── README.md                  ← 本文件
 ├── papers/
-│   ├── pdf/                   ← 21 篇英文原版 PDF（含 LLM 背景 3 篇）
+│   ├── pdf/                   ← 20 篇英文原版 PDF（含 LLM 背景 3 篇）
 │   ├── zh/                    ← 17 篇中文翻译 PDF（super_translate，DeepSeek 后端）
 │   └── cache/                 ← 翻译块级缓存（可续跑，不入库）
 ├── notes/                     ← 15 份深度解读（01–09、11–16，中文）

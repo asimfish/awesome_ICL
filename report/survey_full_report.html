@@ -26,10 +26,10 @@ hr{border:none;border-top:1px solid #dde5ea;margin:16px 0}
 </style></head><body>
 <div class="cover">
   <div class="t1">机器人 One-Shot 技能习得<br>调研全文报告</div>
-  <div class="t2">HOST（arXiv 2607.20033）× GEN-1.5 × S1 及同期 15 项工作的深度解读与趋势洞察<br>从「训练问题」到「提示问题」的范式拐点，以及「涌现 vs 机制」之争</div>
-  <div class="meta">调研日期：2026-08-31（增补 S1 与四篇 EICL 论文后修订）<br>论文范围：HOST · GEN-0/1/1.5 · S1 · Instant Policy · ICRT · RoboTTT · WAM-TTT · StellaVLA · Zero-WAM · BPP · RICL · Vid2Robot · ViVLA · π0.5 · Wall-OSS · EgoScale · EgoWAM · WALL-WM · Fast-WAM（LLM 背景：GPT-3 / Emergent Abilities / Mirage）<br>配套材料：17 篇论文中英对照 PDF · 22 页汇总 PPT（survey_slides.html / .pdf）</div>
+  <div class="t2">HOST（arXiv 2607.20033）× GEN-1.5 × S1 及同期 25+ 项工作的深度解读与趋势洞察<br>从「训练问题」到「提示问题」的范式拐点，以及「涌现 vs 机制」之争</div>
+  <div class="meta">调研日期：2026-08-31（增补 S1 与四篇 EICL 论文后修订）<br>论文范围：HOST · GEN-0/1/1.5 · S1 · LocoFormer · Instant Policy · ICRT · RoboTTT · WAM-TTT · StellaVLA · Zero-WAM · LingBot-VA(v1/v2) · BPP · RICL · Vid2Robot · ViVLA · π0.5 · Wall-OSS · EgoScale · EgoWAM · WALL-WM · GR-3 · ManiLong-Shot · FACTR 2 · Fast-WAM · UniPi · V-JEPA 2 · Cosmos（背景与理论：GPT-3 / 涌现 / Mirage / 贝叶斯 ICL / Induction Heads / ICL≡GD / TTT 层）<br>配套材料：26 篇论文中英对照 PDF · 22 页汇总 PPT（survey_slides.html / .pdf）</div>
 </div>
-<div class="toc"><h1 class="first" style="page-break-before:avoid">目录</h1><ol><li>HOST 深度解读：机器人从一段人类视频里秒级习得操作技能</li><li>GEN 系列深度解读：Generalist AI 的具身基础模型三部曲</li><li>Instant Policy 深度解读：把 in-context 模仿学习变成图扩散，用仿真伪演示喂出即时策略</li><li>ICRT 深度解读：next-token prediction 原教旨主义的机器人 in-context learning 配方</li><li>RoboTTT 深度解读：把 Test-Time Training 装进机器人策略，上下文扩到 8K 步</li><li>BPP 深度解读：一条演示当 prompt，任务多样性是 in-context 操作的第一驱动力</li><li>RICL 深度解读：给预训练 VLA 事后注入 in-context 学习能力</li><li>Vid2Robot 深度解读：端到端视频条件策略的 Google 规模实践</li><li>外围论文速览：one-shot 技能习得调研的五个坐标</li><li>EgoWAM 深度解读：换掉世界预测目标，人类数据才不「漏毒」进动作头</li><li>Zero-WAM 深度解读：把人类视频「造」出来当任务规格，再用 IFP 逼模型真的去看</li><li>WALL-WM 深度解读：把世界-动作建模「循事件关节」下刀</li><li>WAM-TTT 深度解读：把人类演示写进快权重记忆，且只许写在感知侧</li><li>StellaVLA 深度解读：把演示翻译成「为什么」，四篇里唯一真零梯度</li><li>S1 与「涌现之争」：2026 年 8 月具身 ICL 三连发的完整拼图</li><li>趋势与洞察：机器人 One-Shot 技能习得的 2026 拐点</li></ol></div>
+<div class="toc"><h1 class="first" style="page-break-before:avoid">目录</h1><ol><li>HOST 深度解读：机器人从一段人类视频里秒级习得操作技能</li><li>GEN 系列深度解读：Generalist AI 的具身基础模型三部曲</li><li>Instant Policy 深度解读：把 in-context 模仿学习变成图扩散，用仿真伪演示喂出即时策略</li><li>ICRT 深度解读：next-token prediction 原教旨主义的机器人 in-context learning 配方</li><li>RoboTTT 深度解读：把 Test-Time Training 装进机器人策略，上下文扩到 8K 步</li><li>BPP 深度解读：一条演示当 prompt，任务多样性是 in-context 操作的第一驱动力</li><li>RICL 深度解读：给预训练 VLA 事后注入 in-context 学习能力</li><li>Vid2Robot 深度解读：端到端视频条件策略的 Google 规模实践</li><li>外围论文速览：one-shot 技能习得调研的五个坐标</li><li>EgoWAM 深度解读：换掉世界预测目标，人类数据才不「漏毒」进动作头</li><li>Zero-WAM 深度解读：把人类视频「造」出来当任务规格，再用 IFP 逼模型真的去看</li><li>WALL-WM 深度解读：把世界-动作建模「循事件关节」下刀</li><li>WAM-TTT 深度解读：把人类演示写进快权重记忆，且只许写在感知侧</li><li>StellaVLA 深度解读：把演示翻译成「为什么」，四篇里唯一真零梯度</li><li>S1 与「涌现之争」：2026 年 8 月具身 ICL 三连发的完整拼图</li><li>LocoFormer 深度解读：S1 的前夜——上下文当适应机制在运动控制域先走通</li><li>FACTR 2 深度解读：一篇力感知论文，如何被 S1 借去质疑预训练</li><li>LingBot-VA 两代深度解读：把「测试时想象」坚持到底的世界-动作模型</li><li>GR-3 深度解读：few-shot 微调流派的工业标杆，ICL 要消灭的正是它</li><li>ManiLong-Shot 深度解读：OSIL 第一个像样的公开基准，和一个 30.2% 的现实</li><li>ICL 机制理论四篇合集：涌现之争吵的那个东西，理论上到底是什么</li><li>世界模型谱系三篇合集：从像素想象到表征预测再到平台化</li><li>趋势与洞察：机器人 One-Shot 技能习得的 2026 拐点</li></ol></div>
 <article id="ch1"><h1 class="first" id="host-深度解读机器人从一段人类视频里秒级习得操作技能">HOST
 深度解读：机器人从一段人类视频里秒级习得操作技能</h1>
 <blockquote>
@@ -2454,14 +2454,515 @@ EICL 论文）、度量质疑（Schaeffer 式批判尚无人做）。12-24
 个月内最有价值的单个实验就是产业规模的去机制消融。</li>
 </ol>
 </article><article id="ch16"><h1
+id="locoformer-深度解读s1-的前夜上下文当适应机制在运动控制域先走通">LocoFormer
+深度解读：S1 的前夜——上下文当适应机制在运动控制域先走通</h1>
+<blockquote>
+<p><strong>LocoFormer: Generalist Locomotion via Long-context
+Adaptation</strong> arXiv 2509.23745 · CoRL 2025 · Skild AI（Min Liu,
+Deepak Pathak, Ananye Agarwal） 项目页 generalist-locomotion.github.io ·
+S1 博客自述时间线的第一站</p>
+</blockquote>
+<h2 id="1-一句话定位">1. 一句话定位</h2>
+<p>LocoFormer
+是一个「全身型」（omni-bodied）通用运动控制模型：同一套权重零样本控制从未见过的腿式与轮式机器人，并在测试时通过跨
+episode
+的长上下文对形态与动力学变化做在线适应——锁膝、断腿、上高跷这些训练中不存在的损伤，它靠读自己前几次摔倒的历史学会应对。这是
+Skild AI「上下文即适应机制」路线的第一次公开验证，比
+S1（操作域）早约一年。</p>
+<h2 id="2-要解决的问题">2. 要解决的问题</h2>
+<p>运动控制器的现状是「一个本体一套策略」：每换一台机器人（甚至换一副负载）都要重新调参或重训。此前的通用化尝试要么依赖显式形态参数输入（现实中往往拿不到精确运动学），要么用短上下文策略——上下文只有几十步，装不下「试错—修正」所需的信息。LocoFormer
+的问题定义借了 LLM
+的框架：如果控制器能读到足够长的传感历史（跨越秒级甚至多次试验），它应该能从「电机响应不对劲」中推断出「我现在很重」或「我少了一条腿」，然后就地改变策略——即运动控制版的
+in-context learning。</p>
+<h2 id="3-方法">3. 方法</h2>
+<p>两个关键选择。<strong>其一，大规模 RL +
+程序化生成机器人</strong>：不在真实机器人模型上训练，而是随机生成形态（连杆长度、质量、电机参数、腿数/轮腿混合）并施加激进域随机化，逼策略放弃对特定形态的记忆、转而学「从历史推断当前身体」的元能力。观测统一为本体感受序列，不输入任何显式形态描述。<strong>其二，Transformer-XL
+主干</strong>：把上下文从此前策略的几十步扩到跨 episode 边界的量级。TXL
+的段级递归机制是关键——处理当前段时，键值从上一（缓存）段计算但不传梯度，层数越深可利用的历史越远，显存由段长决定而与总长解耦。训练时让策略在同一
+episode 内连跑多个 trial、记忆跨 trial 持续，目标是整个 episode
+的累计回报——这个设定直接把「用第一次摔倒的信息改进第二次」写进了优化目标。</p>
+<h2 id="4-实验结果">4. 实验结果</h2>
+<p>评测在 10 个训练中从未见过的真实机器人形态上进行：五款双足（Unitree
+G1/H1、Fourier GR1、LimX TRON1、Berkeley Humanoid
+BK-H）、三款四足（Unitree A1、Boston Dynamics Spot、ETH AnyMal
+C）、两款轮式（TRON1-W、Go2-W），仿真侧覆盖 1000
+个含粗糙地形的随机化环境，真机侧零样本部署后数秒内适应。最有传播力的是涌现适应序列：锁死一个膝关节，模型适应为三腿行走（训练中不存在此设定）；锁两条腿、切除腿、加负重、上高跷，均在
+2-3 个 trial 内从摔倒恢复到稳定行走——早期 rollout 的失败信息被后续 trial
+显式利用，这是 few-shot 多 episode 适应的直接证据。</p>
+<h2 id="5-局限">5. 局限</h2>
+<p>作者自认训练全部在仿真、依赖域随机化弥合
+sim-to-real，接触丰富的操作类交互不在范围内。延伸批判：其一，「未见机器人」的分布问题——程序化生成的形态空间本身覆盖了腿式/轮式的连续谱，真实机器人是否只是这个谱的内插点？论文没有给「生成分布外」形态的失败案例分析。其二，适应上限没有探明：锁腿、加重属于动力学参数漂移，感知域漂移（换相机、换场地视觉）完全未涉及——这恰是
+manipulation
+域（S1/RoboTTT）后来要面对的更难的轴。其三，评测以行走稳定性为主，缺乏统一的定量适应速度指标（几步收敛、收敛质量），「数秒内适应」多为定性展示。</p>
+<h2 id="6-与调研主线的关系">6. 与调研主线的关系</h2>
+<p><strong>S1 的直系前作</strong>：Skild 时间线（LocoFormer 2025-09 →
+域内 ICL 2026-02 → S1 2026-08）中，LocoFormer
+验证了配方的前半段——长上下文 + 大规模多样性训练 → 测试时适应涌现；S1
+把同一配方搬到 manipulation
+并把「上下文」从自身传感历史扩展为他人的视频演示。注意两者「上下文」的语义差异：LocoFormer
+读的是自己的实时经验（适应），S1
+读的是别人的演示（模仿）——前者不需要跨具身对应，后者需要，这是
+manipulation 版难度更高的根本原因。<strong>与 RoboTTT
+同题异解</strong>：都主张「上下文长度是新 scaling 轴」，LocoFormer 用
+TXL 缓存（无梯度、定长记忆），RoboTTT 用 TTT
+快权重（每步梯度、递归状态）——RoboTTT 的消融恰好证明 GDN
+式线性递归吃不到长上下文红利，而 TXL
+缓存与线性递归的表达力差距、两条实现的直接对比，双方都没做。<strong>对涌现之争的位置</strong>：LocoFormer
+的适应能力同样不是免费的——跨 trial 记忆持续 + 整 episode
+回报这两个训练设定就是它的「显式机制」，这与四篇 EICL
+论文的结论同向。</p>
+</article><article id="ch17"><h1 id="factr-2-深度解读一篇力感知论文如何被-s1-借去质疑预训练">FACTR 2
+深度解读：一篇力感知论文，如何被 S1 借去质疑预训练</h1>
+<blockquote>
+<p><strong>FACTR 2: Learning External Force Sensing for Commodity Robot
+Arms Improves Policy Learning</strong> arXiv 2606.12406v2（2026-08
+更新）· CMU + 早稻田大学 作者：Steven Oh*、Jason Jingzhou Liu*、Tony
+Tao、Philip Han、Kenneth Shaw、Satoshi Funabashi、Ruslan
+Salakhutdinov、Deepak Pathak</p>
+</blockquote>
+<h2 id="1-一句话定位">1. 一句话定位</h2>
+<p>FACTR 2 本体是一篇把力感知带给廉价机械臂的系统论文：NEXT 用 10
+分钟自由运动数据、1
+分钟训练，在没有任何专用力传感器的商品臂上估计外部关节力矩，精度媲美专用力矩传感器；FIRST
+用估出的力信号把演示切成自由空间/预接触/接触三段并上采样接触段，五个长时程任务上比此前力感知策略的任务进度高
+17% 以上。它进入本调研的原因在论文之外：Skild S1
+博客引用它支撑「预训练价值有限」的立论——这个引用经得起核对吗？</p>
+<h2 id="2-要解决的问题">2. 要解决的问题</h2>
+<p>接触密集操作（插入、紧固、可变形物体）需要力敏感性，但多数商品机械臂（AgileX
+Piper、YAM
+等）为控制成本不配力传感器。已有的无传感器外力估计依赖精确的系统辨识或厂商动力学模型，商品臂两者都缺。策略学习侧的问题是：BC
+均匀采样轨迹，而长时程任务里决定成败的接触段只占很小时间比例，训练信号被大量自由空间运动稀释。</p>
+<h2 id="3-方法">3. 方法</h2>
+<p><strong>NEXT（神经外力矩估计）</strong>：核心洞察是「自由运动时的逆动力学模型即是零外力基线」。采集
+10
+分钟无接触自由运动，训练一个从关节状态序列预测电机电流/力矩的小网络（1
+分钟训完）；部署时用实测力矩减去该模型预测的自由运动力矩，残差即外部力矩估计。无需系统辨识、无需
+CAD
+模型、无需额外硬件。该估计直接支持力反馈遥操作（操作者能「感到」接触）。<strong>FIRST（力知情重采样训练）</strong>：用
+NEXT 的力矩信号把每条演示自动分割为自由空间/预接触/接触三个阶段，BC
+训练时按任务调节比例上采样后两者。策略本体是标准的从头训练 BC（MMDiT
+改编的 flow-matching 头，chunk 30，另用 ACT
+复验），可选把力矩估计作为额外输入。</p>
+<h2 id="4-实验结果">4. 实验结果</h2>
+<p>力估计侧：与专用关节力矩传感器的对照显示估计质量相当（论文以曲线与遥操作可用性呈现）；力反馈遥操作在
+Piper、YAM、Nero
+三款低成本臂上落地。策略侧：五个长时程接触任务（含插入、装配类），FIRST
+相比此前力感知策略（FACTR 一代等）任务进度提升超过
+17%；消融确认收益来自重采样而非仅力输入——不带力输入仅用 FIRST
+重采样也有增益（附录
+D.5），电流原始信号与估计力矩的对比显示后者更稳（D.6）。</p>
+<h2 id="5-局限">5. 局限</h2>
+<p>作者自认：NEXT
+依赖准静态假设附近的自由运动覆盖，高速动态下残差法的精度未验证；FIRST
+的重采样比例逐任务手调（附录
+D.3）。延伸批判：五个任务全部使用从头训练的策略，没有与任何预训练基础模型（π0/GR00T
+类）做正面对照——这一点对下一节至关重要。</p>
+<h2 id="6-与调研主线的关系核对-s1-的引用">6. 与调研主线的关系：核对 S1
+的引用</h2>
+<p>S1
+博客的原话是：「研究表明，当后训练数据足够大且密集覆盖任务时，即使从头训练、无预训练的策略也能匹配后训练基础模型的峰值性能（Oh
+et al., 2026）」，并由此推出「预训练的主要意义（如果不是唯一意义）是启用
+ICL」。**核对结论：这是一次外推性引用。**FACTR 2
+的实验确实全部用从头训练的策略并取得强结果，但论文（正文与附录）没有做「从头训练
+vs
+预训练基础模型后训练」的受控对照，也没有陈述这个一般性结论——它的贡献轴是力感知与数据重采样，不是预训练价值评估。S1
+把「从头策略在充足域内数据下表现好」这个侧面观察，升格成了为自家 ICL
+路线铺路的一般性论断。方向上未必错（社区确有同感），但证据强度与引用语气不匹配。对调研的意义有两层：其一，「预训练到底买到了什么」是
+ICL 叙事的地基，目前正反双方（S1 的引申 vs EgoScale 的 log-linear
+scaling law、GR-3 的 few-shot
+微调收益）都拿不出同规模受控对照——这是又一个无人做的裁决实验；其二，FACTR
+2
+自己的真正启示反而被引用忽略了：力信息是纯视觉演示的系统性盲区（本调研洞察
+I4 的「信息瓶颈」），NEXT 这种零硬件力估计恰好是把力信号带进 one-shot
+演示管线的最低成本路径——它与 HOST 的 33:1 解耦配方组合，是触觉增强 ICL
+最具体的落地方案。</p>
+</article><article id="ch18"><h1
+id="lingbot-va-两代深度解读把测试时想象坚持到底的世界-动作模型">LingBot-VA
+两代深度解读：把「测试时想象」坚持到底的世界-动作模型</h1>
+<blockquote>
+<p><strong>v1: Causal World Modeling for Robot Control</strong> · arXiv
+2601.21998 · RSS 2026 · 蚂蚁 Robbyant（Lin Li*, Qihang Zhang*, Yiming
+Luo* 等，Yinghao Xu 通讯）· 开源 <strong>v2: Native Video-Action
+Pretraining for Generalizable Robot Control（LingBot-VA 2.0）</strong> ·
+arXiv 2607.08639 · 2026-07
+Zero-WAM（notes/12）的同门前作与被超越基线</p>
+</blockquote>
+<h2 id="1-一句话定位">1. 一句话定位</h2>
+<p>LingBot-VA 是 WAM 谱系里「测试时保留完整自回归想象」路线的代表：视频
+token 与动作 token
+交织进同一条因果序列，每个自回归步先想象未来视觉状态、再从想象中解码动作，两代演进的主线是把这条路线的两大成本——继承自视频生成模型的历史包袱与推理延迟——逐一还清：v1
+在 RoboTwin 2.0 五十任务上以 92.93/91.55（Easy/Hard 成功率）超越
+π0.5（82.7/76.8）与 Motus，v2
+干脆抛弃「改造视频生成模型」路线、从头做因果预训练，靠稀疏 MoE 与
+Foresight Reasoning 把峰值控制频率推到 225Hz。</p>
+<h2 id="2-要解决的问题">2. 要解决的问题</h2>
+<p>v1
+的立论：视频世界建模与视觉-语言预训练是两条独立的机器人学习地基——前者提供「动作与视觉动力学之间的因果想象」，这是反应式
+VLA（观测直接映射动作）天然缺失的。落地要解三件事：视频与动作两种模态怎么共处一个生成过程；闭环执行怎么不断吸收真实观测（防想象漂移）；想象的算力代价怎么不拖垮控制频率。v2
+追加一刀：复用为数字内容创作设计的双向视频生成模型本身就是错的——适配成因果模型会灾难性遗忘，重建导向的
+VAE 潜空间与动作精度错配。</p>
+<h2 id="3-方法">3. 方法</h2>
+<p><strong>v1 三件套</strong>：（一）共享潜空间 MoT——视频与动作 token
+交织成单一因果序列，共享注意力、分专家
+FFN，建立在大规模预训练视频扩散主干（Wan
+系）上，每个自回归步内「迭代去噪出未来视觉潜变量 +
+同步解码动作」互为条件；（二）闭环 rollout——KV cache
+维护交互历史，每步用真实观测替换想象结果再前进（想象只往前一步，不无限外推）；（三）异步推理——动作预测与电机执行并行。另有噪声潜变量增强：训练时给历史潜变量加噪，让动作解码对想象误差鲁棒。<strong>v2
+四大改动</strong>：（一）语义视觉-动作 tokenizer（96 潜通道）取代 WAN2.2
+重建 VAE，潜空间同时对齐语义与动作；（二）从头因果预训练（causal
+DiT），绕开双向→因果适配的灾难性遗忘；（三）视频专家 FFN 换稀疏 MoE（128
+专家 top-8 + 1 共享，loss-free 均衡），动作专家保持稠密；（四）Foresight
+Reasoning——预测未来潜变量与动作执行重叠进行，每次 rollout
+用学习到的前向动力学在最新真实观测上「再接地」纠漂移，配合少步一致性蒸馏与量化，峰值异步
+225Hz。<strong>v2 的 ICL</strong>：明确跟随 Zero-WAM 与 DVA 引入视频
+in-context
+learning——训练数据中机器人视频配对语义对齐的人类演示视频（不要求同物体实例、同视角、同场景布局），推理时给一段参考人类演示当任务指令，零参数更新迁移动作流程；另有
+MCP（多 chunk 预测）监督多个未来 chunk，与 Zero-WAM 的 IFP
+同属反捷径家族；层级 VLM 规划器把长时程目标分解成子任务上下文。</p>
+<h2 id="4-实验结果">4. 实验结果</h2>
+<p>v1：RoboTwin 2.0 五十任务多任务设定（2500 条干净场景 + 25000
+条重随机化场景演示），Easy/Hard 平均 92.93/91.55，对第二名 Motus
++4.2/+4.6，对 π0.5 +10.2/+14.8；长时程分档（Horizon=3）优势扩大到
++8.2/+9.1；LIBERO 同样领先；真机六任务成功率与进度分双指标全面超
+π0.5，长时程与可变形物体任务差距最大。附带能力：视觉动力学预测、从机器人视频反推逆动力学；论文自报涌现性质为长程时间记忆与
+few-shot 适应。v2：同一 RoboTwin 协议下对 v1 与 π0.5
+大幅领先（论文以两者为主对照）；真机验证 few-shot 泛化与 ICL
+demo（人类演示视频驱动零更新执行）；消融确认语义
+tokenizer、MCP、加速三件各自的贡献。</p>
+<h2 id="5-局限">5. 局限</h2>
+<p>作者自认 v1 的自回归想象仍有累积误差、依赖再接地机制兜底；v2
+从头预训练的算力成本未完整披露。延伸批判：其一，两代都以 π0.5
+为最强外部锚点，而 π0.5 在 RoboTwin 的配置由自家复现——与 WALL-WM
+的「评测环境优势」问题同款；其二，v2 的 ICL 是跟随式引入（引
+Zero-WAM/DVA），论文没有做 Zero-WAM
+式的「无反捷径机制时人类视频是否负收益」消融，its ICL 有效性证据以 demo
+为主；其三，「测试时想象」与
+Fast-WAM「收益在训练时」的正面矛盾两代都未回应——v1
+每步只想象一小步且立即被真实观测替换，这个设计本身可以读作对完整想象路线的部分让步；其四，同门的
+Zero-WAM 用它当基线时未见任务只有 17.45%，说明 v1 的 few-shot
+适应能力在任务级切分下并不成立，「涌现
+few-shot」的声明要按这个外部数字打折。</p>
+<h2 id="6-与调研主线的关系">6. 与调研主线的关系</h2>
+<p><strong>同门谱系</strong>：LingBot-VA（v1）→ Zero-WAM（借 v1 主干加
+HumanGen+IFP 攻未见任务）→ LingBot-VA 2.0（把 Zero-WAM 的视频 ICL
+与反捷径思想收编回主线，同时从头重造底座）——蚂蚁 Robbyant
+三连发构成一条完整的「WAM 底座 → ICL 机制 →
+底座重造」内部演化链，与自变量的 Wall-OSS → HOST → WALL-WM
+链条惊人对称：都是 chunk/底座被自家 ICL 工作倒逼重构。<strong>WAM
+路线三岔口</strong>：测试时完整想象（LingBot-VA）vs
+训练时塑形推理时剥离（Fast-WAM/WALL-WM/Zero-WAM 的 IFP）vs
+表征空间预测（EgoWAM 的 DINO/flow、V-JEPA 2）——LingBot-VA
+是第一条路的最强代表，其 225Hz
+工程栈证明「想象的延迟成本」可以被基建消化，把争论焦点逼回「想象是否带来能力增益」本身。<strong>对涌现之争</strong>：v2
+的 ICL 依赖显式配对数据与 MCP 反捷径目标，再添一条「ICL
+是造出来的」学术侧证据。</p>
+</article><article id="ch19"><h1 id="gr-3-深度解读few-shot-微调流派的工业标杆icl-要消灭的正是它">GR-3
+深度解读：few-shot 微调流派的工业标杆，ICL 要消灭的正是它</h1>
+<blockquote>
+<p><strong>GR-3 Technical Report</strong> arXiv 2507.15493 · 字节跳动
+Seed（Hongtao Wu 通讯）· 2025-07 配套硬件 ByteMini 22-DoF 双臂移动机器人
+· 对照基线 π0（官方 openpi 微调）</p>
+</blockquote>
+<h2 id="1-一句话定位">1. 一句话定位</h2>
+<p>GR-3 是「少量数据快速微调」适应流派的工业标杆：4B 参数 MoT 结构
+VLA（VLM 主干 + DiT flow-matching 动作头），三源数据配方（web
+级视觉-语言共训 + VR 采集人类轨迹 +
+遥操作机器人轨迹），核心卖点是<strong>每个新物体只需 10 条 VR
+人类轨迹</strong>即可完成适配，且在长时程收桌与灵巧挂衣上全面超过
+π0。在本调研的坐标系里，它是 ICL
+阵营（GEN-1.5/S1）宣称要淘汰的那个工作流的最强版本——把「后训练适应」的成本压到了
+VR 手柄级。</p>
+<h2 id="2-要解决的问题">2. 要解决的问题</h2>
+<p>VLA
+的三个老大难：指令跟随不严格（尤其未见指令与抽象概念）、分布外泛化弱（新物体/新环境）、新任务适配贵（每任务数小时遥操作）。GR-3
+的回答不走
+ICL，而是把三源数据各自的长处拼起来：视觉-语言数据买语义泛化，机器人轨迹买操作能力，VR
+人类轨迹买低成本适配——用数据配方而非推理机制解决适应问题。</p>
+<h2 id="3-方法">3. 方法</h2>
+<p><strong>架构</strong>：4B MoT——预训练 VLM 处理视觉与语言，DiT
+动作头以 flow matching 生成动作 chunk，引入归一化 RMSNorm
+改动以强化动态指令跟随；输入自然语言指令 + 环境观测 +
+机器人状态，端到端输出双臂移动底盘动作。<strong>三源训练配方</strong>：（一）与
+web 级视觉-语言数据共训（语义泛化的来源，消融 GR-3 w/o Co-Training
+验证）；（二）遥操作机器人轨迹的模仿学习（可泛化抓放任务采 35k
+条轨迹、101 物体、69 小时）；（三）VR
+设备采集的人类轨迹用于少样本适配——人戴 VR
+用手柄示范，数据成本比真机遥操作低一个量级，采集吞吐约每小时 450
+条。<strong>硬件</strong>：ByteMini，22 自由度、7-DoF
+无偏置球腕手臂（紧凑球腕突破传统腕关节在狭小空间的灵巧极限），全系统面向数据采集与部署双用途设计。</p>
+<h2 id="4-实验结果">4. 实验结果</h2>
+<p>三个真机任务、与逐任务微调的 π0
+对照。<strong>可泛化抓放</strong>：四设定评测（Basic 见过环境 54 物体 /
+未见环境 4 个 / 未见指令含尺寸-空间关系-常识概念 / 未见物体 45
+个），双指标（指令跟随率 IF + 成功率）。GR-3 全设定领先
+π0，视觉-语言共训消融确认未见指令与未见物体上的优势主要来自共训。<strong>few-shot
+适配</strong>：对训练中不存在的新物体，仅用每物体 10 条 VR
+人类轨迹微调，性能显著跃升（图 7b），验证「分钟级采集 +
+少步微调」的适应闭环。<strong>长时程收桌与灵巧挂衣</strong>：以平均任务进度计，GR-3
+稳定完成多步序列（挂衣含插衣架、挂上晾衣杆等步骤，短袖等未见衣型也能处理），π0
+在同设定下差距明显。</p>
+<h2 id="5-局限">5. 局限</h2>
+<p>作者自认评测任务数量有限（三大任务族）、依赖自建硬件平台。延伸批判：其一，π0
+基线是官方仓库微调版，但 π0 并非为 ByteMini
+本体设计，跨本体迁移的先天劣势没有从对比中剥离——「全面超
+π0」部分是主场优势；其二，few-shot 数字口径是「10
+条/物体」的物体级适配，与 GEN-1.5/S1 的「1 条/任务」任务级 ICL
+不同轴，不能直接换算；其三，VR 人类轨迹仍需实物与场地（不同于 HOST
+的任意手机视频），「低成本」相对遥操作成立、相对拍视频不成立；其四，无任何
+ICL/上下文条件能力，模型每次适配都改权重——旧技能是否受损（HOST
+关注的遗忘问题）未报告。</p>
+<h2 id="6-与调研主线的关系">6. 与调研主线的关系</h2>
+<p>GR-3 是趋势报告「适应预算连续旋钮」（0 步=ICL，1-10 步=轻适应，1000+
+步=冲精通）中间档的最强实例，它把这一档的成本压到了「VR 手柄 + 10
+条轨迹」——这直接抬高了 ICL 路线的证明门槛：S1 的「单条演示 ≈ 380
+条后训练示范」兑换率是对着传统遥操作算的，若对手换成 GR-3 式 VR
+采集（每小时 450 条），ICL
+的成本优势会大幅缩水。真正的分界不在成本而在两处：GR-3
+每次适配都动权重（遗忘风险 +
+需要工程师在环），且以物体级泛化为主（任务级新技能仍靠数据）；ICL
+阵营的主张恰是这两点的反面。另一条线索：GR-3 的 VR 人类轨迹与 WAM-TTT
+的「配对人类数据 1:1
+顶替机器人数据」结论互证——人类示范作为数据源的价值已被微调与 ICL
+两个阵营分别确认，分歧只在它进模型的方式（梯度 vs 上下文）。</p>
+</article><article id="ch20"><h1
+id="manilong-shot-深度解读osil-第一个像样的公开基准和一个-302-的现实">ManiLong-Shot
+深度解读：OSIL 第一个像样的公开基准，和一个 30.2% 的现实</h1>
+<blockquote>
+<p><strong>ManiLong-Shot: Interaction-Aware One-Shot Imitation Learning
+for Long-Horizon Manipulation</strong> arXiv 2512.16302 · AAAI 2026 · 附
+RLBench-Oneshot 基准 真机验证平台 UFactory xArm7 + RealSense
+D435/D415</p>
+</blockquote>
+<h2 id="1-一句话定位">1. 一句话定位</h2>
+<p>ManiLong-Shot 做了两件事：方法上，把长时程 one-shot
+模仿拆成「交互感知任务分解 → 功能不变区域预测 →
+区域匹配求目标位姿」三段流水线，在 10 个短程任务上训练后泛化到 20
+个未见长程任务，one-shot 成功率 30.2%，比此前最优 OSIL 方法
+IMOP（7.4%）高 22.8 个百分点；基建上，从 RLBench 挑选 30 任务（10 短程 +
+20 长程分三档难度）构建 RLBench-Oneshot——这是 one-shot
+模仿领域第一个任务分层、协议明确的公开仿真基准。</p>
+<h2 id="2-要解决的问题">2. 要解决的问题</h2>
+<p>已有 OSIL
+方法几乎全在短程原子任务上验证：一次抓取、一次放置。长程任务的困难是复合的——单条演示既要提供「做什么」（原语序列）又要提供「怎么做」（每段的空间对应），而现有方法把演示当整体处理，原语边界、阶段间依赖、演示与测试场景的对应关系全部混在一个匹配问题里。同时领域缺乏标准评测：各家自选任务自定口径，长程
+one-shot 的真实水位无人知晓。</p>
+<h2 id="3-方法">3. 方法</h2>
+<p>三段流水线。<strong>交互感知任务分解</strong>：用 VLM
+或规则式机器人状态转移（夹爪开合、接触事件）把单条无标注长程演示切成交互原语序列——每个原语是一段「预接触-抓取-后接触」的完整交互；这一步把长程问题规约为原语级
+one-shot
+序列。<strong>功能不变区域预测</strong>：对每个原语，预测演示中与任务功能绑定、跨场景不变的物体区域（如把手、开口），滤掉外观与位姿噪声。<strong>区域匹配</strong>：测试场景中匹配对应区域，解出目标末端位姿，交给运动规划（MoveIt）执行。训练只用
+10 个短程任务的演示，泛化压力全部压在分解与区域机制上。</p>
+<h2 id="4-实验结果">4. 实验结果</h2>
+<p><strong>RLBench-Oneshot 构成</strong>：10 短程任务（每任务 100
+条成功演示，前视/双肩/腕四路 RGB-D）+ 20 长程任务分三档（L1：13 任务 × 6
+次交互；L2：4 任务 × 9 次；L3：3 任务 × 12
+次），每个长程任务配一条成功轨迹作 one-shot 演示。协议：25 试验 × 5
+种子，报均值与标准差。<strong>结果</strong>：20 个未见长程任务平均
+30.2%，对比 IMOP 7.4%、ARP+FT 4.7%、3DDA+FT 4.5%、RVT2+FT 4.1%——微调式
+SOTA 模仿方法在此设定下近乎全灭，凸显长程 one-shot
+与「多演示微调」是两个问题。<strong>真机</strong>：xArm7
+上三个长程任务（叠积木、叠杯、放杯，各 6
+个交互阶段），每任务采一条遥操作演示、5 次扰动初始位姿的 one-shot
+试验，验证 sim-to-real 可迁移。</p>
+<h2 id="5-局限">5. 局限</h2>
+<p>作者自认依赖
+VLM/规则分解的质量、运动规划器处理接触的能力有限。延伸批判：其一，30.2%
+的绝对水位提醒所有人：长程 one-shot 在标准协议下远未解决——与产业博客的
+59-66% 对照，后者要么任务更短、要么口径更松（S1
+的人工干预计分）、要么不可复核；其二，真机每任务仅 5
+次试验，是验证级而非评测级证据；其三，流水线各段误差级联，VLM
+分解错误会传导到底（与 WALL-WM 依赖 VLM 事件描述、StellaVLA
+依赖检索同病），三段的误差归因消融不完整；其四，RLBench
+的仿真物理（无接触力细节）决定了它测不了力敏感任务——基准本身的覆盖边界要认清。</p>
+<h2 id="6-与调研主线的关系">6. 与调研主线的关系</h2>
+<p><strong>评测轴</strong>：RLBench-Oneshot 是趋势报告预测 P3（真机 OSVI
+标准协议）的仿真侧先行者——任务分层（交互次数定难度）与固定协议（25×5）值得真机基准直接继承；HOST
+的 50 任务集 + 这套协议设计，是最可能的 P3
+落地组合。<strong>方法轴</strong>：三段流水线与 HOST
+的进度流形同属结构派，但走离散显式路线（原语切分 +
+区域对应）而非连续隐式路线（共享进度流形）；与 StellaVLA
+的语义分段、WALL-WM
+的事件切分构成「时间结构怎么给」的三方案对照——规则/VLM
+切分（本文、WALL-WM）、离线转译（StellaVLA）、自监督对齐（HOST），标注成本递减、对模型能力要求递增。<strong>水位轴</strong>：它给整个领域提供了急需的「地面真相」：在无人工干预、任务级留出、固定协议下，长程
+one-shot 的 SOTA 是
+30.2%——任何声称大幅超越此数的工作，先检查口径再检查方法。</p>
+</article><article id="ch21"><h1 id="icl-机制理论四篇合集涌现之争吵的那个东西理论上到底是什么">ICL
+机制理论四篇合集：涌现之争吵的那个东西，理论上到底是什么</h1>
+<blockquote>
+<p>覆盖四篇：<strong>Implicit Bayesian Inference</strong>（Xie et al.,
+ICLR 2022, arXiv 2111.02080）· <strong>Transformers Learn In-Context by
+Gradient Descent</strong>（von Oswald et al., ICML 2023, 2212.07677）·
+<strong>In-context Learning and Induction Heads</strong>（Olsson et al.,
+Anthropic 2022, 2209.11895）· <strong>Learning to (Learn at Test
+Time)</strong>（Sun et al., 2024, 2407.04620） 定位：LLM
+背景三篇（notes/16 §5）是涌现之争的现象学，这四篇是机制论——GEN-1.5/S1 说
+ICL「涌现」，四篇 EICL 论文说「需要机制」，但双方都没回答 ICL
+本身是什么。LLM
+侧给过三种互补答案，外加一个把答案变成架构的工程化，全部与具身直接相关。</p>
+</blockquote>
+<h2 id="1-为什么调研要补这一层">1. 为什么调研要补这一层</h2>
+<p>涌现之争的攻防（notes/16 §5）停在「消融证据 vs 规模主张」的实证层。但
+LLM 社区 2021-2024 年已经把「ICL
+是什么」推进到机制层，得到的答案直接决定具身 ICL 该怎么设计：如果 ICL
+是隐式贝叶斯推断，那关键在预训练分布的结构（数据配方派的理论依据）；如果
+ICL 是隐式梯度下降，那快权重与纯上下文本是一体（EICL
+坐标系的理论消解）；如果 ICL 靠 induction heads
+这类具体线路，那「涌现」有明确的力学起点可以找。四篇各占一角。</p>
+<h2 id="2-xie-et-alicl-是对潜在概念的隐式贝叶斯推断">2. Xie et al.：ICL
+是对潜在概念的隐式贝叶斯推断</h2>
+<p><strong>主张</strong>：预训练文档由「先抽潜概念 θ、再从 θ 参数化的
+HMM 采样 token」生成时，语言模型做好下一词预测就必须学会从上文推断
+θ；测试时的 few-shot prompt
+只是一段特殊分布的上文，模型对齐演示背后的共享概念即完成「学习」——没有任何参数更新，ICL
+是预训练分布结构的必然副产品。<strong>证据</strong>：合成数据集
+GINC（HMM 混合）上的可控实验——即便 prompt
+的拼接格式在预训练分布之外（低概率事件），只要概念可辨识（distinguishability
+条件成立），ICL
+随例子数单调变好；理论部分给出渐近最优性证明。<strong>对具身的启示</strong>：这是
+BPP/ICRT「数据结构 &gt; 数据量」定律的理论原型——ICRT 的 1098
+条多任务同场景轨迹之所以胜过 1
+万条单任务轨迹，正是因为前者让「任务身份」成为必须从上下文推断的潜变量，后者让观测直接决定动作、潜变量推断没有梯度压力。Zero-WAM
+的 IFP 反捷径目标，本质是人为制造 Xie 意义上的「可辨识性压力」。</p>
+<h2 id="3-von-oswald-et-al注意力前向传播就是梯度下降">3. von Oswald et
+al.：注意力前向传播就是梯度下降</h2>
+<p><strong>主张</strong>：构造性证明——单层线性自注意力可以精确实现对上下文样本的一步梯度下降（把
+GD 的权重更新 ΔW 等价改写为对数据的变换）；且在线性回归任务上训练出的
+Transformer，其前向传播确实收敛到这个 GD 解，多层对应多步
+GD。<strong>含义</strong>：ICL=元学习出的隐式优化器，「读上下文」与「在上下文上做梯度下降」是同一件事的两种描述。<strong>对具身的启示</strong>：这是
+EICL 坐标系（notes/16「快权重 vs 纯上下文」）的理论消解——RoboTTT
+把「处理上下文」显式实现为快权重梯度步，纯上下文的 GEN-1.5/S1 若真具备
+ICL，其注意力内部大概率在做同一件事的隐式版本。争论「哪格更好」的实用意义在于误差与算力的分配方式，而非能力的本质差异。附带一个警示：该等价性在线性注意力/线性回归设定下最干净，真实多模态策略离该设定很远，把它当严格结论外推到机器人属于过度引用。</p>
+<h2 id="4-olsson-et-alicl-能力有一个可定位的力学起点">4. Olsson et
+al.：ICL 能力有一个可定位的力学起点</h2>
+<p><strong>主张</strong>：Transformer 训练早期存在一次「相变」（phase
+change）——induction heads（做前缀匹配 + 复制的注意力头组合：找上文中当前
+token 出现过的位置、把其后继 token 提升为预测）在这个窗口内集体形成，与
+in-context learning
+能力（用上文降低后文损失的能力）的跃升同时发生。<strong>证据</strong>：六条互补论证——宏观共现、共扰动（改架构让
+induction heads 更早形成，ICL
+跃升同步提前）、直接消融、行为泛化（字面复制/翻译/模式匹配）、机制合理性、小模型到大模型的连续性；对小模型是接近因果的证据，对大模型是相关性证据。<strong>对具身的启示</strong>：双刃剑。一方面它给「涌现」提供了最好的辩护词——涌现可以是真实的力学事件（线路集体形成），不只是度量假象（Schaeffer
+的批判并不覆盖这种情形），GEN-0 的「intelligence phase
+transition」叙事因此不能被度量批判一票否决；另一方面它也给出了裁决工具——如果
+GEN-1.5/S1 的 ICL 是涌现的，其网络里应能找到具身版 induction
+heads（对演示片段做「进度匹配 +
+动作复制」的头），可解释性探针是比消融更直接的验证路径，目前无人做。</p>
+<h2 id="5-sun-et-al把隐式优化变成显式架构ttt-层">5. Sun et
+al.：把隐式优化变成显式架构（TTT 层）</h2>
+<p><strong>主张</strong>：序列模型的隐状态本身可以是一个小模型，状态更新规则就是对该小模型做自监督梯度步——「测试时训练」不再是推理技巧而是架构原语。TTT-Linear（隐状态为线性模型）与
+TTT-MLP（两层 MLP）在 125M-1.3B 尺度对照 Transformer 与
+Mamba；关键理论连接：线性模型 + batch GD 的 TTT
+层严格等价于线性注意力——RNN、注意力、测试时训练三个概念在此汇合。<strong>对具身的启示</strong>：这是
+RoboTTT 与 WAM-TTT 的直接技术祖先（两者引用并各自改造：RoboTTT 加 tanh
+门控与 sequence action forcing 装进动作头，WAM-TTT 加 KVM
+损失装进感知侧）。TTT
+层的「表达力换算力」权衡在机器人域刚好反转价值：机器人上下文是高维连续传感流，注意力的二次成本不可行，TTT
+的线性成本 + 可学更新规则恰好补位——这解释了为什么 TTT 在 LLM
+域是「有前途的替代品」、在机器人域直接成了长上下文的默认方案。</p>
+<h2 id="6-合成四篇拼出的一张图与具身域的空白">6.
+合成：四篇拼出的一张图，与具身域的空白</h2>
+<p>四篇的关系可以串成一条论证链：Xie 说明 ICL
+的<strong>成立条件</strong>（预训练分布必须让潜变量推断成为最优策略）；von
+Oswald 说明 ICL 的<strong>计算本质</strong>（隐式优化）；Olsson 说明 ICL
+的<strong>形成过程</strong>（线路相变）；Sun
+把本质<strong>工程化</strong>（显式 TTT
+架构）。对照具身侧：数据配方派（BPP/ICRT/Zero-WAM 的均衡采样）在实践 Xie
+的条件，快权重派（RoboTTT/WAM-TTT）在实践 Sun
+的架构，纯上下文派（GEN-1.5/S1/StellaVLA）在赌 von Oswald
+的隐式版本会自己出现，而 Olsson
+式的线路级验证在具身域完全空白。三个最值得做的迁移实验：具身 induction
+heads 探针（验证产业模型的涌现声明）；GINC
+式可控具身预训练分布（把「任务多样性阈值」从经验数字变成可辨识性理论量）；TTT
+层与全注意力在同算力下的长上下文机器人对照（WAM-TTT 与 RoboTTT
+都没做的那个基线）。局限同样要记录：四篇全部在语言或合成任务上工作，最大
+1.3B 参数，结论向多模态连续控制的外推没有任何一篇提供保证。</p>
+</article><article id="ch22"><h1
+id="世界模型谱系三篇合集从像素想象到表征预测再到平台化">世界模型谱系三篇合集：从像素想象到表征预测再到平台化</h1>
+<blockquote>
+<p>覆盖三篇：<strong>UniPi</strong>（Learning Universal Policies via
+Text-Guided Video Generation，Du et al., NeurIPS 2023, arXiv
+2302.00111）· <strong>V-JEPA 2</strong>（Meta, 2025, 2506.09985）·
+<strong>Cosmos</strong>（NVIDIA World Foundation Model Platform, 2025,
+2501.03575） 定位：本仓库 WAM
+线（Fast-WAM/WALL-WM/EgoWAM/LingBot-VA/Zero-WAM）的上游谱系。三篇代表「视频先验进入机器人」的三代路线：像素想象当策略
+→ 表征空间预测 → 世界模型平台化。</p>
+</blockquote>
+<h2 id="1-谱系总览">1. 谱系总览</h2>
+<p>「视频生成模型携带物理知识，机器人应该继承它」这个信念有三种兑现方式，恰好按时间递进。第一代（UniPi，2023）：视频生成模型<strong>就是</strong>策略——生成未来影像，再从影像反解动作。第二代（V-JEPA
+系，2024-2025）：像素太贵且冗余，把预测搬进抽象表征空间，规划在潜空间进行。第三代（Cosmos，2025）：世界模型退居<strong>平台</strong>——不直接当策略，而是作为可后训练的模拟器底座，为下游
+Physical AI 供数据与评估。本仓库主线里的 WAM
+工作全部是这三代的杂交后代：Fast-WAM/WALL-WM
+继承第一代的像素潜变量但砍掉测试时想象，EgoWAM 的 DINO/3D flow 目标与
+V-JEPA 同属第二代，LingBot-VA 是第一代路线的坚守者，Zero-WAM
+把第三代的「合成数据」思想反向用于 ICL 配对生成。</p>
+<h2 id="2-unipi把决策问题写成文本条件视频生成">2.
+UniPi：把决策问题写成文本条件视频生成</h2>
+<p><strong>主张</strong>：通用策略 = 文本条件视频生成器 +
+任务无关的逆动力学模型。给定指令与首帧，扩散模型生成完成任务的未来视频（planner），逆动力学模型从相邻帧对解出动作（executor）。<strong>关键机制</strong>：视频作为统一的状态-动作表示，天然跨环境、跨本体（动作空间差异被推给轻量逆动力学）；训练数据可以混仿真、真机与
+YouTube。<strong>代表结果</strong>：组合泛化任务上显著超过 Transformer
+BC
+与轨迹级基线，多环境迁移与真机验证成立；论文明确展示「语言条件的组合性」——新的颜色-物体-关系组合靠视频生成的组合泛化直接解决。<strong>对具身
+ICL 的启示与病灶</strong>：它确立了「演示/指令 → 未来影像 →
+动作」的模板（HOST
+的自接地预测级联是这个模板的进度条件版本），但两大成本从此困扰整条路线：推理慢（每步都要生成视频）与像素冗余（光影纹理与任务无关却占尽建模容量）。后续所有
+WAM 工作都可以读作对这两个病灶的不同疗法——Fast-WAM 砍测试时生成，V-JEPA
+换表征空间，LingBot-VA 用工程栈硬扛。</p>
+<h2 id="3-v-jepa-2预测发生在表征空间机器人控制零标注数据起步">3. V-JEPA
+2：预测发生在表征空间，机器人控制零标注数据起步</h2>
+<p><strong>主张</strong>：自监督联合嵌入预测架构（预测目标是 learned
+表征而非像素）在超过 100
+万小时互联网视频上预训练，得到的世界模型既服务理解（Something-Something
+v2 top-1 77.3、Epic-Kitchens-100 动作预期 recall@5 39.7
+均为当时最优）也服务控制。<strong>关键机制</strong>：V-JEPA
+2-AC——在冻结的 V-JEPA 2 上，仅用 Droid 数据集中不到 62
+小时无标注机器人视频后训练出动作条件世界模型；部署时以能量最小化做规划（给定图像目标，在潜空间搜索动作序列），在两个从未采过数据的实验室的
+Franka 臂上零样本完成抓放。<strong>对具身 ICL 的启示</strong>：其一，62
+小时对 100 万小时的杠杆比是「通用视频先验 +
+少量具身接地」配方的极端版本，与 HOST 的 33:1 解耦、EgoScale
+的两阶段同构，且比例悬殊四个数量级——「跟随/翻译解耦」定律的又一独立验证；其二，它是
+EgoWAM
+三准则（外观抽象/跨具身一致/自我运动分解）的天然满足者——表征空间预测天生抽象外观，这从上游解释了
+EgoWAM 里 DINO
+目标为何胜过像素；其三，局限同样有信息量：作者自认对相机位姿敏感、长时程规划退化、依赖图像目标——潜空间规划拿掉了像素冗余，也拿掉了人类可检查性，这是表征路线的固有代价。</p>
+<h2 id="4-cosmos世界模型不当策略当基础设施">4.
+Cosmos：世界模型不当策略，当基础设施</h2>
+<p><strong>主张</strong>：世界基础模型（WFM）平台——视频数据管护流水线 +
+视频 tokenizer 家族 + 扩散/自回归两族预训练 WFM +
+后训练示例（相机控制、机器人操作、自动驾驶），全线开源开放权重。<strong>关键定位</strong>：预训练
+WFM
+是「通用世界模拟器毛坯」，下游各自后训练成专用模拟器；机器人操作是其后训练场景之一（指令条件与动作条件的未来预测）。评测专设
+3D 一致性与物理对齐两轴，承认当前 WFM
+的物理保真仍有明显缺陷（物体恒存性、接触动力学误差）。<strong>对具身 ICL
+的启示</strong>：Cosmos 代表与「WAM
+当策略主干」正交的第三种用法——世界模型作为数据与评估基础设施。Zero-WAM
+的 HumanGen（用生成模型合成人-机配对数据）正是这条路线的 ICL
+应用实例，而 Cosmos
+把该路线的上游能力（可控视频生成、物理对齐评测）平台化。它也暴露了这条路的瓶颈：Zero-WAM
+依赖闭源商业模型合成数据的问题，本可由 Cosmos 类开源平台解决，但 Cosmos
+自己的物理对齐评测说明「合成数据的物理可信度」尚无保证——合成配对路线的天花板在上游模拟器。</p>
+<h2 id="5-合成三条赌注与本仓库-wam-线的交叉验证">5.
+合成：三条赌注与本仓库 WAM 线的交叉验证</h2>
+<p>三代路线各自的赌注：像素派赌「完整成像的动力学最忠实」（代价是算力与冗余），表征派赌「任务相关信息可以无损压进潜空间」（代价是可检查性与目标指定），平台派赌「模拟器成熟会先于策略成熟」（代价是双重误差：模拟差距
++ 策略差距）。本仓库 WAM 线的实验证据向表征派倾斜：Fast-WAM
+证明测试时像素想象不必要，EgoWAM 证明像素目标迁移最弱、DINO/3D flow
+显著更好，WALL-WM
+推理时只跑到中噪锚点（实质放弃完整成像）——四组独立证据指向同一结论：<strong>视频先验的价值在其塑造的表征，不在其生成的像素</strong>。坚守完整想象的
+LingBot-VA 是重要的对照组，其 225Hz
+工程栈证明延迟可解，但「想象带来的能力增益」仍缺与表征路线的同规模对照。对
+ICL 主线的最终含义：如果视频先验的价值在表征，那么「视频生成模型出身」对
+ICL
+的贡献是给了模型一个能读懂演示视频的眼睛，而非一个能想象未来的脑——这与
+S1「把演示当目标规格而非轨迹」的行为证据、HOST
+观测空间预测的设计选择相互印证。</p>
+</article><article id="ch23"><h1
 id="趋势与洞察机器人-one-shot-技能习得的-2026-拐点">趋势与洞察：机器人
 One-Shot 技能习得的 2026 拐点</h1>
 <blockquote>
-<p>本报告基于对 HOST（arXiv 2607.20033）、GEN-0/1/1.5、Skild S1、Instant
-Policy、ICRT、RoboTTT、WAM-TTT、StellaVLA、Zero-WAM、BPP、RICL、Vid2Robot、EgoScale、EgoWAM、WALL-WM、π0.5、Wall-OSS、Fast-WAM
-等工作的深度解读，以及 2026 年 8
-月底的扩展检索（ManiLong-Shot/RLBench-Oneshot、EgoSteer/EgoSmith、Ego2Robot
-等）。 写作时间：2026-08-31（09-01 增补 S1 与四篇 EICL 论文后修订）</p>
+<p>本报告基于对 HOST（arXiv 2607.20033）、GEN-0/1/1.5、Skild
+S1、LocoFormer、Instant
+Policy、ICRT、RoboTTT、WAM-TTT、StellaVLA、Zero-WAM、LingBot-VA（两代）、BPP、RICL、Vid2Robot、EgoScale、EgoWAM、WALL-WM、GR-3、ManiLong-Shot、FACTR
+2、π0.5、Wall-OSS、Fast-WAM 等工作的深度解读，外加 ICL
+机制理论四篇（notes/22）与世界模型上游谱系三篇（notes/23）。
+写作时间：2026-08-31（09-01 增补 S1 与四篇 EICL 论文；09-02 增补 EICL
+直系 6 项 + 理论与谱系专题后修订）</p>
 </blockquote>
 <hr />
 <h2 id="0-一页结论">0. 一页结论</h2>
@@ -2501,6 +3002,11 @@ per-task fine-tuning。</p>
 <td>元学习路线，泛化受限</td>
 </tr>
 <tr>
+<td>2023-02</td>
+<td>UniPi（MIT+Google）</td>
+<td>视频生成当策略的开山：文本条件想象+逆动力学</td>
+</tr>
+<tr>
 <td>2024-03</td>
 <td>Vid2Robot（DeepMind）</td>
 <td>端到端视频条件策略，跨注意力+辅助对比损失</td>
@@ -2526,9 +3032,19 @@ per-task fine-tuning。</p>
 <td>给预训练 VLA 后装 ICL 能力的通用配方</td>
 </tr>
 <tr>
+<td>2025-07</td>
+<td>GR-3（字节 Seed）</td>
+<td>few-shot 微调流派工业标杆：10 条 VR 轨迹适配新物体</td>
+</tr>
+<tr>
 <td>2025-09</td>
 <td>Wall-OSS 开源（自变量）</td>
 <td>中国开源 VLA 基座</td>
+</tr>
+<tr>
+<td>2025-09</td>
+<td>LocoFormer（Skild，CoRL 2025）</td>
+<td>上下文当适应机制在 locomotion 域先走通，S1 直系前作</td>
 </tr>
 <tr>
 <td>2025-11</td>
@@ -2537,8 +3053,13 @@ per-task fine-tuning。</p>
 </tr>
 <tr>
 <td>2026-01</td>
-<td>ManiLong-Shot / RLBench-Oneshot</td>
-<td>OSIL 标准仿真基准出现</td>
+<td>ManiLong-Shot / RLBench-Oneshot（AAAI 2026）</td>
+<td>OSIL 标准协议：未见长程任务 SOTA 仅 30.2%</td>
+</tr>
+<tr>
+<td>2026-01</td>
+<td>LingBot-VA（蚂蚁，RSS 2026）</td>
+<td>「测试时保留完整想象」的 WAM 代表，Zero-WAM 同门前作</td>
 </tr>
 <tr>
 <td>2026-02</td>
@@ -2644,7 +3165,10 @@ id="趋势二上下文长度成为机器人-scaling-的新轴">趋势二：上�
 scaling 的新轴</h3>
 <p>GEN-0 证明了数据轴（27 万小时→幂律），GEN-1.5 的 30
 秒记忆窗口装下一段演示，RoboTTT 则把「上下文长度」独立成第三条 scaling
-轴：128→8K timestep 单调提升闭环性能、无饱和。Jim Fan
+轴：128→8K timestep 单调提升闭环性能、无饱和。时间上更早的证据来自
+LocoFormer（CoRL 2025）：TXL 跨 episode
+上下文让同一策略在锁膝、断腿、上高跷下 2-3 个 trial 内涌现适应——Skild
+先在 locomotion 域验证了「上下文即适应机制」，一年后才有 S1。Jim Fan
 的表述值得记录："What LLM enjoys, robotics should too. Soon, even 1M
 context is not a fantasy."</p>
 <p>上下文变长的直接后果：能装进上下文的东西从「一段演示」变成「多段演示

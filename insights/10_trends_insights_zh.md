@@ -1,7 +1,7 @@
 # 趋势与洞察：机器人 One-Shot 技能习得的 2026 拐点
 
-> 本报告基于对 HOST（arXiv 2607.20033）、GEN-0/1/1.5、Skild S1、Instant Policy、ICRT、RoboTTT、WAM-TTT、StellaVLA、Zero-WAM、BPP、RICL、Vid2Robot、EgoScale、EgoWAM、WALL-WM、π0.5、Wall-OSS、Fast-WAM 等工作的深度解读，以及 2026 年 8 月底的扩展检索（ManiLong-Shot/RLBench-Oneshot、EgoSteer/EgoSmith、Ego2Robot 等）。
-> 写作时间：2026-08-31（09-01 增补 S1 与四篇 EICL 论文后修订）
+> 本报告基于对 HOST（arXiv 2607.20033）、GEN-0/1/1.5、Skild S1、LocoFormer、Instant Policy、ICRT、RoboTTT、WAM-TTT、StellaVLA、Zero-WAM、LingBot-VA（两代）、BPP、RICL、Vid2Robot、EgoScale、EgoWAM、WALL-WM、GR-3、ManiLong-Shot、FACTR 2、π0.5、Wall-OSS、Fast-WAM 等工作的深度解读，外加 ICL 机制理论四篇（notes/22）与世界模型上游谱系三篇（notes/23）。
+> 写作时间：2026-08-31（09-01 增补 S1 与四篇 EICL 论文；09-02 增补 EICL 直系 6 项 + 理论与谱系专题后修订）
 
 ---
 
@@ -17,14 +17,18 @@
 |---|---|---|
 | 1994 | Kuniyoshi "learning by watching" | OSVI 愿景起点 |
 | 2017-2018 | MAML 系 one-shot 模仿（Finn、Yu） | 元学习路线，泛化受限 |
+| 2023-02 | UniPi（MIT+Google） | 视频生成当策略的开山：文本条件想象+逆动力学 |
 | 2024-03 | Vid2Robot（DeepMind） | 端到端视频条件策略，跨注意力+辅助对比损失 |
 | 2024-08 | ICRT（Berkeley） | 机器人 ICL 用 next-token prediction 形式化 |
 | 2024-11 | Instant Policy（Imperial） | 图扩散 ICL，伪演示无限生成 |
 | 2025-04 | π0.5（Physical Intelligence） | VLA 开放世界泛化的代表 |
 | 2025-08 | RICL | 给预训练 VLA 后装 ICL 能力的通用配方 |
+| 2025-07 | GR-3（字节 Seed） | few-shot 微调流派工业标杆：10 条 VR 轨迹适配新物体 |
 | 2025-09 | Wall-OSS 开源（自变量） | 中国开源 VLA 基座 |
+| 2025-09 | LocoFormer（Skild，CoRL 2025） | 上下文当适应机制在 locomotion 域先走通，S1 直系前作 |
 | 2025-11 | GEN-0（27 万小时） | 机器人 scaling law + 7B 相变 |
-| 2026-01 | ManiLong-Shot / RLBench-Oneshot | OSIL 标准仿真基准出现 |
+| 2026-01 | ManiLong-Shot / RLBench-Oneshot（AAAI 2026） | OSIL 标准协议：未见长程任务 SOTA 仅 30.2% |
+| 2026-01 | LingBot-VA（蚂蚁，RSS 2026） | 「测试时保留完整想象」的 WAM 代表，Zero-WAM 同门前作 |
 | 2026-02 | EgoScale（NVIDIA GEAR） | 20,854 小时第一人称人类视频，log-linear scaling law |
 | 2026-04 | GEN-1 | 6 任务 99% 精通 + 3x 速度 |
 | 2026-06 | BPP | 行为提示策略 |
@@ -55,7 +59,7 @@
 
 ### 趋势二：上下文长度成为机器人 scaling 的新轴
 
-GEN-0 证明了数据轴（27 万小时→幂律），GEN-1.5 的 30 秒记忆窗口装下一段演示，RoboTTT 则把「上下文长度」独立成第三条 scaling 轴：128→8K timestep 单调提升闭环性能、无饱和。Jim Fan 的表述值得记录："What LLM enjoys, robotics should too. Soon, even 1M context is not a fantasy."
+GEN-0 证明了数据轴（27 万小时→幂律），GEN-1.5 的 30 秒记忆窗口装下一段演示，RoboTTT 则把「上下文长度」独立成第三条 scaling 轴：128→8K timestep 单调提升闭环性能、无饱和。时间上更早的证据来自 LocoFormer（CoRL 2025）：TXL 跨 episode 上下文让同一策略在锁膝、断腿、上高跷下 2-3 个 trial 内涌现适应——Skild 先在 locomotion 域验证了「上下文即适应机制」，一年后才有 S1。Jim Fan 的表述值得记录："What LLM enjoys, robotics should too. Soon, even 1M context is not a fantasy."
 
 上下文变长的直接后果：能装进上下文的东西从「一段演示」变成「多段演示 + 自己的执行历史 + 纠错记录」。RoboTTT 已展示 on-the-fly self-improvement——机器人中途失败后的自我修正会进入上下文、改进后续动作。**上下文即记忆，记忆即学习**。
 

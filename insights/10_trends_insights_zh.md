@@ -1,7 +1,7 @@
 # 趋势与洞察：机器人 One-Shot 技能习得的 2026 拐点
 
-> 本报告基于对 HOST（arXiv 2607.20033）、GEN-0/1/1.5、Skild S1、LocoFormer、Instant Policy、ICRT、RoboTTT、WAM-TTT、StellaVLA、Zero-WAM、LingBot-VA（两代）、BPP、RICL、Vid2Robot、EgoScale、EgoWAM、WALL-WM、GR-3、ManiLong-Shot、FACTR 2、π0.5、Wall-OSS、Fast-WAM 等工作的深度解读，外加 ICL 机制理论四篇（notes/22）与世界模型上游谱系三篇（notes/23）。
-> 写作时间：2026-08-31（09-01 增补 S1 与四篇 EICL 论文；09-02 增补 EICL 直系 6 项 + 理论与谱系专题后修订）
+> 本报告基于对 HOST（arXiv 2607.20033）、GEN-0/1/1.5、Skild S1、LocoFormer、Instant Policy、ICRT、RoboTTT、WAM-TTT、StellaVLA、Zero-WAM、LingBot-VA（两代）、BPP、RICL、Vid2Robot、EgoScale、EgoWAM、WALL-WM、GR-3、ManiLong-Shot、FACTR 2、π0.5、Wall-OSS、Fast-WAM 等工作的深度解读，外加七个纵深专题：ICL 机制理论（notes/22）、世界模型上游谱系（notes/23）、基座 VLA（notes/24）、One-Shot 模仿源头 2017→（notes/25）、生成式动作头奠基（notes/26）、人类数据管线（notes/27）、视频-动作同代对照组（notes/28）。
+> 写作时间：2026-08-31（09-01 增补 S1 与四篇 EICL 论文；09-02 增补 EICL 直系 6 项 + 理论与谱系专题；09-02 晚由 5 路子 agent 并行补齐历史源头、底座、动作头、数据管线、同代对照 13 项后修订）
 
 ---
 
@@ -16,19 +16,30 @@
 | 时间 | 事件 | 意义 |
 |---|---|---|
 | 1994 | Kuniyoshi "learning by watching" | OSVI 愿景起点 |
-| 2017-2018 | MAML 系 one-shot 模仿（Finn、Yu） | 元学习路线，泛化受限 |
+| 2017-03 | Duan et al. One-Shot Imitation Learning（OpenAI） | 问题定义者：演示条件策略 + 软注意力；未见积木 2 阶段 94.9% → 8 阶段 18.0% |
+| 2017-09 | Finn et al. One-Shot Visual Imitation（MAML） | 元学习路线；真机 PR2 一条演示 90%，二阶梯度使其未能跟上 scaling |
 | 2023-02 | UniPi（MIT+Google） | 视频生成当策略的开山：文本条件想象+逆动力学 |
+| 2023-03 | Diffusion Policy（Columbia+TRI） | 策略从「回归函数」变「条件动作分布采样器」，flow-matching 动作头的源头 |
+| 2023-04 | ACT / ALOHA（Stanford） | 动作分块 + CVAE + 时间集成；动作分块被此后几乎所有 VLA 继承 |
+| 2023-07 | RH20T（上海交大） | 110K 条 / 147 任务力反馈遥操数据集——任务覆盖瓶颈的标本 |
+| 2024-02 | UMI（Stanford+Columbia） | 手持夹爪采集范式开山，在采集端消掉具身差距 |
 | 2024-03 | Vid2Robot（DeepMind） | 端到端视频条件策略，跨注意力+辅助对比损失 |
+| 2024-05 | IMOP（Rutgers，RSS 2024） | 无大模型先验的结构派极致：不变区域匹配；长程 7.4% |
+| 2024-06 | OpenVLA（Stanford 等） | 7B 开源自回归 VLA，多篇 ICL 工作的公共基线 |
 | 2024-08 | ICRT（Berkeley） | 机器人 ICL 用 next-token prediction 形式化 |
+| 2024-10 | π0（Physical Intelligence） | VLM + flow matching 动作专家范式确立；RICL 底座、GR00T 设计上游 |
 | 2024-11 | Instant Policy（Imperial） | 图扩散 ICL，伪演示无限生成 |
+| 2025-03 | GR00T N1（NVIDIA） | 双系统 VLA，System 1 自足结构是 RoboTTT 插 TTT 层的前提 |
 | 2025-04 | π0.5（Physical Intelligence） | VLA 开放世界泛化的代表 |
 | 2025-08 | RICL | 给预训练 VLA 后装 ICL 能力的通用配方 |
 | 2025-07 | GR-3（字节 Seed） | few-shot 微调流派工业标杆：10 条 VR 轨迹适配新物体 |
 | 2025-09 | Wall-OSS 开源（自变量） | 中国开源 VLA 基座 |
 | 2025-09 | LocoFormer（Skild，CoRL 2025） | 上下文当适应机制在 locomotion 域先走通，S1 直系前作 |
 | 2025-11 | GEN-0（27 万小时） | 机器人 scaling law + 7B 相变 |
+| 2025-12 | Motus（清华+北大+地平线） | 一模型五模式 8B MoT；RoboTwin 上被 LingBot-VA/Fast-WAM 一致超越 |
 | 2026-01 | ManiLong-Shot / RLBench-Oneshot（AAAI 2026） | OSIL 标准协议：未见长程任务 SOTA 仅 30.2% |
 | 2026-01 | LingBot-VA（蚂蚁，RSS 2026） | 「测试时保留完整想象」的 WAM 代表，Zero-WAM 同门前作 |
+| 2026-02 | DreamZero（NVIDIA GEAR） | 像素想象派旗舰：14B Wan 骨干单流联合去噪，无 ICL 的 WAM「素体」 |
 | 2026-02 | EgoScale（NVIDIA GEAR） | 20,854 小时第一人称人类视频，log-linear scaling law |
 | 2026-04 | GEN-1 | 6 任务 99% 精通 + 3x 速度 |
 | 2026-06 | BPP | 行为提示策略 |
@@ -36,6 +47,7 @@
 | 2026-07 | EgoWAM（Georgia Tech） | WAM 世界表征对照：DINO/3D flow 远胜像素 |
 | 2026-07-08 | WAM-TTT（北大+银河通用） | 快权重技能吸收：人类视频写进感知侧记忆 |
 | 2026-07-16 | RoboTTT（NVIDIA GEAR + Stanford） | TTT 快权重把上下文扩到 8K timestep（3 个数量级） |
+| 2026-08-03 | Ego2Robot（阿里 Qwen 等） | 1,940 小时第一人称视频 → 18,561 小时合成 / 15 形态 |
 | 2026-08-03 | **HOST 开源** | 架构派 one-shot：62%，29 秒，零参数更新，不遗忘 |
 | 2026-08 中 | StellaVLA（StellarEdge AI） | 结构化语言上下文，三向干预实验首创 |
 | 2026-08-18 | **S1（Skild AI）** | 未见+10 分钟长时程 66%，单演示≈380 条后训练示范 |
@@ -73,7 +85,7 @@ GEN-0 证明了数据轴（27 万小时→幂律），GEN-1.5 的 30 秒记忆�
 | 第一人称人类视频 | EgoScale、EgoSteer | EgoScale 20,854 小时；公开 ego 视频存量约 11.6 万小时 | log-linear scaling law 已验证；embodiment-agnostic motor prior | 需 4D 重建提取动作，误差累积 |
 | 合成/重定向 | Ego2Robot | 18,561 小时、15 种机器人形态 | 一次采集多形态复用 | 渲染真实差距 |
 | 人类视频直接条件化 | HOST、Vid2Robot | HOST 仅 5.8k 段 | 零标注、用户可产生 | 无力信息、依赖对齐质量 |
-| 合成人-机配对 | Zero-WAM（HumanGen） | 74.2K 对 / 8.6K 任务 / >45 本体 | 任务覆盖比 RH20T 高约 25 倍、零人工标注 | 全合成、真实性未评估、依赖闭源商业模型 |
+| 合成人-机配对 | Zero-WAM（HumanGen） | 74.2K 对 / 8.6K 任务 / >45 本体 | 任务覆盖比 RH20T 高约 58 倍（8.6K vs 147）、零人工标注 | 全合成、真实性未评估、依赖闭源商业模型 |
 
 EgoScale 的贡献是把第二条路线的收益变成可预测的：人类数据规模 vs 验证损失呈 log-linear，且验证损失强相关于真机性能——22-DoF 灵巧手 +54%（对比无预训练）。这意味着人类视频数据的采购决策可以像 GEN-0 的机器人数据一样精算了。
 
@@ -85,7 +97,7 @@ Sutton 的 bitter lesson 预言通用方法+算力终将碾压手工设计。GEN
 
 1. **涌现叙事（产业侧）**：GEN-1.5/S1，证据是 demo 视频与内部曲线，规模不可复现；
 2. **机制证据（学术侧）**：四篇 EICL 论文的消融全部反对免费涌现——WAM-TTT 去 meta-training 从 100.0 掉到 9.0；RoboTTT 去 sequence action forcing 训不出来；StellaVLA 需要整条离线结构化流水线；Zero-WAM 最致命，它是路线上最接近产业博客的一篇（大规模预训练+纯上下文+零梯度），但没有 IFP 反捷径目标时往上下文加人类视频是净负收益（28.55 vs 39.44）。公平的限定：四篇的规模都远低于产业（最大 15,360 GPU 小时 vs 50 万小时数据），严格结论是「在学术可负担的规模上需要显式机制」；
-3. **度量质疑（尚无人做）**：Schaeffer et al. 2023 证明 LLM 的「涌现」很大程度是不连续度量制造的海市蜃楼。机器人的二元成功率和 rubric 完成分恰是这类度量；S1 自己公布的 scaling 曲线（1k→100k 小时差距平滑指数扩大）反而更像连续改进而非相变。把度量批判搬进具身领域是当前空白。
+3. **度量质疑（尚无人做）**：Schaeffer et al. 2023 证明 LLM 的「涌现」很大程度是不连续度量制造的海市蜃楼。一条历史注脚：Duan et al. 2017 的附录已记录小网络在积木任务上学习曲线的「相变」（notes/25），比 GEN-0 的「intelligence phase transition」早八年——相变现象本身不新，新的是把它与规模绑定的叙事。机器人的二元成功率和 rubric 完成分恰是这类度量；S1 自己公布的 scaling 曲线（1k→100k 小时差距平滑指数扩大）反而更像连续改进而非相变。把度量批判搬进具身领域是当前空白。
 
 原有的信息论判断仍然成立且被 S1 加强：HOST 62%、GEN-1.5 59%、S1 66% 落在同一区间（口径不可比，但量级一致），**one-shot 学习的瓶颈可能已经不在方法，而在信息论层面**——一段演示视频本身承载的任务信息有上限（初始条件覆盖、力信息缺失、意图歧义）。下一波提升更可能来自：(a) 多模态提示（视频+语言+力反馈）；(b) 交互式澄清（执行中请求补充演示）；(c) 提示组合（GEN-1.5 的 prompt chaining、S1 的长时程组合已是雏形）。
 
@@ -126,6 +138,9 @@ GEN-1 首次把它说透：涌现即兴是能力也是风险（机器人自发�
 
 **Insight 7：中国团队第一次在范式定义层面与美国头部并跑。**
 此前中国具身智能的叙事是「跟随+工程化」（复现 π0、复现 RT-2）。HOST 是范式级原创：问题定义（推理时技能获取 vs 训练时循环）、机制设计（进度流形+自接地级联）、评测口径（50 任务+遗忘验证）都是第一手的，且抢在 GEN-1.5 博客前几天开源。自变量「模型全家桶 + 关键能力开源」的打法，对照 Generalist「数据引擎 + 全闭源」，是两种生态战略的对照实验，值得持续跟踪。
+
+**Insight 9：2017 → 2026 的断裂点在主干先验，不在问题定义；生成式动作头是实践必要而非逻辑必要。**
+one-shot 模仿的问题在 2017 年已被 Duan 完整定义（演示条件策略 + 「同任务两条演示配对训练」——这个配方原样活在 HOST Stage 1 与 ICRT 里），元学习路线（Finn）在 1300 条数据的小规模上一度领先上下文路线，却因二阶梯度跟不上 scaling 而出局；无大模型先验的结构派极致 IMOP 在短程新任务上做到 41.3%，长程只有 7.4%。九年后差的不是任务定义与数据配方，而是 Wan2.2 / Qwen3-VL 级视频-语言先验消解了 Finn 当年明确推迟的人机域偏移——2026 年解决的仍是 Duan 短程问题的真机视觉版，长程部分（IMOP 7.4% → ManiLong-Shot 30.2%）还在 2017 年的曲线上（notes/25）。另一条被本轮修正的判断：HOST/π0/GR00T/GR-3 的动作头全是 flow matching 或 diffusion，源头是 Diffusion Policy 与 ACT，但 ICRT/StellaVLA/RICL 用回归或离散头也能做 ICL——生成式头是「上下文消歧不完全」常态下的实践必要条件，不是逻辑必要条件；真正被所有系统无一例外继承的只有 ACT 的动作分块（notes/26）。GEN-1.5 的动作头设计未公开，不应算入已证实的 flow-matching 名单。
 
 **Insight 8：四篇 EICL 论文的失败是互补的，右上角空缺正是家用场景。**
 把任务时长与分布漂移当两个坐标轴：StellaVLA 固定前缀无法在执行漂移后重新规划（长时程 L1 仅 0.02）；WAM-TTT 快权重执行时冻结，处理不了突发扰动；RoboTTT 场景相机本体全程固定，从未面对真分布漂移；Zero-WAM 从未测过未见环境。四篇各守一条漂移轴、无一同时打下两条，「长时程 × 分布外」的右上角只有 S1 的不可复核博客宣称覆盖。三条被独立验证的共同经验值得所有后来者抄录：人类信息只许改写感知/生成侧、不许直接触碰动作侧；训练期挂辅助目标、推理期整个剥离（辅助必须监督主分支否则剥离后一场空）；上下文不是免费午餐，模型一定走捷径（三篇在三个不同设定下独立撞进同一个坑）。

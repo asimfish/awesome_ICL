@@ -1,0 +1,241 @@
+SOURCE ARCHIVE: Rhoda AI Research Blog
+Title: Causal Video Models Are Data-Efficient Robot Policy Learners (Direct Video-Action Model, DVA)
+URL: https://www.rhoda.ai/research/direct-video-action
+Published: March 2026 (Rhoda AI Research)
+Archived: 2026-09-02 via curl (WebFetch failed); HTML stripped to plain text
+NOTE: No arXiv paper or PDF exists for DVA as of archive date (arXiv API search for 'Direct Video-Action' returns nothing). LingBot-VA 2.0 (arXiv 2607.08639) cites it as ref [90]: Rhoda AI Team, Rhoda AI Blog, 2026. This blog is the only primary source.
+=================================================================
+
+ Causal Video Models Are Data-Efficient Robot Policy Learners | Rhoda AI 
+ Home 
+ Research 
+ News 
+ Team 
+ Careers 
+ Contact 
+
+ Causal Video Models Are Data-Efficient Robot Policy Learners
+ March 2026 · Rhoda AI Research 
+
+ At Rhoda AI, we are building towards generalist robotics. Our Direct Video-Action Model (DVA) reformulates robot policies as video generation, unlocking data-efficient task learning, scaling, long-context memory, and one-shot learning.
+
+ Contents
+ The Challenge 
+ Direct Video-Action Models 
+ Native Causal Video Models 
+ Inverse Dynamics Models 
+ Leapfrog Inference 
+ Data-Efficient Task Learning 
+ Decanting 
+ Container Breakdown 
+ Long-Context Visual Memory 
+ Shell Game 
+ Returns Processing 
+ Demo Following: Sorting 
+ Demo Following: Drawing 
+ Interpretability 
+ What's next? 
+
+ Contents 
+ The Challenge of Generalist Robotics
+ For decades, we have excelled at creating specialized robots — machines that perform a single, repetitive task with superhuman speed and accuracy in controlled factory settings. However, the transition to generalist robotics represents a generational leap: moving from fixed-function hardware to general-purpose agents capable of navigating the messy, unpredictable nature of the real world. Solving this challenge is critical because the next era of automation hinges not just on a robot's ability to follow a precise script, but on its capacity to generalize across diverse environments and tasks using a single, unified model.
+ The missing ingredient is one that today's most powerful AI systems all share — whether specialized for language, images, or video, the most capable models are trained on web-scale data. At massive data scale, AI models equip themselves with a broad base of knowledge and the ability to generalize across countless situations. We build our generalist robots on the same principle. The challenge, however, is data. Emerging approaches, such as vision-language-action models, collect tens or hundreds of thousands of hours of robot data, yet are still far from true generalist behavior. And no matter how much data we collect, it will always be a tiny fraction of the web-scale data available.
+ We believe web video is the most scalable data source capturing the dynamic physical world, and video generation is the most effective objective for a model to learn the deep physical knowledge robots need for decision-making. Our strategy directly formulates robot control as real-time video prediction through a new paradigm: Direct Video-Action Models (DVA) . Trained on web-scale data, these models offer significant advantages over existing approaches:
+ Data-efficient task learning. Our models perform complex, long-horizon tasks reliably with as little as ~10 hours of total robot data.
+
+ Long-context visual memory. Unlike most vision-language-action models, which often have a context of only a few frames, our models natively have hundreds of frames of visual context, enabling them to orchestrate sophisticated, multi-step tasks end-to-end.
+
+ One-shot learning. Long-context visual memory also unlocks new model capabilities, such as learning to imitate human behavior from a single demonstration, in-context, at test time.
+
+ Interpretability through video generation. Because robot actions are generated as videos first, the robot's behavior can be directly visualized through autoregressive rollouts, enabling inspection of model decisions, comparison of configurations, and verification of safe behavior.
+
+ Most importantly, our approach offers a clear path for scaling , since video data exists at an orders-of-magnitude larger scale than robot interaction datasets.
+
+ Direct Video-Action Models
+ 💡 
+ Direct Video-Action Model: A robot policy that translates predictions from a pre-trained causal video model into actions in a real-time closed loop, with the video model directly responsible for decision-making.
+
+ action rollout DIRECT VIDEO-ACTION MODEL (DVA) ··· Video Context Causal Video Model Generated Video Inverse Dynamics Model Generated Actions 
+ Figure 1. Simplified diagram of a Direct Video-Action Model. Conditioned on a video history, we predict future video frames. An inverse dynamics model translates the video prediction into actions, which are executed on the robot. These steps are repeated in a streaming closed-loop, running multiple times per second.
+ We leverage large-scale pre-training by formulating robot control as video prediction. Conditioned on a long context of captured video from the robot, proprioception, and other conditioning signals (e.g. language), we predict a short period into the future, visually. This prediction captures how the robot should behave and how the environment will evolve. A separate inverse dynamics model then serves as a translator, converting the predicted future into robot actions. This cycle of video prediction and robot action translation repeats in a closed loop, multiple times per second. We call this approach a Direct Video-Action Model (DVA) ( Figure 1 ), because the video model directly specifies the desired future behavior as the policy, providing the target signal for action translation. This new paradigm reduces robot control to video generation , enabling the benefits of web-scale pre-training .
+ Much of the prior work has explored using video models for robot control, including synthesizing training data with video models 1-3 [1] GR00T N1: An Open Foundation Model for Generalist Humanoid Robots. arxiv.org/abs/2503.14734 
+[2] DreamGen: Unlocking Generalization in Robot Learning through Video World Models. arxiv.org/abs/2505.12705 
+[3] UniSim: Learning Interactive Real-World Simulators. arxiv.org/abs/2310.06114 , fine-tuning video models to predict actions 4-12 [4] Unleashing Large-Scale Video Generative Pre-training for Visual Robot Manipulation. arxiv.org/abs/2312.13139 
+[5] GR-2: A Generative Video-Language-Action Model with Web-Scale Knowledge for Robot Manipulation. arxiv.org/abs/2410.06158 
+[6] Unified Video Action Model. arxiv.org/abs/2503.00200 
+[7] Unified World Models: Coupling Video and Action Diffusion for Pretraining on Large Robotic Datasets. arxiv.org/abs/2504.02792 
+[8] Prediction with Action: Visual Policy Learning via Joint Denoising Process. arxiv.org/abs/2411.18179 
+[9] Learning an Actionable Discrete Diffusion Policy via Large-Scale Actionless Video Pre-Training. arxiv.org/abs/2402.14407 
+[10] Video Generators are Robot Policies. arxiv.org/abs/2508.00795 
+[11] Cosmos Policy: Fine-Tuning Video Models for Visuomotor Control and Planning. arxiv.org/abs/2601.16163 
+[12] DreamZero: World Action Models are Zero-shot Policies. dreamzero0.github.io , performing open-loop control with video models 13-18 [13] Learning Universal Policies via Text-Guided Video Generation. arxiv.org/abs/2302.00111 
+[14] PLEX: Making the Most of the Available Data for Robotic Manipulation Pretraining. arxiv.org/abs/2303.08789 
+[15] VideoWorld: Exploring Knowledge Learning from Unlabeled Videos. arxiv.org/abs/2501.09781 
+[16] This&That: Language-Gesture Controlled Video Generation for Robot Planning. arxiv.org/abs/2407.05530 
+[17] TesserAct: Learning 4D Embodied World Models. arxiv.org/abs/2504.20995 
+[18] 1X World Model: From Video to Action. 1x.tech/discover/world-model-self-learning , and performing closed-loop control with a video model distilled from a non-causal video model 19-21 [19] Video Prediction Policy: A Generalist Robot Policy with Predictive Visual Representations. arxiv.org/abs/2412.14803 
+[20] mimic-video: Video-Action Models for Generalizable Robot Control Beyond VLAs. arxiv.org/abs/2512.15692 
+[21] LingBot VA: Causal video-action world model for generalist robot control. technology.robbyant.com/lingbot-va . To the best of our knowledge, our model is the first to pre-train a causal video model from scratch and also the first to perform full video denoising during real-time closed-loop robot control .
+
+ Native Causal Video Models
+ We pre-train on general web videos with a causal video generation objective: conditioned on a video history, predict the future. We pre-train from scratch as a causal video model, rather than distilling from a pre-trained bi-directional model. Training on large-scale, diverse video data natively imbues our model with a strong prior on 3D structure, physics, behavior, and conventions.
+ Existing methods for causal video generation encode an entire input sequence, yet supervise on only a few predicted frames. This means the full input video context must be processed for every small prediction step, which is computationally expensive. Diffusion Forcing 22 [22] Diffusion Forcing: Next-token Prediction Meets Full-Sequence Diffusion. arxiv.org/abs/2407.01392 , another recent approach, trains on sequences where each video frame is independently noised to a random level. But in this case, predicting future frames from a noise-free captured input video occurs with vanishingly small probability during training, and performance degrades with a long video context. Hence, neither approach satisfies our desire to both match our training noise mask with inference, and also to ensure efficient training.
+
+ 0
+ 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+
+ context 
+
+ prediction 
+
+ Figure 2. During training, our causal video architecture amortizes the cost of encoding a long context of video frames by simultaneously predicting future frames at every position in the sequence. When training with diffusion, each prediction can be noised independently, with different noise levels.
+ 💡 
+ Context Amortization: A training strategy that predicts future video at every point along a long history of noise-free context, in order to efficiently train causal video generation.
+
+ We introduce the Context Amortization training strategy ( Figure 2 ), which accomplishes both goals, in that we always train with the mask we use at inference (conditioned on a long history of noise-free captured context, predict the future), but we also increase the number of frames on which we calculate the loss, which makes training more efficient. Inspired by language models, which predict next tokens at every position in a text sequence, we encode noise-free context and predict future frames at every position in a video sequence. This strategy allows us to efficiently train with hundreds of frames of context during pre-training.
+ At inference time, KV-caching ensures the encoded context is reused across steps, minimizing redundant computation. When inferencing for robot control, we always use real observations as context, grounding the generation in the continuous observations of the physical environment. However, for visualizations, our models can also generate long videos auto-regressively.
+
+ Translating Video to Action with Inverse Dynamics Models
+ The second main component of our system is an inverse dynamics model, which performs video-to-action translation: given a predicted video, it produces the precise end-effector motion needed to re-enact the depicted actions. Causal action prediction — as in a typical robot policy — predicts future actions conditioned on the past and thus requires modeling behavior and decision-making. Behavior may be arbitrarily complex, and for generalist behavior, may require a data scale infeasible to collect on robots.
+ In contrast, non-causal video-to-action translation is a much more constrained problem. The complex decision making has already been handled at the video generation stage by a model that can leverage large-scale pre-training. What remains — inferring end-effector motion from a demonstration video — is comparatively straightforward.
+
+ Video 2. Non-causal action prediction allows precise video-to-action translation with only a handful of hours of data per robot embodiment type (1x speed).
+ Consequently, we can solve the inverse dynamics task with a small model trained on as little as ~10 hours of data collected from the embodiment type ( Video 2 ). As an added bonus, the data need not involve high-quality task demonstrations: even random motions can be used for training inverse dynamics. Once trained, the inverse dynamics model can be used across different robots of the same type and across many tasks.
+
+ Leapfrog Inference
+ 💡 
+ Leapfrog Inference: A strategy for continuous robot control that predicts long enough into the future to cover the next prediction's inference latency. The predictive model is conditioned on the action currently being executed (predicted at the previous time-step), in order to ensure trajectory continuity.
+
+ Model inference takes time, but the physical world does not wait for the model to decide. Therefore, we overlap inference and action execution to ensure continuous control, as depicted in Figure 3 . Each video prediction is long enough to cover the next prediction's latency. While the model is deciding the next action, the robot executes actions predicted by the previous inference.
+ Predictions with a generative model are generally stochastic, and inconsistency across predictions from consecutive inference calls can lead to jerky robot movements or oscillation. To solve this, each video prediction is conditioned on the action being executed currently, ensuring a continuous trajectory.
+
+ Figure 3. Leapfrog Inference. We predict into the future with sufficient overlap to cover the next prediction's model latency. Action conditioning information is passed between inferences, ensuring a continuous trajectory.
+
+ Data-Efficient Long-Horizon Task Learning
+ Large-scale video pre-training teaches our model the "physics of everything" before it ever inhabits a physical body. For use as robot policies, we post-train our causal video models on robot data of the tasks and embodiments we target. The consistent training objective (causal video prediction) across pre-training and post-training enables the model to quickly acquire the desired robotic behavior. As a result, our DVA approach is remarkably data efficient in terms of robot data.
+ Empirically, we find that our model can robustly learn real-world, long-horizon tasks with 10–20 hours of robot data, which can be collected within a few days ( Video 3 , Video 4 ). This differs from standard practice, which utilize large mid-training or pre-training stages on multi-task robot data, in addition to significant task-specific data collection. We present two example customer tasks, both of which were deployed as real customer proof of concepts and operated successfully for multiple hours without human intervention.
+
+ Decanting
+ ▶ Task: Unpack bearings and sort packaging.
+ Robot data used: 11 hours
+
+ The goal of this task is to unpack boxes, decant the bearings into a tote, and sort the packaging. It requires complex bimanual manipulation, and our industry partner previously considered this process infeasible to automate. The task requires strength (lifting a 10 kg box), but also fine manipulation (pulling a small tab) and handling of deformable objects (thin plastic bags and straps). It challenges robots with a plethora of edge cases, including broken straps, ripped bags, and unseen orientations of objects. However, after post-training with only 11 hours of task data, our model reliably handles a wide range of corner cases and can operate for hours without human intervention. See this long uncut video of our model autonomously decanting boxes for 1.5 hours.
+
+ Video 3. A long, un-cut demonstration showing robustness on the Decanting task (1x and 20x speed).
+
+ The lid tears off during handling. The robot discards it into the correct bin — cardboard, not paper — then uses a different strategy to tip the box.
+
+ The strap snaps — a rare failure the robot still needs to handle gracefully.
+
+ A box tips over. The robot rights it and carries on.
+
+ The robot accidentally grabs a bearing and corrects itself mid-task.
+
+ Bearings sometimes get trapped in the bag — the robot has to work the bag to shake them loose.
+
+ Packing paper gets caught in the bag. The robot manipulates the bag to shake it free.
+
+ The box lands in an unexpected position. The robot adapts on the fly.
+
+ Packing paper gets buried under the bearings. The robot digs it out.
+
+ A bearing gets stuck on the gripper. The robot frees it before moving on.
+
+ The tote has drifted out of position. The robot nudges it back before continuing.
+
+ Container Breakdown
+ ▶ Task: Break down large industrial containers and clear out random debris.
+ Robot data used: 17 hours
+
+ We post-train our model on another challenging industrial task: breaking down Contico containers. Each container weighs about 50 pounds, which is not only physically demanding for humans but also challenging for robots, as strong force amplifies any small imprecision in motion. The model must also manage diverse debris and handle partial observability due to the containers' large size. The task requires accurate spatial reasoning to determine when to pull the container closer to reach a far latch or re-orient the box to access randomly placed trash in hard-to-reach corners.
+ With just 17 hours of robot data, our model already reaches a high degree of robustness. See this long uncut video of our model autonomously breaking down boxes for 160 minutes, all in one continuous run without intervention.
+
+ Video 4. A long, un-cut demonstration showing robustness on the container breakdown task.
+
+ The door won't fall open. The robot recognizes a latch probably wasn't fully released and goes back to fix it.
+
+ The trash is out of reach. The robot must reposition the box before attempting another grab.
+
+ One latch is already open. The robot skips it and moves straight to the next.
+
+ The box has drifted too far to reach the latch. The robot pulls it back into range.
+
+ The first flip fails. The robot doesn't hesitate — it goes for a second attempt.
+
+ The box rotates too far. The robot catches the over-rotation and corrects back to a stable position.
+
+ Long-Context Visual Memory
+ To robustly perform challenging real-world tasks, especially long-horizon ones, robots need long-context memory. Our approach capitalizes on the abundance of long and continuous videos to learn causal dependencies between past events and future outcomes. As a result, our approach demonstrates a strong ability to retain and extract accurate, fine-grained information from visual memory to support downstream robotic tasks.
+
+ Let's Play the Shell Game
+ To motivate long-context memory, we task a robot with playing the "shell game": an object is hidden beneath one of three shells, the shells are shuffled, and the robot must identify which one conceals the object. This task is challenging for prior approaches because it requires persistent long-term visual memory: the system must track the object's state across the entire sequence and reason about scene changes caused by multiple swaps, without directly observing the object. Video generations and real robot rollouts ( Video 5 ) demonstrate that our model tracks the object's position across multiple swaps and remembers the object's appearance over time.
+
+ Video 5. We show the visual observation provided to the robot (top left), the robot's imagined future generated auto-regressively as video (bottom left), and the robot's real-world execution (right).
+
+ Resolving Visual Ambiguity in Returns Processing
+ A practical example that necessitates long-horizon context is an end-to-end returns processing task ( Video 6 , Video 7 ). The task is ambiguous — visually similar states can correspond to very different points in the pipeline. Rather than relying on the current frame alone, the model maintains memory, in the form of a long history of video frames. Unlike other methods, which require hand-engineered scaffolding, such as task progress indicators or multi-stage models, all of our tasks are executed end-to-end, relying on long-context alone. 
+
+ Video 6. End-to-end returns processing. Un-package, inspect, fold, repackage, and bin clothes. Task progress indicators at the top of the video are for illustration purposes only — the model requires no hand-engineered subtask scaffolding.
+
+ Video 7. With a short context (remembering only the last 8 frames), the model loses track of its progress mid-sequence, repeating steps it has already completed. With long-context memory, the model efficiently completes the full returns processing pipeline end-to-end.
+
+ One-Shot Human Demo Following: Item Sorting
+ Long context enables in-context learning, allowing us to inject video examples into the context to perform tasks one-shot, without updating the model weights. The following example ( Video 8 ) demonstrates one-shot pick and place, with the human demonstration conditioning the robot execution. The model understands the intention of the demonstration, not just the motion, which enables it to extrapolate to novel objects, environments, and container types, despite training on a small subset of objects with a single environment.
+
+ Video 8. Following a single human demonstration, the robot places the correct object into the correct container. Despite training only on a dozen objects on a single table without distractors and demonstrations collected off-site, the model extrapolates to novel objects and the office environment.
+
+ Following a single human demonstration, the robot repeatedly places target objects into the correct container. The objects and containers are unseen during training, and training data contains no repeated objects.
+
+ Following a single human demonstration, the robot packs food items. Although trained only with three containers, the model generalizes to scenes with two containers.
+
+ The robot continuously follows a single human demonstration to pack objects correctly. When it makes a mistake, it corrects itself in the next trial.
+
+ One-Shot Human Demo Following: Drawing
+ A more challenging example evaluates one-shot drawing from a human demonstration. In this scenario, both the final shape and the stroke order are important. We demonstrate that the model can translate human demonstrations into the correct sequence of robot actions even when multiple stroke orders could produce the same final shape ( Video 9 ).
+
+ Video 9. Given a single human demonstration, the robot recreates the drawing, matching both the final shape and the stroke order.
+
+ Interpretability through Video Generation
+ Beyond real-world robot control, causal video models can also visualize robot behavior by auto-regressively generating future video. This natural ability to predict the next state is a fundamental advantage DVAs have over more traditional robot policies like VLAs. It provides a convenient tool for debugging and inspecting the behavior of robot policies ( Video 10 ), useful for evaluating models or ensuring safety.
+
+ Container Breakdown.
+
+ Returns Processing.
+
+ Decanting.
+
+ Video 10. Robot videos, generated auto-regressively, without action conditioning (1x speed). Video generations can be used to debug and evaluate the behavior of policies.
+
+ By simulating multiple rollouts from precisely identical initial conditions, we can directly compare models and inference hyper-parameters ( Video 11 ).
+
+ Video 11. Auto-regressive video generations enable easy model comparison and selection. Here, we compare three different models on the same starting context. (1x speed).
+
+ What's next?
+ At Rhoda, we are building video-based foundation models as a pathway toward physical artificial general intelligence. Our work is grounded in the belief that intelligence emerges from learning directly from rich streams of visual experience. We have already demonstrated promising capabilities, including strong action-data efficiency and long-context visual memory — early signals of systems that can accumulate and reuse experience over time.
+ At the same time, major challenges remain ahead: enabling robust planning and reasoning, building systems that can improve themselves through interaction, and unlocking long-horizon mobile manipulation and high-degree-of-freedom dexterous control. These problems sit at the frontier of embodied intelligence, and solving them will require new technical innovations across learning, perception, and control.
+ The coming year will bring rapid progress across all of these dimensions. The convergence of large-scale learning and robotics is opening a new chapter for the field, and it is an incredibly exciting time to be working on embodied intelligence.
+ For researchers interested in our work, collaborations, or other inquiries, please reach out to research@rhoda.ai .
+
+ Citation
+ @article{rhoda2026dva,
+ author = {Rhoda AI Team},
+ title = {Causal Video Models Are Data-Efficient Robot Policy Learners},
+ journal = {Rhoda AI Blog},
+ year = {2026},
+} 
+
+ Rhoda develops cutting edge robotic intelligence to bring generalist robots to the real world.
+ info@rhoda.ai
+ Schedule Consultation 
+ © 2026 Rhoda AI.
+
+ We use cookies and third-party services to understand how our site is used. You can accept or decline non-essential cookies.
+ Decline Accept 
+
+ 

@@ -8,7 +8,7 @@
 
 2026 年 8 月，三家互不相识的机构在 16 天窗口内汇合于同一能力点：**HOST**（开源）用架构设计让机器人看一段人类视频、29 秒后执行新任务（50 个未见任务 62%）；**GEN-1.5** 用 50 万小时数据预训练让 one-shot ICL 作为涌现能力出现（10 任务 59%）；**S1** 把主张推到最远——一条视频演示执行预训练从未见过、最长 10 分钟的任务（66%，语言提示同规模仅 9%）。同月，四篇学术论文（WAM-TTT / RoboTTT / StellaVLA / Zero-WAM）用消融证据一致反对「ICL 免费涌现」叙事。
 
-与一般 awesome 列表不同，本仓库对每篇论文附带：**深度解读**（📄，中文，含延伸批判）、**中译全文 PDF**（🈶，super_translate 生成）、以及汇总的 22 页 PPT、66 页全文报告与趋势洞察。⭐ 标注本调研的三个主角。当前覆盖 30+ 项工作 / 33 篇论文 PDF / 22 份深度解读，含 ICL 机制理论（贝叶斯推断 / 隐式梯度下降 / induction heads / TTT 层）与世界模型上游谱系（UniPi / V-JEPA 2 / Cosmos）两个纵深专题。
+与一般 awesome 列表不同，本仓库对每篇论文附带：**深度解读**（📄，中文，含延伸批判）、**中译全文 PDF**（🈶，super_translate 生成）、以及汇总的 22 页 PPT、66 页全文报告与趋势洞察。⭐ 标注本调研的三个主角。当前覆盖 45+ 项工作 / 46 篇论文 PDF / 27 份深度解读，含七个纵深专题：ICL 机制理论、世界模型上游谱系、基座 VLA、One-Shot 模仿源头（2017 起）、生成式动作头奠基、人类数据管线、视频-动作同代对照组。
 
 > 所有成功率数字都依赖各自的任务集与判定口径，**不同工作的数字禁止直接比大小**；详见各篇解读的「延伸批判」节。
 
@@ -36,6 +36,18 @@
 <tr>
 	<td>&emsp;<a href="#29-icl-theory--mechanisms">2.9 ICL Theory & Mechanisms</a></td>
 	<td>&emsp;<a href="#210-world-model-lineage-upstream">2.10 World-Model Lineage (Upstream)</a></td>
+</tr>
+<tr>
+	<td>&emsp;<a href="#211-foundation-vlas-backbones--baselines">2.11 Foundation VLAs (Backbones & Baselines)</a></td>
+	<td>&emsp;<a href="#212-one-shot-imitation-origins-2017">2.12 One-Shot Imitation Origins (2017→)</a></td>
+</tr>
+<tr>
+	<td>&emsp;<a href="#213-generative-action-heads">2.13 Generative Action Heads</a></td>
+	<td>&emsp;<a href="#214-human-data-pipelines">2.14 Human-Data Pipelines</a></td>
+</tr>
+<tr>
+	<td>&emsp;<a href="#215-video-action-contemporaries">2.15 Video-Action Contemporaries</a></td>
+	<td></td>
 </tr>
 <tr><td colspan="2"><a href="#3-repository-structure">3. Repository Structure</a></td></tr>
 <tr><td colspan="2"><a href="#4-recommended-reading-order">4. Recommended Reading Order</a></td></tr>
@@ -232,18 +244,94 @@ ICL 本身是什么——LLM 侧的机制层答案，具身域验证全部空白
 
     *NVIDIA — 世界模型当基础设施而非策略：tokenizer + 扩散/自回归双族 WFM + 后训练管线，开源开放权重；合成配对路线（Zero-WAM HumanGen）的上游依赖*
 
+### [2.11 Foundation VLAs (Backbones & Baselines)](#content)
+
+「ICL 工作站在谁的肩上」——被本仓库多篇工作用作主干或基线的三个基座模型（详见 [notes/24](notes/24_foundation_VLAs_zh.md)）。
+
+1. **OpenVLA: An Open-Source Vision-Language-Action Model.** CoRL 2024. [paper](https://arxiv.org/abs/2406.09246) [📄解读](notes/24_foundation_VLAs_zh.md) [🈶中译](papers/zh/OpenVLA_2406.09246_zh.pdf)
+
+    *Moo Jin Kim, Karl Pertsch, Siddharth Karamcheti, et al. — Stanford · UC Berkeley · 7B 自回归离散 token VLA（97 万条 OXE 轨迹）；ICRT 与 π0 的公共基线；单图/无历史/无动作块的结构使其成为「语言接口传达不了运动模式」的对照组*
+
+2. **π0: A Vision-Language-Action Flow Model for General Robot Control.** arXiv, 2024. [paper](https://arxiv.org/abs/2410.24164) [📄解读](notes/24_foundation_VLAs_zh.md) [🈶中译](papers/zh/pi0_2410.24164_zh.pdf)
+
+    *Physical Intelligence — PaliGemma 3B + 300M flow matching 动作专家（H=50，50Hz），约 1 万小时专有数据确立「VLM + 连续动作块」范式；RICL 的底座、GR-3 的对照、π0.5 的前作、GR00T N1 的设计上游*
+
+3. **GR00T N1: An Open Foundation Model for Generalist Humanoid Robots.** arXiv, 2025. [paper](https://arxiv.org/abs/2503.14734) [📄解读](notes/24_foundation_VLAs_zh.md) [🈶中译](papers/zh/GR00TN1_2503.14734_zh.pdf)
+
+    *NVIDIA — 2.2B 双系统（Eagle-2 VLM + 跨注意力 DiT，H=16，4 步去噪），8,376 小时四层数据金字塔（真机仅 88 小时）；System 1 自足的解耦结构正是 RoboTTT 能只在动作侧插 TTT 层的前提*
+
+### [2.12 One-Shot Imitation Origins (2017→)](#content)
+
+「2017 年就有的问题，2026 年为什么才成」——one-shot 模仿的问题定义、元学习路线与无大模型先验下结构派的极致（详见 [notes/25](notes/25_osil_origins_zh.md)）。
+
+1. **One-Shot Imitation Learning.** NeurIPS 2017. [paper](https://arxiv.org/abs/1703.07326) [📄解读](notes/25_osil_origins_zh.md) [🈶中译](papers/zh/OneShotIL_Duan_1703.07326_zh.pdf)
+
+    *Yan Duan, Marcin Andrychowicz, Bradly Stadie, et al. — OpenAI · UC Berkeley · 问题定义者：π(a|o,d) 演示条件策略 + 软注意力，「同任务两条演示构成训练对」原样延续为 HOST Stage 1 与 ICRT；未见积木任务 2 阶段 94.9% → 8 阶段 18.0%*
+
+2. **One-Shot Visual Imitation Learning via Meta-Learning.** CoRL 2017. [paper](https://arxiv.org/abs/1709.04905) [📄解读](notes/25_osil_origins_zh.md) [🈶中译](papers/zh/OneShotVisualIL_Finn_1709.04905_zh.pdf)
+
+    *Chelsea Finn, Tianhe Yu, Tianhao Zhang, Pieter Abbeel, Sergey Levine — UC Berkeley · MAML 进视觉模仿，双头架构让纯视频演示可用（真机 PR2 一条演示 90%）；「上下文路线要一万条、MAML 只要一千三百条」是两派数据交叉点的第一次量化*
+
+3. **IMOP: One-Shot Imitation Learning with Invariance Matching for Robotic Manipulation.** RSS 2024. [paper](https://arxiv.org/abs/2405.13178) [📄解读](notes/25_osil_origins_zh.md) [🈶中译](papers/zh/IMOP_2405.13178_zh.pdf)
+
+    *Xinyu Zhang, Abdeslam Boularias — Rutgers · 刚体不变区域匹配 + Procrustes 解析位姿，RLBench 22 跨类别新任务 41.3%，但长程 7.4%（ManiLong-Shot 基线）；「分布内 65.1% 不变、one-shot 归零」是分布内成绩对 one-shot 泛化零预测力的最干净证据*
+
+### [2.13 Generative Action Heads](#content)
+
+「为什么 ICL 时代的机器人策略都是生成模型」——flow matching / diffusion 动作头与动作分块的两个源头（详见 [notes/26](notes/26_generative_action_heads_zh.md)）。
+
+1. **Diffusion Policy: Visuomotor Policy Learning via Action Diffusion.** RSS 2023 / IJRR. [paper](https://arxiv.org/abs/2303.04137) [📄解读](notes/26_generative_action_heads_zh.md) [🈶中译](papers/zh/DiffusionPolicy_2303.04137_zh.pdf)
+
+    *Cheng Chi, Zhenjia Xu, Siyuan Feng, et al. — Columbia · TRI · MIT · 把策略从「回归函数」改成「条件动作分布的采样器」：多模态建模 + 序列预测 + receding horizon；15 任务平均 +46.9%（两主干取最优对基线最优）；π0/GR00T/GR-3/HOST flow-matching 头的直接源头*
+
+2. **Learning Fine-Grained Bimanual Manipulation with Low-Cost Hardware (ACT / ALOHA).** RSS 2023. [paper](https://arxiv.org/abs/2304.13705) [📄解读](notes/26_generative_action_heads_zh.md) [🈶中译](papers/zh/ACT_ALOHA_2304.13705_zh.pdf)
+
+    *Tony Z. Zhao, Vikash Kumar, Sergey Levine, Chelsea Finn — Stanford · UC Berkeley · Meta · k=100 动作分块 + CVAE + 时间集成，2 万美元双臂 50 条演示达 80–96% 毫米级操作；动作分块被此后几乎所有 VLA 无一例外继承，ALOHA 谱系 → Mobile ALOHA → 海量遥操数据*
+
+### [2.14 Human-Data Pipelines](#content)
+
+「ICL 的燃料从哪来」——手持夹爪、力反馈遥操、合成重定向三条采集管线的成本-多样性-具身贴近性对照（详见 [notes/27](notes/27_human_data_pipelines_zh.md)）。
+
+1. **Universal Manipulation Interface: In-The-Wild Robot Teaching Without In-The-Wild Robots (UMI).** RSS 2024. [paper](https://arxiv.org/abs/2402.10329) [📄解读](notes/27_human_data_pipelines_zh.md) [🈶中译](papers/zh/UMI_2402.10329_zh.pdf)
+
+    *Cheng Chi, Zhenjia Xu, Chuer Pan, et al. — Stanford · Columbia · TRI · 手持夹爪采集范式开山（$371 一套，约 117 条/人时），用硬件同构在采集端消掉具身差距；BPP 的 iPhUMI 源自此，Skild S1 数据引擎将其列为三轴折中方案*
+
+2. **RH20T: A Comprehensive Robotic Dataset for Learning Diverse Skills in One-Shot.** ICRA 2024. [paper](https://arxiv.org/abs/2307.00595) [📄解读](notes/27_human_data_pipelines_zh.md) [🈶中译](papers/zh/RH20T_2307.00595_zh.pdf)
+
+    *Hao-Shu Fang, Hongjie Fang, Zhenyu Tang, et al. — 上海交大 · 力反馈遥操数据集规模标杆：110K 条 / 147 任务 / 每任务约 750 条——BPP「任务多样性 > 每任务密度」定律的反面标本，却是唯一记录力/触觉且拥有真实人机配对的管线*
+
+3. **Ego2Robot: Scalable Robot Data Synthesis from Egocentric Human Data.** arXiv, 2026. [paper](https://arxiv.org/abs/2608.02580) [📄解读](notes/27_human_data_pipelines_zh.md) [🈶中译](papers/zh/Ego2Robot_2608.02580_zh.pdf)
+
+    *Ye Wang et al. — 阿里 Qwen · 人大 · 上科大 · BIGAI · 约 1,940 小时第一人称视频 → 18,561 小时合成数据 / 15 种形态（实为渲染之和，真实交互约 1,240 小时）；任务多样性最高但缺 ICL 需要的演示-执行配对结构*
+
+### [2.15 Video-Action Contemporaries](#content)
+
+「WAM 战场的其他玩家」——被反复当基线或并列引用、却未被单独审视的同代对照组（详见 [notes/28](notes/28_video_action_contemporaries_zh.md)）。
+
+1. **DreamZero: World Action Models are Zero-shot Policies.** arXiv, 2026. [paper](https://arxiv.org/abs/2602.15922) [📄解读](notes/28_video_action_contemporaries_zh.md) [🈶中译](papers/zh/DreamZero_2602.15922_zh.pdf)
+
+    *Seonghyeon Ye, et al.（Yuke Zhu, Jim Fan, Joel Jang 领导）— NVIDIA GEAR · 像素想象派旗舰：14B Wan 骨干、视频-动作单流共享时间步联合去噪，38 倍加速买回 7Hz；无 ICL，是 WAM 装上 ICL 机制前的「素体」；WALL-WM 的数字基线*
+
+2. **Motus: A Unified Latent Action World Model.** arXiv, 2025. [paper](https://arxiv.org/abs/2512.13030) [📄解读](notes/28_video_action_contemporaries_zh.md) [🈶中译](papers/zh/Motus_2512.13030_zh.pdf)
+
+    *Hongzhe Bi, Hengkai Tan, et al. — 清华 · 北大 · 地平线 · 一模型五模式（VLA/WM/IDM/VGM/联合）的 8B MoT，光流潜动作作跨具身桥；RoboTwin 2.0 上被 LingBot-VA 两代与 Fast-WAM 一致超越——同一 π0.5 基线在其论文复现 43、在 LingBot-VA 复现 83，40 分离散让所有「+N%」落进噪声区*
+
+3. **DVA: Causal Video Models Are Data-Efficient Robot Policy Learners.** Rhoda AI Blog, 2026-03. [blog 存档](sources/rhoda_dva_blog.txt) [📄解读](notes/28_video_action_contemporaries_zh.md)
+
+    *Rhoda AI Research — 仅博客无论文：从零因果视频模型 + 每具身 10 小时逆动力学，「把人类演示注入上下文」即 ICL，无对齐模块、无反捷径目标、无任何数字；LingBot-VA 2.0 引入视频 ICL 时与 Zero-WAM 并列引用；证据形态应与 S1/GEN-1.5 同等对待*
+
 ## [3. Repository Structure](#content)
 
 ```
 awesome_ICL/
 ├── README.md                  ← 本文件
 ├── papers/
-│   ├── pdf/                   ← 33 篇英文原版 PDF（含 LLM 背景 3 篇 + 理论 4 篇）
-│   ├── zh/                    ← 26 篇中文翻译 PDF（super_translate，DeepSeek 后端）
+│   ├── pdf/                   ← 46 篇英文原版 PDF（含 LLM 背景 3 篇 + 理论 4 篇）
+│   ├── zh/                    ← 39 篇中文翻译 PDF（super_translate，DeepSeek 后端）
 │   └── cache/                 ← 翻译块级缓存（可续跑，不入库）
-├── notes/                     ← 22 份深度解读（01–09、11–23，中文）
+├── notes/                     ← 27 份深度解读（01–09、11–28，中文）
 ├── insights/                  ← 趋势与洞察报告（10）
-├── sources/                   ← S1 博客与微信深度综述存档
+├── sources/                   ← S1 博客、Rhoda DVA 博客与微信深度综述存档
 ├── report/                    ← 汇总 HTML PPT / PPT PDF / 全文报告 HTML+PDF
 ├── scripts/                   ← 翻译队列与报告构建脚本
 └── tools/                     ← 工具仓库（super_translate 等，不入库）
@@ -255,8 +343,10 @@ awesome_ICL/
 2. [`insights/10_trends_insights_zh.md`](insights/10_trends_insights_zh.md) — 趋势全文（六大趋势、八条洞察、七条可证伪预测、开放问题）
 3. [`notes/01_HOST_zh.md`](notes/01_HOST_zh.md) + [`notes/02_GEN_series_zh.md`](notes/02_GEN_series_zh.md) + [`notes/16_S1_EICL_wave_zh.md`](notes/16_S1_EICL_wave_zh.md) — 三大主角与涌现之争
 4. [`notes/12_ZeroWAM_zh.md`](notes/12_ZeroWAM_zh.md) + [`notes/14_WAMTTT_zh.md`](notes/14_WAMTTT_zh.md) + [`notes/15_StellaVLA_zh.md`](notes/15_StellaVLA_zh.md) + [`notes/05_RoboTTT_zh.md`](notes/05_RoboTTT_zh.md) — 四篇 EICL 论文的完整拼图
-5. [`notes/22_ICL_theory_zh.md`](notes/22_ICL_theory_zh.md) + [`notes/23_worldmodel_lineage_zh.md`](notes/23_worldmodel_lineage_zh.md) — 两个纵深专题：ICL 机制理论与世界模型上游谱系
-6. 其余解读按需取用；每份的「延伸批判」与「关系定位」两节是与论文摘要差异最大的增量内容
+5. [`notes/22_ICL_theory_zh.md`](notes/22_ICL_theory_zh.md) + [`notes/23_worldmodel_lineage_zh.md`](notes/23_worldmodel_lineage_zh.md) — 纵深专题：ICL 机制理论与世界模型上游谱系
+6. [`notes/25_osil_origins_zh.md`](notes/25_osil_origins_zh.md)（2017→2026 九年对照）+ [`notes/26_generative_action_heads_zh.md`](notes/26_generative_action_heads_zh.md)（为什么都是生成模型）+ [`notes/24_foundation_VLAs_zh.md`](notes/24_foundation_VLAs_zh.md)（站在谁的肩上）— 历史与底座三专题
+7. [`notes/27_human_data_pipelines_zh.md`](notes/27_human_data_pipelines_zh.md) + [`notes/28_video_action_contemporaries_zh.md`](notes/28_video_action_contemporaries_zh.md) — 数据管线与同代对照组
+8. 其余解读按需取用；每份的「延伸批判」与「关系定位」两节是与论文摘要差异最大的增量内容
 
 ## [5. Reproduce](#content)
 
@@ -265,6 +355,7 @@ awesome_ICL/
 bash scripts/translate_queue.sh
 bash scripts/translate_queue2.sh
 bash scripts/translate_queue3.sh
+bash scripts/translate_queue4.sh
 
 # 全文报告 PDF（pandoc 合并 md → HTML → Chrome headless 打印）
 python3 scripts/build_full_report.py
@@ -287,6 +378,6 @@ N. **论文标题.** Venue, 年份. [paper](arXiv 链接), [code](代码链接)
     *作者 — 机构 · 一句话定位*
 ```
 
-要求：(1) 归入 2.1–2.8 中最贴切的分类；(2) 一句话定位需说明与「演示如何被策略用上」这条主线的关系；(3) 成功率数字必须注明任务集与判定口径。
+要求：(1) 归入 2.1–2.15 中最贴切的分类；(2) 一句话定位需说明与「演示如何被策略用上」这条主线的关系；(3) 成功率数字必须注明任务集与判定口径。
 
 > 注：知乎文章（p/2077872253551878182，涌现之争主题）因 JS 反爬无法存档正文，其引用文献 [1]–[8] 已全部纳入本仓库；两篇微信深度文章存档于 [`sources/`](sources/)。

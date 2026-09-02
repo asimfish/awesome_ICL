@@ -8,7 +8,7 @@
 
 2026 年 8 月，三家互不相识的机构在 16 天窗口内汇合于同一能力点：**HOST**（开源）用架构设计让机器人看一段人类视频、29 秒后执行新任务（50 个未见任务 62%）；**GEN-1.5** 用 50 万小时数据预训练让 one-shot ICL 作为涌现能力出现（10 任务 59%）；**S1** 把主张推到最远——一条视频演示执行预训练从未见过、最长 10 分钟的任务（66%，语言提示同规模仅 9%）。同月，四篇学术论文（WAM-TTT / RoboTTT / StellaVLA / Zero-WAM）用消融证据一致反对「ICL 免费涌现」叙事。
 
-与一般 awesome 列表不同，本仓库对每篇论文附带：**深度解读**（📄，中文，含延伸批判）、**中译全文 PDF**（🈶，super_translate 生成）、以及汇总的 22 页 PPT、66 页全文报告与趋势洞察。⭐ 标注本调研的三个主角。当前覆盖 60+ 项工作 / 65 篇论文 PDF / 32 份深度解读，含十二个纵深专题：ICL 机制理论、世界模型上游谱系、基座 VLA、One-Shot 模仿源头（2017 起）、生成式动作头奠基、人类数据管线、视频-动作同代对照组、潜动作桥梁、上下文 RL 前史、人类视频共训、评测基准与数据地基、具身安全与提示注入。
+与一般 awesome 列表不同，本仓库对每篇论文附带：**深度解读**（📄，中文，含延伸批判）、**中译全文 PDF**（🈶，super_translate 生成）、以及汇总的 22 页 PPT、66 页全文报告与趋势洞察。⭐ 标注本调研的三个主角。当前覆盖 70+ 项工作 / 74 篇论文 PDF / 35 份深度解读，含十五个纵深专题：ICL 机制理论、世界模型上游谱系、基座 VLA、One-Shot 模仿源头（2017 起）、生成式动作头奠基、人类数据管线、视频-动作同代对照组、潜动作桥梁、上下文 RL 前史、人类视频共训、评测基准与数据地基、具身安全与提示注入、演示的几何编码（轨迹/点轨迹/光流提示）、规划层 ICL、检索增强与技能库。
 
 > 所有成功率数字都依赖各自的任务集与判定口径，**不同工作的数字禁止直接比大小**；详见各篇解读的「延伸批判」节。
 
@@ -56,6 +56,14 @@
 <tr>
 	<td>&emsp;<a href="#219-benchmarks--data-foundations">2.19 Benchmarks & Data Foundations</a></td>
 	<td>&emsp;<a href="#220-embodied-safety--prompt-injection">2.20 Embodied Safety & Prompt Injection</a></td>
+</tr>
+<tr>
+	<td>&emsp;<a href="#221-geometric-demonstration-encodings">2.21 Geometric Demonstration Encodings</a></td>
+	<td>&emsp;<a href="#222-planner-level-icl">2.22 Planner-Level ICL</a></td>
+</tr>
+<tr>
+	<td>&emsp;<a href="#223-retrieval--skill-libraries">2.23 Retrieval & Skill Libraries</a></td>
+	<td></td>
 </tr>
 <tr><td colspan="2"><a href="#3-repository-structure">3. Repository Structure</a></td></tr>
 <tr><td colspan="2"><a href="#4-recommended-reading-order">4. Recommended Reading Order</a></td></tr>
@@ -424,16 +432,64 @@ ICL 本身是什么——LLM 侧的机制层答案，具身域验证全部空白
 
     *机器人初始关节位形当触发器（偏好引导遗传算法搜索），ACT / DP / SmolVLA / π0 / OpenVLA 五模型 SO101 真机超 90% 成功率且抗经典防御*
 
+### [2.21 Geometric Demonstration Encodings](#content)
+
+「演示的另一种编码」——末端轨迹草图、任意点轨迹、物体光流当提示：外观与具身不变、空间精度高、人可读可画（详见 [notes/34](notes/34_visual_prompt_intermediates_zh.md)）。
+
+1. **RT-Trajectory: Robotic Task Generalization via Hindsight Trajectory Sketches.** ICLR 2024. [paper](https://arxiv.org/abs/2311.01977) [📄解读](notes/34_visual_prompt_intermediates_zh.md) [🈶中译](papers/zh/RTTrajectory_2311.01977_zh.pdf)
+
+    *Jiayuan Gu, Sean Kirmani, et al. — Google DeepMind · 人手画一条末端轨迹草图当任务条件，未见任务 2D 50% / 2.5D 67% vs RT-2 11.1%；提示可来自手画/LLM 代码/人类手部姿态/检索——2023 年最接近「物理提示」的工作*
+
+2. **ATM: Any-point Trajectory Modeling for Policy Learning.** RSS 2024. [paper](https://arxiv.org/abs/2401.00025) [📄解读](notes/34_visual_prompt_intermediates_zh.md) [🈶中译](papers/zh/ATM_2401.00025_zh.pdf)
+
+    *Chuan Wen, Xingyu Lin, et al. — Berkeley 等 · 从无动作视频预训练任意点未来轨迹模型，轨迹当稠密控制引导；130 余任务平均超视频预训练基线 80%，可从人类与异形态机器人视频迁移*
+
+3. **Im2Flow2Act: Flow as the Cross-Domain Manipulation Interface.** CoRL 2024. [paper](https://arxiv.org/abs/2407.15208) [📄解读](notes/34_visual_prompt_intermediates_zh.md) [🈶中译](papers/zh/Im2Flow2Act_2407.15208_zh.pdf)
+
+    *Mengda Xu, et al. — Columbia 等 · 物体光流作人-机接口，在接口层直接去掉具身信息；真实人类视频 + 仿真机器人玩耍数据，零真机数据达四任务平均 81%*
+
+### [2.22 Planner-Level ICL](#content)
+
+「LLM 自己的 few-shot 能力直接拿来控机器人」——ICL 发生在规划层而非策略层，2022 年即零训练实现「教机器人不用训练」，但天花板由原语库与规划器决定（详见 [notes/35](notes/35_planner_level_icl_zh.md)）。
+
+1. **Code as Policies: Language Model Programs for Embodied Control.** ICRA 2023. [paper](https://arxiv.org/abs/2209.07753) [📄解读](notes/35_planner_level_icl_zh.md) [🈶中译](papers/zh/CodeAsPolicies_2209.07753_zh.pdf)
+
+    *Jacky Liang, Wenlong Huang, et al. — Google · few-shot 提示让 LLM 为新指令写机器人程序（感知 API + 控制 API + NumPy/Shapely）；层级代码生成同时把 HumanEval 推到 39.8%——「演示当 prompt」的文本版鼻祖*
+
+2. **VoxPoser: Composable 3D Value Maps for Robotic Manipulation with Language Models.** CoRL 2023. [paper](https://arxiv.org/abs/2307.05973) [📄解读](notes/35_planner_level_icl_zh.md) [🈶中译](papers/zh/VoxPoser_2307.05973_zh.pdf)
+
+    *Wenlong Huang, Chen Wang, et al. — Stanford · LLM 写代码合成 3D 值图，运动规划器零样本求轨迹；真机日常任务 88.0%（干扰下 70.0%）vs 原语基线 24.0%——ICL 输出从程序推进到连续空间场*
+
+3. **ReKep: Spatio-Temporal Reasoning of Relational Keypoint Constraints for Robotic Manipulation.** CoRL 2024. [paper](https://arxiv.org/abs/2409.01652) [📄解读](notes/35_planner_level_icl_zh.md) [🈶中译](papers/zh/ReKep_2409.01652_zh.pdf)
+
+    *Wenlong Huang, Chen Wang, et al. — Stanford · DINOv2+SAM 提关键点、GPT-4o 看图写分阶段约束函数、层级优化实时求解；双臂与移动平台七任务自动标注版 68.6% vs VoxPoser 10.0%；分阶段约束与 HOST 进度流形描述同一时间结构*
+
+### [2.23 Retrieval & Skill Libraries](#content)
+
+「上下文从哪里来」——非参数记忆库是 ICL 的上游、替代品与攻击面（详见 [notes/36](notes/36_retrieval_and_skill_libraries_zh.md)）。
+
+1. **Behavior Retrieval: Few-Shot Imitation Learning by Querying Unlabeled Datasets.** RSS 2023. [paper](https://arxiv.org/abs/2304.08742) [📄解读](notes/36_retrieval_and_skill_libraries_zh.md) [🈶中译](papers/zh/BehaviorRetrieval_2304.08742_zh.pdf)
+
+    *Maximilian Du, Suraj Nair, Dorsa Sadigh, Chelsea Finn — Stanford · 少量专家数据当查询，VAE 嵌入空间从无标注离线库检索相关转移并过滤次优数据——「上下文该放什么」的第一个系统回答*
+
+2. **STRAP: Robot Sub-Trajectory Retrieval for Augmented Policy Learning.** arXiv, 2024. [paper](https://arxiv.org/abs/2412.15182) [📄解读](notes/36_retrieval_and_skill_libraries_zh.md) [🈶中译](papers/zh/STRAP_2412.15182_zh.pdf)
+
+    *Marius Memmel, Jacob Berg, et al. — UW · Bosch · CMU · 子轨迹粒度检索 + DINOv2 嵌入 + 子序列 DTW，主张「部署时训练」而非零样本；与 HOST 的 SDTW 同工具异用，指向「长时程演示应切片进上下文」*
+
+3. **AgiBot World Colosseo: A Large-scale Manipulation Platform for Scalable and Intelligent Embodied Systems (GO-1).** arXiv, 2025. [paper](https://arxiv.org/abs/2503.06669) [📄解读](notes/36_retrieval_and_skill_libraries_zh.md) [🈶中译](papers/zh/AgiBotGO1_2503.06669_zh.pdf)
+
+    *智元机器人 — 100 万+ 轨迹 / 217 任务 / 五类场景，预训练超 OXE 30%、十分之一小时数即 +18%；GO-1 的 ViLLA 三段架构（潜动作模型 + 潜动作规划器 + 动作专家）具备 ICL 化的两个前提却尚未做 ICL——与 HOST、Zero-WAM 形成各缺一角的三角*
+
 ## [3. Repository Structure](#content)
 
 ```
 awesome_ICL/
 ├── README.md                  ← 本文件
 ├── papers/
-│   ├── pdf/                   ← 65 篇英文原版 PDF（含 LLM 背景 3 篇 + 理论 4 篇）
-│   ├── zh/                    ← 57 篇中文翻译 PDF（super_translate，DeepSeek 后端）
+│   ├── pdf/                   ← 74 篇英文原版 PDF（含 LLM 背景 3 篇 + 理论 4 篇）
+│   ├── zh/                    ← 67 篇中文翻译 PDF（super_translate，DeepSeek 后端）
 │   └── cache/                 ← 翻译块级缓存（可续跑，不入库）
-├── notes/                     ← 32 份深度解读（01–09、11–33，中文）
+├── notes/                     ← 35 份深度解读（01–09、11–36，中文）
 ├── insights/                  ← 趋势与洞察报告（10）
 ├── sources/                   ← S1 博客、Rhoda DVA 博客与微信深度综述存档
 ├── report/                    ← 汇总 HTML PPT / PPT PDF / 全文报告 HTML+PDF
@@ -451,7 +507,8 @@ awesome_ICL/
 6. [`notes/25_osil_origins_zh.md`](notes/25_osil_origins_zh.md)（2017→2026 九年对照）+ [`notes/26_generative_action_heads_zh.md`](notes/26_generative_action_heads_zh.md)（为什么都是生成模型）+ [`notes/24_foundation_VLAs_zh.md`](notes/24_foundation_VLAs_zh.md)（站在谁的肩上）— 历史与底座三专题
 7. [`notes/27_human_data_pipelines_zh.md`](notes/27_human_data_pipelines_zh.md) + [`notes/31_human_video_cotraining_zh.md`](notes/31_human_video_cotraining_zh.md) + [`notes/29_latent_action_bridge_zh.md`](notes/29_latent_action_bridge_zh.md) — 人类数据的三条桥：管线、共训、潜动作
 8. [`notes/32_benchmarks_and_data_foundations_zh.md`](notes/32_benchmarks_and_data_foundations_zh.md)（口径从哪来 + 真机 one-shot 协议建议）+ [`notes/33_embodied_safety_zh.md`](notes/33_embodied_safety_zh.md)（攻击面与 P5 验证）+ [`notes/30_incontext_rl_precursors_zh.md`](notes/30_incontext_rl_precursors_zh.md)（算法前史）
-9. 其余解读按需取用；每份的「延伸批判」与「关系定位」两节是与论文摘要差异最大的增量内容
+9. [`notes/34_visual_prompt_intermediates_zh.md`](notes/34_visual_prompt_intermediates_zh.md)（演示的几何编码）+ [`notes/35_planner_level_icl_zh.md`](notes/35_planner_level_icl_zh.md)（规划层 vs 策略层 ICL 的分界）+ [`notes/36_retrieval_and_skill_libraries_zh.md`](notes/36_retrieval_and_skill_libraries_zh.md)（上下文从哪来）
+10. 其余解读按需取用；每份的「延伸批判」与「关系定位」两节是与论文摘要差异最大的增量内容
 
 ## [5. Reproduce](#content)
 
@@ -461,7 +518,8 @@ bash scripts/translate_queue.sh
 bash scripts/translate_queue2.sh
 bash scripts/translate_queue3.sh
 bash scripts/translate_queue4.sh
-bash scripts/translate_queue5.sh   # 第五批（含 queue5b 补充）
+bash scripts/translate_queue5.sh   # 第五批（含 queue5b/5c 补充）
+bash scripts/translate_queue6.sh
 
 # 全文报告 PDF（pandoc 合并 md → HTML → Chrome headless 打印）
 python3 scripts/build_full_report.py
@@ -484,6 +542,6 @@ N. **论文标题.** Venue, 年份. [paper](arXiv 链接), [code](代码链接)
     *作者 — 机构 · 一句话定位*
 ```
 
-要求：(1) 归入 2.1–2.20 中最贴切的分类；(2) 一句话定位需说明与「演示如何被策略用上」这条主线的关系；(3) 成功率数字必须注明任务集与判定口径。
+要求：(1) 归入 2.1–2.23 中最贴切的分类；(2) 一句话定位需说明与「演示如何被策略用上」这条主线的关系；(3) 成功率数字必须注明任务集与判定口径。
 
 > 注：知乎文章（p/2077872253551878182，涌现之争主题）因 JS 反爬无法存档正文，其引用文献 [1]–[8] 已全部纳入本仓库；两篇微信深度文章存档于 [`sources/`](sources/)。

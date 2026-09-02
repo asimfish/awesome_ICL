@@ -1,7 +1,7 @@
 # 趋势与洞察：机器人 One-Shot 技能习得的 2026 拐点
 
-> 本报告基于对 HOST（arXiv 2607.20033）、GEN-0/1/1.5、Skild S1、LocoFormer、Instant Policy、ICRT、RoboTTT、WAM-TTT、StellaVLA、Zero-WAM、LingBot-VA（两代）、BPP、RICL、Vid2Robot、EgoScale、EgoWAM、WALL-WM、GR-3、ManiLong-Shot、FACTR 2、π0.5、Wall-OSS、Fast-WAM 等工作的深度解读，外加十二个纵深专题：ICL 机制理论（notes/22）、世界模型上游谱系（notes/23）、基座 VLA（notes/24）、One-Shot 模仿源头 2017→（notes/25）、生成式动作头奠基（notes/26）、人类数据管线（notes/27）、视频-动作同代对照组（notes/28）、潜动作桥梁（notes/29）、上下文 RL 前史（notes/30）、人类视频共训（notes/31）、评测基准与数据地基（notes/32）、具身安全与提示注入（notes/33）。
-> 写作时间：2026-08-31（09-01 增补 S1 与四篇 EICL 论文；09-02 增补 EICL 直系 6 项 + 理论与谱系专题；09-02 晚由 5 路子 agent 并行补齐历史源头、底座、动作头、数据管线、同代对照 13 项；09-03 补齐潜动作、上下文 RL 前史、人类共训、基准地基、具身安全 19 项，并据此修正预测 P5）
+> 本报告基于对 HOST（arXiv 2607.20033）、GEN-0/1/1.5、Skild S1、LocoFormer、Instant Policy、ICRT、RoboTTT、WAM-TTT、StellaVLA、Zero-WAM、LingBot-VA（两代）、BPP、RICL、Vid2Robot、EgoScale、EgoWAM、WALL-WM、GR-3、ManiLong-Shot、FACTR 2、π0.5、Wall-OSS、Fast-WAM 等工作的深度解读，外加十五个纵深专题：ICL 机制理论（notes/22）、世界模型上游谱系（notes/23）、基座 VLA（notes/24）、One-Shot 模仿源头 2017→（notes/25）、生成式动作头奠基（notes/26）、人类数据管线（notes/27）、视频-动作同代对照组（notes/28）、潜动作桥梁（notes/29）、上下文 RL 前史（notes/30）、人类视频共训（notes/31）、评测基准与数据地基（notes/32）、具身安全与提示注入（notes/33）、演示的几何编码（notes/34）、规划层 ICL（notes/35）、检索增强与技能库（notes/36）。
+> 写作时间：2026-08-31（09-01 增补 S1 与四篇 EICL 论文；09-02 增补 EICL 直系 6 项 + 理论与谱系专题；09-02 晚由 5 路子 agent 并行补齐历史源头、底座、动作头、数据管线、同代对照 13 项；09-03 补齐潜动作、上下文 RL 前史、人类共训、基准地基、具身安全 19 项，并据此修正预测 P5；09-04 补齐几何编码、规划层 ICL、检索与技能库 9 项）
 
 ---
 
@@ -19,26 +19,35 @@
 | 2017-03 | Duan et al. One-Shot Imitation Learning（OpenAI） | 问题定义者：演示条件策略 + 软注意力；未见积木 2 阶段 94.9% → 8 阶段 18.0% |
 | 2021-06 | Decision Transformer（Berkeley） | 控制问题的序列化改写，「策略=序列模型」让一切前缀操作成为可能 |
 | 2022-06 | Prompt-DT（CMU，ICML 2022） | 轨迹片段当 prompt 零微调泛化——ICRT/BPP「演示当 prompt」的直系祖先 |
+| 2022-09 | Code as Policies（Google） | few-shot 提示让 LLM 写机器人程序——规划层 ICL 零训练实现「教机器人不用训练」 |
 | 2022-10 | Algorithm Distillation（DeepMind） | 上下文内蒸馏出整个 RL 算法；「ICL 需要显式数据结构」最早的干净证据 |
 | 2017-09 | Finn et al. One-Shot Visual Imitation（MAML） | 元学习路线；真机 PR2 一条演示 90%，二阶梯度使其未能跟上 scaling |
 | 2023-02 | UniPi（MIT+Google） | 视频生成当策略的开山：文本条件想象+逆动力学 |
 | 2023-03 | Diffusion Policy（Columbia+TRI） | 策略从「回归函数」变「条件动作分布采样器」，flow-matching 动作头的源头 |
 | 2023-04 | ACT / ALOHA（Stanford） | 动作分块 + CVAE + 时间集成；动作分块被此后几乎所有 VLA 继承 |
+| 2023-04 | Behavior Retrieval（Stanford） | 专家数据当查询检索无标注库——「上下文该放什么」的第一个系统回答 |
 | 2023-06 | LIBERO（UT Austin） | 四套件 130 任务，为终身学习设计却成通用打分板 |
+| 2023-07 | VoxPoser（Stanford） | LLM 合成 3D 值图 + 规划器零样本求轨迹，真机 88% |
 | 2023-07 | RH20T（上海交大） | 110K 条 / 147 任务力反馈遥操数据集——任务覆盖瓶颈的标本 |
 | 2023-10 | Open X-Embodiment（21 机构） | 22 具身 / 100 万+ 轨迹，跨具身正迁移的实证起点与 VLA 公共地基 |
+| 2023-11 | RT-Trajectory（DeepMind） | 人手画轨迹草图当任务条件，未见任务 67% vs RT-2 11%——最早的物理提示 |
+| 2024-01 | ATM（Berkeley 等） | 从无动作视频学任意点轨迹当控制引导，130 余任务超视频预训练基线 80% |
 | 2024-02 | Genie（DeepMind） | 20 万小时游戏视频无监督学出 8 个潜动作码——潜动作桥的开山 |
 | 2024-02 | UMI（Stanford+Columbia） | 手持夹爪采集范式开山，在采集端消掉具身差距 |
 | 2024-03 | Vid2Robot（DeepMind） | 端到端视频条件策略，跨注意力+辅助对比损失 |
 | 2024-05 | IMOP（Rutgers，RSS 2024） | 无大模型先验的结构派极致：不变区域匹配；长程 7.4% |
 | 2024-06 | OpenVLA（Stanford 等） | 7B 开源自回归 VLA，多篇 ICL 工作的公共基线 |
 | 2024-06 | HumanPlus（Stanford） | 人形实时影子人类；人类当遥操作器而非训练数据 |
+| 2024-07 | Im2Flow2Act（Columbia 等） | 物体光流作人-机接口，零真机数据达 81% |
 | 2024-08 | Contextual Backdoor（多机构） | 投毒少数上下文演示即可后门 LLM 具身智能体——上下文演示注入的首个研究 |
+| 2024-09 | ReKep（Stanford） | VLM 看图写关键点约束，双臂零样本 68.6%——规划层 ICL 的当前形态 |
+| 2024-12 | STRAP（UW+Bosch） | 子轨迹检索 + DTW，主张「部署时训练」而非零样本 |
 | 2024-10 | LAPA / EgoMimic / RoboPAIR / Data Scaling Laws | 潜动作预训练超真动作 VLA；Aria 共训 scaling；首次越狱商用机器人；环境-物体多样性幂律 |
 | 2024-08 | ICRT（Berkeley） | 机器人 ICL 用 next-token prediction 形式化 |
 | 2024-10 | π0（Physical Intelligence） | VLM + flow matching 动作专家范式确立；RICL 底座、GR00T 设计上游 |
 | 2024-11 | Instant Policy（Imperial） | 图扩散 ICL，伪演示无限生成 |
 | 2025-03 | GR00T N1（NVIDIA） | 双系统 VLA，System 1 自足结构是 RoboTTT 插 TTT 层的前提 |
+| 2025-03 | AgiBot World / GO-1（智元） | 100 万+ 轨迹 217 任务技能库 + ViLLA 潜动作规划器，超 OXE 预训练 30% |
 | 2025-05 | UniVLA / BadVLA | DINO 空间任务中心潜动作 1/20 算力超 OpenVLA；VLA 后门接近 100% 成功率 |
 | 2025-06 | RoboTwin 2.0（Lumina EAI 等） | 50 双臂任务五具身域随机化基准，WAM 系主战场 |
 | 2025-04 | π0.5（Physical Intelligence） | VLA 开放世界泛化的代表 |
@@ -157,6 +166,9 @@ one-shot 模仿的问题在 2017 年已被 Duan 完整定义（演示条件策�
 **Insight 10：人类视频进机器人有三条桥，选哪条由「能否控制采集」决定；而每条桥都把攻击面带了进来。**
 显式重定向/动作级共训（HumanPlus、EgoMimic、PH2D、GR-3、EgoScale）保真度最高，但只在采集可控（同款眼镜、任务导向采集、人形本体）时成立——EgoMimic 与 EgoWAM 同组两年的演进划出了边界：野生视频必须换通道；世界预测通道（EgoWAM）零标注、对具身差距免疫，只能塑造表征；潜动作（Genie → LAPA → UniVLA）零标注且能给直接动作监督，代价是语义由数据分布决定、相机运动至今没有干净解法（notes/29、31）。ICL 是第四条：不把人类数据写进权重，把演示放进上下文，对齐成本从数据侧转到模型侧——这解释了产业分岔（GEN/S1 有采集控制权，共训做底座 + ICL 做接口；HOST/Zero-WAM 无大规模采集能力，全押 ICL）。安全侧的对应事实（notes/33）：训练期投毒后门已覆盖从 ACT 到 π0 的全谱系动作头（State Backdoor 真机 >90%），而 ICL 把演示变成推理期输入，StellaVLA 的「错演示比无演示差 17.5 点」与 Zero-WAM 的「无反捷径时人类视频净负收益」在安全视角下都是攻击有效性的良性下界。技能库外置（HOST 视频库、GEN-1.5 提示片段）更把一次性注入变成持久化后门。防御研究远少于攻击研究，是当前最不对称的空白。
 
+**Insight 11：ICL 有两层——规划层的 2022 年就成了，策略层的 2026 年才成；拐点定在 2026 是因为低层控制第一次可以从上下文学。**
+Code as Policies（2022）用 GPT-3 的 few-shot 提示写机器人程序，VoxPoser（2023）与 ReKep（2024）让 LLM/VLM 合成值图与关键点约束——零训练、零机器人数据、纯上下文，比 HOST/GEN-1.5 早三年做到「教机器人不用训练」，却没有引发「GPT-3 时刻」的叙事，因为它们的成功率天花板由原语库与规划器决定：凡不能用「关键点到位」描述的任务（拧盖的力、叠衣的褶皱、翻煎饼的时机）都在表达能力之外，而那恰是 S1 拿来展示 ICL 的任务（notes/35）。策略层 ICL 让低层控制本身从演示上下文学习，「教机器人 = 给一段演示」才对全部任务成立。两层的合流形态已现雏形——LingBot-VA 2.0 的层级 VLM 规划器 + 视频 ICL 底层（notes/19）、S1 的隐式长时程组合——但两层分工的收益无人正面评测。规划层 ICL 的可解释与可校验（约束函数可读、可审）在安全上是策略层 ICL 缺失的一环（notes/33），这是合流最实际的理由。演示编码侧同样存在被遗忘的选项：RT-Trajectory 的手画轨迹草图（2023）是字面意义的物理提示，用 RT-1 级小模型就做到未见任务 67%——「零更新泛化到新任务」不需要 50 万小时，需要的是条件信号与动作空间足够接近（notes/34）。GEN-1.5 的传感器流提示恰是最接近动作空间的条件，其「涌现」有多少来自规模、多少来自提示模态本身，RT-Trajectory 提供了一个便宜的对照起点。
+
 **Insight 8：四篇 EICL 论文的失败是互补的，右上角空缺正是家用场景。**
 把任务时长与分布漂移当两个坐标轴：StellaVLA 固定前缀无法在执行漂移后重新规划（长时程 L1 仅 0.02）；WAM-TTT 快权重执行时冻结，处理不了突发扰动；RoboTTT 场景相机本体全程固定，从未面对真分布漂移；Zero-WAM 从未测过未见环境。四篇各守一条漂移轴、无一同时打下两条，「长时程 × 分布外」的右上角只有 S1 的不可复核博客宣称覆盖。三条被独立验证的共同经验值得所有后来者抄录：人类信息只许改写感知/生成侧、不许直接触碰动作侧；训练期挂辅助目标、推理期整个剥离（辅助必须监督主分支否则剥离后一场空）；上下文不是免费午餐，模型一定走捷径（三篇在三个不同设定下独立撞进同一个坑）。
 
@@ -183,4 +195,7 @@ one-shot 模仿的问题在 2017 年已被 Duan 完整定义（演示条件策�
 - **合成演示训练、真实演示测试**：Zero-WAM 的人类视频 100% 合成且从未测过真实视频输入，这是它落地要撞的第一堵墙，也是所有合成配对路线的共同盲区。
 - **潜动作当演示编码 + 进度流形当对齐**：潜动作解决「演示里的运动是什么」（语义翻译），进度流形解决「执行到演示的哪一步」（时间对齐），两者正交且无人组合；ViVLA→HOST 的同团队路线切换暗示这是下一步（notes/29）。
 - **推理期视频演示注入攻击与防御**：对 HOST/S1/Zero-WAM 类策略构造恶意演示视频诱导危险动作的研究为零，防御侧（演示一致性检验、演示-观测矛盾检测、独立于演示通道的安全裁决器）同样为零（notes/33）。
+- **规划层 + 策略层 ICL 的分工评测**：VLM 给阶段与约束（可解释、可校验）、策略从演示学接触与时机——LingBot-VA 2.0 与 S1 已是雏形，但两层各贡献多少无人测（notes/35）。
+- **几何编码 + 进度对齐的组合**：ATM 点轨迹 / Im2Flow2Act 物体光流替代 HOST 的帧嵌入做演示编码，同时获得具身不变性与更低对齐难度；RT-Trajectory 的草图配进度流形可从静态提示升级为动态引导——两个组合都无人做（notes/34）。
+- **检索层作为 ICL 的安全检查点**：Behavior Retrieval 的相关性过滤本为滤次优数据，同样可滤恶意演示；技能库检索是 ICL 系统天然的安全闸门，无人从此角度设计（notes/36、33）。
 - **基线复现的披露标准**：RoboTwin 2.0 上同一 π0.5 被复现出 43 与 83，差距超过多数头条增益——「基线训练数据、微调配方、checkpoint 选择与主方法同等披露」应成为评测协议硬性条款（notes/32）。

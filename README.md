@@ -408,7 +408,7 @@ ICL 本身是什么——LLM 侧的机制层答案，具身域验证全部空白
 
     *Alexander Robey, et al. — UPenn · Dolphins / Jackal / Unitree Go2 三个真实系统常达 100% 越狱成功率，首次越狱商用机器人；「视频当纯上下文」比直接指令更易绕过对齐（100% vs 近乎全拒）*
 
-3. **Exploring the Adversarial Vulnerabilities of Vision-Language-Action Models in Robotics.** arXiv, 2024. [paper](https://arxiv.org/abs/2411.13587) [📄解读](notes/33_embodied_safety_zh.md) [PDF](papers/pdf/AdvVLA_2411.13587.pdf)
+3. **Exploring the Adversarial Vulnerabilities of Vision-Language-Action Models in Robotics.** arXiv, 2024. [paper](https://arxiv.org/abs/2411.13587) [📄解读](notes/33_embodied_safety_zh.md) [🈶中译](papers/zh/AdvVLA_2411.13587_zh.pdf)
 
     *UADA / UPA / TMA 三类攻击 + 物理可用的对抗补丁，仿真任务成功率最高降 100%；感知层攻击可直接施加在演示帧上*
 

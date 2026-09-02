@@ -8,7 +8,7 @@
 
 2026 年 8 月，三家互不相识的机构在 16 天窗口内汇合于同一能力点：**HOST**（开源）用架构设计让机器人看一段人类视频、29 秒后执行新任务（50 个未见任务 62%）；**GEN-1.5** 用 50 万小时数据预训练让 one-shot ICL 作为涌现能力出现（10 任务 59%）；**S1** 把主张推到最远——一条视频演示执行预训练从未见过、最长 10 分钟的任务（66%，语言提示同规模仅 9%）。同月，四篇学术论文（WAM-TTT / RoboTTT / StellaVLA / Zero-WAM）用消融证据一致反对「ICL 免费涌现」叙事。
 
-与一般 awesome 列表不同，本仓库对每篇论文附带：**深度解读**（📄，中文，含延伸批判）、**中译全文 PDF**（🈶，super_translate 生成）、以及汇总的 22 页 PPT、66 页全文报告与趋势洞察。⭐ 标注本调研的三个主角。当前覆盖 45+ 项工作 / 46 篇论文 PDF / 27 份深度解读，含七个纵深专题：ICL 机制理论、世界模型上游谱系、基座 VLA、One-Shot 模仿源头（2017 起）、生成式动作头奠基、人类数据管线、视频-动作同代对照组。
+与一般 awesome 列表不同，本仓库对每篇论文附带：**深度解读**（📄，中文，含延伸批判）、**中译全文 PDF**（🈶，super_translate 生成）、以及汇总的 22 页 PPT、66 页全文报告与趋势洞察。⭐ 标注本调研的三个主角。当前覆盖 60+ 项工作 / 65 篇论文 PDF / 32 份深度解读，含十二个纵深专题：ICL 机制理论、世界模型上游谱系、基座 VLA、One-Shot 模仿源头（2017 起）、生成式动作头奠基、人类数据管线、视频-动作同代对照组、潜动作桥梁、上下文 RL 前史、人类视频共训、评测基准与数据地基、具身安全与提示注入。
 
 > 所有成功率数字都依赖各自的任务集与判定口径，**不同工作的数字禁止直接比大小**；详见各篇解读的「延伸批判」节。
 
@@ -47,7 +47,15 @@
 </tr>
 <tr>
 	<td>&emsp;<a href="#215-video-action-contemporaries">2.15 Video-Action Contemporaries</a></td>
-	<td></td>
+	<td>&emsp;<a href="#216-latent-action-bridge">2.16 Latent-Action Bridge</a></td>
+</tr>
+<tr>
+	<td>&emsp;<a href="#217-in-context-rl-precursors">2.17 In-Context RL Precursors</a></td>
+	<td>&emsp;<a href="#218-human-video-co-training">2.18 Human-Video Co-Training</a></td>
+</tr>
+<tr>
+	<td>&emsp;<a href="#219-benchmarks--data-foundations">2.19 Benchmarks & Data Foundations</a></td>
+	<td>&emsp;<a href="#220-embodied-safety--prompt-injection">2.20 Embodied Safety & Prompt Injection</a></td>
 </tr>
 <tr><td colspan="2"><a href="#3-repository-structure">3. Repository Structure</a></td></tr>
 <tr><td colspan="2"><a href="#4-recommended-reading-order">4. Recommended Reading Order</a></td></tr>
@@ -320,16 +328,112 @@ ICL 本身是什么——LLM 侧的机制层答案，具身域验证全部空白
 
     *Rhoda AI Research — 仅博客无论文：从零因果视频模型 + 每具身 10 小时逆动力学，「把人类演示注入上下文」即 ICL，无对齐模块、无反捷径目标、无任何数字；LingBot-VA 2.0 引入视频 ICL 时与 Zero-WAM 并列引用；证据形态应与 S1/GEN-1.5 同等对待*
 
+### [2.16 Latent-Action Bridge](#content)
+
+「无动作视频怎么变成可训练的动作信号」——人类视频进入策略的第三条桥（详见 [notes/29](notes/29_latent_action_bridge_zh.md)）。
+
+1. **Genie: Generative Interactive Environments.** ICML 2024. [paper](https://arxiv.org/abs/2402.15391) [📄解读](notes/29_latent_action_bridge_zh.md) [🈶中译](papers/zh/Genie_2402.15391_zh.pdf)
+
+    *Google DeepMind — 11B，从 20 万小时游戏视频（过滤后 3 万小时）无监督学出 |A|=8 的离散潜动作；VQ 逆动力学 + 前向动力学三件套的开山，自认对相机运动敏感*
+
+2. **LAPA: Latent Action Pretraining from Videos.** ICLR 2025. [paper](https://arxiv.org/abs/2410.11758) [📄解读](notes/29_latent_action_bridge_zh.md) [🈶中译](papers/zh/LAPA_2410.11758_zh.pdf)
+
+    *KAIST · UW · NVIDIA 等 — 潜动作当 VLA 预训练目标：无动作标签预训练的 VLA 真机超 OpenVLA +6.22%，预训练效率 30 倍以上；Something-Something 22 万条人类视频亦有正迁移*
+
+3. **UniVLA: Learning to Act Anywhere with Task-centric Latent Actions.** RSS 2025. [paper](https://arxiv.org/abs/2505.06111) [📄解读](notes/29_latent_action_bridge_zh.md) [🈶中译](papers/zh/UniVLA_2505.06111_zh.pdf)
+
+    *潜动作建在 DINO 空间 + 语言条件分解任务无关动态；LIBERO 超 OpenVLA +18.5、真机 68.9% vs LAPA 28.9%，预训练算力 1/20——与 EgoWAM 三准则逐条对应*
+
+### [2.17 In-Context RL Precursors](#content)
+
+「把控制写成序列建模，再把演示写成 prompt」——具身 ICL 的算法前史（详见 [notes/30](notes/30_incontext_rl_precursors_zh.md)）。
+
+1. **Decision Transformer: Reinforcement Learning via Sequence Modeling.** NeurIPS 2021. [paper](https://arxiv.org/abs/2106.01345) [📄解读](notes/30_incontext_rl_precursors_zh.md) [🈶中译](papers/zh/DecisionTransformer_2106.01345_zh.pdf)
+
+    *Lili Chen, Kevin Lu, Aravind Rajeswaran, et al. — Berkeley · Google · Facebook · 控制问题的序列化改写：return-to-go 条件自回归预测动作，Atari/D4RL/Key-to-Door 匹敌离线 RL SOTA；「策略=序列模型」让一切前缀操作成为可能*
+
+2. **Prompting Decision Transformer for Few-Shot Policy Generalization.** ICML 2022. [paper](https://arxiv.org/abs/2206.13499) [📄解读](notes/30_incontext_rl_precursors_zh.md) [🈶中译](papers/zh/PromptDT_2206.13499_zh.pdf)
+
+    *Mengdi Xu, et al. — CMU · 轨迹片段当 prompt（K*=2–15 步）零微调泛化到未见 MuJoCo/Meta-World 任务，大幅超 MACAW；ICRT 的直系祖先，且已发现「prompt 须含任务判别信息否则被忽略」*
+
+3. **In-context Reinforcement Learning with Algorithm Distillation.** ICLR 2023. [paper](https://arxiv.org/abs/2210.14215) [📄解读](notes/30_incontext_rl_precursors_zh.md) [🈶中译](papers/zh/AlgorithmDistillation_2210.14215_zh.pdf)
+
+    *Michael Laskin, Luyu Wang, et al. — DeepMind · 用学习历史（而非专家序列）训练，Transformer 在上下文里蒸馏出整个 RL 算法、比源算法更数据高效；LocoFormer 跨 trial 适应与 RoboTTT 失败当上下文的理论原型；「ICL 需要显式数据结构」最早的干净证据*
+
+### [2.18 Human-Video Co-Training](#content)
+
+「把人类数据写进权重的显式路线」——动作级共训的三种对齐策略，与 EgoWAM 的 bitter lesson 合读（详见 [notes/31](notes/31_human_video_cotraining_zh.md)）。
+
+1. **HumanPlus: Humanoid Shadowing and Imitation from Humans.** CoRL 2024. [paper](https://arxiv.org/abs/2406.10454) [📄解读](notes/31_human_video_cotraining_zh.md) [🈶中译](papers/zh/HumanPlus_2406.10454_zh.pdf)
+
+    *Zipeng Fu, Qingqing Zhao, Qi Wu, Gordon Wetzstein, Chelsea Finn — Stanford · 40 小时人体运动数据 RL 训出零样本迁移的影子策略，33-DoF 人形实时跟随人类；最多 40 条演示 60–100%——人类当遥操作器而非训练数据，绕开动作头漏毒*
+
+2. **EgoMimic: Scaling Imitation Learning via Egocentric Video.** arXiv, 2024. [paper](https://arxiv.org/abs/2410.24221) [📄解读](notes/31_human_video_cotraining_zh.md) [🈶中译](papers/zh/EgoMimic_2410.24221_zh.pdf)
+
+    *Simar Kareer, et al. — Georgia Tech（Danfei Xu 组，EgoWAM 前作）· Aria 眼镜第一人称数据与机器人数据平等共训（同款眼镜 + 动作归一化 + 视觉遮罩）；追加 1 小时人类数据价值显著高于 1 小时机器人数据*
+
+3. **Humanoid Policy ~ Human Policy (PH2D / HAT).** arXiv, 2025. [paper](https://arxiv.org/abs/2503.13441) [📄解读](notes/31_human_video_cotraining_zh.md) [🈶中译](papers/zh/PH2D_2503.13441_zh.pdf)
+
+    *UCSD — 消费级头显（Vision Pro / Quest 3）采集任务导向第一人称数据，人与人形作同一策略的两个具身域共训；分布外泛化接近 100% 相对提升（Humanoid A）*
+
+### [2.19 Benchmarks & Data Foundations](#content)
+
+「数字的口径从哪来」——被本仓库论文反复使用的评测协议与数据地基，含「RoboTwin 2.0 上 π0.5 复现 43 vs 83」的解释与真机 one-shot 协议建议（详见 [notes/32](notes/32_benchmarks_and_data_foundations_zh.md)）。
+
+1. **LIBERO: Benchmarking Knowledge Transfer for Lifelong Robot Learning.** NeurIPS 2023. [paper](https://arxiv.org/abs/2306.03310) [📄解读](notes/32_benchmarks_and_data_foundations_zh.md) [🈶中译](papers/zh/LIBERO_2306.03310_zh.pdf)
+
+    *Bo Liu, Yifeng Zhu, et al. — UT Austin · 四套件 130 任务，为终身学习设计却被当成通用打分板；2026 年已接近饱和（StellaVLA 98.8）*
+
+2. **RoboTwin 2.0: A Scalable Data Generator and Benchmark with Strong Domain Randomization.** arXiv, 2025. [paper](https://arxiv.org/abs/2506.18088) [📄解读](notes/32_benchmarks_and_data_foundations_zh.md) [🈶中译](papers/zh/RoboTwin2_2506.18088_zh.pdf)
+
+    *Tianxing Chen, et al. — Lumina EAI 等 · 50 双臂任务、五种具身、731 物体、五轴域随机化，每任务 50 演示 / 100 rollout / Easy-Hard 两档；LingBot-VA、Zero-WAM、Motus、Fast-WAM 的主战场，基线复现值不可跨论文引用*
+
+3. **Open X-Embodiment: Robotic Learning Datasets and RT-X Models.** ICRA 2024. [paper](https://arxiv.org/abs/2310.08864) [📄解读](notes/32_benchmarks_and_data_foundations_zh.md) [🈶中译](papers/zh/OXE_2310.08864_zh.pdf)
+
+    *21 家机构 — 22 种具身、100 万+ 轨迹、527 技能；RT-1-X 小数据集平均 +50%，RT-2-X（55B）涌现能力超 RT-2；OpenVLA/Octo/π0/LAPA 的公共预训练地基，子集异构是 VLA 数字不可比的隐藏来源*
+
+4. **Data Scaling Laws in Imitation Learning for Robotic Manipulation.** ICLR 2025. [paper](https://arxiv.org/abs/2410.18647) [📄解读](notes/32_benchmarks_and_data_foundations_zh.md) [🈶中译](papers/zh/DataScalingLaws_2410.18647_zh.pdf)
+
+    *Fanqi Lin, Yingdong Hu, et al. — 清华 · 上海期智 · 4 万条演示、1.5 万次真机 rollout：泛化随环境数与物体数呈幂律，单组合内演示数很快饱和；32 环境 × 1 物体 × 50 演示即达约 90%——BPP「任务多样性 > 每任务密度」的独立同构证据*
+
+### [2.20 Embodied Safety & Prompt Injection](#content)
+
+「当技能接口开放给任意视频，攻击面在哪」——本节同时验证趋势报告预测 P5，结论：语言层越狱、感知层对抗、训练期演示投毒后门三层已成体系，**推理期视频演示注入**是唯一空白（详见 [notes/33](notes/33_embodied_safety_zh.md)）。
+
+1. **BadRobot: Jailbreaking Embodied LLM Agents in the Physical World.** ICLR 2025. [paper](https://arxiv.org/abs/2407.20242) [📄解读](notes/33_embodied_safety_zh.md) [🈶中译](papers/zh/BadRobot_2407.20242_zh.pdf)
+
+    *Hangtao Zhang, et al. — 语音交互具身 LLM 的三类漏洞（LLM 可操纵 / 语言-动作错位 / 世界知识缺陷），恶意物理动作查询基准与 MSR 指标*
+
+2. **Jailbreaking LLM-Controlled Robots (RoboPAIR).** ICRA 2025. [paper](https://arxiv.org/abs/2410.13691) [📄解读](notes/33_embodied_safety_zh.md) [🈶中译](papers/zh/RoboPAIR_2410.13691_zh.pdf)
+
+    *Alexander Robey, et al. — UPenn · Dolphins / Jackal / Unitree Go2 三个真实系统常达 100% 越狱成功率，首次越狱商用机器人；「视频当纯上下文」比直接指令更易绕过对齐（100% vs 近乎全拒）*
+
+3. **Exploring the Adversarial Vulnerabilities of Vision-Language-Action Models in Robotics.** arXiv, 2024. [paper](https://arxiv.org/abs/2411.13587) [📄解读](notes/33_embodied_safety_zh.md) [PDF](papers/pdf/AdvVLA_2411.13587.pdf)
+
+    *UADA / UPA / TMA 三类攻击 + 物理可用的对抗补丁，仿真任务成功率最高降 100%；感知层攻击可直接施加在演示帧上*
+
+4. **Compromising Embodied Agents with Contextual Backdoor Attacks.** arXiv, 2024-08. [paper](https://arxiv.org/abs/2408.02882) [📄解读](notes/33_embodied_safety_zh.md) [🈶中译](papers/zh/ContextualBackdoor_2408.02882_zh.pdf)
+
+    *只投毒少数上下文演示即可让黑盒 LLM 生成带条件缺陷的具身程序，覆盖规划/操作/自动驾驶真机——文献里与「上下文演示注入」最接近的工作，早于本仓库预测 P5 的做出时间*
+
+5. **BadVLA: Towards Backdoor Attacks on VLA Models via Objective-Decoupled Optimization.** arXiv, 2025. [paper](https://arxiv.org/abs/2505.16640) [📄解读](notes/33_embodied_safety_zh.md) [🈶中译](papers/zh/BadVLA_2505.16640_zh.pdf)
+
+    *目标解耦两阶段后门：感知模块注入最小触发、动作头只用干净数据微调；多基准接近 100% 攻击成功率且对微调鲁棒*
+
+6. **State Backdoor: Stealthy Real-world Poisoning Attack on VLA in State Space.** arXiv, 2026. [paper](https://arxiv.org/abs/2601.04266) [📄解读](notes/33_embodied_safety_zh.md) [🈶中译](papers/zh/StateBackdoor_2601.04266_zh.pdf)
+
+    *机器人初始关节位形当触发器（偏好引导遗传算法搜索），ACT / DP / SmolVLA / π0 / OpenVLA 五模型 SO101 真机超 90% 成功率且抗经典防御*
+
 ## [3. Repository Structure](#content)
 
 ```
 awesome_ICL/
 ├── README.md                  ← 本文件
 ├── papers/
-│   ├── pdf/                   ← 46 篇英文原版 PDF（含 LLM 背景 3 篇 + 理论 4 篇）
-│   ├── zh/                    ← 39 篇中文翻译 PDF（super_translate，DeepSeek 后端）
+│   ├── pdf/                   ← 65 篇英文原版 PDF（含 LLM 背景 3 篇 + 理论 4 篇）
+│   ├── zh/                    ← 57 篇中文翻译 PDF（super_translate，DeepSeek 后端）
 │   └── cache/                 ← 翻译块级缓存（可续跑，不入库）
-├── notes/                     ← 27 份深度解读（01–09、11–28，中文）
+├── notes/                     ← 32 份深度解读（01–09、11–33，中文）
 ├── insights/                  ← 趋势与洞察报告（10）
 ├── sources/                   ← S1 博客、Rhoda DVA 博客与微信深度综述存档
 ├── report/                    ← 汇总 HTML PPT / PPT PDF / 全文报告 HTML+PDF
@@ -345,8 +449,9 @@ awesome_ICL/
 4. [`notes/12_ZeroWAM_zh.md`](notes/12_ZeroWAM_zh.md) + [`notes/14_WAMTTT_zh.md`](notes/14_WAMTTT_zh.md) + [`notes/15_StellaVLA_zh.md`](notes/15_StellaVLA_zh.md) + [`notes/05_RoboTTT_zh.md`](notes/05_RoboTTT_zh.md) — 四篇 EICL 论文的完整拼图
 5. [`notes/22_ICL_theory_zh.md`](notes/22_ICL_theory_zh.md) + [`notes/23_worldmodel_lineage_zh.md`](notes/23_worldmodel_lineage_zh.md) — 纵深专题：ICL 机制理论与世界模型上游谱系
 6. [`notes/25_osil_origins_zh.md`](notes/25_osil_origins_zh.md)（2017→2026 九年对照）+ [`notes/26_generative_action_heads_zh.md`](notes/26_generative_action_heads_zh.md)（为什么都是生成模型）+ [`notes/24_foundation_VLAs_zh.md`](notes/24_foundation_VLAs_zh.md)（站在谁的肩上）— 历史与底座三专题
-7. [`notes/27_human_data_pipelines_zh.md`](notes/27_human_data_pipelines_zh.md) + [`notes/28_video_action_contemporaries_zh.md`](notes/28_video_action_contemporaries_zh.md) — 数据管线与同代对照组
-8. 其余解读按需取用；每份的「延伸批判」与「关系定位」两节是与论文摘要差异最大的增量内容
+7. [`notes/27_human_data_pipelines_zh.md`](notes/27_human_data_pipelines_zh.md) + [`notes/31_human_video_cotraining_zh.md`](notes/31_human_video_cotraining_zh.md) + [`notes/29_latent_action_bridge_zh.md`](notes/29_latent_action_bridge_zh.md) — 人类数据的三条桥：管线、共训、潜动作
+8. [`notes/32_benchmarks_and_data_foundations_zh.md`](notes/32_benchmarks_and_data_foundations_zh.md)（口径从哪来 + 真机 one-shot 协议建议）+ [`notes/33_embodied_safety_zh.md`](notes/33_embodied_safety_zh.md)（攻击面与 P5 验证）+ [`notes/30_incontext_rl_precursors_zh.md`](notes/30_incontext_rl_precursors_zh.md)（算法前史）
+9. 其余解读按需取用；每份的「延伸批判」与「关系定位」两节是与论文摘要差异最大的增量内容
 
 ## [5. Reproduce](#content)
 
@@ -356,6 +461,7 @@ bash scripts/translate_queue.sh
 bash scripts/translate_queue2.sh
 bash scripts/translate_queue3.sh
 bash scripts/translate_queue4.sh
+bash scripts/translate_queue5.sh   # 第五批（含 queue5b 补充）
 
 # 全文报告 PDF（pandoc 合并 md → HTML → Chrome headless 打印）
 python3 scripts/build_full_report.py
@@ -378,6 +484,6 @@ N. **论文标题.** Venue, 年份. [paper](arXiv 链接), [code](代码链接)
     *作者 — 机构 · 一句话定位*
 ```
 
-要求：(1) 归入 2.1–2.15 中最贴切的分类；(2) 一句话定位需说明与「演示如何被策略用上」这条主线的关系；(3) 成功率数字必须注明任务集与判定口径。
+要求：(1) 归入 2.1–2.20 中最贴切的分类；(2) 一句话定位需说明与「演示如何被策略用上」这条主线的关系；(3) 成功率数字必须注明任务集与判定口径。
 
 > 注：知乎文章（p/2077872253551878182，涌现之争主题）因 JS 反爬无法存档正文，其引用文献 [1]–[8] 已全部纳入本仓库；两篇微信深度文章存档于 [`sources/`](sources/)。

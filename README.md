@@ -8,7 +8,7 @@
 
 2026 年 8 月，三家互不相识的机构在 16 天窗口内汇合于同一能力点：**HOST**（开源）用架构设计让机器人看一段人类视频、29 秒后执行新任务（50 个未见任务 62%）；**GEN-1.5** 用 50 万小时数据预训练让 one-shot ICL 作为涌现能力出现（10 任务 59%）；**S1** 把主张推到最远——一条视频演示执行预训练从未见过、最长 10 分钟的任务（66%，语言提示同规模仅 9%）。同月，四篇学术论文（WAM-TTT / RoboTTT / StellaVLA / Zero-WAM）用消融证据一致反对「ICL 免费涌现」叙事。
 
-与一般 awesome 列表不同，本仓库对每篇论文附带：**深度解读**（📄，中文，含延伸批判）、**中译全文 PDF**（🈶，super_translate 生成）、以及汇总的 22 页 PPT、66 页全文报告与趋势洞察。⭐ 标注本调研的三个主角。当前覆盖 70+ 项工作 / 74 篇论文 PDF / 35 份深度解读，含十五个纵深专题：ICL 机制理论、世界模型上游谱系、基座 VLA、One-Shot 模仿源头（2017 起）、生成式动作头奠基、人类数据管线、视频-动作同代对照组、潜动作桥梁、上下文 RL 前史、人类视频共训、评测基准与数据地基、具身安全与提示注入、演示的几何编码（轨迹/点轨迹/光流提示）、规划层 ICL、检索增强与技能库。
+与一般 awesome 列表不同，本仓库对每篇论文附带：**深度解读**（📄，中文，含延伸批判）、**中译全文 PDF**（🈶，super_translate 生成）、以及汇总的 22 页 PPT、66 页全文报告与趋势洞察。⭐ 标注本调研的三个主角。当前覆盖 80+ 项工作 / 82 篇论文 PDF / 38 份深度解读，含十八个纵深专题：ICL 机制理论、世界模型上游谱系、基座 VLA、One-Shot 模仿源头（2017 起）、生成式动作头奠基、人类数据管线、视频-动作同代对照组、潜动作桥梁、上下文 RL 前史、人类视频共训、评测基准与数据地基、具身安全与提示注入、演示的几何编码（轨迹/点轨迹/光流提示）、规划层 ICL、检索增强与技能库、视觉 ICL 前史、开源高效 VLA 对照、适应旋钮两端（测试时计算 / RL 后训练）。
 
 > 所有成功率数字都依赖各自的任务集与判定口径，**不同工作的数字禁止直接比大小**；详见各篇解读的「延伸批判」节。
 
@@ -63,7 +63,11 @@
 </tr>
 <tr>
 	<td>&emsp;<a href="#223-retrieval--skill-libraries">2.23 Retrieval & Skill Libraries</a></td>
-	<td></td>
+	<td>&emsp;<a href="#224-visual-icl-precursors">2.24 Visual ICL Precursors</a></td>
+</tr>
+<tr>
+	<td>&emsp;<a href="#225-open--efficient-vlas">2.25 Open & Efficient VLAs</a></td>
+	<td>&emsp;<a href="#226-adaptation-dial-extremes">2.26 Adaptation-Dial Extremes</a></td>
 </tr>
 <tr><td colspan="2"><a href="#3-repository-structure">3. Repository Structure</a></td></tr>
 <tr><td colspan="2"><a href="#4-recommended-reading-order">4. Recommended Reading Order</a></td></tr>
@@ -480,16 +484,60 @@ ICL 本身是什么——LLM 侧的机制层答案，具身域验证全部空白
 
     *智元机器人 — 100 万+ 轨迹 / 217 任务 / 五类场景，预训练超 OXE 30%、十分之一小时数即 +18%；GO-1 的 ViLLA 三段架构（潜动作模型 + 潜动作规划器 + 动作专家）具备 ICL 化的两个前提却尚未做 ICL——与 HOST、Zero-WAM 形成各缺一角的三角*
 
+### [2.24 Visual ICL Precursors](#content)
+
+「机器人 ICL 之前，纯视觉的上下文学习长什么样」——具身 ICL 相对视觉 ICL 的全部增量困难可归结为时间对齐、具身翻译、闭环三条（详见 [notes/37](notes/37_visual_icl_precursors_zh.md)）。理论背景不做中译。
+
+1. **Visual Prompting via Image Inpainting.** NeurIPS 2022. [paper](https://arxiv.org/abs/2209.00647) [📄解读](notes/37_visual_icl_precursors_zh.md) [🈶中译](papers/zh/VisualPrompting_2209.00647_zh.pdf)
+
+    *Amir Bar, Yossi Gandelsman, Trevor Darrell, Amir Globerson, Alexei Efros — Berkeley · Tel Aviv · 视觉 ICL 归约为 inpainting；关键是 8.8 万张 arXiv 论文图表——「示例并排」结构的训练数据才涌现 ICL，Xie 可辨识性条件的视觉实证*
+
+2. **Painter: Images Speak in Images, A Generalist Painter for In-Context Visual Learning.** CVPR 2023. [paper](https://arxiv.org/abs/2212.02499) [📄解读](notes/37_visual_icl_precursors_zh.md) [🈶中译](papers/zh/Painter_2212.02499_zh.pdf)
+
+    *Xinlong Wang, et al. — BAAI · 浙大 · 北大 · 把所有视觉任务输出重定义为图像，一个模型七任务与专用模型可比——「输出统一到一个模态则 ICL 变易」是 WAM 路线的 CV 版论证*
+
+3. **LVM: Sequential Modeling Enables Scalable Learning for Large Vision Models.** CVPR 2024. [paper](https://arxiv.org/abs/2312.00785) [📄解读](notes/37_visual_icl_precursors_zh.md) [🈶中译](papers/zh/LVM_2312.00785_zh.pdf)
+
+    *Yutong Bai, et al. — Berkeley · JHU · 不用语言，4200 亿视觉 token / 16.4 亿图像上「视觉句子」下一 token 预测，3 亿到 30 亿参数损失平滑下降；视觉 ICL 的 scaling 证据支持平滑改进而非相变*
+
+### [2.25 Open & Efficient VLAs](#content)
+
+「基线的基线」——被 ICL 论文当对照的第二梯队，以及「微调配方比模型本身更影响数字」的实证（详见 [notes/38](notes/38_open_efficient_VLAs_zh.md)）。
+
+1. **RDT-1B: A Diffusion Foundation Model for Bimanual Manipulation.** ICLR 2025. [paper](https://arxiv.org/abs/2410.07864) [📄解读](notes/38_open_efficient_VLAs_zh.md) [🈶中译](papers/zh/RDT1B_2410.07864_zh.pdf)
+
+    *Songming Liu, et al. — 清华 TSAIL · 1.2B 纯扩散双臂基座（46 数据集 / 100 万+ 轨迹 / 21TB），物理可解释统一动作空间；真机超基线 56%，1–5 样本学新技能；GO-1 与 OpenVLA-OFT 的对照基线*
+
+2. **OpenVLA-OFT: Fine-Tuning Vision-Language-Action Models — Optimizing Speed and Success.** arXiv, 2025. [paper](https://arxiv.org/abs/2502.19645) [📄解读](notes/38_open_efficient_VLAs_zh.md) [🈶中译](papers/zh/OpenVLAOFT_2502.19645_zh.pdf)
+
+    *Moo Jin Kim, Chelsea Finn, Percy Liang — Stanford · 同一 OpenVLA 换微调配方（并行解码 + 连续动作 + L1 + 分块）：LIBERO 76.5% → 97.1%，吞吐 26 倍——「基线配方决定数字」最干净的证据，也把 LIBERO 推到饱和*
+
+3. **SmolVLA: A Vision-Language-Action Model for Affordable and Efficient Robotics.** arXiv, 2025. [paper](https://arxiv.org/abs/2506.01844) [📄解读](notes/38_open_efficient_VLAs_zh.md) [🈶中译](papers/zh/SmolVLA_2506.01844_zh.pdf)
+
+    *Mustafa Shukor, et al. — Hugging Face · 4.5 亿参数、不到 3 万条社区数据、消费级 GPU/CPU 可跑，与 10 倍大 VLA 可比；参数量不是能力代理——涌现之争中「规模」需拆成数据小时、任务覆盖、参数量三维*
+
+### [2.26 Adaptation-Dial Extremes](#content)
+
+「适应预算旋钮」的两个新刻度：不改权重的测试时计算，与改权重的真机 RL（详见 [notes/39](notes/39_adaptation_dial_extremes_zh.md)）。
+
+1. **RoboMonkey: Scaling Test-Time Sampling and Verification for VLA Models.** arXiv, 2025. [paper](https://arxiv.org/abs/2506.17811) [📄解读](notes/39_adaptation_dial_extremes_zh.md) [🈶中译](papers/zh/RoboMonkey_2506.17811_zh.pdf)
+
+    *Jacky Kwok, et al. — Stanford · Berkeley · NVIDIA · 动作误差随采样数呈幂律——推理时 scaling law；采样 + 高斯扰动投票 + VLM 验证器，分布外 +25% / 分布内 +9%；验证器即 notes/33 所需「独立于演示通道的安全裁决器」的现成形态*
+
+2. **ConRFT: A Reinforced Fine-tuning Method for VLA Models via Consistency Policy.** RSS 2025. [paper](https://arxiv.org/abs/2502.05450) [📄解读](notes/39_adaptation_dial_extremes_zh.md) [🈶中译](papers/zh/ConRFT_2502.05450_zh.pdf)
+
+    *Yuhui Chen, et al. — 中科院自动化所 · 一致性目标的离线 + 人在环在线两阶段 RL 微调，八个真机任务 45–90 分钟到 96.3%（较监督 +144%）——ICL 解决「能不能做」，RL 后训练解决「做得多可靠」*
+
 ## [3. Repository Structure](#content)
 
 ```
 awesome_ICL/
 ├── README.md                  ← 本文件
 ├── papers/
-│   ├── pdf/                   ← 74 篇英文原版 PDF（含 LLM 背景 3 篇 + 理论 4 篇）
-│   ├── zh/                    ← 67 篇中文翻译 PDF（super_translate，DeepSeek 后端）
+│   ├── pdf/                   ← 82 篇英文原版 PDF（含 LLM 背景 3 篇 + 理论 4 篇）
+│   ├── zh/                    ← 75 篇中文翻译 PDF（super_translate，DeepSeek 后端）
 │   └── cache/                 ← 翻译块级缓存（可续跑，不入库）
-├── notes/                     ← 35 份深度解读（01–09、11–36，中文）
+├── notes/                     ← 38 份深度解读（01–09、11–39，中文）
 ├── insights/                  ← 趋势与洞察报告（10）
 ├── sources/                   ← S1 博客、Rhoda DVA 博客与微信深度综述存档
 ├── report/                    ← 汇总 HTML PPT / PPT PDF / 全文报告 HTML+PDF
@@ -508,7 +556,8 @@ awesome_ICL/
 7. [`notes/27_human_data_pipelines_zh.md`](notes/27_human_data_pipelines_zh.md) + [`notes/31_human_video_cotraining_zh.md`](notes/31_human_video_cotraining_zh.md) + [`notes/29_latent_action_bridge_zh.md`](notes/29_latent_action_bridge_zh.md) — 人类数据的三条桥：管线、共训、潜动作
 8. [`notes/32_benchmarks_and_data_foundations_zh.md`](notes/32_benchmarks_and_data_foundations_zh.md)（口径从哪来 + 真机 one-shot 协议建议）+ [`notes/33_embodied_safety_zh.md`](notes/33_embodied_safety_zh.md)（攻击面与 P5 验证）+ [`notes/30_incontext_rl_precursors_zh.md`](notes/30_incontext_rl_precursors_zh.md)（算法前史）
 9. [`notes/34_visual_prompt_intermediates_zh.md`](notes/34_visual_prompt_intermediates_zh.md)（演示的几何编码）+ [`notes/35_planner_level_icl_zh.md`](notes/35_planner_level_icl_zh.md)（规划层 vs 策略层 ICL 的分界）+ [`notes/36_retrieval_and_skill_libraries_zh.md`](notes/36_retrieval_and_skill_libraries_zh.md)（上下文从哪来）
-10. 其余解读按需取用；每份的「延伸批判」与「关系定位」两节是与论文摘要差异最大的增量内容
+10. [`notes/37_visual_icl_precursors_zh.md`](notes/37_visual_icl_precursors_zh.md)（视觉 ICL 已解决什么、具身 ICL 还要解决什么）+ [`notes/38_open_efficient_VLAs_zh.md`](notes/38_open_efficient_VLAs_zh.md)（基线配方效应）+ [`notes/39_adaptation_dial_extremes_zh.md`](notes/39_adaptation_dial_extremes_zh.md)（完整适应刻度盘）
+11. 其余解读按需取用；每份的「延伸批判」与「关系定位」两节是与论文摘要差异最大的增量内容
 
 ## [5. Reproduce](#content)
 
@@ -520,6 +569,7 @@ bash scripts/translate_queue3.sh
 bash scripts/translate_queue4.sh
 bash scripts/translate_queue5.sh   # 第五批（含 queue5b/5c 补充）
 bash scripts/translate_queue6.sh
+bash scripts/translate_queue7.sh
 
 # 全文报告 PDF（pandoc 合并 md → HTML → Chrome headless 打印）
 python3 scripts/build_full_report.py
@@ -542,6 +592,6 @@ N. **论文标题.** Venue, 年份. [paper](arXiv 链接), [code](代码链接)
     *作者 — 机构 · 一句话定位*
 ```
 
-要求：(1) 归入 2.1–2.23 中最贴切的分类；(2) 一句话定位需说明与「演示如何被策略用上」这条主线的关系；(3) 成功率数字必须注明任务集与判定口径。
+要求：(1) 归入 2.1–2.26 中最贴切的分类；(2) 一句话定位需说明与「演示如何被策略用上」这条主线的关系；(3) 成功率数字必须注明任务集与判定口径。
 
 > 注：知乎文章（p/2077872253551878182，涌现之争主题）因 JS 反爬无法存档正文，其引用文献 [1]–[8] 已全部纳入本仓库；两篇微信深度文章存档于 [`sources/`](sources/)。

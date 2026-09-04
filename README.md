@@ -8,7 +8,7 @@
 
 2026 年 8 月，三家互不相识的机构在 16 天窗口内汇合于同一能力点：**HOST**（开源）用架构设计让机器人看一段人类视频、29 秒后执行新任务（50 个未见任务 62%）；**GEN-1.5** 用 50 万小时数据预训练让 one-shot ICL 作为涌现能力出现（10 任务 59%）；**S1** 把主张推到最远——一条视频演示执行预训练从未见过、最长 10 分钟的任务（66%，语言提示同规模仅 9%）。同月，四篇学术论文（WAM-TTT / RoboTTT / StellaVLA / Zero-WAM）用消融证据一致反对「ICL 免费涌现」叙事。
 
-与一般 awesome 列表不同，本仓库对每篇论文附带：**深度解读**（📄，中文，含延伸批判）、**中译全文 PDF**（🈶，super_translate 生成）、以及汇总的 22 页 PPT、66 页全文报告与趋势洞察。⭐ 标注本调研的三个主角。当前覆盖 85+ 项工作 / 85 篇论文 PDF / 40 份深度解读，含十九个纵深专题：ICL 机制理论、世界模型上游谱系、基座 VLA、One-Shot 模仿源头（2017 起）、生成式动作头奠基、人类数据管线、视频-动作同代对照组、潜动作桥梁、上下文 RL 前史、人类视频共训、评测基准与数据地基、具身安全与提示注入、演示的几何编码（轨迹/点轨迹/光流提示）、规划层 ICL、检索增强与技能库、视觉 ICL 前史、开源高效 VLA 对照、适应旋钮两端（测试时计算 / RL 后训练）、后训练干扰（后面的训练怎样吃掉前面的能力）。
+与一般 awesome 列表不同，本仓库对每篇论文附带：**深度解读**（📄，中文，含延伸批判）、**中译全文 PDF**（🈶，super_translate 生成）、以及汇总的 22 页 PPT、66 页全文报告与趋势洞察。⭐ 标注本调研的三个主角。当前覆盖 85+ 项工作 / 86 篇论文 PDF / 41 份深度解读，含十九个纵深专题：ICL 机制理论、世界模型上游谱系、基座 VLA、One-Shot 模仿源头（2017 起）、生成式动作头奠基、人类数据管线、视频-动作同代对照组、潜动作桥梁、上下文 RL 前史、人类视频共训、评测基准与数据地基、具身安全与提示注入、演示的几何编码（轨迹/点轨迹/光流提示）、规划层 ICL、检索增强与技能库、视觉 ICL 前史、开源高效 VLA 对照、适应旋钮两端（测试时计算 / RL 后训练）、后训练干扰（后面的训练怎样吃掉前面的能力）。
 
 > 所有成功率数字都依赖各自的任务集与判定口径，**不同工作的数字禁止直接比大小**；详见各篇解读的「延伸批判」节。
 
@@ -536,6 +536,10 @@ ICL 本身是什么——LLM 侧的机制层答案，具身域验证全部空白
 
     *Yuhui Chen, et al. — 中科院自动化所 · 一致性目标的离线 + 人在环在线两阶段 RL 微调，八个真机任务 45–90 分钟到 96.3%（较监督 +144%）——ICL 解决「能不能做」，RL 后训练解决「做得多可靠」*
 
+3. **SmoothRL: Online Reinforcement Learning During Asynchronous Execution.** arXiv, 2026-08-30. [paper](https://arxiv.org/abs/2608.29768) [📄解读](notes/42_SmoothRL_zh.md) [🈶中译](papers/zh/SmoothRL_2608.29768_zh.pdf)
+
+    *Astribot Team（星尘智能）— 指出真机在线 RL 的训练-部署错位：动作分块 + 异步推理下每块只有一部分被执行，同步假设的值梯度流进从未进入环境的动作（梯度污染）；解法是 committed / execution / discarded 三段划分 + 只对 execution 段回传值梯度 + critic 看全跨度 + 训练时就跑异步循环。冻结 π0.5 外挂轻量残差 actor-critic，Astribot S1 三任务 250 episode：抛掷 39→94%、笔帽 8→83%、开箱 30→90%，加速度/jerk RMS 降 52%/47%；单次运行、缺异步基线与消融*
+
 ### [2.27 Post-Training Interference & Forgetting](#content)
 
 「后面的任务训练怎样吃掉前面学到的能力」——ICL「不改权重所以不遗忘」这一卖点的反面量化：动作微调几千步内侵蚀 VLM 接地能力、单头持续预训练令主干表征坍缩（详见 [notes/41](notes/41_posttraining_interference_zh.md)）。
@@ -554,12 +558,12 @@ ICL 本身是什么——LLM 侧的机制层答案，具身域验证全部空白
 awesome_ICL/
 ├── README.md                  ← 本文件
 ├── papers/
-│   ├── pdf/                   ← 85 篇英文原版 PDF（含 LLM 背景 3 篇 + 理论 4 篇）
-│   ├── zh/                    ← 78 篇中文翻译 PDF（super_translate，DeepSeek 后端）
+│   ├── pdf/                   ← 86 篇英文原版 PDF（含 LLM 背景 3 篇 + 理论 4 篇）
+│   ├── zh/                    ← 79 篇中文翻译 PDF（super_translate，DeepSeek 后端）
 │   └── cache/                 ← 翻译块级缓存（可续跑，不入库）
-├── notes/                     ← 40 份深度解读（01–09、11–41，中文）
+├── notes/                     ← 41 份深度解读（01–09、11–42，中文）
 ├── insights/                  ← 趋势与洞察报告（10）
-├── sources/                   ← S1 博客、Rhoda DVA 博客、Zeva 量子位报道与微信深度综述存档
+├── sources/                   ← S1 博客、Rhoda DVA 博客、Zeva 与 SmoothRL 微信深读及综述存档
 ├── report/                    ← 汇总 HTML PPT / PPT PDF / 全文报告 HTML+PDF
 ├── scripts/                   ← 翻译队列与报告构建脚本
 └── tools/                     ← 工具仓库（super_translate 等，不入库）
@@ -576,7 +580,7 @@ awesome_ICL/
 7. [`notes/27_human_data_pipelines_zh.md`](notes/27_human_data_pipelines_zh.md) + [`notes/31_human_video_cotraining_zh.md`](notes/31_human_video_cotraining_zh.md) + [`notes/29_latent_action_bridge_zh.md`](notes/29_latent_action_bridge_zh.md) — 人类数据的三条桥：管线、共训、潜动作
 8. [`notes/32_benchmarks_and_data_foundations_zh.md`](notes/32_benchmarks_and_data_foundations_zh.md)（口径从哪来 + 真机 one-shot 协议建议）+ [`notes/33_embodied_safety_zh.md`](notes/33_embodied_safety_zh.md)（攻击面与 P5 验证）+ [`notes/30_incontext_rl_precursors_zh.md`](notes/30_incontext_rl_precursors_zh.md)（算法前史）
 9. [`notes/34_visual_prompt_intermediates_zh.md`](notes/34_visual_prompt_intermediates_zh.md)（演示的几何编码）+ [`notes/35_planner_level_icl_zh.md`](notes/35_planner_level_icl_zh.md)（规划层 vs 策略层 ICL 的分界）+ [`notes/36_retrieval_and_skill_libraries_zh.md`](notes/36_retrieval_and_skill_libraries_zh.md)（上下文从哪来）
-10. [`notes/37_visual_icl_precursors_zh.md`](notes/37_visual_icl_precursors_zh.md)（视觉 ICL 已解决什么、具身 ICL 还要解决什么）+ [`notes/38_open_efficient_VLAs_zh.md`](notes/38_open_efficient_VLAs_zh.md)（基线配方效应）+ [`notes/39_adaptation_dial_extremes_zh.md`](notes/39_adaptation_dial_extremes_zh.md)（完整适应刻度盘）
+10. [`notes/37_visual_icl_precursors_zh.md`](notes/37_visual_icl_precursors_zh.md)（视觉 ICL 已解决什么、具身 ICL 还要解决什么）+ [`notes/38_open_efficient_VLAs_zh.md`](notes/38_open_efficient_VLAs_zh.md)（基线配方效应）+ [`notes/39_adaptation_dial_extremes_zh.md`](notes/39_adaptation_dial_extremes_zh.md) + [`notes/42_SmoothRL_zh.md`](notes/42_SmoothRL_zh.md)（完整适应刻度盘；异步执行下的在线 RL）
 11. [`notes/41_posttraining_interference_zh.md`](notes/41_posttraining_interference_zh.md) — ICL「不遗忘」卖点的反面量化：后训练怎样吃掉前面的能力
 12. 其余解读按需取用；每份的「延伸批判」与「关系定位」两节是与论文摘要差异最大的增量内容
 
@@ -592,6 +596,7 @@ bash scripts/translate_queue5.sh   # 第五批（含 queue5b/5c 补充）
 bash scripts/translate_queue6.sh
 bash scripts/translate_queue7.sh
 bash scripts/translate_queue8.sh
+bash scripts/translate_queue9.sh
 
 # 全文报告 PDF（pandoc 合并 md → HTML → Chrome headless 打印）
 python3 scripts/build_full_report.py

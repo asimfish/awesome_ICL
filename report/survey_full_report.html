@@ -27,9 +27,9 @@ hr{border:none;border-top:1px solid #dde5ea;margin:16px 0}
 <div class="cover">
   <div class="t1">机器人 One-Shot 技能习得<br>调研全文报告</div>
   <div class="t2">HOST（arXiv 2607.20033）× GEN-1.5 × S1 × Zeva 及同期 85+ 项工作的深度解读与趋势洞察<br>从「训练问题」到「提示问题」的范式拐点，以及「涌现 vs 机制」之争</div>
-  <div class="meta">调研日期：2026-08-31（增补 S1 与四篇 EICL 论文后修订）<br>论文范围：HOST · GEN-0/1/1.5 · S1 · Zeva · StarVLA · VLAct · LocoFormer · Instant Policy · ICRT · RoboTTT · WAM-TTT · StellaVLA · Zero-WAM · LingBot-VA(v1/v2) · BPP · RICL · Vid2Robot · ViVLA · π0.5 · Wall-OSS · EgoScale · EgoWAM · WALL-WM · GR-3 · ManiLong-Shot · FACTR 2 · Fast-WAM · UniPi · V-JEPA 2 · Cosmos · OpenVLA · π0 · GR00T N1 · Duan 2017 · Finn 2017 · IMOP · Diffusion Policy · ACT/ALOHA · UMI · RH20T · Ego2Robot · DreamZero · Motus · DVA · Genie · LAPA · UniVLA · HumanPlus · EgoMimic · PH2D · LIBERO · RoboTwin 2.0 · OXE · Data Scaling Laws · BadRobot · RoboPAIR · AdvVLA · Contextual Backdoor · BadVLA · State Backdoor · RT-Trajectory · ATM · Im2Flow2Act · Code as Policies · VoxPoser · ReKep · Behavior Retrieval · STRAP · AgiBot GO-1 · RDT-1B · OpenVLA-OFT · SmolVLA · RoboMonkey · ConRFT（背景与理论：Visual Prompting / Painter / LVM / DT / Prompt-DT / Algorithm Distillation / GPT-3 / 涌现 / Mirage / 贝叶斯 ICL / Induction Heads / ICL≡GD / TTT 层）<br>配套材料：78 篇论文中英对照 PDF · 25 页汇总 PPT（survey_slides.html / .pdf）</div>
+  <div class="meta">调研日期：2026-08-31（增补 S1 与四篇 EICL 论文后修订）<br>论文范围：HOST · GEN-0/1/1.5 · S1 · Zeva · StarVLA · VLAct · SmoothRL · LocoFormer · Instant Policy · ICRT · RoboTTT · WAM-TTT · StellaVLA · Zero-WAM · LingBot-VA(v1/v2) · BPP · RICL · Vid2Robot · ViVLA · π0.5 · Wall-OSS · EgoScale · EgoWAM · WALL-WM · GR-3 · ManiLong-Shot · FACTR 2 · Fast-WAM · UniPi · V-JEPA 2 · Cosmos · OpenVLA · π0 · GR00T N1 · Duan 2017 · Finn 2017 · IMOP · Diffusion Policy · ACT/ALOHA · UMI · RH20T · Ego2Robot · DreamZero · Motus · DVA · Genie · LAPA · UniVLA · HumanPlus · EgoMimic · PH2D · LIBERO · RoboTwin 2.0 · OXE · Data Scaling Laws · BadRobot · RoboPAIR · AdvVLA · Contextual Backdoor · BadVLA · State Backdoor · RT-Trajectory · ATM · Im2Flow2Act · Code as Policies · VoxPoser · ReKep · Behavior Retrieval · STRAP · AgiBot GO-1 · RDT-1B · OpenVLA-OFT · SmolVLA · RoboMonkey · ConRFT（背景与理论：Visual Prompting / Painter / LVM / DT / Prompt-DT / Algorithm Distillation / GPT-3 / 涌现 / Mirage / 贝叶斯 ICL / Induction Heads / ICL≡GD / TTT 层）<br>配套材料：79 篇论文中英对照 PDF · 25 页汇总 PPT（survey_slides.html / .pdf）</div>
 </div>
-<div class="toc"><h1 class="first" style="page-break-before:avoid">目录</h1><ol><li>HOST 深度解读：机器人从一段人类视频里秒级习得操作技能</li><li>GEN 系列深度解读：Generalist AI 的具身基础模型三部曲</li><li>Instant Policy 深度解读：把 in-context 模仿学习变成图扩散，用仿真伪演示喂出即时策略</li><li>ICRT 深度解读：next-token prediction 原教旨主义的机器人 in-context learning 配方</li><li>RoboTTT 深度解读：把 Test-Time Training 装进机器人策略，上下文扩到 8K 步</li><li>BPP 深度解读：一条演示当 prompt，任务多样性是 in-context 操作的第一驱动力</li><li>RICL 深度解读：给预训练 VLA 事后注入 in-context 学习能力</li><li>Vid2Robot 深度解读：端到端视频条件策略的 Google 规模实践</li><li>外围论文速览：one-shot 技能习得调研的五个坐标</li><li>EgoWAM 深度解读：换掉世界预测目标，人类数据才不「漏毒」进动作头</li><li>Zero-WAM 深度解读：把人类视频「造」出来当任务规格，再用 IFP 逼模型真的去看</li><li>WALL-WM 深度解读：把世界-动作建模「循事件关节」下刀</li><li>WAM-TTT 深度解读：把人类演示写进快权重记忆，且只许写在感知侧</li><li>StellaVLA 深度解读：把演示翻译成「为什么」，四篇里唯一真零梯度</li><li>S1 与「涌现之争」：2026 年 8 月具身 ICL 三连发的完整拼图</li><li>LocoFormer 深度解读：S1 的前夜——上下文当适应机制在运动控制域先走通</li><li>FACTR 2 深度解读：一篇力感知论文，如何被 S1 借去质疑预训练</li><li>LingBot-VA 两代深度解读：把「测试时想象」坚持到底的世界-动作模型</li><li>GR-3 深度解读：few-shot 微调流派的工业标杆，ICL 要消灭的正是它</li><li>ManiLong-Shot 深度解读：OSIL 第一个像样的公开基准，和一个 30.2% 的现实</li><li>ICL 机制理论四篇合集：涌现之争吵的那个东西，理论上到底是什么</li><li>世界模型谱系三篇合集：从像素想象到表征预测再到平台化</li><li>基座 VLA 三篇合集：ICL 工作站在谁的肩上</li><li>One-Shot 模仿学习源头三篇合集：2017 年就有的问题，2026 年为什么才成</li><li>生成式动作头奠基两篇合集：为什么 ICL 时代的机器人策略都是生成模型</li><li>人类数据管线三篇合集：ICL 的燃料从哪来——UMI、RH20T、Ego2Robot</li><li>视频-动作模型同代对照组三篇合集：WAM 战场的其他玩家</li><li>潜动作桥梁三篇合集：无动作视频怎么变成可训练的动作信号</li><li>上下文强化学习前史三篇合集：把控制写成序列建模，再把演示写成 prompt</li><li>人类视频共训三篇合集：把人类数据写进权重的显式路线</li><li>评测基准与数据地基四篇合集：数字的口径从哪来</li><li>具身安全与提示注入合集：当技能接口开放给任意视频，攻击面在哪</li><li>演示的另一种编码三篇合集：轨迹草图、点轨迹、物体光流当提示</li><li>规划层 ICL 三篇合集：LLM 自己的 few-shot 能力，直接拿来控机器人</li><li>检索增强与技能库三篇合集：上下文从哪里来——非参数记忆与 ICL 的边界</li><li>视觉 ICL 前史三篇合集：机器人 ICL 之前，纯视觉的上下文学习长什么样</li><li>开源高效 VLA 三篇合集：基线的基线——ICL 论文脚注里那些名字</li><li>适应旋钮两端两篇合集：不改权重的测试时计算，与改权重的 RL 后训练</li><li>Zeva 深度解读：冻结策略从自己的失败里学——In-Context Causal Learning</li><li>后训练干扰两篇合集：后面的任务训练，怎样吃掉前面学到的能力</li><li>趋势与洞察：机器人 One-Shot 技能习得的 2026 拐点</li></ol></div>
+<div class="toc"><h1 class="first" style="page-break-before:avoid">目录</h1><ol><li>HOST 深度解读：机器人从一段人类视频里秒级习得操作技能</li><li>GEN 系列深度解读：Generalist AI 的具身基础模型三部曲</li><li>Instant Policy 深度解读：把 in-context 模仿学习变成图扩散，用仿真伪演示喂出即时策略</li><li>ICRT 深度解读：next-token prediction 原教旨主义的机器人 in-context learning 配方</li><li>RoboTTT 深度解读：把 Test-Time Training 装进机器人策略，上下文扩到 8K 步</li><li>BPP 深度解读：一条演示当 prompt，任务多样性是 in-context 操作的第一驱动力</li><li>RICL 深度解读：给预训练 VLA 事后注入 in-context 学习能力</li><li>Vid2Robot 深度解读：端到端视频条件策略的 Google 规模实践</li><li>外围论文速览：one-shot 技能习得调研的五个坐标</li><li>EgoWAM 深度解读：换掉世界预测目标，人类数据才不「漏毒」进动作头</li><li>Zero-WAM 深度解读：把人类视频「造」出来当任务规格，再用 IFP 逼模型真的去看</li><li>WALL-WM 深度解读：把世界-动作建模「循事件关节」下刀</li><li>WAM-TTT 深度解读：把人类演示写进快权重记忆，且只许写在感知侧</li><li>StellaVLA 深度解读：把演示翻译成「为什么」，四篇里唯一真零梯度</li><li>S1 与「涌现之争」：2026 年 8 月具身 ICL 三连发的完整拼图</li><li>LocoFormer 深度解读：S1 的前夜——上下文当适应机制在运动控制域先走通</li><li>FACTR 2 深度解读：一篇力感知论文，如何被 S1 借去质疑预训练</li><li>LingBot-VA 两代深度解读：把「测试时想象」坚持到底的世界-动作模型</li><li>GR-3 深度解读：few-shot 微调流派的工业标杆，ICL 要消灭的正是它</li><li>ManiLong-Shot 深度解读：OSIL 第一个像样的公开基准，和一个 30.2% 的现实</li><li>ICL 机制理论四篇合集：涌现之争吵的那个东西，理论上到底是什么</li><li>世界模型谱系三篇合集：从像素想象到表征预测再到平台化</li><li>基座 VLA 三篇合集：ICL 工作站在谁的肩上</li><li>One-Shot 模仿学习源头三篇合集：2017 年就有的问题，2026 年为什么才成</li><li>生成式动作头奠基两篇合集：为什么 ICL 时代的机器人策略都是生成模型</li><li>人类数据管线三篇合集：ICL 的燃料从哪来——UMI、RH20T、Ego2Robot</li><li>视频-动作模型同代对照组三篇合集：WAM 战场的其他玩家</li><li>潜动作桥梁三篇合集：无动作视频怎么变成可训练的动作信号</li><li>上下文强化学习前史三篇合集：把控制写成序列建模，再把演示写成 prompt</li><li>人类视频共训三篇合集：把人类数据写进权重的显式路线</li><li>评测基准与数据地基四篇合集：数字的口径从哪来</li><li>具身安全与提示注入合集：当技能接口开放给任意视频，攻击面在哪</li><li>演示的另一种编码三篇合集：轨迹草图、点轨迹、物体光流当提示</li><li>规划层 ICL 三篇合集：LLM 自己的 few-shot 能力，直接拿来控机器人</li><li>检索增强与技能库三篇合集：上下文从哪里来——非参数记忆与 ICL 的边界</li><li>视觉 ICL 前史三篇合集：机器人 ICL 之前，纯视觉的上下文学习长什么样</li><li>开源高效 VLA 三篇合集：基线的基线——ICL 论文脚注里那些名字</li><li>适应旋钮两端两篇合集：不改权重的测试时计算，与改权重的 RL 后训练</li><li>Zeva 深度解读：冻结策略从自己的失败里学——In-Context Causal Learning</li><li>后训练干扰两篇合集：后面的任务训练，怎样吃掉前面学到的能力</li><li>SmoothRL 深度解读：在部署用的异步循环里做在线 RL——「策略输出的动作」与「机器人执行的动作」不再是同一个东西</li><li>趋势与洞察：机器人 One-Shot 技能习得的 2026 拐点</li></ol></div>
 <article id="ch1"><h1 class="first" id="host-深度解读机器人从一段人类视频里秒级习得操作技能">HOST
 深度解读：机器人从一段人类视频里秒级习得操作技能</h1>
 <blockquote>
@@ -5318,6 +5318,114 @@ LIBERO-Plus / RoboTwin 2.0 为战场，基线数字部分取自 LIBERO-Plus
 讨论的配方效应在此同样适用）。两篇都没有测第一层遗忘（任务间）——它们量化的是阶段间侵蚀，与
 HOST 的 43% 存留率不是同一口径。</p>
 </article><article id="ch41"><h1
+id="smoothrl-深度解读在部署用的异步循环里做在线-rl策略输出的动作与机器人执行的动作不再是同一个东西">SmoothRL
+深度解读：在部署用的异步循环里做在线
+RL——「策略输出的动作」与「机器人执行的动作」不再是同一个东西</h1>
+<blockquote>
+<p><strong>SmoothRL: Online Reinforcement Learning During Asynchronous
+Execution</strong> arXiv 2608.29768（2026-08-30）· 星尘智能 Astribot
+Team（作者列表见论文 Contributions 节）· 项目页
+astribot.com/research/SmoothRL
+中文深读参考：sources/wx_new_20260906.txt</p>
+</blockquote>
+<h2 id="1-一句话定位">1. 一句话定位</h2>
+<p>SmoothRL 指出真机在线 RL 的一个被普遍忽略的训练-部署错位：现代
+VLA/WAM 都靠「动作分块 +
+异步推理」隐藏几百毫秒的推理延迟，于是每个分块只有一部分真的被执行、其余被下一个分块覆盖；而现有在线
+RL 方法（RLT、EXPO-FT
+等）全部假设同步执行、把值梯度回传到整个分块——梯度流进了从未进入环境的动作，论文称之为「梯度污染」。解法是把每个分块按帧显式切成
+committed / execution / discarded 三段，只对 execution
+段回传值梯度，critic 看完整动作跨度以保持 chunk-skip Bellman
+备份无偏，并且训练时就跑与部署一致的异步循环。冻结的 π0.5
+基座外挂轻量残差 actor-critic，Astribot S1 上三个任务 250 个 episode
+后：动态抛掷 39% → 94%，笔帽装配 8% → 83%，开箱 30% → 90%；抛掷 rollout
+的加速度与 jerk RMS 分别降 52% 与
+47%。它在本调研里的位置：适应刻度盘最右端（notes/39 的 ConRFT
+一侧）的又一个真机 RL 实例，但贡献不在「RL
+能把成功率推多高」，而在把<strong>部署真实性</strong>写进了优化目标。</p>
+<h2 id="2-要解决的问题">2. 要解决的问题</h2>
+<p>三条硬要求被论文用来给现有工作分类：Online（从正在生成的数据学）、Asynchronous（推理与执行重叠、控制频率不受推理延迟限制）、Value-gradient（∂Q/∂a
+直接回传到策略参数）。离线
+RL（χ⁰、RECAP、CO-RFT）满足异步但不在线、不走值梯度；同步在线
+RL（RLT、EXPO-FT、RL、LWD）在线且走值梯度，但假设整块被执行；异步受限在线
+RL（GRRL）在线且异步，但优化变量放在冻结扩散策略的隐空间噪声里、不直接回传到动作——冻结解码器把改进上限锁在预训练动作分布内。三条同时满足的格子是空的，且这一格的问题无法靠调度设计回避：只要走值梯度又异步部署，策略更新就必然暴露于被覆盖的动作，目标函数本身必须消除污染。动机任务说明了为什么异步不可妥协：抛掷需要手臂持续加速到释放速度，同步执行在每个分块边界停顿一次，速度归零、任务直接失败。</p>
+<h2 id="3-方法">3. 方法</h2>
+<p><strong>固定延迟预算</strong>：真实推理延迟波动，committed 与
+execution 段长度本由不同推理周期决定、生成时未知。SmoothRL
+不建模随机延迟，而是估计推理时间上界 L 并强制调度——每个分块在首帧到期前
+L 步请求推理，提前完成则等待，于是两段长度都固定为
+L。作者自认代价：实际延迟偶尔超预算时循环失稳。<strong>三段划分</strong>：committed（本次推理期间已由前一分块提供的帧，当前分块对此段的预测永不影响环境）、execution（当前分块作为最新策略输出被原样执行的帧，唯一直接决定环境轨迹的部分）、discarded（被下一分块覆盖、永不到达环境的帧）。<strong>分块为原子的
+chunk-skip Bellman 备份</strong>：把一个分块当作 MDP
+的一个原子动作，transition
+记录跨段累积折扣回报与分块执行完后的观测；critic
+以生成区间奖励的真实动作序列为条件，备份无偏——关键的是 critic
+条件动作跨度不必与策略优化跨度重合。<strong>Critic 看全跨度、actor 只对
+execution 段求梯度</strong>：critic 输入 committed + execution
+两段（前者是前一分块发出的真实动作，用作并发决策的状态增广——异步执行本质上是并发决策过程，只看当前观测的
+critic 会对「在飞行中的分块」取边际化），actor 的值梯度截断到 execution
+段，建立「接收梯度的段 = 策略输出 =
+环境执行」的恒等式。<strong>平滑性显式重入目标</strong>：预训练策略的平滑性来自演示，值目标一旦推高
+Q 就无保证，于是以速度/加速度/jerk
+的逐帧界定义可执行集合并松弛为惩罚项。<strong>人类干预</strong>：绝对干预（VR
+遥操作直接替换 actor 输出）与残差干预（手柄增量加到 actor
+输出上），两者统一处理为 BC 目标——一个有信息量的实验：抛向最远容器时 VR
+绝对遥操作成功率约 30%，残差干预约 80%，因为后者保留了 base policy
+的速度曲线、操作者只需补偏差。<strong>实例化</strong>：冻结
+π0.5（逐任务微调）作 base policy 生成参考分块与 RL token；3 层 MLP actor
+预测有界修正（bound 0.05）加到参考动作；REDQ 风格 critic 集成 + TD3
+目标噪声；TD3+BC 锚点项；5Hz 推理请求（30Hz 下 L = 6 帧）、base policy
+输出 32 帧中 committed + execution 占 12 帧、其余 20 帧 discarded；先用
+50 个 base policy rollout 播种缓冲区。</p>
+<h2 id="4-实验结果">4. 实验结果</h2>
+<p><strong>平台</strong>：Astribot S1，25 自由度移动双臂（双 7-DoF 臂 +
+4-DoF 躯干 + 2-DoF 头 + 3-DoF 轮式底座），三路 224×224 相机 +
+本体感受，30Hz 输出 31 维动作，附加网络只修改 20
+个手臂维度。<strong>任务与基座</strong>：动态抛掷（18 个评估配置，base
+policy 用 500 条遥操作演示——抛掷遥操作本身只有约 50%
+成功率）、笔帽装配（12 配置，5mm 间隙，1500 条演示）、开箱（10
+配置，刀片 1mm 宽切 2–3mm 接缝，1500 条演示）；奖励稀疏、由操作员在
+episode 结束时判定成败。<strong>成功率轨迹</strong>（论文口径，评估点
+0/150/200/250 episode）：抛掷 39 → 72 → 83 → 94%；笔帽 8 → 67 → 75 →
+83%；开箱 30 → 20 → 40 → 90%——前两者单调、增益集中在前 150 个
+episode，开箱先跌破基座（探索期）再回升。<strong>失败模式的变化</strong>：base
+policy
+的失败是系统性偏移（笔帽对不同位置产生相似轨迹、开箱刀片一致左偏、抛掷近处过冲远处欠冲）；在线
+RL 后残余失败变成「近似失误」——刀片偏差在正确位置 1–2mm
+左右、抛掷落点更近容器。<strong>平滑性</strong>：真实自主抛掷 rollout
+中右末端执行器加速度与 jerk 的 RMS 相对 base policy 分别降 52% 与
+47%，分块边界的尖峰消失。</p>
+<h2 id="5-局限">5. 局限</h2>
+<p>作者自认：固定延迟预算在超时时失稳；采用直接执行策略输出而非把轨迹混合算子纳入目标，混合算子下的「每个贡献分块恰好被微分一次」扩展留作未来工作。延伸批判（部分与微信深读一致）：其一，每任务的三个非零检查点来自<strong>同一次
+RL 运行</strong>，无多种子方差；其二，每配置只评估一次，18 次中 17
+次成功（94%）的 Wilson 95% 区间约
+73–99%——数字的信息量以「从基本不可用到高度可靠」这个量级读，不以个位数读；其三，唯一对照是冻结
+base policy——缺「异步部署下直接套同步在线
+RL（不截断）」这个最关键的对照，也缺与 GRRL
+的头对头，因此<strong>梯度污染到底造成多大伤害没有被直接测量</strong>，论文的核心论点是形式化推理而非消融证据；其四，无任何系统消融（截断、平滑正则、延迟预算各自贡献）；其五，成功由操作员人工判定。</p>
+<h2 id="6-与调研主线的关系">6. 与调研主线的关系</h2>
+<p><strong>适应刻度盘最右端的第二个实例</strong>（notes/39）：ConRFT 用
+45–90 分钟在线 RL 把成功率推到 96.3%，SmoothRL 用 250 个 episode
+把三个任务推到 83–94%——两者都在说同一件事：ICL 解决「能不能做」，真机 RL
+解决「做得多可靠」。SmoothRL
+的增量是把<strong>部署形态</strong>写进目标：ConRFT 与其他同步在线 RL
+都在一套动力学下训练、另一套下部署。<strong>与动作分块谱系的关系</strong>（notes/26）：ACT
+发明的动作分块被几乎所有 VLA 继承，但分块 + 异步推理带来的「输出 ≠
+执行」问题此前只在推理侧被处理（前缀一致性、轨迹混合），SmoothRL
+是第一个把它搬进 RL 目标函数的工作——这提醒 ICL
+路线同样有一个未被审视的假设：HOST 的 29 秒、GEN-1.5 的 100Hz 动作流、S1
+的 10 分钟长时程都跑在异步分块上，上下文里的「自身执行历史」（RoboTTT 的
+8K 步、Zeva 的交互记忆）记录的是策略输出还是实际执行？若是前者，RoboTTT
+的 DAgger 蒸馏与 Zeva
+的因果交互编码都在学一个部分虚构的历史。这个问题没有任何 ICL
+论文回答过。<strong>与 Zeva
+的镜像</strong>（notes/40）：两者都从「机器人自己的交互后果」里学，Zeva
+走零更新的外挂记忆，SmoothRL
+走轻量残差的值梯度——同一个「从自身经验改进」目标的两种实现，都保持大基座冻结、都依赖人类干预兜底（Zeva
+的重置、SmoothRL 的遥操作），且都没有报告与对方路线的成本对照：Zeva
+四次尝试换 47 个点，SmoothRL 250 个 episode 换 55–75
+个点，哪个更省是可以直接测的问题。<strong>对涌现之争无直接贡献</strong>，但对本调研的评测批判（notes/32）添一例：单次运行、每配置一次评估、无异步基线——真机
+RL 论文的口径问题与 ICL 论文同款。</p>
+</article><article id="ch42"><h1
 id="趋势与洞察机器人-one-shot-技能习得的-2026-拐点">趋势与洞察：机器人
 One-Shot 技能习得的 2026 拐点</h1>
 <blockquote>
@@ -5339,7 +5447,7 @@ ICL（notes/35）、检索增强与技能库（notes/36）、视觉 ICL
 补齐潜动作、上下文 RL 前史、人类共训、基准地基、具身安全 19
 项，并据此修正预测 P5；09-04 补齐几何编码、规划层 ICL、检索与技能库 9
 项；09-05 补齐视觉 ICL 前史、开源高效 VLA、适应旋钮两端 8 项；09-06 增补
-Zeva 与后训练干扰两篇）</p>
+Zeva 与后训练干扰两篇；09-07 增补 SmoothRL）</p>
 </blockquote>
 <hr />
 <h2 id="0-一页结论">0. 一页结论</h2>
@@ -5713,6 +5821,12 @@ scaling；首次越狱商用机器人；环境-物体多样性幂律</td>
 <td>合成人类视频 74.2K 对，任务级零样本 46.95%</td>
 </tr>
 <tr>
+<td>2026-08-30</td>
+<td>SmoothRL（星尘智能）</td>
+<td>异步执行下的在线 RL：三段划分 + 值梯度截断；冻结 π0.5 外挂残差，250
+episode 抛掷 39→94%</td>
+</tr>
+<tr>
 <td>2026-08-31</td>
 <td><strong>Zeva（清华 AIR + 域变换）</strong></td>
 <td>上下文因果学习：冻结策略从自身交互后果学，四次尝试累计 26% →
@@ -6000,10 +6114,15 @@ S1 拿来展示 ICL 的任务（notes/35）。策略层 ICL
 Policies/ReKep）、检索（Behavior
 Retrieval）都不改权重——但前者需要语言指定任务、中者受原语库限制、后者需要已有库；只有演示
 ICL 用同一段输入同时给出「做什么」与「怎么做」（notes/39）。另一端，真机
-RL（ConRFT）45–90 分钟把成功率推到 96.3%，GEN-1 的 99% mastery
-同样靠改权重——ICL 解决「能不能做」（59–66%），RL
-后训练解决「做得多可靠」。三段可叠加：ICL 起步 → 测试时验证提精度 →
-一小时 RL
+RL（ConRFT）45–90 分钟把成功率推到 96.3%，SmoothRL 250 个 episode
+把三个任务推到 83–94%，GEN-1 的 99% mastery 同样靠改权重——ICL
+解决「能不能做」（59–66%），RL 后训练解决「做得多可靠」。SmoothRL
+另提醒了一个所有路线共有却无人审视的假设（notes/42）：VLA/WAM
+全部跑在「动作分块 +
+异步推理」上，策略输出的分块只有一部分真被执行——同步假设的在线 RL
+把值梯度流进从未进入环境的动作；而 RoboTTT 的 8K 步执行历史、Zeva
+的交互记忆，记录的到底是策略输出还是实际执行，也没有任何 ICL
+论文说明。三段可叠加：ICL 起步 → 测试时验证提精度 → 一小时 RL
 收可靠性，工程上完全可行，无人接起来测。两条对涌现之争的旁证同时出现：视觉
 ICL 的 scaling（LVM 4200 亿 token，损失平滑下降，notes/37）与推理时
 scaling（RoboMonkey
@@ -6120,7 +6239,11 @@ backbone、同一数据、同一评测上并排跑过——四篇互相知晓却
 能否后装，目前无一报告（notes/41）。</li>
 <li><strong>自我改进的公平基线</strong>：Zeva
 式「越用越稳」需与无记忆独立重试的 CSR@K 曲线并排，并与 RoboTTT
-快权重记忆、ConRFT 一小时 RL 做成本-收益对照（notes/40、39）。</li>
+快权重记忆、ConRFT 一小时 RL、SmoothRL 250 episode 残差 RL
+做成本-收益对照（notes/40、39、42）。</li>
+<li>**上下文里的「执行历史」记录的是输出还是执行？**异步分块部署下二者不同（SmoothRL
+的 committed/execution/discarded 划分），RoboTTT 与 Zeva
+的自我改进若建立在策略输出而非实际执行的历史上，学到的是部分虚构的因果（notes/42）。</li>
 <li><strong>基线复现的披露标准</strong>：RoboTwin 2.0 上同一 π0.5
 被复现出 43 与
 83，差距超过多数头条增益——「基线训练数据、微调配方、checkpoint

@@ -117,7 +117,7 @@ ul.tight.amber li::before{background:var(--amber)}
       <p><strong>为什么是拐点：</strong>三家方法论各异（归纳偏置 vs 数据暴力 vs 数据+配方），却在 16 天窗口交付同一能力——范式转移不再依赖单一路线成立。同月，四篇学术论文（WAM-TTT/RoboTTT/StellaVLA/Zero-WAM）把「演示怎么被用上」做成可核对的实验，其消融一致反对「免费涌现」叙事；月末第四家 Zeva 让冻结策略从<strong>自己的交互后果</strong>学（四次尝试 26%→73%）。本调研其余 80 余项工作提供了这场汇合与争论的完整证据链。</p>
     </div>
   </div>
-  <div class="foot"><span>来源：notes/01、02；insights/10 §0</span><span class="num">02 / 25</span></div>
+  <div class="foot"><span>来源：notes/01、02；insights/10 §0</span><span class="num">02 / 28</span></div>
 </section>
 
 <!-- ═══ Slide 3: Situation ═══ -->
@@ -146,7 +146,7 @@ ul.tight.amber li::before{background:var(--amber)}
       <p>与此同时，LLM 那边「教模型」早已是提示工程：例子放进上下文、权重不动。机器人界的问题变成：<strong>ICL 是语言独有的运气，还是感知运动序列上同样成立的普适性质？</strong>——12 篇论文用五条不同路线回答了它。</p>
     </div>
   </div>
-  <div class="foot"><span>来源：notes/01 §2、06 §4、07 §4、09 §3</span><span class="num">03 / 25</span></div>
+  <div class="foot"><span>来源：notes/01 §2、06 §4、07 §4、09 §3</span><span class="num">03 / 28</span></div>
 </section>
 
 <!-- ═══ Slide 4: Complication ═══ -->
@@ -172,7 +172,7 @@ ul.tight.amber li::before{background:var(--amber)}
       <p><strong>共同的问题（QUESTION）：</strong>怎样让演示从「被动参考」变成「主动驱动执行的信号」？——结构派的答案是把对齐做成显式机制（HOST），规模派的答案是让数据多到捷径不存在（GEN-1.5），中间还有数据配方（BPP/ICRT）、架构机制（RoboTTT）、事后注入（RICL）三条路。</p>
     </div>
   </div>
-  <div class="foot"><span>来源：notes/01 §3、04 §3.3、08 §5、03 §6</span><span class="num">04 / 25</span></div>
+  <div class="foot"><span>来源：notes/01 §3、04 §3.3、08 §5、03 §6</span><span class="num">04 / 28</span></div>
 </section>
 
 <!-- ═══ Slide 5: HOST vs GEN-1.5 对照 ═══ -->
@@ -194,7 +194,7 @@ ul.tight.amber li::before{background:var(--amber)}
       <p><strong>读法警告：</strong>62% 与 59% 不可直接比大小——任务集、难度、判定口径都不同。真正的信息是：两条成本结构完全不同的路线，都把 one-shot 从论文指标做成了可演示能力。</p>
     </div>
   </div>
-  <div class="foot"><span>来源：notes/01 §1/§7、02 §5</span><span class="num">05 / 25</span></div>
+  <div class="foot"><span>来源：notes/01 §1/§7、02 §5</span><span class="num">05 / 28</span></div>
 </section>
 
 <!-- ═══ Slide 6: HOST 机制 ═══ -->
@@ -218,7 +218,7 @@ ul.tight.amber li::before{background:var(--amber)}
       <p style="font-size:13.5px"><strong>两阶段训练：</strong>Stage 1 用 193k 同具身轨迹练「预测-执行」基本功；Stage 2 用 5.8k 组（人类视频, 机器人轨迹）配对练跨具身对齐——演化自 ViVLA（同团队前作）：把前作埋在隐动作空间的翻译、交给 transformer 隐式学的对应，全部换成显式模块。</p>
     </div>
   </div>
-  <div class="foot"><span>来源：notes/01 §4/§5、09 §1/§5</span><span class="num">06 / 25</span></div>
+  <div class="foot"><span>来源：notes/01 §4/§5、09 §1/§5</span><span class="num">06 / 28</span></div>
 </section>
 
 <!-- ═══ Slide 7: HOST 证据 ═══ -->
@@ -238,7 +238,7 @@ ul.tight.amber li::before{background:var(--amber)}
       <div class="card"><h3>鲁棒性</h3><p>未见物体替换只掉约 4 个点；演示与执行场景不同、第三人称视角均可工作。50 任务 × 20 次试验的口径，是本调研里统计功效最强的真机评测。</p></div>
     </div>
   </div>
-  <div class="foot"><span>来源：notes/01 §6、09 §2/§3</span><span class="num">07 / 25</span></div>
+  <div class="foot"><span>来源：notes/01 §6、09 §2/§3</span><span class="num">07 / 28</span></div>
 </section>
 
 <!-- ═══ Slide 8: GEN 三部曲 ═══ -->
@@ -264,7 +264,7 @@ ul.tight.amber li::before{background:var(--amber)}
       <p><strong>谨慎读数：</strong>全部数字来自公司博客——10 个评测任务（对 HOST 的 50 个）、无同行评审、无开源复现渠道。GEN-1.5 的价值不在数字本身，而在它给出「ICL 会随规模自然出现」的存在性证明，与 ICRT 在 3k 条轨迹上的最小可行原型（79.2%）首尾呼应：配方相同，规模差五个数量级。</p>
     </div>
   </div>
-  <div class="foot"><span>来源：notes/02 §2–§6、04 §7</span><span class="num">08 / 25</span></div>
+  <div class="foot"><span>来源：notes/02 §2–§6、04 §7</span><span class="num">08 / 28</span></div>
 </section>
 
 <!-- ═══ Slide S1: Skild AI ═══ -->
@@ -291,7 +291,7 @@ ul.tight.amber li::before{background:var(--amber)}
       <p><strong>该打的折扣：</strong>与 GEN-1.5 同样无论文、无开源、内部 benchmark；长时程「累计逐步成功率」允许人工干预恢复计分（博客自述主要为救语言基线），66% 不是无干预端到端完成率；预训练任务清单未公开，「未见」无法外部审计；380 条兑换率是插值估计。时间线：LocoFormer（2025-09）→ 域内 ICL（2026-02）→ 第一张煎饼（2026-05）→ S1（2026-08）。</p>
     </div>
   </div>
-  <div class="foot"><span>来源：notes/16 §2–§3；sources/skild_s1_blog.txt</span><span class="num">09 / 25</span></div>
+  <div class="foot"><span>来源：notes/16 §2–§3；sources/skild_s1_blog.txt</span><span class="num">09 / 28</span></div>
 </section>
 
 <!-- ═══ Slide 9: 方法族谱 ═══ -->
@@ -339,7 +339,7 @@ ul.tight.amber li::before{background:var(--amber)}
       </tr>
     </table>
   </div>
-  <div class="foot"><span>来源：notes/03–07、09；insights/10 §2</span><span class="num">10 / 25</span></div>
+  <div class="foot"><span>来源：notes/03–07、09；insights/10 §2</span><span class="num">10 / 28</span></div>
 </section>
 
 <!-- ═══ Slide 10: 全景对照表 ═══ -->
@@ -370,7 +370,7 @@ ul.tight.amber li::before{background:var(--amber)}
     </table>
     <p class="src">各行成功率的任务集与判定口径互不相同，禁止跨行直接比大小；详见各篇 notes 的「延伸批判」节。</p>
   </div>
-  <div class="foot"><span>来源：notes/01–09</span><span class="num">11 / 25</span></div>
+  <div class="foot"><span>来源：notes/01–09</span><span class="num">11 / 28</span></div>
 </section>
 
 <!-- ═══ Slide 11: 证据链 1 ═══ -->
@@ -396,7 +396,7 @@ ul.tight.amber li::before{background:var(--amber)}
       <p><strong>对 GEN-1.5 的反推：</strong>50 万小时数据「自然」覆盖了多任务歧义场景——规模派的涌现，可能只是数据配方派的强迫函数在大数据下自动满足。这条假设可以用 BPP 式受控实验在中等规模上证伪。</p>
     </div>
   </div>
-  <div class="foot"><span>来源：notes/04 §3/§5、06 §4/§5；insights/10 §3</span><span class="num">12 / 25</span></div>
+  <div class="foot"><span>来源：notes/04 §3/§5、06 §4/§5；insights/10 §3</span><span class="num">12 / 28</span></div>
 </section>
 
 <!-- ═══ Slide 12: 证据链 2 ═══ -->
@@ -427,7 +427,7 @@ ul.tight.amber li::before{background:var(--amber)}
       <p><strong>推论：</strong>「HOST 式显式对齐」与「RoboTTT 式长上下文 TTT 主干」不互斥——把进度流形装进 8K 上下文的 fast weights 架构，是本调研看到的最明确的下一代系统蓝图。</p>
     </div>
   </div>
-  <div class="foot"><span>来源：notes/05 §1/§4/§6；insights/10 §3</span><span class="num">13 / 25</span></div>
+  <div class="foot"><span>来源：notes/05 §1/§4/§6；insights/10 §3</span><span class="num">13 / 28</span></div>
 </section>
 
 <!-- ═══ Slide 13: 证据链 3 TCC 演化 ═══ -->
@@ -453,7 +453,7 @@ ul.tight.amber li::before{background:var(--amber)}
       <div class="card"><h3>方法论启示</h3><p>「训练期学到的好表征」不等于「推理期被用起来的能力」。同一原理的第三个实例：RoboTTT 把「记忆」从静态权重搬进推理期梯度更新的 fast weights。</p></div>
     </div>
   </div>
-  <div class="foot"><span>来源：notes/08 §5/§6、01 §4</span><span class="num">14 / 25</span></div>
+  <div class="foot"><span>来源：notes/08 §5/§6、01 §4</span><span class="num">14 / 28</span></div>
 </section>
 
 <!-- ═══ Slide EICL: 四篇坐标系 ═══ -->
@@ -473,7 +473,7 @@ ul.tight.amber li::before{background:var(--amber)}
       <p><strong>三条被独立验证的共同经验：</strong>① 人类信息只许改写感知/生成侧，不许直接触碰动作侧（WAM-TTT 与 Zero-WAM 从相反路线撞到同一结论）；② 训练期挂辅助目标、推理期整个剥离，且辅助必须监督主分支否则剥离后一场空；③ 上下文不是免费午餐——三篇在三个不同设定下独立发现「模型必走捷径」（多给一帧历史反而降 17.5 个点、无反捷径目标时人类视频是净负收益）。GEN-1.5 与 S1 主张的「纯上下文·零梯度」恰是 Zero-WAM 所在的格子。</p>
     </div>
   </div>
-  <div class="foot"><span>来源：notes/05、12、14、15；sources/wx_eicl_four_papers_review.txt</span><span class="num">15 / 25</span></div>
+  <div class="foot"><span>来源：notes/05、12、14、15；sources/wx_eicl_four_papers_review.txt</span><span class="num">15 / 28</span></div>
 </section>
 
 <!-- ═══ Slide 涌现之争 ═══ -->
@@ -503,7 +503,7 @@ ul.tight.amber li::before{background:var(--amber)}
       <p><strong>公平的限定与无人做的第三方视角：</strong>学术侧最大规模 15,360 GPU 小时，远低于产业 50 万小时——严格结论是「在学术可负担的规模上需要显式机制」，裁决要等产业规模的去机制消融。另一把武器无人使用：机器人的二元成功率/rubric 恰是 Schaeffer 指出的易造「涌现假象」的不连续度量；S1 自己的 scaling 曲线（差距平滑指数扩大）反而更像连续改进而非相变。把度量批判搬进具身领域，是当前空白的研究机会。</p>
     </div>
   </div>
-  <div class="foot"><span>来源：notes/16 §5；insights/10 趋势四</span><span class="num">16 / 25</span></div>
+  <div class="foot"><span>来源：notes/16 §5；insights/10 趋势四</span><span class="num">16 / 28</span></div>
 </section>
 
 <!-- ═══ 纵深专题 ① 历史与底座 ═══ -->
@@ -529,7 +529,7 @@ ul.tight.amber li::before{background:var(--amber)}
       <p><strong>对涌现之争的历史注脚：</strong>Duan 2017 附录已记录小网络学习曲线的「相变」，比 GEN-0 早八年；Algorithm Distillation 则给出最早的干净反证——同架构同算力，喂专家序列得模仿、喂学习历史才得上下文改进。相变现象不新，新的是把它与规模绑定的叙事。</p>
     </div>
   </div>
-  <div class="foot"><span>来源：notes/24、25、26、30</span><span class="num">17 / 25</span></div>
+  <div class="foot"><span>来源：notes/24、25、26、30</span><span class="num">17 / 28</span></div>
 </section>
 
 <!-- ═══ 纵深专题 ② 人类数据三条桥 ═══ -->
@@ -548,7 +548,7 @@ ul.tight.amber li::before{background:var(--amber)}
       <p><strong>产业分岔由此可解释：</strong>GEN/S1 拥有采集控制权，共训做底座 + ICL 做接口两条都走；HOST/Zero-WAM 无大规模采集能力，全押 ICL。数据侧的独立证据同向：Lin et al. 幂律（32 环境 × 1 物体 × 50 演示 ≈ 90%）、BPP「任务多样性 &gt; 每任务密度」、Zero-WAM 任务级重采样——多样性轴的边际价值远高于密度轴。</p>
     </div>
   </div>
-  <div class="foot"><span>来源：notes/11、27、29、31、32</span><span class="num">18 / 25</span></div>
+  <div class="foot"><span>来源：notes/11、27、29、31、32</span><span class="num">18 / 28</span></div>
 </section>
 
 <!-- ═══ 纵深专题 ③ 口径与安全 ═══ -->
@@ -576,12 +576,78 @@ ul.tight.amber li::before{background:var(--amber)}
       <p><strong>P5 修正：</strong>原预测「12 个月内出现第一起 physical prompt injection 研究」信息不足——它预测的事在预测做出前已部分发生。修正为：12 个月内出现首个针对视频演示 ICL 策略的推理期注入攻击。StellaVLA「错演示比无演示差 17.5 点」在安全视角下是攻击有效性的良性下界；技能库外置把一次性注入变成持久化后门。</p>
     </div>
   </div>
-  <div class="foot"><span>来源：notes/32、33；insights/10 P5 修正</span><span class="num">19 / 25</span></div>
+  <div class="foot"><span>来源：notes/32、33；insights/10 P5 修正</span><span class="num">19 / 28</span></div>
+</section>
+
+<!-- ═══ 纵深专题 ④ 演示的四种编码 × ICL 的两层 ═══ -->
+<section class="slide">
+  <div class="slide-head"><span>纵深专题 ④ · 编码与层级</span><span class="num">20</span></div>
+  <h1>演示有四种编码、ICL 有两层：<br>拐点定在 2026 而非 2022，是因为低层控制第一次能从上下文学</h1>
+  <div class="body">
+    <div class="grid2" style="margin-bottom:12px">
+      <div class="card">
+        <h3>演示的四种编码（notes/34、29、15）</h3>
+        <table style="font-size:11.5px;margin-top:6px">
+          <tr><th>编码</th><th>代表</th><th>取舍</th></tr>
+          <tr><td>像素</td><td class="dim">HOST · Zero-WAM · S1</td><td class="dim">信息最全、噪声最大，对齐负担最重</td></tr>
+          <tr><td>结构化语言</td><td class="dim">StellaVLA</td><td class="dim">抽象最强，空间精度差、长时程崩</td></tr>
+          <tr><td>潜动作</td><td class="dim">Genie → LAPA → UniVLA</td><td class="dim">零标注可 scale 到互联网视频；不可解释，相机运动无解</td></tr>
+          <tr><td>几何中间表示</td><td class="dim">RT-Trajectory · ATM · Im2Flow2Act</td><td class="dim">外观/具身不变、人可画；只编码运动不编码意图</td></tr>
+        </table>
+        <p style="margin-top:8px">RT-Trajectory 用 RT-1 级小模型、人手画一条草图就做到未见任务 <span class="num">67%</span>（vs RT-2 11%）——「零更新泛化」不需要 50 万小时，需要条件信号与动作空间足够接近。</p>
+      </div>
+      <div class="card">
+        <h3>ICL 的两层（notes/35、36、37）</h3>
+        <ul class="tight">
+          <li><strong>规划层 ICL 2022 年就成了</strong>：Code as Policies 用 GPT-3 few-shot 写机器人程序，VoxPoser 值图 88%，ReKep 关键点约束双臂 68.6%——零训练零机器人数据，但天花板由原语库与规划器决定：拧盖的力、翻煎饼的时机都在表达能力之外</li>
+          <li><strong>策略层 ICL 2026 年才成</strong>：低层控制本身从演示上下文学，「教机器人 = 给一段演示」才对全部任务成立</li>
+          <li><strong>检索是 ICL 的上游</strong>：Behavior Retrieval / STRAP 回答「上下文该放什么」（基础模型嵌入、子轨迹粒度、过滤次优）；AgiBot 百万级技能库 + ViLLA 潜动作接口具备 ICL 化两个前提却尚未做 ICL</li>
+          <li><strong>视觉 ICL 已解决的</strong>（Bar 2022 / Painter / LVM）：从示例读任务、输出统一到一个模态；具身 ICL 的全部增量困难只剩<strong>时间对齐、具身翻译、闭环</strong>三条</li>
+        </ul>
+      </div>
+    </div>
+    <div class="callout">
+      <p><strong>合流形态：</strong>规划层给阶段与约束（可解释、可校验——安全所需），策略层在每阶段内从演示学接触与时机；LingBot-VA 2.0 的层级 VLM + 视频 ICL、S1 的隐式长时程组合已是雏形，但两层分工的收益无人正面评测。几何编码 + 进度流形的组合（ATM 点轨迹替代 HOST 帧嵌入）同样无人做。</p>
+    </div>
+  </div>
+  <div class="foot"><span>来源：notes/29、34、35、36、37</span><span class="num">20 / 28</span></div>
+</section>
+
+<!-- ═══ 纵深专题 ⑤ 适应刻度盘 · 学自己 · 遗忘的反面 ═══ -->
+<section class="slide">
+  <div class="slide-head"><span>纵深专题 ⑤ · 刻度盘与遗忘</span><span class="num">21</span></div>
+  <h1>把 ICL 放回完整的适应刻度盘：它是起点不是终点；<br>「不改权重所以不遗忘」有了反面量化，上下文学习从「学别人」走到「学自己」</h1>
+  <div class="body">
+    <div class="grid3" style="margin-bottom:12px">
+      <div class="card">
+        <h3>刻度盘全谱（notes/39、42）</h3>
+        <p><strong>不改权重</strong>：演示 ICL · 测试时计算（RoboMonkey 采样+VLM 验证，OOD <span class="num">+25%</span>，推理时幂律）· 规划层 ICL · 检索<br><strong>改少量</strong>：TTT 快权重 · GEN-1.5 1–10 步<br><strong>改全部</strong>：GR-3 10 条 VR · OFT 配方 · 真机 RL（ConRFT 45–90 分钟 <span class="num">96.3%</span>；SmoothRL 250 episode 抛掷 39→94%）</p>
+        <p style="margin-top:6px">ICL 的独特性不在零更新，而在<strong>一段演示同时解决任务指定与动作生成</strong>；ICL 起步 → 验证提精度 → RL 收可靠性三段可叠加，无人接起来测。</p>
+      </div>
+      <div class="card" style="border-color:rgba(34,211,238,.45)">
+        <h3>学自己：Zeva（notes/40）</h3>
+        <p>此前所有 ICL 的上下文都是<strong>他人的演示</strong>；Zeva 让冻结策略以自己的「动作→后果」为上下文做隐式系统辨识——因果交互编码 + 双时间尺度记忆 + 检索注入。Atomic5 <span class="num">76.8%</span> 超 Fast-WAM，四次尝试累计 <span class="num">26%→73%</span>，人类演示叠加再 +15%。</p>
+        <p style="margin-top:6px">Algorithm Distillation「上下文内 RL」在操作域的首个实现。<strong>口径警示</strong>：CSR@K 需与无记忆独立重试基线并排——26% 独立重试四次也约 70%。</p>
+      </div>
+      <div class="card" style="border-color:rgba(248,113,113,.45)">
+        <h3>遗忘的反面量化（notes/41、38）</h3>
+        <ul class="tight amber">
+          <li><strong>阶段间侵蚀</strong>（StarVLA）：只用动作监督微调，RefCOCO-g 接地 <span class="num">2 万步</span>内跌至接近随机；空间引导共训保住约 70%，操作反升</li>
+          <li><strong>表征坍缩</strong>（VLAct）：单一动作头预训练把主干锁进该头几何，换头即失效——「同头性能强夸大主干可复用性」</li>
+          <li><strong>配方效应</strong>（OpenVLA-OFT）：同权重同数据换微调配方 76.5→<span class="num">97.1%</span>；SmolVLA 4.5 亿参数比肩 10 倍大模型</li>
+        </ul>
+      </div>
+    </div>
+    <div class="callout" style="border-color:var(--red)">
+      <p><strong>两条新开放问题：</strong>ICL 基座本身是多阶段训练产物，应报告「侵蚀存留率」与「换头稳定性」——决定演示能否被读懂、ICL 能否后装，无一报告；SmoothRL 的三段划分照出所有路线共有的假设：异步分块部署下<strong>策略输出 ≠ 实际执行</strong>，RoboTTT 的 8K 步历史与 Zeva 的交互记忆记录的是哪一个，无人说明。</p>
+    </div>
+  </div>
+  <div class="foot"><span>来源：notes/38、39、40、41、42</span><span class="num">21 / 28</span></div>
 </section>
 
 <!-- ═══ Slide 14: 六大趋势 ═══ -->
 <section class="slide">
-  <div class="slide-head"><span>趋势</span><span class="num">20</span></div>
+  <div class="slide-head"><span>趋势</span><span class="num">22</span></div>
   <h1>六大趋势：范式、scaling 轴、数据、路线、评测、生态</h1>
   <div class="body">
     <div class="grid3" style="grid-template-rows:1fr 1fr;height:100%">
@@ -593,12 +659,12 @@ ul.tight.amber li::before{background:var(--amber)}
       <div class="card"><h3><span class="num" style="color:var(--amber)">T6</span> 开源在吃掉先发优势</h3><p>HOST 论文+代码+权重全开源，抢在 GEN-1.5 博客前数日；π0 系、GR00T、Wall-OSS 全线开源。闭源数据引擎的护城河窗口正在收窄。</p></div>
     </div>
   </div>
-  <div class="foot"><span>来源：insights/10 §2</span><span class="num">20 / 25</span></div>
+  <div class="foot"><span>来源：insights/10 §2</span><span class="num">22 / 28</span></div>
 </section>
 
 <!-- ═══ Slide 15: 洞察 1-4 ═══ -->
 <section class="slide">
-  <div class="slide-head"><span>核心洞察 · 上</span><span class="num">21</span></div>
+  <div class="slide-head"><span>核心洞察 · 上</span><span class="num">23</span></div>
   <h1>洞察 1–4：技能变成资产，提示变成工种，<br>ICL 与微调的边界正在消失</h1>
   <div class="body">
     <div class="grid2" style="grid-template-rows:1fr 1fr;height:100%">
@@ -608,12 +674,12 @@ ul.tight.amber li::before{background:var(--amber)}
       <div class="card"><h3><span class="num" style="color:var(--green)">I4</span> 下一个瓶颈是信息，不是算法</h3><p>59–62% 汇合 + HOST 抗扰实验说明单段视频的信息已被高效榨取；剩余失败相当比例来自视频<strong>根本没携带</strong>的信息——接触力、被遮挡接触点、隐含意图。出路：触觉采集、多模态提示、交互式补充演示。</p></div>
     </div>
   </div>
-  <div class="foot"><span>来源：insights/10 §3</span><span class="num">21 / 25</span></div>
+  <div class="foot"><span>来源：insights/10 §3</span><span class="num">23 / 28</span></div>
 </section>
 
 <!-- ═══ Slide 16: 洞察 5-7 ═══ -->
 <section class="slide">
-  <div class="slide-head"><span>核心洞察 · 下</span><span class="num">22</span></div>
+  <div class="slide-head"><span>核心洞察 · 下</span><span class="num">24</span></div>
   <h1>洞察 5–8：解耦配方可推广，具身对齐将独立成科，<br>中国团队范式层并跑，四篇 EICL 的失败互补</h1>
   <div class="body">
     <div class="grid2" style="grid-template-rows:1fr 1fr;margin-bottom:14px;flex:1;min-height:0">
@@ -626,12 +692,29 @@ ul.tight.amber li::before{background:var(--amber)}
       <p><strong>一句话收拢：</strong>当「教机器人」的成本从数百条遥操作跌到一段手机视频，瓶颈就从算法转移到信息、安全和生态——这三个新战场目前几乎无人占位。</p>
     </div>
   </div>
-  <div class="foot"><span>来源：insights/10 §3</span><span class="num">22 / 25</span></div>
+  <div class="foot"><span>来源：insights/10 §3</span><span class="num">24 / 28</span></div>
+</section>
+
+<!-- ═══ 洞察 9–13 ═══ -->
+<section class="slide">
+  <div class="slide-head"><span>核心洞察 · 续</span><span class="num">25</span></div>
+  <h1>洞察 9–13：断裂点在主干先验，人类数据有三条桥，<br>ICL 有两层，起点不是终点，不遗忘有了反面</h1>
+  <div class="body">
+    <div class="grid3" style="grid-template-rows:1fr 1fr;height:100%;gap:12px">
+      <div class="card"><h3><span class="num" style="color:var(--green)">I9</span> 2017→2026 的断裂点在主干先验</h3><p>Duan 2017 的「演示配对训练」原样活在 HOST 里；差的是 Wan/Qwen 级视频-语言先验消解了 Finn 推迟的人机域偏移。生成式动作头是 ICL 的<strong>实践</strong>必要非逻辑必要，唯一被全部继承的是动作分块。</p></div>
+      <div class="card"><h3><span class="num" style="color:var(--green)">I10</span> 人类数据三条桥，选哪条看能否控制采集</h3><p>显式重定向/共训（采集可控时保真最高）· 世界预测通道（野生数据）· 潜动作（零标注可 scale）；ICL 是第四条——对齐成本从数据侧搬到模型侧。每条桥都把攻击面带了进来。</p></div>
+      <div class="card"><h3><span class="num" style="color:var(--green)">I11</span> ICL 有两层，2022 年规划层就成了</h3><p>Code as Policies/VoxPoser/ReKep 零训练做到「教机器人不用训练」却没引发 GPT-3 叙事——天花板在原语库。策略层让低层控制从上下文学，拐点才成立；两层合流的收益无人评测。</p></div>
+      <div class="card"><h3><span class="num" style="color:var(--green)">I12</span> ICL 的独特性不在零更新，它是起点</h3><p>测试时计算、规划层 ICL、检索都零更新；只有演示 ICL 用一段输入同时给「做什么」与「怎么做」。ICL 起步（59–66%）→ 验证提精度 → 真机 RL 收尾（96%）三段可叠加。视觉 ICL 与推理时 scaling 都是平滑幂律，无一叫涌现。</p></div>
+      <div class="card"><h3><span class="num" style="color:var(--green)">I13</span> 「不遗忘」有了反面量化；学别人→学自己</h3><p>遗忘三机制：任务间（43% 存留）、阶段间侵蚀（接地 2 万步归零）、表征坍缩（换头失效）——ICL 全部绕开，但其基座本身经多阶段训练。Zeva 让冻结策略从自身后果学（26→73%），填上「递归状态」一格。</p></div>
+      <div class="card" style="border-color:rgba(248,113,113,.4)"><h3 style="color:var(--red)">跨洞察的一条线</h3><p>每一轮扩充都在把「规模」这个变量拆细：数据小时 · 任务覆盖 · 参数量 · 微调配方 · 提示模态 · 预训练序列结构——GEN-0/1.5 的 scaling 叙事只报告了前两者。涌现之争的裁决不需要更大的模型，需要把这六个变量分开归因。</p></div>
+    </div>
+  </div>
+  <div class="foot"><span>来源：insights/10 §3 洞察 9–13</span><span class="num">25 / 28</span></div>
 </section>
 
 <!-- ═══ Slide 17: 可证伪预测 ═══ -->
 <section class="slide">
-  <div class="slide-head"><span>预测 · 12–24 个月</span><span class="num">23</span></div>
+  <div class="slide-head"><span>预测 · 12–24 个月</span><span class="num">26</span></div>
   <h1>七条可证伪的预测：把判断写成可以被打脸的形式（P5 已被打脸并修正）</h1>
   <div class="body">
     <table style="margin-bottom:14px;font-size:13.5px">
@@ -646,12 +729,12 @@ ul.tight.amber li::before{background:var(--amber)}
     </table>
     <div class="callout"><p>每条预测都指定了时间窗与可观察事件——12 个月后回看本页，错了的部分同样有信息量。</p></div>
   </div>
-  <div class="foot"><span>来源：insights/10 §4</span><span class="num">23 / 25</span></div>
+  <div class="foot"><span>来源：insights/10 §4</span><span class="num">26 / 28</span></div>
 </section>
 
 <!-- ═══ Slide 18: 开放问题 ═══ -->
 <section class="slide">
-  <div class="slide-head"><span>开放问题 · 研究机会</span><span class="num">24</span></div>
+  <div class="slide-head"><span>开放问题 · 研究机会</span><span class="num">27</span></div>
   <h1>九个无人占位的研究缺口，每个都可以直接立项</h1>
   <div class="body">
     <div class="grid3" style="grid-template-rows:1fr 1fr 1fr;height:100%;gap:12px">
@@ -666,12 +749,12 @@ ul.tight.amber li::before{background:var(--amber)}
       <div class="card"><h3>合成演示训练、真实演示测试</h3><p>Zero-WAM 的人类视频 100% 合成且从未测过真实视频输入——合成配对路线落地要撞的第一堵墙，全线盲区。</p></div>
     </div>
   </div>
-  <div class="foot"><span>来源：insights/10 §5</span><span class="num">24 / 25</span></div>
+  <div class="foot"><span>来源：insights/10 §5</span><span class="num">27 / 28</span></div>
 </section>
 
 <!-- ═══ Slide 19: 交付物 ═══ -->
 <section class="slide">
-  <div class="slide-head"><span>附录 · 调研交付物</span><span class="num">25</span></div>
+  <div class="slide-head"><span>附录 · 调研交付物</span><span class="num">28</span></div>
   <h1>本调研仓库：86 篇论文 PDF（79 篇中译）+ 41 份深度解读 + 本报告</h1>
   <div class="body">
     <div class="grid2" style="margin-bottom:16px">
@@ -696,7 +779,7 @@ ul.tight.amber li::before{background:var(--amber)}
       <p><strong>推荐阅读顺序：</strong>本 PPT → insights/10（趋势全文）→ notes/01（HOST）+ notes/02（GEN 系列）+ notes/16（S1 与涌现之争）→ 按兴趣进入其余 12 份解读；每份解读的「延伸批判」与「关系定位」两节是与摘要差异最大的增量内容。</p>
     </div>
   </div>
-  <div class="foot"><span>awesome_ICL · 2026-08-31</span><span class="num">25 / 25</span></div>
+  <div class="foot"><span>awesome_ICL · 2026-08-31</span><span class="num">28 / 28</span></div>
 </section>
 
 </div>

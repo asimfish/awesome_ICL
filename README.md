@@ -8,7 +8,7 @@
 
 2026 年 8 月，三家互不相识的机构在 16 天窗口内汇合于同一能力点：**HOST**（开源）用架构设计让机器人看一段人类视频、29 秒后执行新任务（50 个未见任务 62%）；**GEN-1.5** 用 50 万小时数据预训练让 one-shot ICL 作为涌现能力出现（10 任务 59%）；**S1** 把主张推到最远——一条视频演示执行预训练从未见过、最长 10 分钟的任务（66%，语言提示同规模仅 9%）。同月，四篇学术论文（WAM-TTT / RoboTTT / StellaVLA / Zero-WAM）用消融证据一致反对「ICL 免费涌现」叙事。
 
-与一般 awesome 列表不同，本仓库对每篇论文附带：**深度解读**（📄，中文，含延伸批判）、**中译全文 PDF**（🈶，super_translate 生成）、以及汇总的 22 页 PPT、66 页全文报告与趋势洞察。⭐ 标注本调研的三个主角。当前覆盖 85+ 项工作 / 86 篇论文 PDF / 41 份深度解读，含十九个纵深专题：ICL 机制理论、世界模型上游谱系、基座 VLA、One-Shot 模仿源头（2017 起）、生成式动作头奠基、人类数据管线、视频-动作同代对照组、潜动作桥梁、上下文 RL 前史、人类视频共训、评测基准与数据地基、具身安全与提示注入、演示的几何编码（轨迹/点轨迹/光流提示）、规划层 ICL、检索增强与技能库、视觉 ICL 前史、开源高效 VLA 对照、适应旋钮两端（测试时计算 / RL 后训练）、后训练干扰（后面的训练怎样吃掉前面的能力）。
+与一般 awesome 列表不同，本仓库对每篇论文附带：**深度解读**（📄，中文，含延伸批判）、**中译全文 PDF**（🈶，super_translate 生成）、以及汇总的 28 页 PPT、148 页全文报告与趋势洞察。⭐ 标注本调研的四个主角（HOST / GEN-1.5 / S1 / Zeva）。当前覆盖 85+ 项工作 / 86 篇论文 PDF / 41 份深度解读，含十九个纵深专题：ICL 机制理论、世界模型上游谱系、基座 VLA、One-Shot 模仿源头（2017 起）、生成式动作头奠基、人类数据管线、视频-动作同代对照组、潜动作桥梁、上下文 RL 前史、人类视频共训、评测基准与数据地基、具身安全与提示注入、演示的几何编码（轨迹/点轨迹/光流提示）、规划层 ICL、检索增强与技能库、视觉 ICL 前史、开源高效 VLA 对照、适应旋钮两端（测试时计算 / RL 后训练）、后训练干扰（后面的训练怎样吃掉前面的能力）。
 
 > 所有成功率数字都依赖各自的任务集与判定口径，**不同工作的数字禁止直接比大小**；详见各篇解读的「延伸批判」节。
 
@@ -83,9 +83,9 @@
 
 | 交付物 | 路径 |
 |---|---|
-| **汇总 PPT**（22 页，浏览器打开，← → 翻页） | [`report/survey_slides.html`](report/survey_slides.html) · [PDF 版](report/survey_slides.pdf) |
-| **全文报告**（16 章 66 页合订） | [`report/survey_full_report.pdf`](report/survey_full_report.pdf) |
-| **趋势与洞察**（六大趋势 · 八条洞察 · 七条可证伪预测 · 开放问题） | [`insights/10_trends_insights_zh.md`](insights/10_trends_insights_zh.md) |
+| **汇总 PPT**（28 页，浏览器打开，← → 翻页） | [`report/survey_slides.html`](report/survey_slides.html) · [PDF 版](report/survey_slides.pdf) |
+| **全文报告**（42 章 148 页合订） | [`report/survey_full_report.pdf`](report/survey_full_report.pdf) |
+| **趋势与洞察**（六大趋势 · 十三条洞察 · 七条可证伪预测 · 开放问题） | [`insights/10_trends_insights_zh.md`](insights/10_trends_insights_zh.md) |
 | **S1 与涌现之争**（三连发时间线 + Brown/Wei/Schaeffer 谱系在具身领域的重演） | [`notes/16_S1_EICL_wave_zh.md`](notes/16_S1_EICL_wave_zh.md) |
 
 ## [2. Papers](#content)
@@ -571,7 +571,7 @@ awesome_ICL/
 
 ## [4. Recommended Reading Order](#content)
 
-1. [`report/survey_slides.html`](report/survey_slides.html) — 22 页 PPT，15 分钟拿到全部结论
+1. [`report/survey_slides.html`](report/survey_slides.html) — 28 页 PPT，20 分钟拿到全部结论
 2. [`insights/10_trends_insights_zh.md`](insights/10_trends_insights_zh.md) — 趋势全文（六大趋势、八条洞察、七条可证伪预测、开放问题）
 3. [`notes/01_HOST_zh.md`](notes/01_HOST_zh.md) + [`notes/02_GEN_series_zh.md`](notes/02_GEN_series_zh.md) + [`notes/16_S1_EICL_wave_zh.md`](notes/16_S1_EICL_wave_zh.md) + [`notes/40_Zeva_zh.md`](notes/40_Zeva_zh.md) — 四大主角与涌现之争
 4. [`notes/12_ZeroWAM_zh.md`](notes/12_ZeroWAM_zh.md) + [`notes/14_WAMTTT_zh.md`](notes/14_WAMTTT_zh.md) + [`notes/15_StellaVLA_zh.md`](notes/15_StellaVLA_zh.md) + [`notes/05_RoboTTT_zh.md`](notes/05_RoboTTT_zh.md) — 四篇 EICL 论文的完整拼图

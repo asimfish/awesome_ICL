@@ -26,10 +26,10 @@ hr{border:none;border-top:1px solid #dde5ea;margin:16px 0}
 </style></head><body>
 <div class="cover">
   <div class="t1">机器人 One-Shot 技能习得<br>调研全文报告</div>
-  <div class="t2">HOST（arXiv 2607.20033）× GEN-1.5 × S1 及同期 80+ 项工作的深度解读与趋势洞察<br>从「训练问题」到「提示问题」的范式拐点，以及「涌现 vs 机制」之争</div>
-  <div class="meta">调研日期：2026-08-31（增补 S1 与四篇 EICL 论文后修订）<br>论文范围：HOST · GEN-0/1/1.5 · S1 · LocoFormer · Instant Policy · ICRT · RoboTTT · WAM-TTT · StellaVLA · Zero-WAM · LingBot-VA(v1/v2) · BPP · RICL · Vid2Robot · ViVLA · π0.5 · Wall-OSS · EgoScale · EgoWAM · WALL-WM · GR-3 · ManiLong-Shot · FACTR 2 · Fast-WAM · UniPi · V-JEPA 2 · Cosmos · OpenVLA · π0 · GR00T N1 · Duan 2017 · Finn 2017 · IMOP · Diffusion Policy · ACT/ALOHA · UMI · RH20T · Ego2Robot · DreamZero · Motus · DVA · Genie · LAPA · UniVLA · HumanPlus · EgoMimic · PH2D · LIBERO · RoboTwin 2.0 · OXE · Data Scaling Laws · BadRobot · RoboPAIR · AdvVLA · Contextual Backdoor · BadVLA · State Backdoor · RT-Trajectory · ATM · Im2Flow2Act · Code as Policies · VoxPoser · ReKep · Behavior Retrieval · STRAP · AgiBot GO-1 · RDT-1B · OpenVLA-OFT · SmolVLA · RoboMonkey · ConRFT（背景与理论：Visual Prompting / Painter / LVM / DT / Prompt-DT / Algorithm Distillation / GPT-3 / 涌现 / Mirage / 贝叶斯 ICL / Induction Heads / ICL≡GD / TTT 层）<br>配套材料：75 篇论文中英对照 PDF · 25 页汇总 PPT（survey_slides.html / .pdf）</div>
+  <div class="t2">HOST（arXiv 2607.20033）× GEN-1.5 × S1 × Zeva 及同期 85+ 项工作的深度解读与趋势洞察<br>从「训练问题」到「提示问题」的范式拐点，以及「涌现 vs 机制」之争</div>
+  <div class="meta">调研日期：2026-08-31（增补 S1 与四篇 EICL 论文后修订）<br>论文范围：HOST · GEN-0/1/1.5 · S1 · Zeva · StarVLA · VLAct · LocoFormer · Instant Policy · ICRT · RoboTTT · WAM-TTT · StellaVLA · Zero-WAM · LingBot-VA(v1/v2) · BPP · RICL · Vid2Robot · ViVLA · π0.5 · Wall-OSS · EgoScale · EgoWAM · WALL-WM · GR-3 · ManiLong-Shot · FACTR 2 · Fast-WAM · UniPi · V-JEPA 2 · Cosmos · OpenVLA · π0 · GR00T N1 · Duan 2017 · Finn 2017 · IMOP · Diffusion Policy · ACT/ALOHA · UMI · RH20T · Ego2Robot · DreamZero · Motus · DVA · Genie · LAPA · UniVLA · HumanPlus · EgoMimic · PH2D · LIBERO · RoboTwin 2.0 · OXE · Data Scaling Laws · BadRobot · RoboPAIR · AdvVLA · Contextual Backdoor · BadVLA · State Backdoor · RT-Trajectory · ATM · Im2Flow2Act · Code as Policies · VoxPoser · ReKep · Behavior Retrieval · STRAP · AgiBot GO-1 · RDT-1B · OpenVLA-OFT · SmolVLA · RoboMonkey · ConRFT（背景与理论：Visual Prompting / Painter / LVM / DT / Prompt-DT / Algorithm Distillation / GPT-3 / 涌现 / Mirage / 贝叶斯 ICL / Induction Heads / ICL≡GD / TTT 层）<br>配套材料：78 篇论文中英对照 PDF · 25 页汇总 PPT（survey_slides.html / .pdf）</div>
 </div>
-<div class="toc"><h1 class="first" style="page-break-before:avoid">目录</h1><ol><li>HOST 深度解读：机器人从一段人类视频里秒级习得操作技能</li><li>GEN 系列深度解读：Generalist AI 的具身基础模型三部曲</li><li>Instant Policy 深度解读：把 in-context 模仿学习变成图扩散，用仿真伪演示喂出即时策略</li><li>ICRT 深度解读：next-token prediction 原教旨主义的机器人 in-context learning 配方</li><li>RoboTTT 深度解读：把 Test-Time Training 装进机器人策略，上下文扩到 8K 步</li><li>BPP 深度解读：一条演示当 prompt，任务多样性是 in-context 操作的第一驱动力</li><li>RICL 深度解读：给预训练 VLA 事后注入 in-context 学习能力</li><li>Vid2Robot 深度解读：端到端视频条件策略的 Google 规模实践</li><li>外围论文速览：one-shot 技能习得调研的五个坐标</li><li>EgoWAM 深度解读：换掉世界预测目标，人类数据才不「漏毒」进动作头</li><li>Zero-WAM 深度解读：把人类视频「造」出来当任务规格，再用 IFP 逼模型真的去看</li><li>WALL-WM 深度解读：把世界-动作建模「循事件关节」下刀</li><li>WAM-TTT 深度解读：把人类演示写进快权重记忆，且只许写在感知侧</li><li>StellaVLA 深度解读：把演示翻译成「为什么」，四篇里唯一真零梯度</li><li>S1 与「涌现之争」：2026 年 8 月具身 ICL 三连发的完整拼图</li><li>LocoFormer 深度解读：S1 的前夜——上下文当适应机制在运动控制域先走通</li><li>FACTR 2 深度解读：一篇力感知论文，如何被 S1 借去质疑预训练</li><li>LingBot-VA 两代深度解读：把「测试时想象」坚持到底的世界-动作模型</li><li>GR-3 深度解读：few-shot 微调流派的工业标杆，ICL 要消灭的正是它</li><li>ManiLong-Shot 深度解读：OSIL 第一个像样的公开基准，和一个 30.2% 的现实</li><li>ICL 机制理论四篇合集：涌现之争吵的那个东西，理论上到底是什么</li><li>世界模型谱系三篇合集：从像素想象到表征预测再到平台化</li><li>基座 VLA 三篇合集：ICL 工作站在谁的肩上</li><li>One-Shot 模仿学习源头三篇合集：2017 年就有的问题，2026 年为什么才成</li><li>生成式动作头奠基两篇合集：为什么 ICL 时代的机器人策略都是生成模型</li><li>人类数据管线三篇合集：ICL 的燃料从哪来——UMI、RH20T、Ego2Robot</li><li>视频-动作模型同代对照组三篇合集：WAM 战场的其他玩家</li><li>潜动作桥梁三篇合集：无动作视频怎么变成可训练的动作信号</li><li>上下文强化学习前史三篇合集：把控制写成序列建模，再把演示写成 prompt</li><li>人类视频共训三篇合集：把人类数据写进权重的显式路线</li><li>评测基准与数据地基四篇合集：数字的口径从哪来</li><li>具身安全与提示注入合集：当技能接口开放给任意视频，攻击面在哪</li><li>演示的另一种编码三篇合集：轨迹草图、点轨迹、物体光流当提示</li><li>规划层 ICL 三篇合集：LLM 自己的 few-shot 能力，直接拿来控机器人</li><li>检索增强与技能库三篇合集：上下文从哪里来——非参数记忆与 ICL 的边界</li><li>视觉 ICL 前史三篇合集：机器人 ICL 之前，纯视觉的上下文学习长什么样</li><li>开源高效 VLA 三篇合集：基线的基线——ICL 论文脚注里那些名字</li><li>适应旋钮两端两篇合集：不改权重的测试时计算，与改权重的 RL 后训练</li><li>趋势与洞察：机器人 One-Shot 技能习得的 2026 拐点</li></ol></div>
+<div class="toc"><h1 class="first" style="page-break-before:avoid">目录</h1><ol><li>HOST 深度解读：机器人从一段人类视频里秒级习得操作技能</li><li>GEN 系列深度解读：Generalist AI 的具身基础模型三部曲</li><li>Instant Policy 深度解读：把 in-context 模仿学习变成图扩散，用仿真伪演示喂出即时策略</li><li>ICRT 深度解读：next-token prediction 原教旨主义的机器人 in-context learning 配方</li><li>RoboTTT 深度解读：把 Test-Time Training 装进机器人策略，上下文扩到 8K 步</li><li>BPP 深度解读：一条演示当 prompt，任务多样性是 in-context 操作的第一驱动力</li><li>RICL 深度解读：给预训练 VLA 事后注入 in-context 学习能力</li><li>Vid2Robot 深度解读：端到端视频条件策略的 Google 规模实践</li><li>外围论文速览：one-shot 技能习得调研的五个坐标</li><li>EgoWAM 深度解读：换掉世界预测目标，人类数据才不「漏毒」进动作头</li><li>Zero-WAM 深度解读：把人类视频「造」出来当任务规格，再用 IFP 逼模型真的去看</li><li>WALL-WM 深度解读：把世界-动作建模「循事件关节」下刀</li><li>WAM-TTT 深度解读：把人类演示写进快权重记忆，且只许写在感知侧</li><li>StellaVLA 深度解读：把演示翻译成「为什么」，四篇里唯一真零梯度</li><li>S1 与「涌现之争」：2026 年 8 月具身 ICL 三连发的完整拼图</li><li>LocoFormer 深度解读：S1 的前夜——上下文当适应机制在运动控制域先走通</li><li>FACTR 2 深度解读：一篇力感知论文，如何被 S1 借去质疑预训练</li><li>LingBot-VA 两代深度解读：把「测试时想象」坚持到底的世界-动作模型</li><li>GR-3 深度解读：few-shot 微调流派的工业标杆，ICL 要消灭的正是它</li><li>ManiLong-Shot 深度解读：OSIL 第一个像样的公开基准，和一个 30.2% 的现实</li><li>ICL 机制理论四篇合集：涌现之争吵的那个东西，理论上到底是什么</li><li>世界模型谱系三篇合集：从像素想象到表征预测再到平台化</li><li>基座 VLA 三篇合集：ICL 工作站在谁的肩上</li><li>One-Shot 模仿学习源头三篇合集：2017 年就有的问题，2026 年为什么才成</li><li>生成式动作头奠基两篇合集：为什么 ICL 时代的机器人策略都是生成模型</li><li>人类数据管线三篇合集：ICL 的燃料从哪来——UMI、RH20T、Ego2Robot</li><li>视频-动作模型同代对照组三篇合集：WAM 战场的其他玩家</li><li>潜动作桥梁三篇合集：无动作视频怎么变成可训练的动作信号</li><li>上下文强化学习前史三篇合集：把控制写成序列建模，再把演示写成 prompt</li><li>人类视频共训三篇合集：把人类数据写进权重的显式路线</li><li>评测基准与数据地基四篇合集：数字的口径从哪来</li><li>具身安全与提示注入合集：当技能接口开放给任意视频，攻击面在哪</li><li>演示的另一种编码三篇合集：轨迹草图、点轨迹、物体光流当提示</li><li>规划层 ICL 三篇合集：LLM 自己的 few-shot 能力，直接拿来控机器人</li><li>检索增强与技能库三篇合集：上下文从哪里来——非参数记忆与 ICL 的边界</li><li>视觉 ICL 前史三篇合集：机器人 ICL 之前，纯视觉的上下文学习长什么样</li><li>开源高效 VLA 三篇合集：基线的基线——ICL 论文脚注里那些名字</li><li>适应旋钮两端两篇合集：不改权重的测试时计算，与改权重的 RL 后训练</li><li>Zeva 深度解读：冻结策略从自己的失败里学——In-Context Causal Learning</li><li>后训练干扰两篇合集：后面的任务训练，怎样吃掉前面学到的能力</li><li>趋势与洞察：机器人 One-Shot 技能习得的 2026 拐点</li></ol></div>
 <article id="ch1"><h1 class="first" id="host-深度解读机器人从一段人类视频里秒级习得操作技能">HOST
 深度解读：机器人从一段人类视频里秒级习得操作技能</h1>
 <blockquote>
@@ -5105,11 +5105,224 @@ law」都是零更新下性能随某种资源单调上升的现象——前者�
 演示接口面向的家用场景不可复制。两篇都没有与任何 ICL
 方法对照——本节的刻度盘对比全部是跨论文定性定位，不构成性能排序。</p>
 </article><article id="ch39"><h1
+id="zeva-深度解读冻结策略从自己的失败里学in-context-causal-learning">Zeva
+深度解读：冻结策略从自己的失败里学——In-Context Causal Learning</h1>
+<blockquote>
+<p><strong>Zeva: In-Context Causal Learning for Generalizable Embodied
+Manipulation</strong> arXiv 2608.30880（2026-08-31）·
+清华大学智能产业研究院（AIR）+ Z-Trans AI（域变换） 作者：Fu Chen*、Xin
+Ding*（共同一作）……Hao Wu、Ting Cao（通讯，Ting Cao 项目负责）· 项目页
+air-embodied-brain.github.io/Zeva
+中文报道：量子位「模型不更新，能力却持续增长」（sources/wx_new_20260905.txt）</p>
+</blockquote>
+<h2 id="1-一句话定位">1. 一句话定位</h2>
+<p>Zeva 把具身 ICL
+的上下文来源从「别人的演示」扩到「自己的交互后果」：策略参数全程冻结，每次执行的「动作→状态变化」被编码成因果交互信号存入双时间尺度记忆，下一次动作时检索相关信号注入上下文——于是同一个冻结模型在反复尝试中越做越好（RoboCasa365-Atomic5
+上累计成功率从首次尝试 26% 升到四次尝试内
+73%），且这种经验可跨任务迁移；外加一段人类遥操作演示还能再提最多 15
+个点。它是 Algorithm Distillation「上下文内强化学习」（notes/30）与
+LocoFormer 跨 trial 适应（notes/17）在操作域的第一个完整实现，也是 2026
+年 8 月具身 ICL 三连发之后的第四家。</p>
+<h2 id="2-要解决的问题">2. 要解决的问题</h2>
+<p>论文把矛头对准两类现有方法的共同盲区。梯度类（微调、test-time
+training）依赖权重更新——慢、贵、且可能破坏已有能力（本仓库反复记录的遗忘问题，见
+notes/01 的 Wall-OSS 43% 存留率、notes/41 的动作微调遗忘 VLM
+能力）；上下文类（演示条件
+ICL，HOST/GEN-1.5/S1）解决的是「任务理解」——从演示读出做什么——却没有让模型从<strong>自己动作的物理后果</strong>里学因果：同一个「拧瓶盖」演示，瓶盖是紧是松、瓶身是轻是重，只有真的拧过一次才知道。Zeva
+的问题定义因此是「上下文因果学习」（ICCL）：冻结策略以自身交互历史为上下文做隐式系统辨识（推断物体质量、关节约束这类潜在物理属性），把推断结果用于下一次动作生成。</p>
+<h2 id="3-方法">3. 方法</h2>
+<p>三个组件串成一条循环。<strong>因果交互提取</strong>（Causal
+Interaction Extractor / Causal Transition Encoder）：把「执行的动作 +
+它引起的状态变化」这对动作-效果编码成潜在因果信号——不是存原始视频，而是存「我做了什么、世界怎么变」的压缩表示。<strong>双时间尺度因果记忆</strong>：短程交互轨迹（Brief
+Interaction Trace,
+BIT）记录当前尝试内的最近动态，每次尝试开始时清空；持久交互记忆（Persistent
+Interaction Memory, PIM）在同一 episode
+的多次尝试间保留并巩固有用证据，episode
+结束才清空。<strong>上下文策略注入</strong>：每一步动作生成前，以任务目标与当前状态为查询从
+PIM 检索相关因果信号，与 BIT 一起构造「因果提示」，注入冻结策略 π(a | o,
+g,
+M)——策略在上下文里完成隐式因果推断再出动作。评测协议专门区分「episode」（一次任务初始化）与「attempt」（一次连续执行）：固定
+episode
+下重置到同一初始状态反复尝试，所有对比方法获得相同的最大重试预算，报告
+CSR@K（K 次尝试内完成的 episode 比例）。</p>
+<h2 id="4-实验结果">4. 实验结果</h2>
+<p><strong>仿真 RoboCasa365-Atomic5</strong>（五个厨房任务，每任务 50
+个随机 episode）：Zeva 平均成功率 76.8%，对照 Fast-WAM
+72.4%、Cosmos3-Nano 64.8%、LingBot-VA 55.2%、Xiaomi-Robotics-1
+31.2%、τ0-WM 29.0%；分任务看 Zeva
+在关烤箱门（86）与开微波炉（84）领先，在电热水壶（78 对 Fast-WAM
+88）与咖啡杯（44 对 54）落后。<strong>真机 ChemLab-Evo</strong>（ARX
+机械臂，化学实验室三个难度等级，每格 20 个随机
+episode）：一级原子操作（拿试管/放烧杯/倒水）平均 83.3%（Zeva）对
+Fast-WAM 76.7%、π0.5 73.3%；二级短序列（滴定/配盐溶液）70.0% 对
+LingBot-VA 65.0%；三级复杂长程（天平称重/萃取）成功率 7.5% 对其余全部
+0–2.5%——按阶段进度分则 57.32% 对 Cosmos3-Nano
+44.73%。<strong>自我演化</strong>：Atomic5 上 CSR 从第一次尝试 26%
+升到四次内 73%，ChemLab-Evo
+同趋势——这是论文的核心主张，也是与所有基线（无记忆、多次尝试近似独立）的本质差异。<strong>人类演示叠加</strong>：在自身交互学习之上再给人类遥操作演示当上下文，最多再提升
+15
+个点。作者自认局限：只从任务执行产生的尝试里学因果，不主动探索——下一步是因果驱动的主动探索。</p>
+<h2 id="5-局限">5. 局限</h2>
+<ol type="1">
+<li><strong>26% → 73% 的口径</strong>：CSR@K
+是「四次机会内至少成功一次」的累计率，即便一个无记忆策略每次独立以 26%
+成功，四次内至少成功一次的概率也有 1 − 0.74⁴ ≈
+70%。论文声明所有方法获得相同重试预算，但正文摘录中没有给出基线的 CSR@4
+对照数字——「越用越稳」的增量到底比独立重试高多少，是评估这项工作必须先看清的一件事；论文用固定
+episode（重置到同一初始状态）设计，恰是为了把「记忆带来的改进」与「随机初始化的运气」分开，这一点设计是对的，缺的是并排的基线曲线。</li>
+<li><strong>三级任务的绝对水位</strong>：复杂长程任务成功率 7.5%，进度分
+57%——「越做越好」的起点很低，长程仍是未解问题，与 ManiLong-Shot
+30.2%（notes/21）的地面真相一致。</li>
+<li><strong>主干与算力未在摘录中明示</strong>：冻结策略 π
+具体是哪个基座、因果编码器怎么训、训练数据多少，正文没有一句话交代（可能在附录或项目页）；「首个
+ICCL 框架」的主张在 LocoFormer（跨 trial 上下文适应，locomotion 域）与
+RoboTTT 的 on-the-fly self-improvement 面前需要限定为「操作域 +
+显式因果记忆」。</li>
+<li><strong>基线的公平性</strong>：Fast-WAM、LingBot-VA、π0.5、Cosmos3-Nano
+均为通用基座，未被赋予任何形式的跨尝试记忆——对比证明的是「有记忆好于无记忆」，不是「Zeva
+的记忆设计好于其他记忆设计」；与 RoboTTT
+式快权重记忆的直接对照缺失。</li>
+<li>记忆按 episode 清空——跨
+episode、跨场景的长期积累（真正的「越用越稳」）未评测。</li>
+</ol>
+<h2 id="6-与调研主线的关系">6. 与调研主线的关系</h2>
+<p><strong>第四家，也是新的一格</strong>：HOST（人类视频）、GEN-1.5（传感器流）、S1（长时程视频）的上下文都是<strong>他人的演示</strong>；Zeva
+的上下文是<strong>自己的交互后果</strong>，人类演示只是可选叠加。在
+notes/16 的 EICL 坐标系（改权重 vs 改输入 × 何时适应）里，Zeva
+落在「改输入 · 每次尝试后更新记忆」——纯上下文列里此前只有
+StellaVLA（部署前固定前缀）与 Zero-WAM（episode 常量），Zeva
+补上了「上下文随执行历史增长」这一格，恰是 notes/16 未走之路清单第 2
+条「常量前缀 + 递归状态叠加」的一种实现（PIM
+是跨尝试的准递归状态，人类演示是常量前缀）。</p>
+<p><strong>与 Algorithm Distillation 的对应</strong>（notes/30）：AD
+证明 Transformer 能在上下文里从「学习历史」蒸馏出 RL
+算法——前提是训练数据包含失败到改进的完整历史。Zeva 的 CSR 曲线是 AD
+现象的操作域版本，但机制不同：AD 靶向的是让主干自己学会读历史，Zeva
+是在冻结主干外挂一个显式因果记忆与检索——前者需要专门的预训练数据结构，后者不需要重训主干。这与
+RoboTTT（改动作侧快权重）、WAM-TTT（改感知侧快权重）构成「自我改进」的三种实现：改权重、改主干训练、外挂记忆。</p>
+<p><strong>对涌现之争</strong>：Zeva 是又一条「ICL
+需要显式机制」的证据——它的自我改进能力完全来自外挂的因果记忆，主干本身冻结且不具备此能力；S1
+展示的「失败后自发重试改进」若真存在，Zeva
+给出了一个可验证的机制假说。<strong>对安全</strong>（notes/33）：PIM 是
+ICL
+系统里第一个「随部署持续增长的记忆」，恶意交互（有人故意在机器人尝试时干扰）会被当作因果证据写进记忆并影响后续动作——这是
+notes/33
+「技能库外置把注入变成持久化后门」的实时版本。<strong>对适应刻度盘</strong>（notes/39）：Zeva
+给「零更新」刻度加了第三个维度——ICL 花演示、测试时计算花算力、Zeva
+花<strong>尝试次数</strong>，四次尝试换 47 个点的累计增益，与 ConRFT
+一小时 RL 换 96% 之间的成本-收益对照值得专门测。</p>
+</article><article id="ch40"><h1
+id="后训练干扰两篇合集后面的任务训练怎样吃掉前面学到的能力">后训练干扰两篇合集：后面的任务训练，怎样吃掉前面学到的能力</h1>
+<blockquote>
+<p>覆盖两篇：<strong>StarVLA</strong>（A Lego-like Codebase for VLA
+Model Developing，2026，arXiv 2604.05014）·
+<strong>VLAct</strong>（Beyond Data Scaling: Representation-Centric
+Continued Pre-training for VLA Models，2026，2608.27550）
+定位：本调研反复引用「遗忘」——HOST 论文实测 Wall-OSS 经 SFT
+学新任务后旧技能只剩 43%（notes/01），LIBERO
+本为终身学习设计（notes/32），ICL
+路线的核心卖点之一就是「不改权重所以不遗忘」。但遗忘在 VLA
+里具体怎么发生、发生得多快、能否止住，此前没有被单独审视。这两篇给出了目前最系统的两组证据：StarVLA
+量化了<strong>动作微调在几千步内吃掉 VLM 的视觉-语言能力</strong>，VLAct
+发现了<strong>单一动作头的持续预训练会把主干表征坍缩成只有该头能读的形态</strong>——两种「后面训练伤害前面能力」的机制。</p>
+</blockquote>
+<h2 id="1-为什么补这两篇">1. 为什么补这两篇</h2>
+<p>「后面的任务训练影响前面的任务」在 VLA
+语境下有两层。第一层是任务间遗忘（学任务 B 忘任务 A），HOST 用 43%
+存留率做过实测、LIBERO
+用终身学习协议测过；第二层更隐蔽——<strong>训练阶段间的能力侵蚀</strong>：VLM
+主干在网页数据上学到的接地、指令跟随、空间推理，被随后的动作微调阶段破坏，而这些恰是操作泛化的前提。StarVLA
+与 VLAct 关注的正是第二层。它对本调研的意义是双向的：一方面解释了为什么
+ICL 路线有吸引力（不动权重就不侵蚀），另一方面提示 ICL
+的基座本身也是经过多阶段训练的——底座若已被侵蚀，上下文再好也读不出来。</p>
+<h2 id="2-starvla动作单训在两万步内把接地能力打到接近随机">2.
+StarVLA：动作单训在两万步内把接地能力打到接近随机</h2>
+<p><strong>本体</strong>：一个模块化 VLA 代码库——主干（VLM 如
+Qwen-VL、世界模型如
+Cosmos）与动作头（四种解码范式）各自可换，统一支持跨具身学习与多模态共训，集成
+LIBERO / SimplerEnv / RoboTwin 2.0 / RoboCasa-GR1 / BEHAVIOR-1K
+五个基准的统一评测接口；论文自报「最简单的单基准复现配方即可匹敌或超过既有方法」。<strong>与本篇主题直接相关的是第
+6 节多模态共训</strong>。论文的表述：预训练 VLM
+若只用动作预测微调，会在几千步内「遗忘」预训练的视觉与语言能力——表现为物体接地、指令跟随、场景理解退化，而这三者都是稳健操作的前提。<strong>量化证据</strong>（论文口径，引自其上的
+ST4VLA 研究）：Vanilla VLA（仅动作数据微调）的 RefCOCO-g 接地性能在 2
+万步内跌到接近随机；朴素共训（动作 +
+空间接地数据）部分保住感知但震荡不稳；空间引导共训最好，保住约 70%
+的原始接地性能。表 8 给出全景——Vanilla VLA
+的多模态理解指标已无法评测（表中为空），加共训后 MME 1106、RefCOCO-g <a
+href="mailto:IoU@0.5">IoU@0.5</a> 47.1；空间引导 + 空间预训练后 MME
+1411、RefCOCO-g 71.2、RoboRefIt 74.3，同时操作性能反升：Google Robot
+VM/VA 84.6/75.9、WidowX 73.2，对照 Vanilla 的 66.1/63.5 与
+54.7。机制解释：共训通过维持感知相关通路的梯度流对抗遗忘；论文另给了梯度子空间对齐分析（PSS）说明空间接地目标与动作目标在朴素共训下冲突、在空间引导下对齐。</p>
+<h2 id="3-vlact单一动作头的持续预训练把主干表征坍缩成只有它能读">3.
+VLAct：单一动作头的持续预训练把主干表征「坍缩」成只有它能读</h2>
+<p><strong>本体</strong>：面向 VLA 的 VLM 主干持续预训练配方——从预训练
+VLM
+出发，在广泛、异构、多具身的机器人数据（DROID、InternA1、RoboCoin、MolmoAct
+等全开源数据 +
+字幕数据）上继续预训练，产出一个可复用的主干，下游再接任务专用动作头微调；基座
+Qwen3-VL-4B，训练建在 StarVLA 代码库上，16 卡。<strong>引子实验（第 2
+节）是本篇最有价值的部分</strong>，它揭示了第二种「后训练伤害前面能力」：固定主干，只换预训练与微调用的动作头（离散
+FAST token、回归 OFT、流匹配 PI、扩散
+GR00T）。两个发现——（一）离散监督可迁移但有量化损失：FAST 预训练的主干接
+GR00T 头略优于从头微调，但保留 FAST
+头本身远差于连续头；（二）<strong>单头连续监督引发头特异性表征坍缩</strong>：OFT
+预训练的主干接 OFT 头下游大幅提升，同一主干接 PI 或 GR00T
+头却表现很差——动作信息还在，但被组织成只有预训练时那个头能解码的几何形态。论文的结论句：「同头性能强夸大了主干的可复用性」。<strong>三项对策</strong>：浅层保护——预训练时冻结整个视觉编码器与
+LLM 下半层、只训上半层与动作头，下游再全解冻（LIBERO-Plus +3.7%、AgileX
++3.4%）；字幕混训——消融多种 VLM
+数据后发现字幕是最强的锚，因为字幕对物体、属性、空间关系、场景给出稠密监督；多头连续共监督
++ 部分统一的跨具身动作布局（含周期关节的 wrap-aware
+损失）。<strong>主结果</strong>（论文口径）：LIBERO-Plus 总分
+82.6%，比同主干同 OFT 头的 Qwen3VL-OFT（75.0%）高 7.6
+个点——这一对照隔离了持续预训练配方本身的效果，增益集中在相机、机器人状态、噪声、布局四个扰动轴；比阿里
+Abot-M0（80.5%）高 2.1 个点且只用开源数据。RoboTwin 2.0 基础设定（每任务
+50 条干净演示）VLAct-OFT 干净 92.5% / 随机 90.8%，超过
+InternVLA-A1、Being-H0.7、Motus、LingBot-VLA、ABot-M0、π0.5，接近
+HoloBrain-0 与 Fast-WAM；换不同下游头性能稳定（PI 头干净
+93.0%），支持「迁移的是主干表征而非某个头」。</p>
+<h2 id="4-合成三种后面吃前面的机制以及-icl-在其中的位置">4.
+合成：三种「后面吃前面」的机制，以及 ICL 在其中的位置</h2>
+<p>把本仓库的证据排开，「后训练伤害前面能力」至少有三种机制：<strong>任务间遗忘</strong>（Wall-OSS
+SFT 后旧技能 43%，HOST；LIBERO
+终身学习协议里顺序微调的前向迁移与遗忘权衡）；<strong>阶段间能力侵蚀</strong>（StarVLA：动作单训
+2
+万步内接地能力归零）；<strong>表征几何坍缩</strong>（VLAct：单头预训练把主干锁死在一个头的解码几何里，换头即失效）。三者的共同根源是同一个：梯度更新在优化当前目标时不保护与当前目标正交的已有结构。三种对策也同构：共训保留旧目标的梯度流（StarVLA
+的字幕/接地共训、VLAct 的字幕混训）、冻结保护关键层（VLAct
+浅层保护）、多目标共监督防止坍缩（VLAct 多头）。</p>
+<p><strong>ICL
+在这张图里的位置有两面</strong>。正面：不改权重意味着三种机制全部不触发——HOST
+的技能库外置、Zeva 的冻结策略 + 外挂记忆（notes/40）、RoboTTT
+只动快权重（notes/05），都是在设计上绕开遗忘；这是 ICL
+相对微调路线最硬的结构性优势，本篇两文把「绕开了什么」量化了。反面：ICL
+的基座本身是多阶段训练的产物——HOST 主干经 Fast-WAM 式 WAM
+预训练、GEN-1.5 经 8 个月连续预训练、Zero-WAM 经 15,360 GPU
+小时——每一阶段都可能发生 StarVLA/VLAct
+描述的侵蚀与坍缩。如果基座的视觉-语言接地已被动作训练吃掉，「读懂演示视频」这一步就会受损；如果基座表征坍缩成只适配一种动作头，ICL
+后装（RICL 式，notes/07）的适配性也会受损。VLAct
+的「换头稳定性」因此可以反过来当作<strong>基座是否适合做 ICL
+后装的诊断指标</strong>——目前没有任何 ICL
+论文测过自己基座的这一属性。</p>
+<p><strong>对涌现之争的一条延伸</strong>：GEN-1.5 强调 ICL 从 8
+个月连续预训练中涌现；StarVLA/VLAct
+说明连续预训练同时在侵蚀与重塑表征——涌现出的 ICL 能力与被侵蚀掉的 VLM
+能力可能是同一枚硬币，GEN-1.5
+博客没有报告其基座在标准视觉-语言基准上的存留率。</p>
+<h2 id="5-局限与批判">5. 局限与批判</h2>
+<p>StarVLA 的遗忘量化引自其上的 ST4VLA 研究（同团队），RefCOCO-g
+的「接近随机」缺少精确数字，2
+万步的时间尺度只在一种主干、一种数据配比下观察；VLAct 的引子实验只在
+Qwen3-VL-4B
+上做，「表征坍缩」以下游性能推断、未做表征几何的直接测量（如子空间重叠），且四种头的定义与训练预算是否严格对齐见附录；两篇的主结果都以
+LIBERO-Plus / RoboTwin 2.0 为战场，基线数字部分取自 LIBERO-Plus
+论文而非自行复现（notes/32 与 notes/38
+讨论的配方效应在此同样适用）。两篇都没有测第一层遗忘（任务间）——它们量化的是阶段间侵蚀，与
+HOST 的 43% 存留率不是同一口径。</p>
+</article><article id="ch41"><h1
 id="趋势与洞察机器人-one-shot-技能习得的-2026-拐点">趋势与洞察：机器人
 One-Shot 技能习得的 2026 拐点</h1>
 <blockquote>
 <p>本报告基于对 HOST（arXiv 2607.20033）、GEN-0/1/1.5、Skild
-S1、LocoFormer、Instant
+S1、Zeva、LocoFormer、Instant
 Policy、ICRT、RoboTTT、WAM-TTT、StellaVLA、Zero-WAM、LingBot-VA（两代）、BPP、RICL、Vid2Robot、EgoScale、EgoWAM、WALL-WM、GR-3、ManiLong-Shot、FACTR
 2、π0.5、Wall-OSS、Fast-WAM 等工作的深度解读，外加十五个纵深专题：ICL
 机制理论（notes/22）、世界模型上游谱系（notes/23）、基座
@@ -5119,13 +5332,14 @@ RL
 前史（notes/30）、人类视频共训（notes/31）、评测基准与数据地基（notes/32）、具身安全与提示注入（notes/33）、演示的几何编码（notes/34）、规划层
 ICL（notes/35）、检索增强与技能库（notes/36）、视觉 ICL
 前史（notes/37）、开源高效 VLA
-对照（notes/38）、适应旋钮两端（notes/39）。 写作时间：2026-08-31（09-01
-增补 S1 与四篇 EICL 论文；09-02 增补 EICL 直系 6 项 +
-理论与谱系专题；09-02 晚由 5 路子 agent
+对照（notes/38）、适应旋钮两端（notes/39）、后训练干扰（notes/41）。
+写作时间：2026-08-31（09-01 增补 S1 与四篇 EICL 论文；09-02 增补 EICL
+直系 6 项 + 理论与谱系专题；09-02 晚由 5 路子 agent
 并行补齐历史源头、底座、动作头、数据管线、同代对照 13 项；09-03
 补齐潜动作、上下文 RL 前史、人类共训、基准地基、具身安全 19
 项，并据此修正预测 P5；09-04 补齐几何编码、规划层 ICL、检索与技能库 9
-项；09-05 补齐视觉 ICL 前史、开源高效 VLA、适应旋钮两端 8 项）</p>
+项；09-05 补齐视觉 ICL 前史、开源高效 VLA、适应旋钮两端 8 项；09-06 增补
+Zeva 与后训练干扰两篇）</p>
 </blockquote>
 <hr />
 <h2 id="0-一页结论">0. 一页结论</h2>
@@ -5137,7 +5351,10 @@ HOST（62%，50 任务，29 秒/技能），Skild AI 发布了把主张推到最
 S1（未见且长达 10 分钟的任务 66%，同规模语言提示仅
 9%）。三家互不相识的机构、三条不同的路线在 16
 天窗口内汇合于同一个能力点——这不是巧合，是领域相变的信号。同月，四篇学术论文（WAM-TTT、RoboTTT、StellaVLA、Zero-WAM）把「演示怎么被用上」做成了可核对的实验，其消融证据一致指向：至少在学术可负担的规模上，具身
-ICL 需要显式机制，不是免费涌现（详见第 16 号报告）。</p>
+ICL 需要显式机制，不是免费涌现（详见第 16 号报告）。月末第四家
+Zeva（清华 AIR +
+域变换，08-31）把上下文来源从「他人的演示」扩到「自己的交互后果」：冻结策略靠外挂因果记忆在四次尝试内累计成功率从
+26% 升到 73%——上下文学习从「学别人」走到「学自己」（第 40 号报告）。</p>
 <p>类比语言模型的历史坐标：这就是机器人的 GPT-3
 时刻。GPT-3（2020）之后，NLP
 的重心从「为每个任务微调」转向「为每个任务写
@@ -5495,6 +5712,18 @@ scaling；首次越狱商用机器人；环境-物体多样性幂律</td>
 <td>Zero-WAM（Robbyant+港科广）</td>
 <td>合成人类视频 74.2K 对，任务级零样本 46.95%</td>
 </tr>
+<tr>
+<td>2026-08-31</td>
+<td><strong>Zeva（清华 AIR + 域变换）</strong></td>
+<td>上下文因果学习：冻结策略从自身交互后果学，四次尝试累计 26% →
+73%；第四家</td>
+</tr>
+<tr>
+<td>2026-04 / 08</td>
+<td>StarVLA / VLAct</td>
+<td>量化后训练干扰：动作单训 2
+万步内接地能力归零；单头预训练令主干表征坍缩</td>
+</tr>
 </tbody>
 </table>
 <h2 id="2-六大趋势">2. 六大趋势</h2>
@@ -5784,6 +6013,26 @@ scaling（RoboMonkey
 10
 倍大模型，进一步要求把「规模」拆成数据小时、任务覆盖、参数量、微调配方四个变量分别归因——GEN-0
 的 scaling law 只报告了前两者。</p>
+<p><strong>Insight 13：「不改权重所以不遗忘」是 ICL
+最硬的结构性优势，现在有了反面的量化；而上下文学习正从「学别人」走到「学自己」。</strong>
+遗忘在 VLA 里至少有三种机制（notes/41）：任务间遗忘（Wall-OSS SFT
+后旧技能存留 43%）、阶段间能力侵蚀（StarVLA：只用动作监督微调，RefCOCO-g
+接地能力 2 万步内跌至接近随机，空间引导共训才保住约
+70%）、表征几何坍缩（VLAct：单一动作头预训练把主干锁进该头的解码几何，同主干换头即失效——「同头性能强夸大了主干可复用性」）。三者同源：梯度更新不保护与当前目标正交的已有结构。ICL
+路线（HOST 技能库外置、RoboTTT 只动快权重、Zeva 冻结策略 +
+外挂记忆）在设计上全部绕开——这是相对微调路线最硬的优势，本轮两文把「绕开了什么」量化了。但同一证据也指向
+ICL 的软肋：其基座本身是多阶段训练产物（HOST 经 WAM 预训练、GEN-1.5 经 8
+个月连续预训练），每一阶段都可能发生侵蚀与坍缩——基座若已丢掉视觉-语言接地，「读懂演示视频」就受损；VLAct
+的「换头稳定性」可反过来当作基座是否适合 ICL
+后装的诊断指标，无人测过。另一条线索来自 Zeva（notes/40）：此前所有 ICL
+的上下文都是他人的演示，Zeva
+让冻结策略以自己的「动作→后果」为上下文做隐式系统辨识，四次尝试累计成功率
+26% → 73%，人类演示只是可选叠加（再 +15%）——这是 Algorithm
+Distillation「上下文内 RL」（notes/30）在操作域的首个完整实现，也填上了
+notes/16 未走之路里「常量前缀 + 递归状态叠加」那一格。两个提醒：CSR@K
+是「K
+次内至少成功一次」的累计率，需与无记忆独立重试的基线曲线并排看；持续增长的交互记忆是
+ICL 系统里第一个实时攻击面（notes/33）。</p>
 <p><strong>Insight 8：四篇 EICL
 论文的失败是互补的，右上角空缺正是家用场景。</strong>
 把任务时长与分布漂移当两个坐标轴：StellaVLA
@@ -5864,6 +6113,14 @@ backbone、同一数据、同一评测上并排跑过——四篇互相知晓却
 <li><strong>具身 ICL 相对视觉 ICL
 的三条增量困难</strong>：时间对齐、具身翻译、闭环——视觉 ICL
 已解决「从示例读任务」与「输出统一」，具身侧应把资源集中在这三条而非重新发明前两者（notes/37）。</li>
+<li><strong>ICL 基座的「侵蚀存留率」与「换头稳定性」</strong>：ICL
+论文应报告其基座在标准视觉-语言基准上的能力存留（StarVLA
+口径）与跨动作头的表征可复用性（VLAct
+口径）——这两项决定了演示能否被读懂、ICL
+能否后装，目前无一报告（notes/41）。</li>
+<li><strong>自我改进的公平基线</strong>：Zeva
+式「越用越稳」需与无记忆独立重试的 CSR@K 曲线并排，并与 RoboTTT
+快权重记忆、ConRFT 一小时 RL 做成本-收益对照（notes/40、39）。</li>
 <li><strong>基线复现的披露标准</strong>：RoboTwin 2.0 上同一 π0.5
 被复现出 43 与
 83，差距超过多数头条增益——「基线训练数据、微调配方、checkpoint

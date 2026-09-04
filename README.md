@@ -8,7 +8,7 @@
 
 2026 年 8 月，三家互不相识的机构在 16 天窗口内汇合于同一能力点：**HOST**（开源）用架构设计让机器人看一段人类视频、29 秒后执行新任务（50 个未见任务 62%）；**GEN-1.5** 用 50 万小时数据预训练让 one-shot ICL 作为涌现能力出现（10 任务 59%）；**S1** 把主张推到最远——一条视频演示执行预训练从未见过、最长 10 分钟的任务（66%，语言提示同规模仅 9%）。同月，四篇学术论文（WAM-TTT / RoboTTT / StellaVLA / Zero-WAM）用消融证据一致反对「ICL 免费涌现」叙事。
 
-与一般 awesome 列表不同，本仓库对每篇论文附带：**深度解读**（📄，中文，含延伸批判）、**中译全文 PDF**（🈶，super_translate 生成）、以及汇总的 22 页 PPT、66 页全文报告与趋势洞察。⭐ 标注本调研的三个主角。当前覆盖 80+ 项工作 / 82 篇论文 PDF / 38 份深度解读，含十八个纵深专题：ICL 机制理论、世界模型上游谱系、基座 VLA、One-Shot 模仿源头（2017 起）、生成式动作头奠基、人类数据管线、视频-动作同代对照组、潜动作桥梁、上下文 RL 前史、人类视频共训、评测基准与数据地基、具身安全与提示注入、演示的几何编码（轨迹/点轨迹/光流提示）、规划层 ICL、检索增强与技能库、视觉 ICL 前史、开源高效 VLA 对照、适应旋钮两端（测试时计算 / RL 后训练）。
+与一般 awesome 列表不同，本仓库对每篇论文附带：**深度解读**（📄，中文，含延伸批判）、**中译全文 PDF**（🈶，super_translate 生成）、以及汇总的 22 页 PPT、66 页全文报告与趋势洞察。⭐ 标注本调研的三个主角。当前覆盖 85+ 项工作 / 85 篇论文 PDF / 40 份深度解读，含十九个纵深专题：ICL 机制理论、世界模型上游谱系、基座 VLA、One-Shot 模仿源头（2017 起）、生成式动作头奠基、人类数据管线、视频-动作同代对照组、潜动作桥梁、上下文 RL 前史、人类视频共训、评测基准与数据地基、具身安全与提示注入、演示的几何编码（轨迹/点轨迹/光流提示）、规划层 ICL、检索增强与技能库、视觉 ICL 前史、开源高效 VLA 对照、适应旋钮两端（测试时计算 / RL 后训练）、后训练干扰（后面的训练怎样吃掉前面的能力）。
 
 > 所有成功率数字都依赖各自的任务集与判定口径，**不同工作的数字禁止直接比大小**；详见各篇解读的「延伸批判」节。
 
@@ -68,6 +68,10 @@
 <tr>
 	<td>&emsp;<a href="#225-open--efficient-vlas">2.25 Open & Efficient VLAs</a></td>
 	<td>&emsp;<a href="#226-adaptation-dial-extremes">2.26 Adaptation-Dial Extremes</a></td>
+</tr>
+<tr>
+	<td>&emsp;<a href="#227-post-training-interference--forgetting">2.27 Post-Training Interference & Forgetting</a></td>
+	<td></td>
 </tr>
 <tr><td colspan="2"><a href="#3-repository-structure">3. Repository Structure</a></td></tr>
 <tr><td colspan="2"><a href="#4-recommended-reading-order">4. Recommended Reading Order</a></td></tr>
@@ -153,6 +157,10 @@
 3. **Zero-WAM: In-Context World-Action Modeling from Human Videos for Open-Ended Task Generalization.** arXiv, 2026. [paper](https://arxiv.org/abs/2608.26103) [📄解读](notes/12_ZeroWAM_zh.md) [🈶中译](papers/zh/ZeroWAM_2608.26103_zh.pdf)
 
     *Zhou et al. — Robbyant · HKUST(GZ) · HKUST · 唯一正面攻打未见任务（46.95% vs 17.45%）；HumanGen 合成 74.2K 人-机配对；IFP 消融证明纯上下文路线需要显式反捷径机制*
+
+4. **Zeva: In-Context Causal Learning for Generalizable Embodied Manipulation.** arXiv, 2026-08-31. [paper](https://arxiv.org/abs/2608.30880) [📄解读](notes/40_Zeva_zh.md) [🈶中译](papers/zh/Zeva_2608.30880_zh.pdf) ⭐
+
+    *Fu Chen, Xin Ding, et al. — 清华 AIR · Z-Trans AI（域变换）· 上下文从「他人演示」扩到「自己的交互后果」：因果交互编码 + 双时间尺度记忆（BIT/PIM）+ 检索注入冻结策略；RoboCasa365-Atomic5 76.8% 超 Fast-WAM 72.4%，四次尝试内累计 26% → 73%，真机 ChemLab-Evo 三级全胜；人类演示叠加再 +15%——Algorithm Distillation「上下文内 RL」在操作域的首个完整实现，注意 CSR@K 口径需与独立重试基线对照*
 
 ### [2.5 Data Recipes & Post-hoc ICL](#content)
 
@@ -528,18 +536,30 @@ ICL 本身是什么——LLM 侧的机制层答案，具身域验证全部空白
 
     *Yuhui Chen, et al. — 中科院自动化所 · 一致性目标的离线 + 人在环在线两阶段 RL 微调，八个真机任务 45–90 分钟到 96.3%（较监督 +144%）——ICL 解决「能不能做」，RL 后训练解决「做得多可靠」*
 
+### [2.27 Post-Training Interference & Forgetting](#content)
+
+「后面的任务训练怎样吃掉前面学到的能力」——ICL「不改权重所以不遗忘」这一卖点的反面量化：动作微调几千步内侵蚀 VLM 接地能力、单头持续预训练令主干表征坍缩（详见 [notes/41](notes/41_posttraining_interference_zh.md)）。
+
+1. **StarVLA: A Lego-like Codebase for Vision-Language-Action Model Developing.** arXiv, 2026. [paper](https://arxiv.org/abs/2604.05014) [📄解读](notes/41_posttraining_interference_zh.md) [🈶中译](papers/zh/StarVLA_2604.05014_zh.pdf)
+
+    *模块化 VLA 代码库（主干 × 四种动作头可换，五基准统一评测）；§6 量化动作单训遗忘：RefCOCO-g 接地 2 万步内跌至接近随机，空间引导共训保住约 70% 并令操作反升（WidowX 54.7 → 73.2）*
+
+2. **VLAct: Beyond Data Scaling — Representation-Centric Continued Pre-training for VLA Models.** arXiv, 2026. [paper](https://arxiv.org/abs/2608.27550) [📄解读](notes/41_posttraining_interference_zh.md) [🈶中译](papers/zh/VLAct_2608.27550_zh.pdf)
+
+    *Qwen3-VL-4B 持续预训练配方：引子实验发现单一动作头预训练使主干表征坍缩（OFT 预训练主干接 PI/GR00T 头即失效——「同头性能强夸大主干可复用性」）；浅层保护 + 字幕混训 + 多头共监督；LIBERO-Plus 82.6% 比同主干 Qwen3VL-OFT 高 7.6，RoboTwin 2.0 基础设定 92.5/90.8*
+
 ## [3. Repository Structure](#content)
 
 ```
 awesome_ICL/
 ├── README.md                  ← 本文件
 ├── papers/
-│   ├── pdf/                   ← 82 篇英文原版 PDF（含 LLM 背景 3 篇 + 理论 4 篇）
-│   ├── zh/                    ← 75 篇中文翻译 PDF（super_translate，DeepSeek 后端）
+│   ├── pdf/                   ← 85 篇英文原版 PDF（含 LLM 背景 3 篇 + 理论 4 篇）
+│   ├── zh/                    ← 78 篇中文翻译 PDF（super_translate，DeepSeek 后端）
 │   └── cache/                 ← 翻译块级缓存（可续跑，不入库）
-├── notes/                     ← 38 份深度解读（01–09、11–39，中文）
+├── notes/                     ← 40 份深度解读（01–09、11–41，中文）
 ├── insights/                  ← 趋势与洞察报告（10）
-├── sources/                   ← S1 博客、Rhoda DVA 博客与微信深度综述存档
+├── sources/                   ← S1 博客、Rhoda DVA 博客、Zeva 量子位报道与微信深度综述存档
 ├── report/                    ← 汇总 HTML PPT / PPT PDF / 全文报告 HTML+PDF
 ├── scripts/                   ← 翻译队列与报告构建脚本
 └── tools/                     ← 工具仓库（super_translate 等，不入库）
@@ -549,7 +569,7 @@ awesome_ICL/
 
 1. [`report/survey_slides.html`](report/survey_slides.html) — 22 页 PPT，15 分钟拿到全部结论
 2. [`insights/10_trends_insights_zh.md`](insights/10_trends_insights_zh.md) — 趋势全文（六大趋势、八条洞察、七条可证伪预测、开放问题）
-3. [`notes/01_HOST_zh.md`](notes/01_HOST_zh.md) + [`notes/02_GEN_series_zh.md`](notes/02_GEN_series_zh.md) + [`notes/16_S1_EICL_wave_zh.md`](notes/16_S1_EICL_wave_zh.md) — 三大主角与涌现之争
+3. [`notes/01_HOST_zh.md`](notes/01_HOST_zh.md) + [`notes/02_GEN_series_zh.md`](notes/02_GEN_series_zh.md) + [`notes/16_S1_EICL_wave_zh.md`](notes/16_S1_EICL_wave_zh.md) + [`notes/40_Zeva_zh.md`](notes/40_Zeva_zh.md) — 四大主角与涌现之争
 4. [`notes/12_ZeroWAM_zh.md`](notes/12_ZeroWAM_zh.md) + [`notes/14_WAMTTT_zh.md`](notes/14_WAMTTT_zh.md) + [`notes/15_StellaVLA_zh.md`](notes/15_StellaVLA_zh.md) + [`notes/05_RoboTTT_zh.md`](notes/05_RoboTTT_zh.md) — 四篇 EICL 论文的完整拼图
 5. [`notes/22_ICL_theory_zh.md`](notes/22_ICL_theory_zh.md) + [`notes/23_worldmodel_lineage_zh.md`](notes/23_worldmodel_lineage_zh.md) — 纵深专题：ICL 机制理论与世界模型上游谱系
 6. [`notes/25_osil_origins_zh.md`](notes/25_osil_origins_zh.md)（2017→2026 九年对照）+ [`notes/26_generative_action_heads_zh.md`](notes/26_generative_action_heads_zh.md)（为什么都是生成模型）+ [`notes/24_foundation_VLAs_zh.md`](notes/24_foundation_VLAs_zh.md)（站在谁的肩上）— 历史与底座三专题
@@ -557,7 +577,8 @@ awesome_ICL/
 8. [`notes/32_benchmarks_and_data_foundations_zh.md`](notes/32_benchmarks_and_data_foundations_zh.md)（口径从哪来 + 真机 one-shot 协议建议）+ [`notes/33_embodied_safety_zh.md`](notes/33_embodied_safety_zh.md)（攻击面与 P5 验证）+ [`notes/30_incontext_rl_precursors_zh.md`](notes/30_incontext_rl_precursors_zh.md)（算法前史）
 9. [`notes/34_visual_prompt_intermediates_zh.md`](notes/34_visual_prompt_intermediates_zh.md)（演示的几何编码）+ [`notes/35_planner_level_icl_zh.md`](notes/35_planner_level_icl_zh.md)（规划层 vs 策略层 ICL 的分界）+ [`notes/36_retrieval_and_skill_libraries_zh.md`](notes/36_retrieval_and_skill_libraries_zh.md)（上下文从哪来）
 10. [`notes/37_visual_icl_precursors_zh.md`](notes/37_visual_icl_precursors_zh.md)（视觉 ICL 已解决什么、具身 ICL 还要解决什么）+ [`notes/38_open_efficient_VLAs_zh.md`](notes/38_open_efficient_VLAs_zh.md)（基线配方效应）+ [`notes/39_adaptation_dial_extremes_zh.md`](notes/39_adaptation_dial_extremes_zh.md)（完整适应刻度盘）
-11. 其余解读按需取用；每份的「延伸批判」与「关系定位」两节是与论文摘要差异最大的增量内容
+11. [`notes/41_posttraining_interference_zh.md`](notes/41_posttraining_interference_zh.md) — ICL「不遗忘」卖点的反面量化：后训练怎样吃掉前面的能力
+12. 其余解读按需取用；每份的「延伸批判」与「关系定位」两节是与论文摘要差异最大的增量内容
 
 ## [5. Reproduce](#content)
 
@@ -570,6 +591,7 @@ bash scripts/translate_queue4.sh
 bash scripts/translate_queue5.sh   # 第五批（含 queue5b/5c 补充）
 bash scripts/translate_queue6.sh
 bash scripts/translate_queue7.sh
+bash scripts/translate_queue8.sh
 
 # 全文报告 PDF（pandoc 合并 md → HTML → Chrome headless 打印）
 python3 scripts/build_full_report.py
@@ -592,6 +614,6 @@ N. **论文标题.** Venue, 年份. [paper](arXiv 链接), [code](代码链接)
     *作者 — 机构 · 一句话定位*
 ```
 
-要求：(1) 归入 2.1–2.26 中最贴切的分类；(2) 一句话定位需说明与「演示如何被策略用上」这条主线的关系；(3) 成功率数字必须注明任务集与判定口径。
+要求：(1) 归入 2.1–2.27 中最贴切的分类；(2) 一句话定位需说明与「演示如何被策略用上」这条主线的关系；(3) 成功率数字必须注明任务集与判定口径。
 
 > 注：知乎文章（p/2077872253551878182，涌现之争主题）因 JS 反爬无法存档正文，其引用文献 [1]–[8] 已全部纳入本仓库；两篇微信深度文章存档于 [`sources/`](sources/)。

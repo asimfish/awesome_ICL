@@ -1,0 +1,165 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1340" height="1416" viewBox="0 0 1340 1416" font-family="-apple-system,Helvetica,Arial,'PingFang SC','Noto Sans CJK SC',sans-serif">
+<rect width="1340" height="1416" fill="#0b0f17"/>
+<text x="36" y="42" font-size="24" font-weight="700" fill="#e6edf3">Figure 2 · 具身上下文学习的分类体系（Taxonomy）</text>
+<text x="36" y="68" font-size="13.5" fill="#9aa4b2">7 个一级维度 · 26 个子类 · 代表性工作按仓库 notes 编号对应；同一工作可出现在多个维度（如 Zero-WAM 既是像素演示编码也是纯上下文机制）。</text>
+<rect x="40" y="693.0" width="200" height="68" rx="10" fill="#e6edf3"/>
+<text x="140.0" y="721.0" font-size="16" font-weight="700" text-anchor="middle" fill="#0b0f17">具身上下文学习</text>
+<text x="140.0" y="743.0" font-size="12.5" text-anchor="middle" fill="#0b0f17">Embodied In-Context Learning</text>
+<path d="M240,727.0 H280.0 V205.0 H320" fill="none" stroke="#243040" stroke-width="1.6"/>
+<rect x="320" y="110.0" width="230" height="190.0" rx="9" fill="#7ab2c1" stroke="#0e7490" stroke-width="1.6"/>
+<text x="435.0" y="200.0" font-size="15" font-weight="700" text-anchor="middle" fill="#0b0f17">上下文的来源与编码</text>
+<text x="435.0" y="220.0" font-size="12.5" font-weight="400" text-anchor="middle" fill="#0b0f17">（演示怎么进模型）</text>
+<path d="M550,205.0 H585.0 V125.0 H620" fill="none" stroke="#0e7490" stroke-width="1.2" opacity="0.8"/>
+<rect x="620" y="110" width="210" height="30" rx="6" fill="#0b0f17" stroke="#0e7490" stroke-width="1.2"/>
+<text x="632" y="130.0" font-size="13.5" font-weight="600" fill="#e6edf3">像素 / 视频演示</text>
+<line x1="830" y1="125.0" x2="872" y2="125.0" stroke="#0e7490" stroke-width="1" opacity="0.6"/>
+<text x="880" y="130.0" font-size="12.5" fill="#e6edf3">HOST · Zero-WAM · S1 · GEN-1.5 · Vid2Robot · ViVLA · BPP</text>
+<path d="M550,205.0 H585.0 V165.0 H620" fill="none" stroke="#0e7490" stroke-width="1.2" opacity="0.8"/>
+<rect x="620" y="150" width="210" height="30" rx="6" fill="#0b0f17" stroke="#0e7490" stroke-width="1.2"/>
+<text x="632" y="170.0" font-size="13.5" font-weight="600" fill="#e6edf3">结构化语言</text>
+<line x1="830" y1="165.0" x2="872" y2="165.0" stroke="#0e7490" stroke-width="1" opacity="0.6"/>
+<text x="880" y="170.0" font-size="12.5" fill="#e6edf3">StellaVLA</text>
+<path d="M550,205.0 H585.0 V205.0 H620" fill="none" stroke="#0e7490" stroke-width="1.2" opacity="0.8"/>
+<rect x="620" y="190" width="210" height="30" rx="6" fill="#0b0f17" stroke="#0e7490" stroke-width="1.2"/>
+<text x="632" y="210.0" font-size="13.5" font-weight="600" fill="#e6edf3">几何中间表示</text>
+<line x1="830" y1="205.0" x2="872" y2="205.0" stroke="#0e7490" stroke-width="1" opacity="0.6"/>
+<text x="880" y="210.0" font-size="12.5" fill="#e6edf3">RT-Trajectory · ATM · Im2Flow2Act</text>
+<path d="M550,205.0 H585.0 V245.0 H620" fill="none" stroke="#0e7490" stroke-width="1.2" opacity="0.8"/>
+<rect x="620" y="230" width="210" height="30" rx="6" fill="#0b0f17" stroke="#0e7490" stroke-width="1.2"/>
+<text x="632" y="250.0" font-size="13.5" font-weight="600" fill="#e6edf3">潜动作</text>
+<line x1="830" y1="245.0" x2="872" y2="245.0" stroke="#0e7490" stroke-width="1" opacity="0.6"/>
+<text x="880" y="250.0" font-size="12.5" fill="#e6edf3">Genie · LAPA · UniVLA</text>
+<path d="M550,205.0 H585.0 V285.0 H620" fill="none" stroke="#0e7490" stroke-width="1.2" opacity="0.8"/>
+<rect x="620" y="270" width="210" height="30" rx="6" fill="#0b0f17" stroke="#0e7490" stroke-width="1.2"/>
+<text x="632" y="290.0" font-size="13.5" font-weight="600" fill="#e6edf3">自身交互后果</text>
+<line x1="830" y1="285.0" x2="872" y2="285.0" stroke="#0e7490" stroke-width="1" opacity="0.6"/>
+<text x="880" y="290.0" font-size="12.5" fill="#e6edf3">Zeva · RoboTTT · LocoFormer · Algorithm Distill.</text>
+<path d="M240,727.0 H280.0 V436.0 H320" fill="none" stroke="#243040" stroke-width="1.6"/>
+<rect x="320" y="332.0" width="230" height="208.0" rx="9" fill="#eb88b4" stroke="#db2777" stroke-width="1.6"/>
+<text x="435.0" y="431.0" font-size="15" font-weight="700" text-anchor="middle" fill="#0b0f17">适应机制</text>
+<text x="435.0" y="451.0" font-size="12.5" font-weight="400" text-anchor="middle" fill="#0b0f17">（改什么 · 何时）</text>
+<path d="M550,436.0 H585.0 V356.0 H620" fill="none" stroke="#db2777" stroke-width="1.2" opacity="0.8"/>
+<rect x="620" y="332" width="210" height="48" rx="6" fill="#0b0f17" stroke="#db2777" stroke-width="1.2"/>
+<text x="632" y="361.0" font-size="13.5" font-weight="600" fill="#e6edf3">纯上下文 · 零梯度</text>
+<line x1="830" y1="356.0" x2="872" y2="356.0" stroke="#db2777" stroke-width="1" opacity="0.6"/>
+<text x="880" y="352.0" font-size="12.5" fill="#e6edf3">ICRT · Instant Policy · StellaVLA · Zero-WAM · HOST</text>
+<text x="880" y="370.0" font-size="12.5" fill="#e6edf3">Prompt-DT</text>
+<path d="M550,436.0 H585.0 V405.0 H620" fill="none" stroke="#db2777" stroke-width="1.2" opacity="0.8"/>
+<rect x="620" y="390" width="210" height="30" rx="6" fill="#0b0f17" stroke="#db2777" stroke-width="1.2"/>
+<text x="632" y="410.0" font-size="13.5" font-weight="600" fill="#e6edf3">快权重 / TTT</text>
+<line x1="830" y1="405.0" x2="872" y2="405.0" stroke="#db2777" stroke-width="1" opacity="0.6"/>
+<text x="880" y="410.0" font-size="12.5" fill="#e6edf3">RoboTTT · WAM-TTT · TTT Layers</text>
+<path d="M550,436.0 H585.0 V445.0 H620" fill="none" stroke="#db2777" stroke-width="1.2" opacity="0.8"/>
+<rect x="620" y="430" width="210" height="30" rx="6" fill="#0b0f17" stroke="#db2777" stroke-width="1.2"/>
+<text x="632" y="450.0" font-size="13.5" font-weight="600" fill="#e6edf3">检索增强 · 后装</text>
+<line x1="830" y1="445.0" x2="872" y2="445.0" stroke="#db2777" stroke-width="1" opacity="0.6"/>
+<text x="880" y="450.0" font-size="12.5" fill="#e6edf3">RICL · Behavior Retrieval · STRAP</text>
+<path d="M550,436.0 H585.0 V485.0 H620" fill="none" stroke="#db2777" stroke-width="1.2" opacity="0.8"/>
+<rect x="620" y="470" width="210" height="30" rx="6" fill="#0b0f17" stroke="#db2777" stroke-width="1.2"/>
+<text x="632" y="490.0" font-size="13.5" font-weight="600" fill="#e6edf3">规划层 ICL</text>
+<line x1="830" y1="485.0" x2="872" y2="485.0" stroke="#db2777" stroke-width="1" opacity="0.6"/>
+<text x="880" y="490.0" font-size="12.5" fill="#e6edf3">Code as Policies · VoxPoser · ReKep</text>
+<path d="M550,436.0 H585.0 V525.0 H620" fill="none" stroke="#db2777" stroke-width="1.2" opacity="0.8"/>
+<rect x="620" y="510" width="210" height="30" rx="6" fill="#0b0f17" stroke="#db2777" stroke-width="1.2"/>
+<text x="632" y="530.0" font-size="13.5" font-weight="600" fill="#e6edf3">测试时计算 / RL 后训练</text>
+<line x1="830" y1="525.0" x2="872" y2="525.0" stroke="#db2777" stroke-width="1" opacity="0.6"/>
+<text x="880" y="530.0" font-size="12.5" fill="#e6edf3">RoboMonkey · ConRFT · SmoothRL · GR-3</text>
+<path d="M240,727.0 H280.0 V665.0 H320" fill="none" stroke="#243040" stroke-width="1.6"/>
+<rect x="320" y="572.0" width="230" height="186.0" rx="9" fill="#b692f5" stroke="#7c3aed" stroke-width="1.6"/>
+<text x="435.0" y="670.0" font-size="15" font-weight="700" text-anchor="middle" fill="#0b0f17">底座与世界模型</text>
+<path d="M550,665.0 H585.0 V596.0 H620" fill="none" stroke="#7c3aed" stroke-width="1.2" opacity="0.8"/>
+<rect x="620" y="572" width="210" height="48" rx="6" fill="#0b0f17" stroke="#7c3aed" stroke-width="1.2"/>
+<text x="632" y="601.0" font-size="13.5" font-weight="600" fill="#e6edf3">基座 VLA</text>
+<line x1="830" y1="596.0" x2="872" y2="596.0" stroke="#7c3aed" stroke-width="1" opacity="0.6"/>
+<text x="880" y="592.0" font-size="12.5" fill="#e6edf3">OpenVLA · π0 · π0.5 · GR00T N1 · RDT-1B · SmolVLA</text>
+<text x="880" y="610.0" font-size="12.5" fill="#e6edf3">OpenVLA-OFT · Wall-OSS</text>
+<path d="M550,665.0 H585.0 V654.0 H620" fill="none" stroke="#7c3aed" stroke-width="1.2" opacity="0.8"/>
+<rect x="620" y="630" width="210" height="48" rx="6" fill="#0b0f17" stroke="#7c3aed" stroke-width="1.2"/>
+<text x="632" y="659.0" font-size="13.5" font-weight="600" fill="#e6edf3">世界-动作模型 (WAM)</text>
+<line x1="830" y1="654.0" x2="872" y2="654.0" stroke="#7c3aed" stroke-width="1" opacity="0.6"/>
+<text x="880" y="650.0" font-size="12.5" fill="#e6edf3">Fast-WAM · WALL-WM · EgoWAM · LingBot-VA 1/2 · DreamZero</text>
+<text x="880" y="668.0" font-size="12.5" fill="#e6edf3">Motus · DVA</text>
+<path d="M550,665.0 H585.0 V703.0 H620" fill="none" stroke="#7c3aed" stroke-width="1.2" opacity="0.8"/>
+<rect x="620" y="688" width="210" height="30" rx="6" fill="#0b0f17" stroke="#7c3aed" stroke-width="1.2"/>
+<text x="632" y="708.0" font-size="13.5" font-weight="600" fill="#e6edf3">视频生成 → 世界模型</text>
+<line x1="830" y1="703.0" x2="872" y2="703.0" stroke="#7c3aed" stroke-width="1" opacity="0.6"/>
+<text x="880" y="708.0" font-size="12.5" fill="#e6edf3">UniPi · V-JEPA 2 · Cosmos</text>
+<path d="M550,665.0 H585.0 V743.0 H620" fill="none" stroke="#7c3aed" stroke-width="1.2" opacity="0.8"/>
+<rect x="620" y="728" width="210" height="30" rx="6" fill="#0b0f17" stroke="#7c3aed" stroke-width="1.2"/>
+<text x="632" y="748.0" font-size="13.5" font-weight="600" fill="#e6edf3">持续预训练与遗忘</text>
+<line x1="830" y1="743.0" x2="872" y2="743.0" stroke="#7c3aed" stroke-width="1" opacity="0.6"/>
+<text x="880" y="748.0" font-size="12.5" fill="#e6edf3">StarVLA · VLAct</text>
+<path d="M240,727.0 H280.0 V845.0 H320" fill="none" stroke="#243040" stroke-width="1.6"/>
+<rect x="320" y="790.0" width="230" height="110.0" rx="9" fill="#f3a379" stroke="#ea580c" stroke-width="1.6"/>
+<text x="435.0" y="850.0" font-size="15" font-weight="700" text-anchor="middle" fill="#0b0f17">数据来源</text>
+<path d="M550,845.0 H585.0 V805.0 H620" fill="none" stroke="#ea580c" stroke-width="1.2" opacity="0.8"/>
+<rect x="620" y="790" width="210" height="30" rx="6" fill="#0b0f17" stroke="#ea580c" stroke-width="1.2"/>
+<text x="632" y="810.0" font-size="13.5" font-weight="600" fill="#e6edf3">人类数据管线</text>
+<line x1="830" y1="805.0" x2="872" y2="805.0" stroke="#ea580c" stroke-width="1" opacity="0.6"/>
+<text x="880" y="810.0" font-size="12.5" fill="#e6edf3">UMI · RH20T · Ego2Robot · EgoScale</text>
+<path d="M550,845.0 H585.0 V845.0 H620" fill="none" stroke="#ea580c" stroke-width="1.2" opacity="0.8"/>
+<rect x="620" y="830" width="210" height="30" rx="6" fill="#0b0f17" stroke="#ea580c" stroke-width="1.2"/>
+<text x="632" y="850.0" font-size="13.5" font-weight="600" fill="#e6edf3">人类视频共训</text>
+<line x1="830" y1="845.0" x2="872" y2="845.0" stroke="#ea580c" stroke-width="1" opacity="0.6"/>
+<text x="880" y="850.0" font-size="12.5" fill="#e6edf3">HumanPlus · EgoMimic · PH2D</text>
+<path d="M550,845.0 H585.0 V885.0 H620" fill="none" stroke="#ea580c" stroke-width="1.2" opacity="0.8"/>
+<rect x="620" y="870" width="210" height="30" rx="6" fill="#0b0f17" stroke="#ea580c" stroke-width="1.2"/>
+<text x="632" y="890.0" font-size="13.5" font-weight="600" fill="#e6edf3">技能库 · 跨具身数据</text>
+<line x1="830" y1="885.0" x2="872" y2="885.0" stroke="#ea580c" stroke-width="1" opacity="0.6"/>
+<text x="880" y="890.0" font-size="12.5" fill="#e6edf3">AgiBot GO-1 · OXE · FACTR 2</text>
+<path d="M240,727.0 H280.0 V956.0 H320" fill="none" stroke="#243040" stroke-width="1.6"/>
+<rect x="320" y="928.0" width="230" height="56.0" rx="9" fill="#cba876" stroke="#a16207" stroke-width="1.6"/>
+<text x="435.0" y="961.0" font-size="15" font-weight="700" text-anchor="middle" fill="#0b0f17">评测与口径</text>
+<path d="M550,956.0 H585.0 V956.0 H620" fill="none" stroke="#a16207" stroke-width="1.2" opacity="0.8"/>
+<rect x="620" y="932" width="210" height="48" rx="6" fill="#0b0f17" stroke="#a16207" stroke-width="1.2"/>
+<text x="632" y="961.0" font-size="13.5" font-weight="600" fill="#e6edf3">基准与协议</text>
+<line x1="830" y1="956.0" x2="872" y2="956.0" stroke="#a16207" stroke-width="1" opacity="0.6"/>
+<text x="880" y="952.0" font-size="12.5" fill="#e6edf3">LIBERO · RoboTwin 2.0 · RLBench-Oneshot</text>
+<text x="880" y="970.0" font-size="12.5" fill="#e6edf3">Data Scaling Laws</text>
+<path d="M240,727.0 H280.0 V1067.0 H320" fill="none" stroke="#243040" stroke-width="1.6"/>
+<rect x="320" y="1012.0" width="230" height="110.0" rx="9" fill="#eb8787" stroke="#dc2626" stroke-width="1.6"/>
+<text x="435.0" y="1072.0" font-size="15" font-weight="700" text-anchor="middle" fill="#0b0f17">具身安全</text>
+<path d="M550,1067.0 H585.0 V1027.0 H620" fill="none" stroke="#dc2626" stroke-width="1.2" opacity="0.8"/>
+<rect x="620" y="1012" width="210" height="30" rx="6" fill="#0b0f17" stroke="#dc2626" stroke-width="1.2"/>
+<text x="632" y="1032.0" font-size="13.5" font-weight="600" fill="#e6edf3">语言层越狱</text>
+<line x1="830" y1="1027.0" x2="872" y2="1027.0" stroke="#dc2626" stroke-width="1" opacity="0.6"/>
+<text x="880" y="1032.0" font-size="12.5" fill="#e6edf3">BadRobot · RoboPAIR</text>
+<path d="M550,1067.0 H585.0 V1067.0 H620" fill="none" stroke="#dc2626" stroke-width="1.2" opacity="0.8"/>
+<rect x="620" y="1052" width="210" height="30" rx="6" fill="#0b0f17" stroke="#dc2626" stroke-width="1.2"/>
+<text x="632" y="1072.0" font-size="13.5" font-weight="600" fill="#e6edf3">感知层对抗</text>
+<line x1="830" y1="1067.0" x2="872" y2="1067.0" stroke="#dc2626" stroke-width="1" opacity="0.6"/>
+<text x="880" y="1072.0" font-size="12.5" fill="#e6edf3">AdvVLA</text>
+<path d="M550,1067.0 H585.0 V1107.0 H620" fill="none" stroke="#dc2626" stroke-width="1.2" opacity="0.8"/>
+<rect x="620" y="1092" width="210" height="30" rx="6" fill="#0b0f17" stroke="#dc2626" stroke-width="1.2"/>
+<text x="632" y="1112.0" font-size="13.5" font-weight="600" fill="#e6edf3">演示投毒后门</text>
+<line x1="830" y1="1107.0" x2="872" y2="1107.0" stroke="#dc2626" stroke-width="1" opacity="0.6"/>
+<text x="880" y="1112.0" font-size="12.5" fill="#e6edf3">Contextual Backdoor · BadVLA · State Backdoor</text>
+<path d="M240,727.0 H280.0 V1249.0 H320" fill="none" stroke="#243040" stroke-width="1.6"/>
+<rect x="320" y="1154.0" width="230" height="190.0" rx="9" fill="#99a1ac" stroke="#475569" stroke-width="1.6"/>
+<text x="435.0" y="1254.0" font-size="15" font-weight="700" text-anchor="middle" fill="#0b0f17">理论与前史</text>
+<path d="M550,1249.0 H585.0 V1169.0 H620" fill="none" stroke="#475569" stroke-width="1.2" opacity="0.8"/>
+<rect x="620" y="1154" width="210" height="30" rx="6" fill="#0b0f17" stroke="#475569" stroke-width="1.2"/>
+<text x="632" y="1174.0" font-size="13.5" font-weight="600" fill="#e6edf3">LLM ICL 与涌现之争</text>
+<line x1="830" y1="1169.0" x2="872" y2="1169.0" stroke="#475569" stroke-width="1" opacity="0.6"/>
+<text x="880" y="1174.0" font-size="12.5" fill="#e6edf3">GPT-3 · Emergent Abilities · Mirage</text>
+<path d="M550,1249.0 H585.0 V1209.0 H620" fill="none" stroke="#475569" stroke-width="1.2" opacity="0.8"/>
+<rect x="620" y="1194" width="210" height="30" rx="6" fill="#0b0f17" stroke="#475569" stroke-width="1.2"/>
+<text x="632" y="1214.0" font-size="13.5" font-weight="600" fill="#e6edf3">ICL 机制理论</text>
+<line x1="830" y1="1209.0" x2="872" y2="1209.0" stroke="#475569" stroke-width="1" opacity="0.6"/>
+<text x="880" y="1214.0" font-size="12.5" fill="#e6edf3">Bayesian ICL · Induction Heads · ICL≡GD</text>
+<path d="M550,1249.0 H585.0 V1249.0 H620" fill="none" stroke="#475569" stroke-width="1.2" opacity="0.8"/>
+<rect x="620" y="1234" width="210" height="30" rx="6" fill="#0b0f17" stroke="#475569" stroke-width="1.2"/>
+<text x="632" y="1254.0" font-size="13.5" font-weight="600" fill="#e6edf3">视觉 ICL 前史</text>
+<line x1="830" y1="1249.0" x2="872" y2="1249.0" stroke="#475569" stroke-width="1" opacity="0.6"/>
+<text x="880" y="1254.0" font-size="12.5" fill="#e6edf3">Visual Prompting · Painter · LVM</text>
+<path d="M550,1249.0 H585.0 V1289.0 H620" fill="none" stroke="#475569" stroke-width="1.2" opacity="0.8"/>
+<rect x="620" y="1274" width="210" height="30" rx="6" fill="#0b0f17" stroke="#475569" stroke-width="1.2"/>
+<text x="632" y="1294.0" font-size="13.5" font-weight="600" fill="#e6edf3">上下文 RL 前史</text>
+<line x1="830" y1="1289.0" x2="872" y2="1289.0" stroke="#475569" stroke-width="1" opacity="0.6"/>
+<text x="880" y="1294.0" font-size="12.5" fill="#e6edf3">Decision Tf · Prompt-DT · Algorithm Distill.</text>
+<path d="M550,1249.0 H585.0 V1329.0 H620" fill="none" stroke="#475569" stroke-width="1.2" opacity="0.8"/>
+<rect x="620" y="1314" width="210" height="30" rx="6" fill="#0b0f17" stroke="#475569" stroke-width="1.2"/>
+<text x="632" y="1334.0" font-size="13.5" font-weight="600" fill="#e6edf3">OSIL 源头 · 动作头</text>
+<line x1="830" y1="1329.0" x2="872" y2="1329.0" stroke="#475569" stroke-width="1" opacity="0.6"/>
+<text x="880" y="1334.0" font-size="12.5" fill="#e6edf3">Duan'17 · Finn'17 · IMOP · Diffusion Policy · ACT/ALOHA</text>
+</svg>

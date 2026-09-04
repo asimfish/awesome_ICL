@@ -572,7 +572,7 @@ awesome_ICL/
 ## [4. Recommended Reading Order](#content)
 
 1. [`report/survey_slides.html`](report/survey_slides.html) — 28 页 PPT，20 分钟拿到全部结论
-2. [`insights/10_trends_insights_zh.md`](insights/10_trends_insights_zh.md) — 趋势全文（六大趋势、八条洞察、七条可证伪预测、开放问题）
+2. [`insights/10_trends_insights_zh.md`](insights/10_trends_insights_zh.md) — 趋势全文（六大趋势、十三条洞察、七条可证伪预测、开放问题）
 3. [`notes/01_HOST_zh.md`](notes/01_HOST_zh.md) + [`notes/02_GEN_series_zh.md`](notes/02_GEN_series_zh.md) + [`notes/16_S1_EICL_wave_zh.md`](notes/16_S1_EICL_wave_zh.md) + [`notes/40_Zeva_zh.md`](notes/40_Zeva_zh.md) — 四大主角与涌现之争
 4. [`notes/12_ZeroWAM_zh.md`](notes/12_ZeroWAM_zh.md) + [`notes/14_WAMTTT_zh.md`](notes/14_WAMTTT_zh.md) + [`notes/15_StellaVLA_zh.md`](notes/15_StellaVLA_zh.md) + [`notes/05_RoboTTT_zh.md`](notes/05_RoboTTT_zh.md) — 四篇 EICL 论文的完整拼图
 5. [`notes/22_ICL_theory_zh.md`](notes/22_ICL_theory_zh.md) + [`notes/23_worldmodel_lineage_zh.md`](notes/23_worldmodel_lineage_zh.md) — 纵深专题：ICL 机制理论与世界模型上游谱系

@@ -117,12 +117,256 @@ ul.tight.amber li::before{background:var(--amber)}
       <p><strong>为什么是拐点：</strong>三家方法论各异（归纳偏置 vs 数据暴力 vs 数据+配方），却在 16 天窗口交付同一能力——范式转移不再依赖单一路线成立。同月，四篇学术论文（WAM-TTT/RoboTTT/StellaVLA/Zero-WAM）把「演示怎么被用上」做成可核对的实验，其消融一致反对「免费涌现」叙事；月末第四家 Zeva 让冻结策略从<strong>自己的交互后果</strong>学（四次尝试 26%→73%）。本调研其余 80 余项工作提供了这场汇合与争论的完整证据链。</p>
     </div>
   </div>
-  <div class="foot"><span>来源：notes/01、02；insights/10 §0</span><span class="num">02 / 28</span></div>
+  <div class="foot"><span>来源：notes/01、02；insights/10 §0</span><span class="num">02 / 29</span></div>
+</section>
+
+<!-- ═══ 纵览时间线 ═══ -->
+<section class="slide">
+  <div class="slide-head"><span>纵览 · 90 项工作</span><span class="num">03</span></div>
+  <h1>一张图看全景：2017 年定义问题，2022 年 LLM/视觉 ICL 与规划层 ICL 就位，<br>2024–2026 三年 66 项工作把低层控制推进上下文</h1>
+  <div class="body" style="justify-content:center">
+    <div style="width:100%;height:100%;display:flex;align-items:center"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" preserveAspectRatio="xMidYMid meet" viewBox="0 0 1904 540" font-family="-apple-system,Helvetica,Arial,'PingFang SC',sans-serif">
+
+<text x="60" y="34" font-size="21" font-weight="700" fill="#e6edf3">Embodied In-Context Learning — 90 works, 2017–2026</text>
+<text x="60" y="55" font-size="12.5" fill="#8b98a9">awesome_ICL · one dot per work · colored by family · ★ = headline work · stacked by publication year</text>
+<circle cx="65" cy="78" r="5.5" fill="#fbbf24"/>
+<text x="76" y="82" font-size="11.5" fill="#c9d1d9">主角 · 产业发布 (HOST / GEN / S1 / Zeva)</text>
+<circle cx="585" cy="78" r="5.5" fill="#22d3ee"/>
+<text x="596" y="82" font-size="11.5" fill="#c9d1d9">具身 ICL 方法（结构 · 快权重 · 纯上下文 · 配方 · 几何编码 · 规划层 · 检索）</text>
+<circle cx="1105" cy="78" r="5.5" fill="#a78bfa"/>
+<text x="1116" y="82" font-size="11.5" fill="#c9d1d9">世界-动作模型 · 视频生成谱系</text>
+<circle cx="65" cy="102" r="5.5" fill="#34d399"/>
+<text x="76" y="106" font-size="11.5" fill="#c9d1d9">基座 VLA · 基线 · 持续预训练</text>
+<circle cx="585" cy="102" r="5.5" fill="#fb923c"/>
+<text x="596" y="106" font-size="11.5" fill="#c9d1d9">人类数据：管线 / 共训 / 潜动作</text>
+<circle cx="1105" cy="102" r="5.5" fill="#94a3b8"/>
+<text x="1116" y="106" font-size="11.5" fill="#c9d1d9">理论与前史：LLM/视觉 ICL · 上下文 RL · OSIL 源头 · 动作头</text>
+<circle cx="65" cy="126" r="5.5" fill="#facc15"/>
+<text x="76" y="130" font-size="11.5" fill="#c9d1d9">评测基准与数据地基</text>
+<circle cx="585" cy="126" r="5.5" fill="#f87171"/>
+<text x="596" y="130" font-size="11.5" fill="#c9d1d9">具身安全与提示注入</text>
+<circle cx="1105" cy="126" r="5.5" fill="#f472b6"/>
+<text x="1116" y="130" font-size="11.5" fill="#c9d1d9">适应刻度盘两端：测试时计算 / 真机 RL</text>
+<line x1="50" y1="470" x2="1874" y2="470" stroke="#3b4656" stroke-width="1.5"/>
+<line x1="124.0" y1="466" x2="124.0" y2="474" stroke="#3b4656"/>
+<text x="124.0" y="492" font-size="14" text-anchor="middle" fill="#c9d1d9" font-weight="700">2017</text>
+<text x="124.0" y="510" font-size="11" text-anchor="middle" fill="#8b98a9">2 works</text>
+<circle cx="68" cy="454" r="4.5" fill="#94a3b8"/>
+<text x="77" y="457.5" font-size="10.5" fill="#c9d1d9">Duan'17</text>
+<circle cx="68" cy="430" r="4.5" fill="#94a3b8"/>
+<text x="77" y="433.5" font-size="10.5" fill="#c9d1d9">Finn'17</text>
+<line x1="242.0" y1="466" x2="242.0" y2="474" stroke="#3b4656"/>
+<text x="242.0" y="492" font-size="14" text-anchor="middle" fill="#c9d1d9" font-weight="700">2018</text>
+<text x="242.0" y="510" font-size="11" text-anchor="middle" fill="#8b98a9">0 works</text>
+<line x1="324.0" y1="466" x2="324.0" y2="474" stroke="#3b4656"/>
+<text x="324.0" y="492" font-size="14" text-anchor="middle" fill="#c9d1d9" font-weight="700">2019</text>
+<text x="324.0" y="510" font-size="11" text-anchor="middle" fill="#8b98a9">0 works</text>
+<line x1="442.0" y1="466" x2="442.0" y2="474" stroke="#3b4656"/>
+<text x="442.0" y="492" font-size="14" text-anchor="middle" fill="#c9d1d9" font-weight="700">2020</text>
+<text x="442.0" y="510" font-size="11" text-anchor="middle" fill="#8b98a9">1 work</text>
+<circle cx="386" cy="454" r="4.5" fill="#94a3b8"/>
+<text x="395" y="457.5" font-size="10.5" fill="#c9d1d9">GPT-3</text>
+<line x1="596.0" y1="466" x2="596.0" y2="474" stroke="#3b4656"/>
+<text x="596.0" y="492" font-size="14" text-anchor="middle" fill="#c9d1d9" font-weight="700">2021</text>
+<text x="596.0" y="510" font-size="11" text-anchor="middle" fill="#8b98a9">2 works</text>
+<circle cx="540" cy="454" r="4.5" fill="#94a3b8"/>
+<text x="549" y="457.5" font-size="10.5" fill="#c9d1d9">Decision Tf</text>
+<circle cx="540" cy="430" r="4.5" fill="#94a3b8"/>
+<text x="549" y="433.5" font-size="10.5" fill="#c9d1d9">Bayesian ICL</text>
+<line x1="750.0" y1="466" x2="750.0" y2="474" stroke="#3b4656"/>
+<text x="750.0" y="492" font-size="14" text-anchor="middle" fill="#c9d1d9" font-weight="700">2022</text>
+<text x="750.0" y="510" font-size="11" text-anchor="middle" fill="#8b98a9">8 works</text>
+<circle cx="694" cy="454" r="4.5" fill="#94a3b8"/>
+<text x="703" y="457.5" font-size="10.5" fill="#c9d1d9">Emergent</text>
+<circle cx="694" cy="430" r="4.5" fill="#94a3b8"/>
+<text x="703" y="433.5" font-size="10.5" fill="#c9d1d9">Prompt-DT</text>
+<circle cx="694" cy="406" r="4.5" fill="#22d3ee"/>
+<text x="703" y="409.5" font-size="10.5" fill="#c9d1d9">Code as Policies</text>
+<circle cx="694" cy="382" r="4.5" fill="#94a3b8"/>
+<text x="703" y="385.5" font-size="10.5" fill="#c9d1d9">Induction Heads</text>
+<circle cx="694" cy="358" r="4.5" fill="#94a3b8"/>
+<text x="703" y="361.5" font-size="10.5" fill="#c9d1d9">Visual Prompting</text>
+<circle cx="694" cy="334" r="4.5" fill="#94a3b8"/>
+<text x="703" y="337.5" font-size="10.5" fill="#c9d1d9">Algorithm Distill.</text>
+<circle cx="694" cy="310" r="4.5" fill="#94a3b8"/>
+<text x="703" y="313.5" font-size="10.5" fill="#c9d1d9">ICL≡GD</text>
+<circle cx="694" cy="286" r="4.5" fill="#94a3b8"/>
+<text x="703" y="289.5" font-size="10.5" fill="#c9d1d9">Painter</text>
+<line x1="904.0" y1="466" x2="904.0" y2="474" stroke="#3b4656"/>
+<text x="904.0" y="492" font-size="14" text-anchor="middle" fill="#c9d1d9" font-weight="700">2023</text>
+<text x="904.0" y="510" font-size="11" text-anchor="middle" fill="#8b98a9">11 works</text>
+<circle cx="848" cy="454" r="4.5" fill="#a78bfa"/>
+<text x="857" y="457.5" font-size="10.5" fill="#c9d1d9">UniPi</text>
+<circle cx="848" cy="430" r="4.5" fill="#94a3b8"/>
+<text x="857" y="433.5" font-size="10.5" fill="#c9d1d9">Diffusion Policy</text>
+<circle cx="848" cy="406" r="4.5" fill="#94a3b8"/>
+<text x="857" y="409.5" font-size="10.5" fill="#c9d1d9">ACT/ALOHA</text>
+<circle cx="848" cy="382" r="4.5" fill="#22d3ee"/>
+<text x="857" y="385.5" font-size="10.5" fill="#c9d1d9">Behavior Retrieval</text>
+<circle cx="848" cy="358" r="4.5" fill="#94a3b8"/>
+<text x="857" y="361.5" font-size="10.5" fill="#c9d1d9">Mirage</text>
+<circle cx="848" cy="334" r="4.5" fill="#facc15"/>
+<text x="857" y="337.5" font-size="10.5" fill="#c9d1d9">LIBERO</text>
+<circle cx="848" cy="310" r="4.5" fill="#fb923c"/>
+<text x="857" y="313.5" font-size="10.5" fill="#c9d1d9">RH20T</text>
+<circle cx="848" cy="286" r="4.5" fill="#22d3ee"/>
+<text x="857" y="289.5" font-size="10.5" fill="#c9d1d9">VoxPoser</text>
+<circle cx="848" cy="262" r="4.5" fill="#facc15"/>
+<text x="857" y="265.5" font-size="10.5" fill="#c9d1d9">OXE</text>
+<circle cx="848" cy="238" r="4.5" fill="#22d3ee"/>
+<text x="857" y="241.5" font-size="10.5" fill="#c9d1d9">RT-Trajectory</text>
+<circle cx="848" cy="214" r="4.5" fill="#94a3b8"/>
+<text x="857" y="217.5" font-size="10.5" fill="#c9d1d9">LVM</text>
+<line x1="1122.0" y1="466" x2="1122.0" y2="474" stroke="#3b4656"/>
+<text x="1122.0" y="492" font-size="14" text-anchor="middle" fill="#c9d1d9" font-weight="700">2024</text>
+<text x="1122.0" y="510" font-size="11" text-anchor="middle" fill="#8b98a9">22 works</text>
+<circle cx="1002" cy="454" r="4.5" fill="#22d3ee"/>
+<text x="1011" y="457.5" font-size="10.5" fill="#c9d1d9">ATM</text>
+<circle cx="1002" cy="430" r="4.5" fill="#fb923c"/>
+<text x="1011" y="433.5" font-size="10.5" fill="#c9d1d9">Genie</text>
+<circle cx="1002" cy="406" r="4.5" fill="#fb923c"/>
+<text x="1011" y="409.5" font-size="10.5" fill="#c9d1d9">UMI</text>
+<circle cx="1002" cy="382" r="4.5" fill="#22d3ee"/>
+<text x="1011" y="385.5" font-size="10.5" fill="#c9d1d9">Vid2Robot</text>
+<circle cx="1002" cy="358" r="4.5" fill="#fb923c"/>
+<text x="1011" y="361.5" font-size="10.5" fill="#c9d1d9">HumanPlus</text>
+<circle cx="1002" cy="334" r="4.5" fill="#34d399"/>
+<text x="1011" y="337.5" font-size="10.5" fill="#c9d1d9">OpenVLA</text>
+<circle cx="1002" cy="310" r="4.5" fill="#f87171"/>
+<text x="1011" y="313.5" font-size="10.5" fill="#c9d1d9">BadRobot</text>
+<circle cx="1002" cy="286" r="4.5" fill="#22d3ee"/>
+<text x="1011" y="289.5" font-size="10.5" fill="#c9d1d9">Im2Flow2Act</text>
+<circle cx="1002" cy="262" r="4.5" fill="#94a3b8"/>
+<text x="1011" y="265.5" font-size="10.5" fill="#c9d1d9">TTT Layers</text>
+<circle cx="1002" cy="238" r="4.5" fill="#f87171"/>
+<text x="1011" y="241.5" font-size="10.5" fill="#c9d1d9">Contextual Backdoor</text>
+<circle cx="1002" cy="214" r="4.5" fill="#22d3ee"/>
+<text x="1011" y="217.5" font-size="10.5" fill="#c9d1d9">ICRT</text>
+<circle cx="1002" cy="190" r="4.5" fill="#22d3ee"/>
+<text x="1011" y="193.5" font-size="10.5" fill="#c9d1d9">ReKep</text>
+<circle cx="1130" cy="454" r="4.5" fill="#facc15"/>
+<text x="1139" y="457.5" font-size="10.5" fill="#c9d1d9">Data Scaling Laws</text>
+<circle cx="1130" cy="430" r="4.5" fill="#fb923c"/>
+<text x="1139" y="433.5" font-size="10.5" fill="#c9d1d9">EgoMimic</text>
+<circle cx="1130" cy="406" r="4.5" fill="#fb923c"/>
+<text x="1139" y="409.5" font-size="10.5" fill="#c9d1d9">LAPA</text>
+<circle cx="1130" cy="382" r="4.5" fill="#34d399"/>
+<text x="1139" y="385.5" font-size="10.5" fill="#c9d1d9">RDT-1B</text>
+<circle cx="1130" cy="358" r="4.5" fill="#f87171"/>
+<text x="1139" y="361.5" font-size="10.5" fill="#c9d1d9">RoboPAIR</text>
+<circle cx="1130" cy="334" r="4.5" fill="#34d399"/>
+<text x="1139" y="337.5" font-size="10.5" fill="#c9d1d9">π0</text>
+<circle cx="1130" cy="310" r="4.5" fill="#f87171"/>
+<text x="1139" y="313.5" font-size="10.5" fill="#c9d1d9">AdvVLA</text>
+<circle cx="1130" cy="286" r="4.5" fill="#22d3ee"/>
+<text x="1139" y="289.5" font-size="10.5" fill="#c9d1d9">Instant Policy</text>
+<circle cx="1130" cy="262" r="4.5" fill="#22d3ee"/>
+<text x="1139" y="265.5" font-size="10.5" fill="#c9d1d9">STRAP</text>
+<circle cx="1130" cy="238" r="4.5" fill="#22d3ee"/>
+<text x="1139" y="241.5" font-size="10.5" fill="#c9d1d9">ViVLA</text>
+<line x1="1404.0" y1="466" x2="1404.0" y2="474" stroke="#3b4656"/>
+<text x="1404.0" y="492" font-size="14" text-anchor="middle" fill="#c9d1d9" font-weight="700">2025</text>
+<text x="1404.0" y="510" font-size="11" text-anchor="middle" fill="#8b98a9">20 works</text>
+<circle cx="1284" cy="454" r="4.5" fill="#a78bfa"/>
+<text x="1293" y="457.5" font-size="10.5" fill="#c9d1d9">Cosmos</text>
+<circle cx="1284" cy="430" r="4.5" fill="#f472b6"/>
+<text x="1293" y="433.5" font-size="10.5" fill="#c9d1d9">ConRFT</text>
+<circle cx="1284" cy="406" r="4.5" fill="#34d399"/>
+<text x="1293" y="409.5" font-size="10.5" fill="#c9d1d9">OpenVLA-OFT</text>
+<circle cx="1284" cy="382" r="4.5" fill="#22d3ee"/>
+<text x="1293" y="385.5" font-size="10.5" fill="#c9d1d9">AgiBot GO-1</text>
+<circle cx="1284" cy="358" r="4.5" fill="#34d399"/>
+<text x="1293" y="361.5" font-size="10.5" fill="#c9d1d9">GR00T N1</text>
+<circle cx="1284" cy="334" r="4.5" fill="#fb923c"/>
+<text x="1293" y="337.5" font-size="10.5" fill="#c9d1d9">PH2D</text>
+<circle cx="1284" cy="310" r="4.5" fill="#34d399"/>
+<text x="1293" y="313.5" font-size="10.5" fill="#c9d1d9">π0.5</text>
+<circle cx="1284" cy="286" r="4.5" fill="#f87171"/>
+<text x="1293" y="289.5" font-size="10.5" fill="#c9d1d9">BadVLA</text>
+<circle cx="1284" cy="262" r="4.5" fill="#fb923c"/>
+<text x="1293" y="265.5" font-size="10.5" fill="#c9d1d9">UniVLA</text>
+<circle cx="1284" cy="238" r="4.5" fill="#f472b6"/>
+<text x="1293" y="241.5" font-size="10.5" fill="#c9d1d9">RoboMonkey</text>
+<circle cx="1284" cy="214" r="4.5" fill="#facc15"/>
+<text x="1293" y="217.5" font-size="10.5" fill="#c9d1d9">RoboTwin 2.0</text>
+<circle cx="1284" cy="190" r="4.5" fill="#34d399"/>
+<text x="1293" y="193.5" font-size="10.5" fill="#c9d1d9">SmolVLA</text>
+<circle cx="1412" cy="454" r="4.5" fill="#a78bfa"/>
+<text x="1421" y="457.5" font-size="10.5" fill="#c9d1d9">V-JEPA 2</text>
+<circle cx="1412" cy="430" r="4.5" fill="#34d399"/>
+<text x="1421" y="433.5" font-size="10.5" fill="#c9d1d9">GR-3</text>
+<circle cx="1412" cy="406" r="4.5" fill="#22d3ee"/>
+<text x="1421" y="409.5" font-size="10.5" fill="#c9d1d9">RICL</text>
+<circle cx="1412" cy="382" r="4.5" fill="#22d3ee"/>
+<text x="1421" y="385.5" font-size="10.5" fill="#c9d1d9">LocoFormer</text>
+<circle cx="1412" cy="358" r="4.5" fill="#34d399"/>
+<text x="1421" y="361.5" font-size="10.5" fill="#c9d1d9">Wall-OSS</text>
+<circle cx="1412" cy="334" r="4.5" fill="#fbbf24"/>
+<text x="1421" y="337.5" font-size="10.5" fill="#c9d1d9">GEN-0</text>
+<circle cx="1412" cy="310" r="4.5" fill="#22d3ee"/>
+<text x="1421" y="313.5" font-size="10.5" fill="#c9d1d9">ManiLong-Shot</text>
+<circle cx="1412" cy="286" r="4.5" fill="#a78bfa"/>
+<text x="1421" y="289.5" font-size="10.5" fill="#c9d1d9">Motus</text>
+<line x1="1686.0" y1="466" x2="1686.0" y2="474" stroke="#3b4656"/>
+<text x="1686.0" y="492" font-size="14" text-anchor="middle" fill="#c9d1d9" font-weight="700">2026</text>
+<text x="1686.0" y="510" font-size="11" text-anchor="middle" fill="#8b98a9">24 works</text>
+<circle cx="1566" cy="454" r="4.5" fill="#a78bfa"/>
+<text x="1575" y="457.5" font-size="10.5" fill="#c9d1d9">LingBot-VA</text>
+<circle cx="1566" cy="430" r="4.5" fill="#f87171"/>
+<text x="1575" y="433.5" font-size="10.5" fill="#c9d1d9">State Backdoor</text>
+<circle cx="1566" cy="406" r="4.5" fill="#a78bfa"/>
+<text x="1575" y="409.5" font-size="10.5" fill="#c9d1d9">DreamZero</text>
+<circle cx="1566" cy="382" r="4.5" fill="#34d399"/>
+<text x="1575" y="385.5" font-size="10.5" fill="#c9d1d9">EgoScale</text>
+<circle cx="1566" cy="358" r="4.5" fill="#a78bfa"/>
+<text x="1575" y="361.5" font-size="10.5" fill="#c9d1d9">DVA</text>
+<circle cx="1566" cy="334" r="4.5" fill="#a78bfa"/>
+<text x="1575" y="337.5" font-size="10.5" fill="#c9d1d9">Fast-WAM</text>
+<circle cx="1566" cy="310" r="4.5" fill="#fbbf24"/>
+<text x="1575" y="313.5" font-size="10.5" fill="#c9d1d9">GEN-1</text>
+<circle cx="1566" cy="286" r="4.5" fill="#34d399"/>
+<text x="1575" y="289.5" font-size="10.5" fill="#c9d1d9">StarVLA</text>
+<circle cx="1566" cy="262" r="4.5" fill="#22d3ee"/>
+<text x="1575" y="265.5" font-size="10.5" fill="#c9d1d9">BPP</text>
+<circle cx="1566" cy="238" r="4.5" fill="#34d399"/>
+<text x="1575" y="241.5" font-size="10.5" fill="#c9d1d9">FACTR 2</text>
+<circle cx="1566" cy="214" r="4.5" fill="#a78bfa"/>
+<text x="1575" y="217.5" font-size="10.5" fill="#c9d1d9">WALL-WM</text>
+<circle cx="1566" cy="190" r="4.5" fill="#a78bfa"/>
+<text x="1575" y="193.5" font-size="10.5" fill="#c9d1d9">EgoWAM</text>
+<circle cx="1694" cy="454" r="4.5" fill="#a78bfa"/>
+<text x="1703" y="457.5" font-size="10.5" fill="#c9d1d9">LingBot-VA 2.0</text>
+<circle cx="1694" cy="430" r="4.5" fill="#22d3ee"/>
+<text x="1703" y="433.5" font-size="10.5" fill="#c9d1d9">RoboTTT</text>
+<circle cx="1694" cy="406" r="4.5" fill="#22d3ee"/>
+<text x="1703" y="409.5" font-size="10.5" fill="#c9d1d9">WAM-TTT</text>
+<circle cx="1694" cy="382" r="4.5" fill="#fb923c"/>
+<text x="1703" y="385.5" font-size="10.5" fill="#c9d1d9">Ego2Robot</text>
+<circle cx="1694" cy="358" r="5.5" fill="#fbbf24" stroke="#e6edf3" stroke-width="1.5"/>
+<text x="1703" y="361.5" font-size="10.5" fill="#c9d1d9" font-weight="700">★ GEN-1.5</text>
+<circle cx="1694" cy="334" r="5.5" fill="#fbbf24" stroke="#e6edf3" stroke-width="1.5"/>
+<text x="1703" y="337.5" font-size="10.5" fill="#c9d1d9" font-weight="700">★ HOST</text>
+<circle cx="1694" cy="310" r="5.5" fill="#fbbf24" stroke="#e6edf3" stroke-width="1.5"/>
+<text x="1703" y="313.5" font-size="10.5" fill="#c9d1d9" font-weight="700">★ S1</text>
+<circle cx="1694" cy="286" r="4.5" fill="#f472b6"/>
+<text x="1703" y="289.5" font-size="10.5" fill="#c9d1d9">SmoothRL</text>
+<circle cx="1694" cy="262" r="4.5" fill="#22d3ee"/>
+<text x="1703" y="265.5" font-size="10.5" fill="#c9d1d9">StellaVLA</text>
+<circle cx="1694" cy="238" r="4.5" fill="#34d399"/>
+<text x="1703" y="241.5" font-size="10.5" fill="#c9d1d9">VLAct</text>
+<circle cx="1694" cy="214" r="4.5" fill="#22d3ee"/>
+<text x="1703" y="217.5" font-size="10.5" fill="#c9d1d9">Zero-WAM</text>
+<circle cx="1694" cy="190" r="5.5" fill="#fbbf24" stroke="#e6edf3" stroke-width="1.5"/>
+<text x="1703" y="193.5" font-size="10.5" fill="#c9d1d9" font-weight="700">★ Zeva</text>
+<text x="1686.0" y="158" font-size="11.5" text-anchor="middle" fill="#fbbf24" font-weight="700">2026-08：HOST · S1 · GEN-1.5 · Zeva 四家汇合</text>
+</svg></div>
+  </div>
+  <div class="foot"><span>assets/timeline_dark.svg · scripts/make_timeline.py</span><span class="num">03 / 29</span></div>
 </section>
 
 <!-- ═══ Slide 3: Situation ═══ -->
 <section class="slide">
-  <div class="slide-head"><span>背景 · SITUATION</span><span class="num">03</span></div>
+  <div class="slide-head"><span>背景 · SITUATION</span><span class="num">04</span></div>
   <h1>旧范式下，每个新技能都是一次小型科研项目：<br>数百条遥操作 + 数小时微调 + 旧技能坍塌</h1>
   <div class="body">
     <div class="grid3" style="margin-bottom:16px">
@@ -146,12 +390,12 @@ ul.tight.amber li::before{background:var(--amber)}
       <p>与此同时，LLM 那边「教模型」早已是提示工程：例子放进上下文、权重不动。机器人界的问题变成：<strong>ICL 是语言独有的运气，还是感知运动序列上同样成立的普适性质？</strong>——12 篇论文用五条不同路线回答了它。</p>
     </div>
   </div>
-  <div class="foot"><span>来源：notes/01 §2、06 §4、07 §4、09 §3</span><span class="num">03 / 28</span></div>
+  <div class="foot"><span>来源：notes/01 §2、06 §4、07 §4、09 §3</span><span class="num">04 / 29</span></div>
 </section>
 
 <!-- ═══ Slide 4: Complication ═══ -->
 <section class="slide">
-  <div class="slide-head"><span>问题解剖 · COMPLICATION</span><span class="num">04</span></div>
+  <div class="slide-head"><span>问题解剖 · COMPLICATION</span><span class="num">05</span></div>
   <h1>此前的视频模仿为什么不 work：<br>演示被当成「被动上下文」，模型学会了忽略它</h1>
   <div class="body">
     <div class="grid3" style="margin-bottom:16px">
@@ -172,12 +416,12 @@ ul.tight.amber li::before{background:var(--amber)}
       <p><strong>共同的问题（QUESTION）：</strong>怎样让演示从「被动参考」变成「主动驱动执行的信号」？——结构派的答案是把对齐做成显式机制（HOST），规模派的答案是让数据多到捷径不存在（GEN-1.5），中间还有数据配方（BPP/ICRT）、架构机制（RoboTTT）、事后注入（RICL）三条路。</p>
     </div>
   </div>
-  <div class="foot"><span>来源：notes/01 §3、04 §3.3、08 §5、03 §6</span><span class="num">04 / 28</span></div>
+  <div class="foot"><span>来源：notes/01 §3、04 §3.3、08 §5、03 §6</span><span class="num">05 / 29</span></div>
 </section>
 
 <!-- ═══ Slide 5: HOST vs GEN-1.5 对照 ═══ -->
 <section class="slide">
-  <div class="slide-head"><span>两大主角</span><span class="num">05</span></div>
+  <div class="slide-head"><span>两大主角</span><span class="num">06</span></div>
   <h1><span class="hl-c">HOST</span> 与 <span class="hl-a">GEN-1.5</span>：方法论镜像，能力点重合</h1>
   <div class="body">
     <table style="margin-bottom:14px">
@@ -194,12 +438,12 @@ ul.tight.amber li::before{background:var(--amber)}
       <p><strong>读法警告：</strong>62% 与 59% 不可直接比大小——任务集、难度、判定口径都不同。真正的信息是：两条成本结构完全不同的路线，都把 one-shot 从论文指标做成了可演示能力。</p>
     </div>
   </div>
-  <div class="foot"><span>来源：notes/01 §1/§7、02 §5</span><span class="num">05 / 28</span></div>
+  <div class="foot"><span>来源：notes/01 §1/§7、02 §5</span><span class="num">06 / 29</span></div>
 </section>
 
 <!-- ═══ Slide 6: HOST 机制 ═══ -->
 <section class="slide">
-  <div class="slide-head"><span>HOST 深拆 · 机制</span><span class="num">06</span></div>
+  <div class="slide-head"><span>HOST 深拆 · 机制</span><span class="num">07</span></div>
   <h1>HOST 的两个机制，分别对准两个病灶：<br>时间错位用「目标耦合」治，跨具身鸿沟用「自接地级联」治</h1>
   <div class="body">
     <div class="grid2" style="margin-bottom:14px">
@@ -218,12 +462,12 @@ ul.tight.amber li::before{background:var(--amber)}
       <p style="font-size:13.5px"><strong>两阶段训练：</strong>Stage 1 用 193k 同具身轨迹练「预测-执行」基本功；Stage 2 用 5.8k 组（人类视频, 机器人轨迹）配对练跨具身对齐——演化自 ViVLA（同团队前作）：把前作埋在隐动作空间的翻译、交给 transformer 隐式学的对应，全部换成显式模块。</p>
     </div>
   </div>
-  <div class="foot"><span>来源：notes/01 §4/§5、09 §1/§5</span><span class="num">06 / 28</span></div>
+  <div class="foot"><span>来源：notes/01 §4/§5、09 §1/§5</span><span class="num">07 / 29</span></div>
 </section>
 
 <!-- ═══ Slide 7: HOST 证据 ═══ -->
 <section class="slide">
-  <div class="slide-head"><span>HOST 深拆 · 证据</span><span class="num">07</span></div>
+  <div class="slide-head"><span>HOST 深拆 · 证据</span><span class="num">08</span></div>
   <h1>同一批 50 个未见任务上的成功率阶梯：<br>语言 17 → 视频被动条件 19 → SFT 56 → <span class="hl-c">HOST 62</span></h1>
   <div class="body">
     <div style="margin-bottom:18px">
@@ -238,12 +482,12 @@ ul.tight.amber li::before{background:var(--amber)}
       <div class="card"><h3>鲁棒性</h3><p>未见物体替换只掉约 4 个点；演示与执行场景不同、第三人称视角均可工作。50 任务 × 20 次试验的口径，是本调研里统计功效最强的真机评测。</p></div>
     </div>
   </div>
-  <div class="foot"><span>来源：notes/01 §6、09 §2/§3</span><span class="num">07 / 28</span></div>
+  <div class="foot"><span>来源：notes/01 §6、09 §2/§3</span><span class="num">08 / 29</span></div>
 </section>
 
 <!-- ═══ Slide 8: GEN 三部曲 ═══ -->
 <section class="slide">
-  <div class="slide-head"><span>GEN 系列 · 规模派叙事</span><span class="num">08</span></div>
+  <div class="slide-head"><span>GEN 系列 · 规模派叙事</span><span class="num">09</span></div>
   <h1>GEN 三部曲九个月走完：验证 scaling law → 99% 精通 → <span class="hl-a">ICL 涌现</span></h1>
   <div class="body">
     <div style="display:flex;gap:14px;margin-bottom:16px">
@@ -264,12 +508,12 @@ ul.tight.amber li::before{background:var(--amber)}
       <p><strong>谨慎读数：</strong>全部数字来自公司博客——10 个评测任务（对 HOST 的 50 个）、无同行评审、无开源复现渠道。GEN-1.5 的价值不在数字本身，而在它给出「ICL 会随规模自然出现」的存在性证明，与 ICRT 在 3k 条轨迹上的最小可行原型（79.2%）首尾呼应：配方相同，规模差五个数量级。</p>
     </div>
   </div>
-  <div class="foot"><span>来源：notes/02 §2–§6、04 §7</span><span class="num">08 / 28</span></div>
+  <div class="foot"><span>来源：notes/02 §2–§6、04 §7</span><span class="num">09 / 29</span></div>
 </section>
 
 <!-- ═══ Slide S1: Skild AI ═══ -->
 <section class="slide">
-  <div class="slide-head"><span>S1 · 第三家</span><span class="num">09</span></div>
+  <div class="slide-head"><span>S1 · 第三家</span><span class="num">10</span></div>
   <h1><span class="hl-a">S1</span>（Skild AI）把主张推到最远：<br>未见任务 × 10 分钟长时程，单条演示 ≈ 380 条遥操作示范</h1>
   <div class="body">
     <div class="grid3" style="margin-bottom:14px">
@@ -291,12 +535,12 @@ ul.tight.amber li::before{background:var(--amber)}
       <p><strong>该打的折扣：</strong>与 GEN-1.5 同样无论文、无开源、内部 benchmark；长时程「累计逐步成功率」允许人工干预恢复计分（博客自述主要为救语言基线），66% 不是无干预端到端完成率；预训练任务清单未公开，「未见」无法外部审计；380 条兑换率是插值估计。时间线：LocoFormer（2025-09）→ 域内 ICL（2026-02）→ 第一张煎饼（2026-05）→ S1（2026-08）。</p>
     </div>
   </div>
-  <div class="foot"><span>来源：notes/16 §2–§3；sources/skild_s1_blog.txt</span><span class="num">09 / 28</span></div>
+  <div class="foot"><span>来源：notes/16 §2–§3；sources/skild_s1_blog.txt</span><span class="num">10 / 29</span></div>
 </section>
 
 <!-- ═══ Slide 9: 方法族谱 ═══ -->
 <section class="slide">
-  <div class="slide-head"><span>全景 · 五条路线</span><span class="num">10</span></div>
+  <div class="slide-head"><span>全景 · 五条路线</span><span class="num">11</span></div>
   <h1>同一个目标，五条路线：one-shot 能力可以被设计、被喂出、<br>被配方化、被机制化、被事后注入</h1>
   <div class="body">
     <table>
@@ -339,12 +583,12 @@ ul.tight.amber li::before{background:var(--amber)}
       </tr>
     </table>
   </div>
-  <div class="foot"><span>来源：notes/03–07、09；insights/10 §2</span><span class="num">10 / 28</span></div>
+  <div class="foot"><span>来源：notes/03–07、09；insights/10 §2</span><span class="num">11 / 29</span></div>
 </section>
 
 <!-- ═══ Slide 10: 全景对照表 ═══ -->
 <section class="slide">
-  <div class="slide-head"><span>全景 · 论文矩阵</span><span class="num">11</span></div>
+  <div class="slide-head"><span>全景 · 论文矩阵</span><span class="num">12</span></div>
   <h1>18 项工作一页对照：演示接口决定成本，机制决定上限</h1>
   <div class="body">
     <table style="font-size:10.6px" class="dense">
@@ -370,12 +614,12 @@ ul.tight.amber li::before{background:var(--amber)}
     </table>
     <p class="src">各行成功率的任务集与判定口径互不相同，禁止跨行直接比大小；详见各篇 notes 的「延伸批判」节。</p>
   </div>
-  <div class="foot"><span>来源：notes/01–09</span><span class="num">11 / 28</span></div>
+  <div class="foot"><span>来源：notes/01–09</span><span class="num">12 / 29</span></div>
 </section>
 
 <!-- ═══ Slide 11: 证据链 1 ═══ -->
 <section class="slide">
-  <div class="slide-head"><span>证据链 ①</span><span class="num">12</span></div>
+  <div class="slide-head"><span>证据链 ①</span><span class="num">13</span></div>
   <h1>决定 ICL 成败的不是数据量，是数据结构：<br>「强迫模型读演示」是所有路线的共同前提</h1>
   <div class="body">
     <div class="grid3" style="margin-bottom:16px">
@@ -396,12 +640,12 @@ ul.tight.amber li::before{background:var(--amber)}
       <p><strong>对 GEN-1.5 的反推：</strong>50 万小时数据「自然」覆盖了多任务歧义场景——规模派的涌现，可能只是数据配方派的强迫函数在大数据下自动满足。这条假设可以用 BPP 式受控实验在中等规模上证伪。</p>
     </div>
   </div>
-  <div class="foot"><span>来源：notes/04 §3/§5、06 §4/§5；insights/10 §3</span><span class="num">12 / 28</span></div>
+  <div class="foot"><span>来源：notes/04 §3/§5、06 §4/§5；insights/10 §3</span><span class="num">13 / 29</span></div>
 </section>
 
 <!-- ═══ Slide 12: 证据链 2 ═══ -->
 <section class="slide">
-  <div class="slide-head"><span>证据链 ②</span><span class="num">13</span></div>
+  <div class="slide-head"><span>证据链 ②</span><span class="num">14</span></div>
   <h1>上下文长度是与数据量正交的第二条 scaling 轴：<br>128 → 8K 步，性能单调上升，尚未见顶</h1>
   <div class="body">
     <div class="grid2" style="margin-bottom:16px">
@@ -427,12 +671,12 @@ ul.tight.amber li::before{background:var(--amber)}
       <p><strong>推论：</strong>「HOST 式显式对齐」与「RoboTTT 式长上下文 TTT 主干」不互斥——把进度流形装进 8K 上下文的 fast weights 架构，是本调研看到的最明确的下一代系统蓝图。</p>
     </div>
   </div>
-  <div class="foot"><span>来源：notes/05 §1/§4/§6；insights/10 §3</span><span class="num">13 / 28</span></div>
+  <div class="foot"><span>来源：notes/05 §1/§4/§6；insights/10 §3</span><span class="num">14 / 29</span></div>
 </section>
 
 <!-- ═══ Slide 13: 证据链 3 TCC 演化 ═══ -->
 <section class="slide">
-  <div class="slide-head"><span>证据链 ③</span><span class="num">14</span></div>
+  <div class="slide-head"><span>证据链 ③</span><span class="num">15</span></div>
   <h1>全场最干净的对照：同一个工具（TCC），<br>从「训练期正则」升级为「推理期机制」，19% → 62%</h1>
   <div class="body">
     <div style="display:flex;align-items:stretch;gap:0;margin-bottom:18px">
@@ -453,12 +697,12 @@ ul.tight.amber li::before{background:var(--amber)}
       <div class="card"><h3>方法论启示</h3><p>「训练期学到的好表征」不等于「推理期被用起来的能力」。同一原理的第三个实例：RoboTTT 把「记忆」从静态权重搬进推理期梯度更新的 fast weights。</p></div>
     </div>
   </div>
-  <div class="foot"><span>来源：notes/08 §5/§6、01 §4</span><span class="num">14 / 28</span></div>
+  <div class="foot"><span>来源：notes/08 §5/§6、01 §4</span><span class="num">15 / 29</span></div>
 </section>
 
 <!-- ═══ Slide EICL: 四篇坐标系 ═══ -->
 <section class="slide">
-  <div class="slide-head"><span>证据链 ④ · EICL 四篇</span><span class="num">15</span></div>
+  <div class="slide-head"><span>证据链 ④ · EICL 四篇</span><span class="num">16</span></div>
   <h1>学术侧同月交卷：四篇论文把「演示怎么被用上」<br>切成 2×2 坐标，各占一格、零重叠、零对比；月末 Zeva 补上「学自己」一格</h1>
   <div class="body">
     <table style="margin-bottom:11px;font-size:11.6px">
@@ -473,12 +717,12 @@ ul.tight.amber li::before{background:var(--amber)}
       <p><strong>三条被独立验证的共同经验：</strong>① 人类信息只许改写感知/生成侧，不许直接触碰动作侧（WAM-TTT 与 Zero-WAM 从相反路线撞到同一结论）；② 训练期挂辅助目标、推理期整个剥离，且辅助必须监督主分支否则剥离后一场空；③ 上下文不是免费午餐——三篇在三个不同设定下独立发现「模型必走捷径」（多给一帧历史反而降 17.5 个点、无反捷径目标时人类视频是净负收益）。GEN-1.5 与 S1 主张的「纯上下文·零梯度」恰是 Zero-WAM 所在的格子。</p>
     </div>
   </div>
-  <div class="foot"><span>来源：notes/05、12、14、15；sources/wx_eicl_four_papers_review.txt</span><span class="num">15 / 28</span></div>
+  <div class="foot"><span>来源：notes/05、12、14、15；sources/wx_eicl_four_papers_review.txt</span><span class="num">16 / 29</span></div>
 </section>
 
 <!-- ═══ Slide 涌现之争 ═══ -->
 <section class="slide">
-  <div class="slide-head"><span>争论 · 涌现 vs 机制</span><span class="num">16</span></div>
+  <div class="slide-head"><span>争论 · 涌现 vs 机制</span><span class="num">17</span></div>
   <h1>ICL 是<span class="hl-a">涌现</span>出来的，还是<span class="hl-c">造</span>出来的？<br>LLM 的辩论正在具身领域重演</h1>
   <div class="body">
     <div class="grid2" style="margin-bottom:14px">
@@ -503,12 +747,12 @@ ul.tight.amber li::before{background:var(--amber)}
       <p><strong>公平的限定与无人做的第三方视角：</strong>学术侧最大规模 15,360 GPU 小时，远低于产业 50 万小时——严格结论是「在学术可负担的规模上需要显式机制」，裁决要等产业规模的去机制消融。另一把武器无人使用：机器人的二元成功率/rubric 恰是 Schaeffer 指出的易造「涌现假象」的不连续度量；S1 自己的 scaling 曲线（差距平滑指数扩大）反而更像连续改进而非相变。把度量批判搬进具身领域，是当前空白的研究机会。</p>
     </div>
   </div>
-  <div class="foot"><span>来源：notes/16 §5；insights/10 趋势四</span><span class="num">16 / 28</span></div>
+  <div class="foot"><span>来源：notes/16 §5；insights/10 趋势四</span><span class="num">17 / 29</span></div>
 </section>
 
 <!-- ═══ 纵深专题 ① 历史与底座 ═══ -->
 <section class="slide">
-  <div class="slide-head"><span>纵深专题 ① · 历史与底座</span><span class="num">17</span></div>
+  <div class="slide-head"><span>纵深专题 ① · 历史与底座</span><span class="num">18</span></div>
   <h1>2017 年就定义好的问题，为什么 2026 年才成：<br>断裂点在主干先验，不在问题本身</h1>
   <div class="body">
     <div class="grid3" style="margin-bottom:14px">
@@ -529,12 +773,12 @@ ul.tight.amber li::before{background:var(--amber)}
       <p><strong>对涌现之争的历史注脚：</strong>Duan 2017 附录已记录小网络学习曲线的「相变」，比 GEN-0 早八年；Algorithm Distillation 则给出最早的干净反证——同架构同算力，喂专家序列得模仿、喂学习历史才得上下文改进。相变现象不新，新的是把它与规模绑定的叙事。</p>
     </div>
   </div>
-  <div class="foot"><span>来源：notes/24、25、26、30</span><span class="num">17 / 28</span></div>
+  <div class="foot"><span>来源：notes/24、25、26、30</span><span class="num">18 / 29</span></div>
 </section>
 
 <!-- ═══ 纵深专题 ② 人类数据三条桥 ═══ -->
 <section class="slide">
-  <div class="slide-head"><span>纵深专题 ② · 人类数据怎么进机器人</span><span class="num">18</span></div>
+  <div class="slide-head"><span>纵深专题 ② · 人类数据怎么进机器人</span><span class="num">19</span></div>
   <h1>人类视频进策略有三条桥，选哪条由「能否控制采集」决定：<br>ICL 是第四条——把对齐成本从数据侧搬到模型侧</h1>
   <div class="body">
     <table style="margin-bottom:13px;font-size:12.5px">
@@ -548,12 +792,12 @@ ul.tight.amber li::before{background:var(--amber)}
       <p><strong>产业分岔由此可解释：</strong>GEN/S1 拥有采集控制权，共训做底座 + ICL 做接口两条都走；HOST/Zero-WAM 无大规模采集能力，全押 ICL。数据侧的独立证据同向：Lin et al. 幂律（32 环境 × 1 物体 × 50 演示 ≈ 90%）、BPP「任务多样性 &gt; 每任务密度」、Zero-WAM 任务级重采样——多样性轴的边际价值远高于密度轴。</p>
     </div>
   </div>
-  <div class="foot"><span>来源：notes/11、27、29、31、32</span><span class="num">18 / 28</span></div>
+  <div class="foot"><span>来源：notes/11、27、29、31、32</span><span class="num">19 / 29</span></div>
 </section>
 
 <!-- ═══ 纵深专题 ③ 口径与安全 ═══ -->
 <section class="slide">
-  <div class="slide-head"><span>纵深专题 ③ · 口径与安全</span><span class="num">19</span></div>
+  <div class="slide-head"><span>纵深专题 ③ · 口径与安全</span><span class="num">20</span></div>
   <h1>同一 π0.5 基线被复现出 43 与 83；<br>预测 P5 需要修正——演示投毒后门已成体系，只剩推理期注入一格空着</h1>
   <div class="body">
     <div class="grid2" style="margin-bottom:14px">
@@ -576,12 +820,12 @@ ul.tight.amber li::before{background:var(--amber)}
       <p><strong>P5 修正：</strong>原预测「12 个月内出现第一起 physical prompt injection 研究」信息不足——它预测的事在预测做出前已部分发生。修正为：12 个月内出现首个针对视频演示 ICL 策略的推理期注入攻击。StellaVLA「错演示比无演示差 17.5 点」在安全视角下是攻击有效性的良性下界；技能库外置把一次性注入变成持久化后门。</p>
     </div>
   </div>
-  <div class="foot"><span>来源：notes/32、33；insights/10 P5 修正</span><span class="num">19 / 28</span></div>
+  <div class="foot"><span>来源：notes/32、33；insights/10 P5 修正</span><span class="num">20 / 29</span></div>
 </section>
 
 <!-- ═══ 纵深专题 ④ 演示的四种编码 × ICL 的两层 ═══ -->
 <section class="slide">
-  <div class="slide-head"><span>纵深专题 ④ · 编码与层级</span><span class="num">20</span></div>
+  <div class="slide-head"><span>纵深专题 ④ · 编码与层级</span><span class="num">21</span></div>
   <h1>演示有四种编码、ICL 有两层：<br>拐点定在 2026 而非 2022，是因为低层控制第一次能从上下文学</h1>
   <div class="body">
     <div class="grid2" style="margin-bottom:12px">
@@ -610,12 +854,12 @@ ul.tight.amber li::before{background:var(--amber)}
       <p><strong>合流形态：</strong>规划层给阶段与约束（可解释、可校验——安全所需），策略层在每阶段内从演示学接触与时机；LingBot-VA 2.0 的层级 VLM + 视频 ICL、S1 的隐式长时程组合已是雏形，但两层分工的收益无人正面评测。几何编码 + 进度流形的组合（ATM 点轨迹替代 HOST 帧嵌入）同样无人做。</p>
     </div>
   </div>
-  <div class="foot"><span>来源：notes/29、34、35、36、37</span><span class="num">20 / 28</span></div>
+  <div class="foot"><span>来源：notes/29、34、35、36、37</span><span class="num">21 / 29</span></div>
 </section>
 
 <!-- ═══ 纵深专题 ⑤ 适应刻度盘 · 学自己 · 遗忘的反面 ═══ -->
 <section class="slide">
-  <div class="slide-head"><span>纵深专题 ⑤ · 刻度盘与遗忘</span><span class="num">21</span></div>
+  <div class="slide-head"><span>纵深专题 ⑤ · 刻度盘与遗忘</span><span class="num">22</span></div>
   <h1>把 ICL 放回完整的适应刻度盘：它是起点不是终点；<br>「不改权重所以不遗忘」有了反面量化，上下文学习从「学别人」走到「学自己」</h1>
   <div class="body">
     <div class="grid3" style="margin-bottom:12px">
@@ -642,12 +886,12 @@ ul.tight.amber li::before{background:var(--amber)}
       <p><strong>两条新开放问题：</strong>ICL 基座本身是多阶段训练产物，应报告「侵蚀存留率」与「换头稳定性」——决定演示能否被读懂、ICL 能否后装，无一报告；SmoothRL 的三段划分照出所有路线共有的假设：异步分块部署下<strong>策略输出 ≠ 实际执行</strong>，RoboTTT 的 8K 步历史与 Zeva 的交互记忆记录的是哪一个，无人说明。</p>
     </div>
   </div>
-  <div class="foot"><span>来源：notes/38、39、40、41、42</span><span class="num">21 / 28</span></div>
+  <div class="foot"><span>来源：notes/38、39、40、41、42</span><span class="num">22 / 29</span></div>
 </section>
 
 <!-- ═══ Slide 14: 六大趋势 ═══ -->
 <section class="slide">
-  <div class="slide-head"><span>趋势</span><span class="num">22</span></div>
+  <div class="slide-head"><span>趋势</span><span class="num">23</span></div>
   <h1>六大趋势：范式、scaling 轴、数据、路线、评测、生态</h1>
   <div class="body">
     <div class="grid3" style="grid-template-rows:1fr 1fr;height:100%">
@@ -659,12 +903,12 @@ ul.tight.amber li::before{background:var(--amber)}
       <div class="card"><h3><span class="num" style="color:var(--amber)">T6</span> 开源在吃掉先发优势</h3><p>HOST 论文+代码+权重全开源，抢在 GEN-1.5 博客前数日；π0 系、GR00T、Wall-OSS 全线开源。闭源数据引擎的护城河窗口正在收窄。</p></div>
     </div>
   </div>
-  <div class="foot"><span>来源：insights/10 §2</span><span class="num">22 / 28</span></div>
+  <div class="foot"><span>来源：insights/10 §2</span><span class="num">23 / 29</span></div>
 </section>
 
 <!-- ═══ Slide 15: 洞察 1-4 ═══ -->
 <section class="slide">
-  <div class="slide-head"><span>核心洞察 · 上</span><span class="num">23</span></div>
+  <div class="slide-head"><span>核心洞察 · 上</span><span class="num">24</span></div>
   <h1>洞察 1–4：技能变成资产，提示变成工种，<br>ICL 与微调的边界正在消失</h1>
   <div class="body">
     <div class="grid2" style="grid-template-rows:1fr 1fr;height:100%">
@@ -674,12 +918,12 @@ ul.tight.amber li::before{background:var(--amber)}
       <div class="card"><h3><span class="num" style="color:var(--green)">I4</span> 下一个瓶颈是信息，不是算法</h3><p>59–62% 汇合 + HOST 抗扰实验说明单段视频的信息已被高效榨取；剩余失败相当比例来自视频<strong>根本没携带</strong>的信息——接触力、被遮挡接触点、隐含意图。出路：触觉采集、多模态提示、交互式补充演示。</p></div>
     </div>
   </div>
-  <div class="foot"><span>来源：insights/10 §3</span><span class="num">23 / 28</span></div>
+  <div class="foot"><span>来源：insights/10 §3</span><span class="num">24 / 29</span></div>
 </section>
 
 <!-- ═══ Slide 16: 洞察 5-7 ═══ -->
 <section class="slide">
-  <div class="slide-head"><span>核心洞察 · 下</span><span class="num">24</span></div>
+  <div class="slide-head"><span>核心洞察 · 下</span><span class="num">25</span></div>
   <h1>洞察 5–8：解耦配方可推广，具身对齐将独立成科，<br>中国团队范式层并跑，四篇 EICL 的失败互补</h1>
   <div class="body">
     <div class="grid2" style="grid-template-rows:1fr 1fr;margin-bottom:14px;flex:1;min-height:0">
@@ -692,12 +936,12 @@ ul.tight.amber li::before{background:var(--amber)}
       <p><strong>一句话收拢：</strong>当「教机器人」的成本从数百条遥操作跌到一段手机视频，瓶颈就从算法转移到信息、安全和生态——这三个新战场目前几乎无人占位。</p>
     </div>
   </div>
-  <div class="foot"><span>来源：insights/10 §3</span><span class="num">24 / 28</span></div>
+  <div class="foot"><span>来源：insights/10 §3</span><span class="num">25 / 29</span></div>
 </section>
 
 <!-- ═══ 洞察 9–13 ═══ -->
 <section class="slide">
-  <div class="slide-head"><span>核心洞察 · 续</span><span class="num">25</span></div>
+  <div class="slide-head"><span>核心洞察 · 续</span><span class="num">26</span></div>
   <h1>洞察 9–13：断裂点在主干先验，人类数据有三条桥，<br>ICL 有两层，起点不是终点，不遗忘有了反面</h1>
   <div class="body">
     <div class="grid3" style="grid-template-rows:1fr 1fr;height:100%;gap:12px">
@@ -709,12 +953,12 @@ ul.tight.amber li::before{background:var(--amber)}
       <div class="card" style="border-color:rgba(248,113,113,.4)"><h3 style="color:var(--red)">跨洞察的一条线</h3><p>每一轮扩充都在把「规模」这个变量拆细：数据小时 · 任务覆盖 · 参数量 · 微调配方 · 提示模态 · 预训练序列结构——GEN-0/1.5 的 scaling 叙事只报告了前两者。涌现之争的裁决不需要更大的模型，需要把这六个变量分开归因。</p></div>
     </div>
   </div>
-  <div class="foot"><span>来源：insights/10 §3 洞察 9–13</span><span class="num">25 / 28</span></div>
+  <div class="foot"><span>来源：insights/10 §3 洞察 9–13</span><span class="num">26 / 29</span></div>
 </section>
 
 <!-- ═══ Slide 17: 可证伪预测 ═══ -->
 <section class="slide">
-  <div class="slide-head"><span>预测 · 12–24 个月</span><span class="num">26</span></div>
+  <div class="slide-head"><span>预测 · 12–24 个月</span><span class="num">27</span></div>
   <h1>七条可证伪的预测：把判断写成可以被打脸的形式（P5 已被打脸并修正）</h1>
   <div class="body">
     <table style="margin-bottom:14px;font-size:13.5px">
@@ -729,12 +973,12 @@ ul.tight.amber li::before{background:var(--amber)}
     </table>
     <div class="callout"><p>每条预测都指定了时间窗与可观察事件——12 个月后回看本页，错了的部分同样有信息量。</p></div>
   </div>
-  <div class="foot"><span>来源：insights/10 §4</span><span class="num">26 / 28</span></div>
+  <div class="foot"><span>来源：insights/10 §4</span><span class="num">27 / 29</span></div>
 </section>
 
 <!-- ═══ Slide 18: 开放问题 ═══ -->
 <section class="slide">
-  <div class="slide-head"><span>开放问题 · 研究机会</span><span class="num">27</span></div>
+  <div class="slide-head"><span>开放问题 · 研究机会</span><span class="num">28</span></div>
   <h1>九个无人占位的研究缺口，每个都可以直接立项</h1>
   <div class="body">
     <div class="grid3" style="grid-template-rows:1fr 1fr 1fr;height:100%;gap:12px">
@@ -749,12 +993,12 @@ ul.tight.amber li::before{background:var(--amber)}
       <div class="card"><h3>合成演示训练、真实演示测试</h3><p>Zero-WAM 的人类视频 100% 合成且从未测过真实视频输入——合成配对路线落地要撞的第一堵墙，全线盲区。</p></div>
     </div>
   </div>
-  <div class="foot"><span>来源：insights/10 §5</span><span class="num">27 / 28</span></div>
+  <div class="foot"><span>来源：insights/10 §5</span><span class="num">28 / 29</span></div>
 </section>
 
 <!-- ═══ Slide 19: 交付物 ═══ -->
 <section class="slide">
-  <div class="slide-head"><span>附录 · 调研交付物</span><span class="num">28</span></div>
+  <div class="slide-head"><span>附录 · 调研交付物</span><span class="num">29</span></div>
   <h1>本调研仓库：86 篇论文 PDF（79 篇中译）+ 41 份深度解读 + 本报告</h1>
   <div class="body">
     <div class="grid2" style="margin-bottom:16px">
@@ -779,7 +1023,7 @@ ul.tight.amber li::before{background:var(--amber)}
       <p><strong>推荐阅读顺序：</strong>本 PPT → insights/10（趋势全文）→ notes/01（HOST）+ notes/02（GEN 系列）+ notes/16（S1 与涌现之争）→ 按兴趣进入其余 12 份解读；每份解读的「延伸批判」与「关系定位」两节是与摘要差异最大的增量内容。</p>
     </div>
   </div>
-  <div class="foot"><span>awesome_ICL · 2026-08-31</span><span class="num">28 / 28</span></div>
+  <div class="foot"><span>awesome_ICL · 2026-08-31</span><span class="num">29 / 29</span></div>
 </section>
 
 </div>

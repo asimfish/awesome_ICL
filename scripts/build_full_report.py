@@ -8,15 +8,15 @@ repo = pathlib.Path(__file__).resolve().parent.parent
 N = lambda name: repo / "notes" / name
 
 PARTS = [
- ("0", "执行摘要：趋势、洞察、研究机会与口径账本", "十条一页结论 · 六大趋势 · 十三条洞察 · 七条可证伪预测 · 22 个研究机会（各配最小可行实验）· 25 个头条数字的口径账本——全部结论先行，细节见后续各章。",
+ ("0", "执行摘要：趋势、洞察、研究机会与口径账本", "十条一页结论 · 六大趋势 · 十三条洞察 · 七条可证伪预测 · 22 个研究机会（各配最小可行实验）· 26 个头条数字的口径账本——全部结论先行，细节见后续各章。",
   [repo/"insights/10_trends_insights_zh.md", repo/"insights/11_open_problems_zh.md", repo/"insights/12_numbers_ledger_zh.md"]),
  ("A", "主线：2026-08 拐点与四个主角", "HOST（开源结构派）· GEN 系列（规模涌现派）· S1（未见长时程）· Zeva（学自己的交互后果）。四家数字落在同一区间纯属口径巧合。",
   [N("01_HOST_zh.md"), N("02_GEN_series_zh.md"), N("16_S1_EICL_wave_zh.md"), N("40_Zeva_zh.md")]),
- ("B", "具身 ICL 方法：演示怎么被策略用上", "结构派、快权重、纯上下文、数据配方四条学术路线；几何编码、规划层 ICL、检索三种非像素上下文；以及适应刻度盘两端。",
+ ("B", "具身 ICL 方法：演示怎么被策略用上", "结构派、快权重、纯上下文、数据配方四条学术路线；几何编码、规划层 ICL、检索三种非像素上下文；适应刻度盘两端；以及演示进仿真 RL 奖励的第三种归宿。",
   [N("03_InstantPolicy_zh.md"), N("04_ICRT_zh.md"), N("05_RoboTTT_zh.md"), N("06_BPP_zh.md"), N("07_RICL_zh.md"), N("08_Vid2Robot_zh.md"),
    N("12_ZeroWAM_zh.md"), N("14_WAMTTT_zh.md"), N("15_StellaVLA_zh.md"), N("17_LocoFormer_zh.md"), N("21_ManiLongShot_zh.md"),
    N("34_visual_prompt_intermediates_zh.md"), N("35_planner_level_icl_zh.md"), N("36_retrieval_and_skill_libraries_zh.md"),
-   N("39_adaptation_dial_extremes_zh.md"), N("42_SmoothRL_zh.md")]),
+   N("39_adaptation_dial_extremes_zh.md"), N("42_SmoothRL_zh.md"), N("43_DemoMimic_zh.md")]),
  ("C", "底座与世界模型：ICL 站在谁的肩上", "基座 VLA 与第二梯队、世界-动作模型及其视频生成上游、同代对照组，以及后训练怎样吃掉前面的能力。",
   [N("24_foundation_VLAs_zh.md"), N("38_open_efficient_VLAs_zh.md"), N("09_related_quick_reviews_zh.md"), N("20_GR3_zh.md"),
    N("11_EgoWAM_zh.md"), N("13_WALLWM_zh.md"), N("19_LingBotVA_zh.md"), N("28_video_action_contemporaries_zh.md"),
@@ -92,14 +92,14 @@ for L, ptitle, pdesc, files in PARTS:
         html = md2html(f)
         body.append(f'<article>{html}</article>')
 
-fig_html = f'''<div class="figpage1">{svg('assets/fig1_timeline.svg')}<div class="figcap">图 1 · 90 项工作的时间线：按九个家族分泳道、按发表年月定位，★ 为四个主角，橙色竖带为 2026-08 拐点月。</div></div>
+fig_html = f'''<div class="figpage1">{svg('assets/fig1_timeline.svg')}<div class="figcap">图 1 · 91 项工作的时间线：按九个家族分泳道、按发表年月定位，★ 为四个主角，橙色竖带为 2026-08 拐点月。</div></div>
 <div class="figpage2">{svg('assets/fig2_taxonomy.svg')}<div class="figcap">图 2 · 具身上下文学习的分类体系：七个一级维度、26 个子类，与本报告 Part A–G 一一对应。</div></div>'''
 
 doc = f"""<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><title>具身上下文学习调研全文</title><style>{CSS}</style></head><body>
 <div class="cover">
   <div class="t1">具身上下文学习（Embodied ICL）<br>调研全文报告</div>
   <div class="t2">HOST × GEN-1.5 × S1 × Zeva 及同期 85+ 项工作的深度解读与趋势洞察<br>从「训练问题」到「提示问题」的范式拐点，以及「涌现 vs 机制」之争</div>
-  <div class="meta">调研日期：2026-08-31 起持续更新（最近修订 2026-09）<br>结构：执行摘要（趋势与洞察）→ Part A 主线与四个主角 → Part B 具身 ICL 方法 → Part C 底座与世界模型 → Part D 人类数据三条桥 → Part E 评测与口径 → Part F 具身安全 → Part G 理论与前史<br>规模：{ch} 章 · 90 项工作 · 86 篇英文 PDF · 79 篇中译 PDF · 图 1 时间线 / 图 2 分类树<br>配套：34 页汇总 PPT（report/survey_slides.html / .pdf）· GitHub：asimfish/awesome_ICL</div>
+  <div class="meta">调研日期：2026-08-31 起持续更新（最近修订 2026-09）<br>结构：执行摘要（趋势与洞察）→ Part A 主线与四个主角 → Part B 具身 ICL 方法 → Part C 底座与世界模型 → Part D 人类数据三条桥 → Part E 评测与口径 → Part F 具身安全 → Part G 理论与前史<br>规模：{ch} 章 · 91 项工作 · 87 篇英文 PDF · 80 篇中译 PDF · 图 1 时间线 / 图 2 分类树<br>配套：34 页汇总 PPT（report/survey_slides.html / .pdf）· GitHub：asimfish/awesome_ICL</div>
 </div>
 <div class="toc"><h1 class="first" style="page-break-before:avoid">目录</h1>{"".join(toc)}</div>
 {fig_html}

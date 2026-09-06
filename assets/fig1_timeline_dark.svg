@@ -1,7 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="3170" height="1034" viewBox="0 0 3170 1034" font-family="-apple-system,Helvetica,Arial,'PingFang SC','Noto Sans CJK SC',sans-serif">
 <rect width="3170" height="1034" fill="#0b0f17"/>
-<text x="36" y="42" font-size="24" font-weight="700" fill="#e6edf3">Figure 1 · Embodied In-Context Learning：90 项工作的时间线（2017–2026）</text>
-<text x="36" y="68" font-size="13.5" fill="#9aa4b2">按九个家族分泳道、按发表年月定位；★ 为四个主角工作（HOST · S1 · GEN-1.5 · Zeva）。2024–2026 三年集中了 66 项——低层控制进入上下文的爆发期。</text>
+<text x="36" y="42" font-size="24" font-weight="700" fill="#e6edf3">Figure 1 · Embodied In-Context Learning：91 项工作的时间线（2017–2026）</text>
+<text x="36" y="68" font-size="13.5" fill="#9aa4b2">按九个家族分泳道、按发表年月定位；★ 为四个主角工作（HOST · S1 · GEN-1.5 · Zeva）。2024–2026 三年集中了 67 项——低层控制进入上下文的爆发期。</text>
 <rect x="300" y="108" width="150" height="866" fill="#101722"/>
 <line x1="300" y1="108" x2="300" y2="976" stroke="#243040" stroke-dasharray="3 4"/>
 <text x="375" y="1002" font-size="15" font-weight="700" text-anchor="middle" fill="#e6edf3">2017</text>
@@ -36,7 +36,7 @@
 <text x="2230" y="1020" font-size="11.5" text-anchor="middle" fill="#9aa4b2">20 works</text>
 <line x1="2490" y1="108" x2="2490" y2="976" stroke="#243040" stroke-dasharray="3 4"/>
 <text x="2810" y="1002" font-size="15" font-weight="700" text-anchor="middle" fill="#e6edf3">2026</text>
-<text x="2810" y="1020" font-size="11.5" text-anchor="middle" fill="#9aa4b2">24 works</text>
+<text x="2810" y="1020" font-size="11.5" text-anchor="middle" fill="#9aa4b2">25 works</text>
 <rect x="2863" y="108" width="53" height="866" fill="#d97706" opacity="0.18"/>
 <text x="2890" y="102" font-size="12" font-weight="700" text-anchor="middle" fill="#d97706">2026-08 拐点月</text>
 <line x1="300" y1="245" x2="3130" y2="245" stroke="#243040"/>
@@ -58,7 +58,7 @@
 <line x1="300" y1="379" x2="3130" y2="379" stroke="#243040"/>
 <rect x="36" y="252" width="6" height="120" rx="3" fill="#0e7490"/>
 <text x="52" y="317.0" font-size="14.5" font-weight="700" fill="#e6edf3">具身 ICL 方法</text>
-<text x="52" y="334.0" font-size="11.5" fill="#9aa4b2">21 works</text>
+<text x="52" y="334.0" font-size="11.5" fill="#9aa4b2">22 works</text>
 <rect x="955.3" y="255.0" width="134.5" height="24" rx="12" fill="#7ab2c1" stroke="#0e7490" stroke-width="1"/>
 <text x="1022.5" y="271.5" font-size="13" text-anchor="middle" fill="#0b0f17">Code as Policies</text>
 <rect x="1134.6" y="255.0" width="149.0" height="24" rx="12" fill="#7ab2c1" stroke="#0e7490" stroke-width="1"/>
@@ -101,6 +101,8 @@
 <text x="2890.0" y="271.5" font-size="13" text-anchor="middle" fill="#0b0f17">StellaVLA</text>
 <rect x="2851.9" y="345.0" width="76.2" height="24" rx="12" fill="#7ab2c1" stroke="#0e7490" stroke-width="1"/>
 <text x="2890.0" y="361.5" font-size="13" text-anchor="middle" fill="#0b0f17">Zero-WAM</text>
+<rect x="2901.6" y="285.0" width="83.5" height="24" rx="12" fill="#7ab2c1" stroke="#0e7490" stroke-width="1"/>
+<text x="2943.3" y="301.5" font-size="13" text-anchor="middle" fill="#0b0f17">DemoMimic</text>
 <line x1="300" y1="483" x2="3130" y2="483" stroke="#243040"/>
 <rect x="36" y="386" width="6" height="90" rx="3" fill="#7c3aed"/>
 <text x="52" y="436.0" font-size="14.5" font-weight="700" fill="#e6edf3">世界-动作模型 · 视频谱系</text>

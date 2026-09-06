@@ -37,6 +37,7 @@ WORKS = [
  ("EgoWAM",2026,7,"wam",0),("LingBot-VA 2.0",2026,7,"wam",0),("RoboTTT",2026,7,"icl",0),
  ("HOST",2026,8,"head",1),("StellaVLA",2026,8,"icl",0),("S1",2026,8,"head",1),("GEN-1.5",2026,8,"head",1),
  ("Zero-WAM",2026,8,"icl",0),("Ego2Robot",2026,8,"human",0),("VLAct",2026,8,"vla",0),("SmoothRL",2026,8,"dial",0),("Zeva",2026,8,"head",1),
+ ("DemoMimic",2026,9,"icl",0),
 ]
 # family: (label, color)  — same palette in both figures
 FAM = {
@@ -66,6 +67,7 @@ TAXONOMY = [  # (branch label, family for color, [(sub-label, [works])])
    ("检索增强 · 后装", ["RICL","Behavior Retrieval","STRAP"]),
    ("规划层 ICL", ["Code as Policies","VoxPoser","ReKep"]),
    ("测试时计算 / RL 后训练", ["RoboMonkey","ConRFT","SmoothRL","GR-3"]),
+   ("演示引导的 sim-to-real RL", ["DemoMimic"]),
  ]),
  ("底座与世界模型", "wam", [
    ("基座 VLA", ["OpenVLA","π0","π0.5","GR00T N1","RDT-1B","SmolVLA","OpenVLA-OFT","Wall-OSS"]),

@@ -4,22 +4,22 @@
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](#contributing)
 [![Last Update](https://img.shields.io/badge/last%20update-2026--09-blue.svg)](#)
 
-具身智能 In-Context Learning（EICL）/ One-Shot 技能习得的论文列表与深度调研仓库。核心问题：**「教机器人一个新技能」正在从训练问题变成提示问题吗？** 当前覆盖 **90 项工作 / 86 篇英文 PDF / 79 篇中译 PDF / 41 份深度解读**，按七个维度组织；⭐ 标注四个主角（HOST · GEN-1.5 · S1 · Zeva）。
+具身智能 In-Context Learning（EICL）/ One-Shot 技能习得的论文列表与深度调研仓库。核心问题：**「教机器人一个新技能」正在从训练问题变成提示问题吗？** 当前覆盖 **91 项工作 / 87 篇英文 PDF / 80 篇中译 PDF / 42 份深度解读**，按七个维度组织；⭐ 标注四个主角（HOST · GEN-1.5 · S1 · Zeva）。
 
 ## 产物入口（Deliverables）
 
 | 想要 | 打开 | 说明 |
 |---|---|---|
 | **15 分钟拿到全部结论** | [`report/survey_slides.html`](report/survey_slides.html) · [PDF](report/survey_slides.pdf) | 34 页汇总 PPT，浏览器打开 ← → 翻页、F 全屏 |
-| **系统研读** | [`report/survey_full_report.pdf`](report/survey_full_report.pdf) | 158 页全文报告：总览图 + 趋势洞察 + 41 份解读按七维度分部合订 |
+| **系统研读** | [`report/survey_full_report.pdf`](report/survey_full_report.pdf) | 118 页全文报告：总览图 + 趋势洞察 + 41 份解读按七维度分部合订 |
 | **趋势与洞察** | [`insights/10_trends_insights_zh.md`](insights/10_trends_insights_zh.md) | 六大趋势 · 十三条洞察 · 七条可证伪预测（P5 已被打脸并修正）· 开放问题清单 |
 | **研究机会清单** | [`insights/11_open_problems_zh.md`](insights/11_open_problems_zh.md) | 22 个无人占位的空白，按 Part A–G 排列，每条配「为什么重要 + 最小可行实验 + 相关解读」；只做一件事就做第 4 条 |
-| **数字口径账本** | [`insights/12_numbers_ledger_zh.md`](insights/12_numbers_ledger_zh.md) | 25 个头条数字逐条标注任务集 / 未见定义 / 指标类型 / 试验规模 / 干预 / 独立性 / 证据形式——并排任何两个数字前先查此表 |
+| **数字口径账本** | [`insights/12_numbers_ledger_zh.md`](insights/12_numbers_ledger_zh.md) | 26 个头条数字逐条标注任务集 / 未见定义 / 指标类型 / 试验规模 / 干预 / 独立性 / 证据形式——并排任何两个数字前先查此表 |
 | **总览图** | [图 1 时间线](assets/fig1_timeline.svg) · [图 2 分类树](assets/fig2_taxonomy.svg) | 矢量 SVG；`scripts/make_figures.py` 生成，深色版见 `assets/*_dark*.svg` |
 | **四个主角的深读** | [HOST](notes/01_HOST_zh.md) · [GEN 系列](notes/02_GEN_series_zh.md) · [S1 与涌现之争](notes/16_S1_EICL_wave_zh.md) · [Zeva](notes/40_Zeva_zh.md) | 每篇含机制拆解 / 关键数字与口径 / 局限 / 关系定位 |
-| **论文原文与中译** | [`papers/pdf/`](papers/pdf/) · [`papers/zh/`](papers/zh/) | 86 篇英文原版 · 79 篇 [SuperTranslate](https://github.com/asimfish/super_translate) 保版式中译 |
+| **论文原文与中译** | [`papers/pdf/`](papers/pdf/) · [`papers/zh/`](papers/zh/) | 87 篇英文原版 · 80 篇 [SuperTranslate](https://github.com/asimfish/super_translate) 保版式中译 |
 | **审校留痕** | [`sources/reviews/`](sources/reviews/) | 三份总结文档经 Codex（gpt-6-astra）终审的原始报告：共 45 条定点修改（数字口径、过强表述、MVE 可行性），已全部应用 |
-| **全部解读** | [`notes/`](notes/) | 41 份中文深度解读（编号 01–42），每份的「延伸批判」与「关系定位」两节是与论文摘要差异最大的增量 |
+| **全部解读** | [`notes/`](notes/) | 42 份中文深度解读（编号 01–43），每份的「延伸批判」与「关系定位」两节是与论文摘要差异最大的增量 |
 
 > 所有成功率数字都依赖各自的任务集与判定口径，**不同工作的数字禁止直接比大小**；详见各篇解读的「延伸批判」节与 [Part E](#part-e--评测与口径数字从哪来)。
 
@@ -27,7 +27,7 @@
 
 ![Figure 1 · Timeline](assets/fig1_timeline.svg)
 
-*图 1 · 90 项工作的时间线：按九个家族分泳道、按发表年月定位，★ 为四个主角，橙色竖带为 2026-08 拐点月。*
+*图 1 · 91 项工作的时间线：按九个家族分泳道、按发表年月定位，★ 为四个主角，橙色竖带为 2026-08 拐点月。*
 
 ![Figure 2 · Taxonomy](assets/fig2_taxonomy.svg)
 
@@ -61,6 +61,10 @@
 <tr>
 	<td>&emsp;<a href="#b7-retrieval--skill-libraries">B7. Retrieval & Skill Libraries</a></td>
 	<td>&emsp;<a href="#b8-adaptation-dial-extremes">B8. Adaptation-Dial Extremes</a></td>
+</tr>
+<tr>
+	<td>&emsp;<a href="#b9-demonstration-guided-sim-to-real-rl">B9. Demonstration-Guided Sim-to-Real RL</a></td>
+	<td></td>
 </tr>
 <tr><td colspan="2"><a href="#part-c--底座与世界模型icl-站在谁的肩上"><b>Part C · 底座与世界模型：ICL 站在谁的肩上</b>&emsp;<i>Backbones & World Models</i></a></td></tr>
 <tr>
@@ -143,7 +147,7 @@
 
 ## Part B · 具身 ICL 方法：演示怎么被策略用上
 
-*Embodied ICL Methods* — 按「演示改什么 × 何时适应」分：结构派、快权重、纯上下文、数据配方；再加三种非像素的上下文形态（几何编码、规划层、检索）与适应刻度盘两端。
+*Embodied ICL Methods* — 按「演示改什么 × 何时适应」分：结构派、快权重、纯上下文、数据配方；再加三种非像素的上下文形态（几何编码、规划层、检索）、适应刻度盘两端，以及演示的第三种归宿——进仿真 RL 的奖励。
 
 ### B1. Structure-Designed One-Shot
 
@@ -272,6 +276,14 @@
 3. **SmoothRL: Online Reinforcement Learning During Asynchronous Execution.** arXiv, 2026-08-30. [paper](https://arxiv.org/abs/2608.29768) [📄解读](notes/42_SmoothRL_zh.md) [🈶中译](papers/zh/SmoothRL_2608.29768_zh.pdf)
 
     *Astribot Team（星尘智能）— 指出真机在线 RL 的训练-部署错位：动作分块 + 异步推理下每块只有一部分被执行，同步假设的值梯度流进从未进入环境的动作（梯度污染）；解法是 committed / execution / discarded 三段划分 + 只对 execution 段回传值梯度 + critic 看全跨度 + 训练时就跑异步循环。冻结 π0.5 外挂轻量残差 actor-critic，Astribot S1 三任务 250 episode：抛掷 39→94%、笔帽 8→83%、开箱 30→90%，加速度/jerk RMS 降 52%/47%；单次运行、缺异步基线与消融*
+
+### B9. Demonstration-Guided Sim-to-Real RL
+
+演示的第三种归宿：不进上下文、不直接进权重，而是作为仿真 RL 的参考轨迹与奖励先验，产出一个不再依赖演示的泛化策略（详见 [notes/43](notes/43_DemoMimic_zh.md)）。
+
+1. **DemoMimic: One Demonstration, Many Objects — Generalizing Manipulation via Local Contact Geometry.** arXiv, 2026-09-01. [paper](https://arxiv.org/abs/2609.01938) [📄解读](notes/43_DemoMimic_zh.md) [🈶中译](papers/zh/DemoMimic_2609.01938_zh.pdf)
+
+    *Satvik Sharma, Samrat Sahoo, Huang Huang, Fei-Fei Li, Jiajun Wu, Dorsa Sadigh, Jeannette Bohg — Stanford · 一段人类演示重定向为参考轨迹，残差 RL 配接触中心奖励（对齐 AR + 持续接触 SCR），蒸馏成只读第一人称 RGB-D 的学生策略；单一真机策略跨 16 物体 / 4 任务 / 2 种五指手平均 71%（连续成功分，非二元），sim-to-real 掉幅最小；泛化边界由局部接触几何决定（曲面盖唇处掉到 39%）*
 
 ## Part C · 底座与世界模型：ICL 站在谁的肩上
 
@@ -613,11 +625,11 @@ ICL 本身是什么——LLM 侧的机制层答案，具身域验证全部空白
 awesome_ICL/
 ├── README.md                  ← 本文件
 ├── papers/
-│   ├── pdf/                   ← 86 篇英文原版 PDF（含 LLM 背景 3 篇 + 理论 4 篇）
-│   ├── zh/                    ← 79 篇中文翻译 PDF（super_translate，DeepSeek 后端）
+│   ├── pdf/                   ← 87 篇英文原版 PDF（含 LLM 背景 3 篇 + 理论 4 篇）
+│   ├── zh/                    ← 80 篇中文翻译 PDF（super_translate，DeepSeek 后端）
 │   └── cache/                 ← 翻译块级缓存（可续跑，不入库）
 ├── assets/                    ← 图 1 时间线 / 图 2 分类树 SVG（浅色 README 版 + 深色 PPT 版）
-├── notes/                     ← 41 份深度解读（01–42，中文；全文报告按 Part A–G 分部合订）
+├── notes/                     ← 42 份深度解读（01–43，中文；全文报告按 Part A–G 分部合订）
 ├── insights/                  ← 趋势与洞察（10）· 研究机会清单（11）· 数字口径账本（12）
 ├── sources/                   ← S1 博客、Rhoda DVA 博客、微信深读存档；reviews/ 为 Codex 终审报告
 ├── report/                    ← 汇总 HTML PPT / PPT PDF / 全文报告 HTML+PDF
@@ -634,7 +646,7 @@ awesome_ICL/
 | **15 分钟** | [`report/survey_slides.html`](report/survey_slides.html)（34 页 PPT）——执行摘要 → 总览图 → 四主角 → 证据链 → 涌现之争 → 五个纵深专题 → 趋势 / 洞察 / 预测 / 缺口 |
 | **1 小时** | [`insights/10_trends_insights_zh.md`](insights/10_trends_insights_zh.md) §0 十条执行摘要 + [`insights/12`](insights/12_numbers_ledger_zh.md) 口径账本 → Part A 四篇主角解读：[HOST](notes/01_HOST_zh.md) · [GEN 系列](notes/02_GEN_series_zh.md) · [S1 与涌现之争](notes/16_S1_EICL_wave_zh.md) · [Zeva](notes/40_Zeva_zh.md) |
 | **半天** | 再加 [`insights/11`](insights/11_open_problems_zh.md) 研究机会清单、Part B 的四篇 EICL 学术论文（[RoboTTT](notes/05_RoboTTT_zh.md) · [Zero-WAM](notes/12_ZeroWAM_zh.md) · [WAM-TTT](notes/14_WAMTTT_zh.md) · [StellaVLA](notes/15_StellaVLA_zh.md)）与 Part E 的口径专题（[基准与数据地基](notes/32_benchmarks_and_data_foundations_zh.md)） |
-| **系统研读** | [`report/survey_full_report.pdf`](report/survey_full_report.pdf)（158 页）——趋势报告前置，41 份解读按 Part A–G 分部合订；或按下方 Part 顺序逐节阅读 README |
+| **系统研读** | [`report/survey_full_report.pdf`](report/survey_full_report.pdf)（118 页）——趋势报告前置，41 份解读按 Part A–G 分部合订；或按下方 Part 顺序逐节阅读 README |
 
 按兴趣直达：想知道 **ICL 到底是什么** → Part G（[理论四篇](notes/22_ICL_theory_zh.md)、[视觉 ICL 前史](notes/37_visual_icl_precursors_zh.md)）；想知道 **人类视频怎么进机器人** → Part D 三条桥 + [EgoWAM](notes/11_EgoWAM_zh.md)；想知道 **ICL 与微调/RL 的关系** → [B8 适应刻度盘](notes/39_adaptation_dial_extremes_zh.md) + [C7 后训练干扰](notes/41_posttraining_interference_zh.md)；想知道 **安全** → [F1](notes/33_embodied_safety_zh.md)。每份解读的「延伸批判」与「关系定位」两节是与论文摘要差异最大的增量内容。
 
@@ -651,6 +663,7 @@ bash scripts/translate_queue6.sh
 bash scripts/translate_queue7.sh
 bash scripts/translate_queue8.sh
 bash scripts/translate_queue9.sh
+bash scripts/translate_queue10.sh
 
 # 全文报告 PDF（pandoc 合并 md → HTML → Chrome headless 打印）
 python3 scripts/build_full_report.py
@@ -676,6 +689,6 @@ N. **论文标题.** Venue, 年份. [paper](arXiv 链接), [code](代码链接)
     *作者 — 机构 · 一句话定位*
 ```
 
-要求：(1) 归入 Part A–G 下 27 个子类中最贴切的一个；(2) 一句话定位需说明与「演示如何被策略用上」这条主线的关系；(3) 成功率数字必须注明任务集与判定口径。
+要求：(1) 归入 Part A–G 下 28 个子类中最贴切的一个；(2) 一句话定位需说明与「演示如何被策略用上」这条主线的关系；(3) 成功率数字必须注明任务集与判定口径。
 
 > 注：知乎文章（p/2077872253551878182，涌现之争主题）因 JS 反爬无法存档正文，其引用文献 [1]–[8] 已全部纳入本仓库；两篇微信深度文章存档于 [`sources/`](sources/)。

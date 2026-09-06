@@ -36,13 +36,13 @@ hr{border:none;border-top:1px solid #dde5ea;margin:16px 0}
 <div class="cover">
   <div class="t1">具身上下文学习（Embodied ICL）<br>调研全文报告</div>
   <div class="t2">HOST × GEN-1.5 × S1 × Zeva 及同期 85+ 项工作的深度解读与趋势洞察<br>从「训练问题」到「提示问题」的范式拐点，以及「涌现 vs 机制」之争</div>
-  <div class="meta">调研日期：2026-08-31 起持续更新（最近修订 2026-09）<br>结构：执行摘要（趋势与洞察）→ Part A 主线与四个主角 → Part B 具身 ICL 方法 → Part C 底座与世界模型 → Part D 人类数据三条桥 → Part E 评测与口径 → Part F 具身安全 → Part G 理论与前史<br>规模：44 章 · 90 项工作 · 86 篇英文 PDF · 79 篇中译 PDF · 图 1 时间线 / 图 2 分类树<br>配套：34 页汇总 PPT（report/survey_slides.html / .pdf）· GitHub：asimfish/awesome_ICL</div>
+  <div class="meta">调研日期：2026-08-31 起持续更新（最近修订 2026-09）<br>结构：执行摘要（趋势与洞察）→ Part A 主线与四个主角 → Part B 具身 ICL 方法 → Part C 底座与世界模型 → Part D 人类数据三条桥 → Part E 评测与口径 → Part F 具身安全 → Part G 理论与前史<br>规模：45 章 · 91 项工作 · 87 篇英文 PDF · 80 篇中译 PDF · 图 1 时间线 / 图 2 分类树<br>配套：34 页汇总 PPT（report/survey_slides.html / .pdf）· GitHub：asimfish/awesome_ICL</div>
 </div>
-<div class="toc"><h1 class="first" style="page-break-before:avoid">目录</h1><div class="part">Part 0 · 执行摘要：趋势、洞察、研究机会与口径账本</div><ol><li>趋势与洞察：机器人 One-Shot 技能习得的 2026 拐点</li><li>研究机会清单：22 项待验证问题，每项配一个起步实验</li><li>数字口径账本：本调研引用的头条数字，逐条标注它们到底在测什么</li></ol><div class="part">Part A · 主线：2026-08 拐点与四个主角</div><ol><li>HOST 深度解读：机器人从一段人类视频里秒级习得操作技能</li><li>GEN 系列深度解读：Generalist AI 的具身基础模型三部曲</li><li>S1 与「涌现之争」：2026 年 8 月具身 ICL 三连发的完整拼图</li><li>Zeva 深度解读：冻结策略从自己的失败里学——In-Context Causal Learning</li></ol><div class="part">Part B · 具身 ICL 方法：演示怎么被策略用上</div><ol><li>Instant Policy 深度解读：把 in-context 模仿学习变成图扩散，用仿真伪演示喂出即时策略</li><li>ICRT 深度解读：next-token prediction 原教旨主义的机器人 in-context learning 配方</li><li>RoboTTT 深度解读：把 Test-Time Training 装进机器人策略，上下文扩到 8K 步</li><li>BPP 深度解读：一条演示当 prompt，任务多样性是 in-context 操作的第一驱动力</li><li>RICL 深度解读：给预训练 VLA 事后注入 in-context 学习能力</li><li>Vid2Robot 深度解读：端到端视频条件策略的 Google 规模实践</li><li>Zero-WAM 深度解读：把人类视频「造」出来当任务规格，再用 IFP 逼模型真的去看</li><li>WAM-TTT 深度解读：把人类演示写进快权重记忆，且只许写在感知侧</li><li>StellaVLA 深度解读：把演示翻译成「为什么」，四篇里唯一真零梯度</li><li>LocoFormer 深度解读：S1 的前夜——上下文当适应机制在运动控制域先走通</li><li>ManiLong-Shot 深度解读：OSIL 第一个像样的公开基准，和一个 30.2% 的现实</li><li>演示的另一种编码三篇合集：轨迹草图、点轨迹、物体光流当提示</li><li>规划层 ICL 三篇合集：LLM 自己的 few-shot 能力，直接拿来控机器人</li><li>检索增强与技能库三篇合集：上下文从哪里来——非参数记忆与 ICL 的边界</li><li>适应旋钮两端两篇合集：不改权重的测试时计算，与改权重的 RL 后训练</li><li>SmoothRL 深度解读：在部署用的异步循环里做在线 RL——「策略输出的动作」与「机器人执行的动作」不再是同一个东西</li></ol><div class="part">Part C · 底座与世界模型：ICL 站在谁的肩上</div><ol><li>基座 VLA 三篇合集：ICL 工作站在谁的肩上</li><li>开源高效 VLA 三篇合集：基线的基线——ICL 论文脚注里那些名字</li><li>外围论文速览：one-shot 技能习得调研的五个坐标</li><li>GR-3 深度解读：few-shot 微调流派的工业标杆，ICL 要消灭的正是它</li><li>EgoWAM 深度解读：换掉世界预测目标，人类数据才不「漏毒」进动作头</li><li>WALL-WM 深度解读：把世界-动作建模「循事件关节」下刀</li><li>LingBot-VA 两代深度解读：把「测试时想象」坚持到底的世界-动作模型</li><li>视频-动作模型同代对照组三篇合集：WAM 战场的其他玩家</li><li>世界模型谱系三篇合集：从像素想象到表征预测再到平台化</li><li>后训练干扰两篇合集：后面的任务训练，怎样吃掉前面学到的能力</li></ol><div class="part">Part D · 数据：人类数据进机器人的三条桥</div><ol><li>人类数据管线三篇合集：ICL 的燃料从哪来——UMI、RH20T、Ego2Robot</li><li>人类视频共训三篇合集：把人类数据写进权重的显式路线</li><li>潜动作桥梁三篇合集：无动作视频怎么变成可训练的动作信号</li><li>FACTR 2 深度解读：一篇力感知论文，如何被 S1 借去质疑预训练</li></ol><div class="part">Part E · 评测与口径：数字从哪来</div><ol><li>评测基准与数据地基四篇合集：数字的口径从哪来</li></ol><div class="part">Part F · 具身安全：技能接口开放后的攻击面</div><ol><li>具身安全与提示注入合集：当技能接口开放给任意视频，攻击面在哪</li></ol><div class="part">Part G · 理论与前史：ICL 本身是什么</div><ol><li>ICL 机制理论四篇合集：涌现之争吵的那个东西，理论上到底是什么</li><li>One-Shot 模仿学习源头三篇合集：2017 年就有的问题，2026 年为什么才成</li><li>生成式动作头奠基两篇合集：为什么 ICL 时代的机器人策略都是生成模型</li><li>上下文强化学习前史三篇合集：把控制写成序列建模，再把演示写成 prompt</li><li>视觉 ICL 前史三篇合集：机器人 ICL 之前，纯视觉的上下文学习长什么样</li></ol></div>
+<div class="toc"><h1 class="first" style="page-break-before:avoid">目录</h1><div class="part">Part 0 · 执行摘要：趋势、洞察、研究机会与口径账本</div><ol><li>趋势与洞察：机器人 One-Shot 技能习得的 2026 拐点</li><li>研究机会清单：22 项待验证问题，每项配一个起步实验</li><li>数字口径账本：本调研引用的头条数字，逐条标注它们到底在测什么</li></ol><div class="part">Part A · 主线：2026-08 拐点与四个主角</div><ol><li>HOST 深度解读：机器人从一段人类视频里秒级习得操作技能</li><li>GEN 系列深度解读：Generalist AI 的具身基础模型三部曲</li><li>S1 与「涌现之争」：2026 年 8 月具身 ICL 三连发的完整拼图</li><li>Zeva 深度解读：冻结策略从自己的失败里学——In-Context Causal Learning</li></ol><div class="part">Part B · 具身 ICL 方法：演示怎么被策略用上</div><ol><li>Instant Policy 深度解读：把 in-context 模仿学习变成图扩散，用仿真伪演示喂出即时策略</li><li>ICRT 深度解读：next-token prediction 原教旨主义的机器人 in-context learning 配方</li><li>RoboTTT 深度解读：把 Test-Time Training 装进机器人策略，上下文扩到 8K 步</li><li>BPP 深度解读：一条演示当 prompt，任务多样性是 in-context 操作的第一驱动力</li><li>RICL 深度解读：给预训练 VLA 事后注入 in-context 学习能力</li><li>Vid2Robot 深度解读：端到端视频条件策略的 Google 规模实践</li><li>Zero-WAM 深度解读：把人类视频「造」出来当任务规格，再用 IFP 逼模型真的去看</li><li>WAM-TTT 深度解读：把人类演示写进快权重记忆，且只许写在感知侧</li><li>StellaVLA 深度解读：把演示翻译成「为什么」，四篇里唯一真零梯度</li><li>LocoFormer 深度解读：S1 的前夜——上下文当适应机制在运动控制域先走通</li><li>ManiLong-Shot 深度解读：OSIL 第一个像样的公开基准，和一个 30.2% 的现实</li><li>演示的另一种编码三篇合集：轨迹草图、点轨迹、物体光流当提示</li><li>规划层 ICL 三篇合集：LLM 自己的 few-shot 能力，直接拿来控机器人</li><li>检索增强与技能库三篇合集：上下文从哪里来——非参数记忆与 ICL 的边界</li><li>适应旋钮两端两篇合集：不改权重的测试时计算，与改权重的 RL 后训练</li><li>SmoothRL 深度解读：在部署用的异步循环里做在线 RL——「策略输出的动作」与「机器人执行的动作」不再是同一个东西</li><li>DemoMimic 深度解读：一段演示、多个物体——演示不进上下文也不进权重，而是进仿真 RL 的奖励</li></ol><div class="part">Part C · 底座与世界模型：ICL 站在谁的肩上</div><ol><li>基座 VLA 三篇合集：ICL 工作站在谁的肩上</li><li>开源高效 VLA 三篇合集：基线的基线——ICL 论文脚注里那些名字</li><li>外围论文速览：one-shot 技能习得调研的五个坐标</li><li>GR-3 深度解读：few-shot 微调流派的工业标杆，ICL 要消灭的正是它</li><li>EgoWAM 深度解读：换掉世界预测目标，人类数据才不「漏毒」进动作头</li><li>WALL-WM 深度解读：把世界-动作建模「循事件关节」下刀</li><li>LingBot-VA 两代深度解读：把「测试时想象」坚持到底的世界-动作模型</li><li>视频-动作模型同代对照组三篇合集：WAM 战场的其他玩家</li><li>世界模型谱系三篇合集：从像素想象到表征预测再到平台化</li><li>后训练干扰两篇合集：后面的任务训练，怎样吃掉前面学到的能力</li></ol><div class="part">Part D · 数据：人类数据进机器人的三条桥</div><ol><li>人类数据管线三篇合集：ICL 的燃料从哪来——UMI、RH20T、Ego2Robot</li><li>人类视频共训三篇合集：把人类数据写进权重的显式路线</li><li>潜动作桥梁三篇合集：无动作视频怎么变成可训练的动作信号</li><li>FACTR 2 深度解读：一篇力感知论文，如何被 S1 借去质疑预训练</li></ol><div class="part">Part E · 评测与口径：数字从哪来</div><ol><li>评测基准与数据地基四篇合集：数字的口径从哪来</li></ol><div class="part">Part F · 具身安全：技能接口开放后的攻击面</div><ol><li>具身安全与提示注入合集：当技能接口开放给任意视频，攻击面在哪</li></ol><div class="part">Part G · 理论与前史：ICL 本身是什么</div><ol><li>ICL 机制理论四篇合集：涌现之争吵的那个东西，理论上到底是什么</li><li>One-Shot 模仿学习源头三篇合集：2017 年就有的问题，2026 年为什么才成</li><li>生成式动作头奠基两篇合集：为什么 ICL 时代的机器人策略都是生成模型</li><li>上下文强化学习前史三篇合集：把控制写成序列建模，再把演示写成 prompt</li><li>视觉 ICL 前史三篇合集：机器人 ICL 之前，纯视觉的上下文学习长什么样</li></ol></div>
 <div class="figpage1"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3170 1034" font-family="-apple-system,Helvetica,Arial,'PingFang SC','Noto Sans CJK SC',sans-serif">
 <rect width="3170" height="1034" fill="#ffffff"/>
-<text x="36" y="42" font-size="24" font-weight="700" fill="#111827">Figure 1 · Embodied In-Context Learning：90 项工作的时间线（2017–2026）</text>
-<text x="36" y="68" font-size="13.5" fill="#6b7280">按九个家族分泳道、按发表年月定位；★ 为四个主角工作（HOST · S1 · GEN-1.5 · Zeva）。2024–2026 三年集中了 66 项——低层控制进入上下文的爆发期。</text>
+<text x="36" y="42" font-size="24" font-weight="700" fill="#111827">Figure 1 · Embodied In-Context Learning：91 项工作的时间线（2017–2026）</text>
+<text x="36" y="68" font-size="13.5" fill="#6b7280">按九个家族分泳道、按发表年月定位；★ 为四个主角工作（HOST · S1 · GEN-1.5 · Zeva）。2024–2026 三年集中了 67 项——低层控制进入上下文的爆发期。</text>
 <rect x="300" y="108" width="150" height="866" fill="#f8fafc"/>
 <line x1="300" y1="108" x2="300" y2="976" stroke="#e5e7eb" stroke-dasharray="3 4"/>
 <text x="375" y="1002" font-size="15" font-weight="700" text-anchor="middle" fill="#111827">2017</text>
@@ -77,7 +77,7 @@ hr{border:none;border-top:1px solid #dde5ea;margin:16px 0}
 <text x="2230" y="1020" font-size="11.5" text-anchor="middle" fill="#6b7280">20 works</text>
 <line x1="2490" y1="108" x2="2490" y2="976" stroke="#e5e7eb" stroke-dasharray="3 4"/>
 <text x="2810" y="1002" font-size="15" font-weight="700" text-anchor="middle" fill="#111827">2026</text>
-<text x="2810" y="1020" font-size="11.5" text-anchor="middle" fill="#6b7280">24 works</text>
+<text x="2810" y="1020" font-size="11.5" text-anchor="middle" fill="#6b7280">25 works</text>
 <rect x="2863" y="108" width="53" height="866" fill="#d97706" opacity="0.1"/>
 <text x="2890" y="102" font-size="12" font-weight="700" text-anchor="middle" fill="#d97706">2026-08 拐点月</text>
 <line x1="300" y1="245" x2="3130" y2="245" stroke="#e5e7eb"/>
@@ -99,7 +99,7 @@ hr{border:none;border-top:1px solid #dde5ea;margin:16px 0}
 <line x1="300" y1="379" x2="3130" y2="379" stroke="#e5e7eb"/>
 <rect x="36" y="252" width="6" height="120" rx="3" fill="#0e7490"/>
 <text x="52" y="317.0" font-size="14.5" font-weight="700" fill="#111827">具身 ICL 方法</text>
-<text x="52" y="334.0" font-size="11.5" fill="#6b7280">21 works</text>
+<text x="52" y="334.0" font-size="11.5" fill="#6b7280">22 works</text>
 <rect x="955.3" y="255.0" width="134.5" height="24" rx="12" fill="#d8e8ed" stroke="#0e7490" stroke-width="1"/>
 <text x="1022.5" y="271.5" font-size="13" text-anchor="middle" fill="#111827">Code as Policies</text>
 <rect x="1134.6" y="255.0" width="149.0" height="24" rx="12" fill="#d8e8ed" stroke="#0e7490" stroke-width="1"/>
@@ -142,6 +142,8 @@ hr{border:none;border-top:1px solid #dde5ea;margin:16px 0}
 <text x="2890.0" y="271.5" font-size="13" text-anchor="middle" fill="#111827">StellaVLA</text>
 <rect x="2851.9" y="345.0" width="76.2" height="24" rx="12" fill="#d8e8ed" stroke="#0e7490" stroke-width="1"/>
 <text x="2890.0" y="361.5" font-size="13" text-anchor="middle" fill="#111827">Zero-WAM</text>
+<rect x="2901.6" y="285.0" width="83.5" height="24" rx="12" fill="#d8e8ed" stroke="#0e7490" stroke-width="1"/>
+<text x="2943.3" y="301.5" font-size="13" text-anchor="middle" fill="#111827">DemoMimic</text>
 <line x1="300" y1="483" x2="3130" y2="483" stroke="#e5e7eb"/>
 <rect x="36" y="386" width="6" height="90" rx="3" fill="#7c3aed"/>
 <text x="52" y="436.0" font-size="14.5" font-weight="700" fill="#111827">世界-动作模型 · 视频谱系</text>
@@ -296,15 +298,15 @@ hr{border:none;border-top:1px solid #dde5ea;margin:16px 0}
 <text x="1428.1" y="819.5" font-size="13" text-anchor="middle" fill="#111827">LVM</text>
 <rect x="1686.3" y="803.0" width="90.8" height="24" rx="12" fill="#e1e3e7" stroke="#475569" stroke-width="1"/>
 <text x="1731.7" y="819.5" font-size="13" text-anchor="middle" fill="#111827">TTT Layers</text>
-</svg><div class="figcap">图 1 · 90 项工作的时间线：按九个家族分泳道、按发表年月定位，★ 为四个主角，橙色竖带为 2026-08 拐点月。</div></div>
-<div class="figpage2"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1340 1416" font-family="-apple-system,Helvetica,Arial,'PingFang SC','Noto Sans CJK SC',sans-serif">
-<rect width="1340" height="1416" fill="#ffffff"/>
+</svg><div class="figcap">图 1 · 91 项工作的时间线：按九个家族分泳道、按发表年月定位，★ 为四个主角，橙色竖带为 2026-08 拐点月。</div></div>
+<div class="figpage2"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1340 1456" font-family="-apple-system,Helvetica,Arial,'PingFang SC','Noto Sans CJK SC',sans-serif">
+<rect width="1340" height="1456" fill="#ffffff"/>
 <text x="36" y="42" font-size="24" font-weight="700" fill="#111827">Figure 2 · 具身上下文学习的分类体系（Taxonomy）</text>
-<text x="36" y="68" font-size="13.5" fill="#6b7280">7 个一级维度 · 26 个子类 · 代表性工作按仓库 notes 编号对应；同一工作可出现在多个维度（如 Zero-WAM 既是像素演示编码也是纯上下文机制）。</text>
-<rect x="40" y="693.0" width="200" height="68" rx="10" fill="#111827"/>
-<text x="140.0" y="721.0" font-size="16" font-weight="700" text-anchor="middle" fill="#ffffff">具身上下文学习</text>
-<text x="140.0" y="743.0" font-size="12.5" text-anchor="middle" fill="#ffffff">Embodied In-Context Learning</text>
-<path d="M240,727.0 H280.0 V205.0 H320" fill="none" stroke="#e5e7eb" stroke-width="1.6"/>
+<text x="36" y="68" font-size="13.5" fill="#6b7280">7 个一级维度 · 27 个子类 · 代表性工作按仓库 notes 编号对应；同一工作可出现在多个维度（如 Zero-WAM 既是像素演示编码也是纯上下文机制）。</text>
+<rect x="40" y="713.0" width="200" height="68" rx="10" fill="#111827"/>
+<text x="140.0" y="741.0" font-size="16" font-weight="700" text-anchor="middle" fill="#ffffff">具身上下文学习</text>
+<text x="140.0" y="763.0" font-size="12.5" text-anchor="middle" fill="#ffffff">Embodied In-Context Learning</text>
+<path d="M240,747.0 H280.0 V205.0 H320" fill="none" stroke="#e5e7eb" stroke-width="1.6"/>
 <rect x="320" y="110.0" width="230" height="190.0" rx="9" fill="#d8e8ed" stroke="#0e7490" stroke-width="1.6"/>
 <text x="435.0" y="200.0" font-size="15" font-weight="700" text-anchor="middle" fill="#111827">上下文的来源与编码</text>
 <text x="435.0" y="220.0" font-size="12.5" font-weight="400" text-anchor="middle" fill="#111827">（演示怎么进模型）</text>
@@ -333,136 +335,141 @@ hr{border:none;border-top:1px solid #dde5ea;margin:16px 0}
 <text x="632" y="290.0" font-size="13.5" font-weight="600" fill="#111827">自身交互后果</text>
 <line x1="830" y1="285.0" x2="872" y2="285.0" stroke="#0e7490" stroke-width="1" opacity="0.6"/>
 <text x="880" y="290.0" font-size="12.5" fill="#111827">Zeva · RoboTTT · LocoFormer · Algorithm Distill.</text>
-<path d="M240,727.0 H280.0 V436.0 H320" fill="none" stroke="#e5e7eb" stroke-width="1.6"/>
-<rect x="320" y="332.0" width="230" height="208.0" rx="9" fill="#f9dce9" stroke="#db2777" stroke-width="1.6"/>
-<text x="435.0" y="431.0" font-size="15" font-weight="700" text-anchor="middle" fill="#111827">适应机制</text>
-<text x="435.0" y="451.0" font-size="12.5" font-weight="400" text-anchor="middle" fill="#111827">（改什么 · 何时）</text>
-<path d="M550,436.0 H585.0 V356.0 H620" fill="none" stroke="#db2777" stroke-width="1.2" opacity="0.8"/>
+<path d="M240,747.0 H280.0 V456.0 H320" fill="none" stroke="#e5e7eb" stroke-width="1.6"/>
+<rect x="320" y="332.0" width="230" height="248.0" rx="9" fill="#f9dce9" stroke="#db2777" stroke-width="1.6"/>
+<text x="435.0" y="451.0" font-size="15" font-weight="700" text-anchor="middle" fill="#111827">适应机制</text>
+<text x="435.0" y="471.0" font-size="12.5" font-weight="400" text-anchor="middle" fill="#111827">（改什么 · 何时）</text>
+<path d="M550,456.0 H585.0 V356.0 H620" fill="none" stroke="#db2777" stroke-width="1.2" opacity="0.8"/>
 <rect x="620" y="332" width="210" height="48" rx="6" fill="#ffffff" stroke="#db2777" stroke-width="1.2"/>
 <text x="632" y="361.0" font-size="13.5" font-weight="600" fill="#111827">纯上下文 · 零梯度</text>
 <line x1="830" y1="356.0" x2="872" y2="356.0" stroke="#db2777" stroke-width="1" opacity="0.6"/>
 <text x="880" y="352.0" font-size="12.5" fill="#111827">ICRT · Instant Policy · StellaVLA · Zero-WAM · HOST</text>
 <text x="880" y="370.0" font-size="12.5" fill="#111827">Prompt-DT</text>
-<path d="M550,436.0 H585.0 V405.0 H620" fill="none" stroke="#db2777" stroke-width="1.2" opacity="0.8"/>
+<path d="M550,456.0 H585.0 V405.0 H620" fill="none" stroke="#db2777" stroke-width="1.2" opacity="0.8"/>
 <rect x="620" y="390" width="210" height="30" rx="6" fill="#ffffff" stroke="#db2777" stroke-width="1.2"/>
 <text x="632" y="410.0" font-size="13.5" font-weight="600" fill="#111827">快权重 / TTT</text>
 <line x1="830" y1="405.0" x2="872" y2="405.0" stroke="#db2777" stroke-width="1" opacity="0.6"/>
 <text x="880" y="410.0" font-size="12.5" fill="#111827">RoboTTT · WAM-TTT · TTT Layers</text>
-<path d="M550,436.0 H585.0 V445.0 H620" fill="none" stroke="#db2777" stroke-width="1.2" opacity="0.8"/>
+<path d="M550,456.0 H585.0 V445.0 H620" fill="none" stroke="#db2777" stroke-width="1.2" opacity="0.8"/>
 <rect x="620" y="430" width="210" height="30" rx="6" fill="#ffffff" stroke="#db2777" stroke-width="1.2"/>
 <text x="632" y="450.0" font-size="13.5" font-weight="600" fill="#111827">检索增强 · 后装</text>
 <line x1="830" y1="445.0" x2="872" y2="445.0" stroke="#db2777" stroke-width="1" opacity="0.6"/>
 <text x="880" y="450.0" font-size="12.5" fill="#111827">RICL · Behavior Retrieval · STRAP</text>
-<path d="M550,436.0 H585.0 V485.0 H620" fill="none" stroke="#db2777" stroke-width="1.2" opacity="0.8"/>
+<path d="M550,456.0 H585.0 V485.0 H620" fill="none" stroke="#db2777" stroke-width="1.2" opacity="0.8"/>
 <rect x="620" y="470" width="210" height="30" rx="6" fill="#ffffff" stroke="#db2777" stroke-width="1.2"/>
 <text x="632" y="490.0" font-size="13.5" font-weight="600" fill="#111827">规划层 ICL</text>
 <line x1="830" y1="485.0" x2="872" y2="485.0" stroke="#db2777" stroke-width="1" opacity="0.6"/>
 <text x="880" y="490.0" font-size="12.5" fill="#111827">Code as Policies · VoxPoser · ReKep</text>
-<path d="M550,436.0 H585.0 V525.0 H620" fill="none" stroke="#db2777" stroke-width="1.2" opacity="0.8"/>
+<path d="M550,456.0 H585.0 V525.0 H620" fill="none" stroke="#db2777" stroke-width="1.2" opacity="0.8"/>
 <rect x="620" y="510" width="210" height="30" rx="6" fill="#ffffff" stroke="#db2777" stroke-width="1.2"/>
 <text x="632" y="530.0" font-size="13.5" font-weight="600" fill="#111827">测试时计算 / RL 后训练</text>
 <line x1="830" y1="525.0" x2="872" y2="525.0" stroke="#db2777" stroke-width="1" opacity="0.6"/>
 <text x="880" y="530.0" font-size="12.5" fill="#111827">RoboMonkey · ConRFT · SmoothRL · GR-3</text>
-<path d="M240,727.0 H280.0 V665.0 H320" fill="none" stroke="#e5e7eb" stroke-width="1.6"/>
-<rect x="320" y="572.0" width="230" height="186.0" rx="9" fill="#eadffc" stroke="#7c3aed" stroke-width="1.6"/>
-<text x="435.0" y="670.0" font-size="15" font-weight="700" text-anchor="middle" fill="#111827">底座与世界模型</text>
-<path d="M550,665.0 H585.0 V596.0 H620" fill="none" stroke="#7c3aed" stroke-width="1.2" opacity="0.8"/>
-<rect x="620" y="572" width="210" height="48" rx="6" fill="#ffffff" stroke="#7c3aed" stroke-width="1.2"/>
-<text x="632" y="601.0" font-size="13.5" font-weight="600" fill="#111827">基座 VLA</text>
-<line x1="830" y1="596.0" x2="872" y2="596.0" stroke="#7c3aed" stroke-width="1" opacity="0.6"/>
-<text x="880" y="592.0" font-size="12.5" fill="#111827">OpenVLA · π0 · π0.5 · GR00T N1 · RDT-1B · SmolVLA</text>
-<text x="880" y="610.0" font-size="12.5" fill="#111827">OpenVLA-OFT · Wall-OSS</text>
-<path d="M550,665.0 H585.0 V654.0 H620" fill="none" stroke="#7c3aed" stroke-width="1.2" opacity="0.8"/>
-<rect x="620" y="630" width="210" height="48" rx="6" fill="#ffffff" stroke="#7c3aed" stroke-width="1.2"/>
-<text x="632" y="659.0" font-size="13.5" font-weight="600" fill="#111827">世界-动作模型 (WAM)</text>
-<line x1="830" y1="654.0" x2="872" y2="654.0" stroke="#7c3aed" stroke-width="1" opacity="0.6"/>
-<text x="880" y="650.0" font-size="12.5" fill="#111827">Fast-WAM · WALL-WM · EgoWAM · LingBot-VA 1/2 · DreamZero</text>
-<text x="880" y="668.0" font-size="12.5" fill="#111827">Motus · DVA</text>
-<path d="M550,665.0 H585.0 V703.0 H620" fill="none" stroke="#7c3aed" stroke-width="1.2" opacity="0.8"/>
-<rect x="620" y="688" width="210" height="30" rx="6" fill="#ffffff" stroke="#7c3aed" stroke-width="1.2"/>
-<text x="632" y="708.0" font-size="13.5" font-weight="600" fill="#111827">视频生成 → 世界模型</text>
-<line x1="830" y1="703.0" x2="872" y2="703.0" stroke="#7c3aed" stroke-width="1" opacity="0.6"/>
-<text x="880" y="708.0" font-size="12.5" fill="#111827">UniPi · V-JEPA 2 · Cosmos</text>
-<path d="M550,665.0 H585.0 V743.0 H620" fill="none" stroke="#7c3aed" stroke-width="1.2" opacity="0.8"/>
+<path d="M550,456.0 H585.0 V565.0 H620" fill="none" stroke="#db2777" stroke-width="1.2" opacity="0.8"/>
+<rect x="620" y="550" width="210" height="30" rx="6" fill="#ffffff" stroke="#db2777" stroke-width="1.2"/>
+<text x="632" y="570.0" font-size="13.5" font-weight="600" fill="#111827">演示引导的 sim-to-real RL</text>
+<line x1="830" y1="565.0" x2="872" y2="565.0" stroke="#db2777" stroke-width="1" opacity="0.6"/>
+<text x="880" y="570.0" font-size="12.5" fill="#111827">DemoMimic</text>
+<path d="M240,747.0 H280.0 V705.0 H320" fill="none" stroke="#e5e7eb" stroke-width="1.6"/>
+<rect x="320" y="612.0" width="230" height="186.0" rx="9" fill="#eadffc" stroke="#7c3aed" stroke-width="1.6"/>
+<text x="435.0" y="710.0" font-size="15" font-weight="700" text-anchor="middle" fill="#111827">底座与世界模型</text>
+<path d="M550,705.0 H585.0 V636.0 H620" fill="none" stroke="#7c3aed" stroke-width="1.2" opacity="0.8"/>
+<rect x="620" y="612" width="210" height="48" rx="6" fill="#ffffff" stroke="#7c3aed" stroke-width="1.2"/>
+<text x="632" y="641.0" font-size="13.5" font-weight="600" fill="#111827">基座 VLA</text>
+<line x1="830" y1="636.0" x2="872" y2="636.0" stroke="#7c3aed" stroke-width="1" opacity="0.6"/>
+<text x="880" y="632.0" font-size="12.5" fill="#111827">OpenVLA · π0 · π0.5 · GR00T N1 · RDT-1B · SmolVLA</text>
+<text x="880" y="650.0" font-size="12.5" fill="#111827">OpenVLA-OFT · Wall-OSS</text>
+<path d="M550,705.0 H585.0 V694.0 H620" fill="none" stroke="#7c3aed" stroke-width="1.2" opacity="0.8"/>
+<rect x="620" y="670" width="210" height="48" rx="6" fill="#ffffff" stroke="#7c3aed" stroke-width="1.2"/>
+<text x="632" y="699.0" font-size="13.5" font-weight="600" fill="#111827">世界-动作模型 (WAM)</text>
+<line x1="830" y1="694.0" x2="872" y2="694.0" stroke="#7c3aed" stroke-width="1" opacity="0.6"/>
+<text x="880" y="690.0" font-size="12.5" fill="#111827">Fast-WAM · WALL-WM · EgoWAM · LingBot-VA 1/2 · DreamZero</text>
+<text x="880" y="708.0" font-size="12.5" fill="#111827">Motus · DVA</text>
+<path d="M550,705.0 H585.0 V743.0 H620" fill="none" stroke="#7c3aed" stroke-width="1.2" opacity="0.8"/>
 <rect x="620" y="728" width="210" height="30" rx="6" fill="#ffffff" stroke="#7c3aed" stroke-width="1.2"/>
-<text x="632" y="748.0" font-size="13.5" font-weight="600" fill="#111827">持续预训练与遗忘</text>
+<text x="632" y="748.0" font-size="13.5" font-weight="600" fill="#111827">视频生成 → 世界模型</text>
 <line x1="830" y1="743.0" x2="872" y2="743.0" stroke="#7c3aed" stroke-width="1" opacity="0.6"/>
-<text x="880" y="748.0" font-size="12.5" fill="#111827">StarVLA · VLAct</text>
-<path d="M240,727.0 H280.0 V845.0 H320" fill="none" stroke="#e5e7eb" stroke-width="1.6"/>
-<rect x="320" y="790.0" width="230" height="110.0" rx="9" fill="#fbe4d8" stroke="#ea580c" stroke-width="1.6"/>
-<text x="435.0" y="850.0" font-size="15" font-weight="700" text-anchor="middle" fill="#111827">数据来源</text>
-<path d="M550,845.0 H585.0 V805.0 H620" fill="none" stroke="#ea580c" stroke-width="1.2" opacity="0.8"/>
-<rect x="620" y="790" width="210" height="30" rx="6" fill="#ffffff" stroke="#ea580c" stroke-width="1.2"/>
-<text x="632" y="810.0" font-size="13.5" font-weight="600" fill="#111827">人类数据管线</text>
-<line x1="830" y1="805.0" x2="872" y2="805.0" stroke="#ea580c" stroke-width="1" opacity="0.6"/>
-<text x="880" y="810.0" font-size="12.5" fill="#111827">UMI · RH20T · Ego2Robot · EgoScale</text>
-<path d="M550,845.0 H585.0 V845.0 H620" fill="none" stroke="#ea580c" stroke-width="1.2" opacity="0.8"/>
+<text x="880" y="748.0" font-size="12.5" fill="#111827">UniPi · V-JEPA 2 · Cosmos</text>
+<path d="M550,705.0 H585.0 V783.0 H620" fill="none" stroke="#7c3aed" stroke-width="1.2" opacity="0.8"/>
+<rect x="620" y="768" width="210" height="30" rx="6" fill="#ffffff" stroke="#7c3aed" stroke-width="1.2"/>
+<text x="632" y="788.0" font-size="13.5" font-weight="600" fill="#111827">持续预训练与遗忘</text>
+<line x1="830" y1="783.0" x2="872" y2="783.0" stroke="#7c3aed" stroke-width="1" opacity="0.6"/>
+<text x="880" y="788.0" font-size="12.5" fill="#111827">StarVLA · VLAct</text>
+<path d="M240,747.0 H280.0 V885.0 H320" fill="none" stroke="#e5e7eb" stroke-width="1.6"/>
+<rect x="320" y="830.0" width="230" height="110.0" rx="9" fill="#fbe4d8" stroke="#ea580c" stroke-width="1.6"/>
+<text x="435.0" y="890.0" font-size="15" font-weight="700" text-anchor="middle" fill="#111827">数据来源</text>
+<path d="M550,885.0 H585.0 V845.0 H620" fill="none" stroke="#ea580c" stroke-width="1.2" opacity="0.8"/>
 <rect x="620" y="830" width="210" height="30" rx="6" fill="#ffffff" stroke="#ea580c" stroke-width="1.2"/>
-<text x="632" y="850.0" font-size="13.5" font-weight="600" fill="#111827">人类视频共训</text>
+<text x="632" y="850.0" font-size="13.5" font-weight="600" fill="#111827">人类数据管线</text>
 <line x1="830" y1="845.0" x2="872" y2="845.0" stroke="#ea580c" stroke-width="1" opacity="0.6"/>
-<text x="880" y="850.0" font-size="12.5" fill="#111827">HumanPlus · EgoMimic · PH2D</text>
-<path d="M550,845.0 H585.0 V885.0 H620" fill="none" stroke="#ea580c" stroke-width="1.2" opacity="0.8"/>
+<text x="880" y="850.0" font-size="12.5" fill="#111827">UMI · RH20T · Ego2Robot · EgoScale</text>
+<path d="M550,885.0 H585.0 V885.0 H620" fill="none" stroke="#ea580c" stroke-width="1.2" opacity="0.8"/>
 <rect x="620" y="870" width="210" height="30" rx="6" fill="#ffffff" stroke="#ea580c" stroke-width="1.2"/>
-<text x="632" y="890.0" font-size="13.5" font-weight="600" fill="#111827">技能库 · 跨具身数据</text>
+<text x="632" y="890.0" font-size="13.5" font-weight="600" fill="#111827">人类视频共训</text>
 <line x1="830" y1="885.0" x2="872" y2="885.0" stroke="#ea580c" stroke-width="1" opacity="0.6"/>
-<text x="880" y="890.0" font-size="12.5" fill="#111827">AgiBot GO-1 · OXE · FACTR 2</text>
-<path d="M240,727.0 H280.0 V956.0 H320" fill="none" stroke="#e5e7eb" stroke-width="1.6"/>
-<rect x="320" y="928.0" width="230" height="56.0" rx="9" fill="#efe5d7" stroke="#a16207" stroke-width="1.6"/>
-<text x="435.0" y="961.0" font-size="15" font-weight="700" text-anchor="middle" fill="#111827">评测与口径</text>
-<path d="M550,956.0 H585.0 V956.0 H620" fill="none" stroke="#a16207" stroke-width="1.2" opacity="0.8"/>
-<rect x="620" y="932" width="210" height="48" rx="6" fill="#ffffff" stroke="#a16207" stroke-width="1.2"/>
-<text x="632" y="961.0" font-size="13.5" font-weight="600" fill="#111827">基准与协议</text>
-<line x1="830" y1="956.0" x2="872" y2="956.0" stroke="#a16207" stroke-width="1" opacity="0.6"/>
-<text x="880" y="952.0" font-size="12.5" fill="#111827">LIBERO · RoboTwin 2.0 · RLBench-Oneshot</text>
-<text x="880" y="970.0" font-size="12.5" fill="#111827">Data Scaling Laws</text>
-<path d="M240,727.0 H280.0 V1067.0 H320" fill="none" stroke="#e5e7eb" stroke-width="1.6"/>
-<rect x="320" y="1012.0" width="230" height="110.0" rx="9" fill="#f9dcdc" stroke="#dc2626" stroke-width="1.6"/>
-<text x="435.0" y="1072.0" font-size="15" font-weight="700" text-anchor="middle" fill="#111827">具身安全</text>
-<path d="M550,1067.0 H585.0 V1027.0 H620" fill="none" stroke="#dc2626" stroke-width="1.2" opacity="0.8"/>
-<rect x="620" y="1012" width="210" height="30" rx="6" fill="#ffffff" stroke="#dc2626" stroke-width="1.2"/>
-<text x="632" y="1032.0" font-size="13.5" font-weight="600" fill="#111827">语言层越狱</text>
-<line x1="830" y1="1027.0" x2="872" y2="1027.0" stroke="#dc2626" stroke-width="1" opacity="0.6"/>
-<text x="880" y="1032.0" font-size="12.5" fill="#111827">BadRobot · RoboPAIR</text>
-<path d="M550,1067.0 H585.0 V1067.0 H620" fill="none" stroke="#dc2626" stroke-width="1.2" opacity="0.8"/>
+<text x="880" y="890.0" font-size="12.5" fill="#111827">HumanPlus · EgoMimic · PH2D</text>
+<path d="M550,885.0 H585.0 V925.0 H620" fill="none" stroke="#ea580c" stroke-width="1.2" opacity="0.8"/>
+<rect x="620" y="910" width="210" height="30" rx="6" fill="#ffffff" stroke="#ea580c" stroke-width="1.2"/>
+<text x="632" y="930.0" font-size="13.5" font-weight="600" fill="#111827">技能库 · 跨具身数据</text>
+<line x1="830" y1="925.0" x2="872" y2="925.0" stroke="#ea580c" stroke-width="1" opacity="0.6"/>
+<text x="880" y="930.0" font-size="12.5" fill="#111827">AgiBot GO-1 · OXE · FACTR 2</text>
+<path d="M240,747.0 H280.0 V996.0 H320" fill="none" stroke="#e5e7eb" stroke-width="1.6"/>
+<rect x="320" y="968.0" width="230" height="56.0" rx="9" fill="#efe5d7" stroke="#a16207" stroke-width="1.6"/>
+<text x="435.0" y="1001.0" font-size="15" font-weight="700" text-anchor="middle" fill="#111827">评测与口径</text>
+<path d="M550,996.0 H585.0 V996.0 H620" fill="none" stroke="#a16207" stroke-width="1.2" opacity="0.8"/>
+<rect x="620" y="972" width="210" height="48" rx="6" fill="#ffffff" stroke="#a16207" stroke-width="1.2"/>
+<text x="632" y="1001.0" font-size="13.5" font-weight="600" fill="#111827">基准与协议</text>
+<line x1="830" y1="996.0" x2="872" y2="996.0" stroke="#a16207" stroke-width="1" opacity="0.6"/>
+<text x="880" y="992.0" font-size="12.5" fill="#111827">LIBERO · RoboTwin 2.0 · RLBench-Oneshot</text>
+<text x="880" y="1010.0" font-size="12.5" fill="#111827">Data Scaling Laws</text>
+<path d="M240,747.0 H280.0 V1107.0 H320" fill="none" stroke="#e5e7eb" stroke-width="1.6"/>
+<rect x="320" y="1052.0" width="230" height="110.0" rx="9" fill="#f9dcdc" stroke="#dc2626" stroke-width="1.6"/>
+<text x="435.0" y="1112.0" font-size="15" font-weight="700" text-anchor="middle" fill="#111827">具身安全</text>
+<path d="M550,1107.0 H585.0 V1067.0 H620" fill="none" stroke="#dc2626" stroke-width="1.2" opacity="0.8"/>
 <rect x="620" y="1052" width="210" height="30" rx="6" fill="#ffffff" stroke="#dc2626" stroke-width="1.2"/>
-<text x="632" y="1072.0" font-size="13.5" font-weight="600" fill="#111827">感知层对抗</text>
+<text x="632" y="1072.0" font-size="13.5" font-weight="600" fill="#111827">语言层越狱</text>
 <line x1="830" y1="1067.0" x2="872" y2="1067.0" stroke="#dc2626" stroke-width="1" opacity="0.6"/>
-<text x="880" y="1072.0" font-size="12.5" fill="#111827">AdvVLA</text>
-<path d="M550,1067.0 H585.0 V1107.0 H620" fill="none" stroke="#dc2626" stroke-width="1.2" opacity="0.8"/>
+<text x="880" y="1072.0" font-size="12.5" fill="#111827">BadRobot · RoboPAIR</text>
+<path d="M550,1107.0 H585.0 V1107.0 H620" fill="none" stroke="#dc2626" stroke-width="1.2" opacity="0.8"/>
 <rect x="620" y="1092" width="210" height="30" rx="6" fill="#ffffff" stroke="#dc2626" stroke-width="1.2"/>
-<text x="632" y="1112.0" font-size="13.5" font-weight="600" fill="#111827">演示投毒后门</text>
+<text x="632" y="1112.0" font-size="13.5" font-weight="600" fill="#111827">感知层对抗</text>
 <line x1="830" y1="1107.0" x2="872" y2="1107.0" stroke="#dc2626" stroke-width="1" opacity="0.6"/>
-<text x="880" y="1112.0" font-size="12.5" fill="#111827">Contextual Backdoor · BadVLA · State Backdoor</text>
-<path d="M240,727.0 H280.0 V1249.0 H320" fill="none" stroke="#e5e7eb" stroke-width="1.6"/>
-<rect x="320" y="1154.0" width="230" height="190.0" rx="9" fill="#e1e3e7" stroke="#475569" stroke-width="1.6"/>
-<text x="435.0" y="1254.0" font-size="15" font-weight="700" text-anchor="middle" fill="#111827">理论与前史</text>
-<path d="M550,1249.0 H585.0 V1169.0 H620" fill="none" stroke="#475569" stroke-width="1.2" opacity="0.8"/>
-<rect x="620" y="1154" width="210" height="30" rx="6" fill="#ffffff" stroke="#475569" stroke-width="1.2"/>
-<text x="632" y="1174.0" font-size="13.5" font-weight="600" fill="#111827">LLM ICL 与涌现之争</text>
-<line x1="830" y1="1169.0" x2="872" y2="1169.0" stroke="#475569" stroke-width="1" opacity="0.6"/>
-<text x="880" y="1174.0" font-size="12.5" fill="#111827">GPT-3 · Emergent Abilities · Mirage</text>
-<path d="M550,1249.0 H585.0 V1209.0 H620" fill="none" stroke="#475569" stroke-width="1.2" opacity="0.8"/>
+<text x="880" y="1112.0" font-size="12.5" fill="#111827">AdvVLA</text>
+<path d="M550,1107.0 H585.0 V1147.0 H620" fill="none" stroke="#dc2626" stroke-width="1.2" opacity="0.8"/>
+<rect x="620" y="1132" width="210" height="30" rx="6" fill="#ffffff" stroke="#dc2626" stroke-width="1.2"/>
+<text x="632" y="1152.0" font-size="13.5" font-weight="600" fill="#111827">演示投毒后门</text>
+<line x1="830" y1="1147.0" x2="872" y2="1147.0" stroke="#dc2626" stroke-width="1" opacity="0.6"/>
+<text x="880" y="1152.0" font-size="12.5" fill="#111827">Contextual Backdoor · BadVLA · State Backdoor</text>
+<path d="M240,747.0 H280.0 V1289.0 H320" fill="none" stroke="#e5e7eb" stroke-width="1.6"/>
+<rect x="320" y="1194.0" width="230" height="190.0" rx="9" fill="#e1e3e7" stroke="#475569" stroke-width="1.6"/>
+<text x="435.0" y="1294.0" font-size="15" font-weight="700" text-anchor="middle" fill="#111827">理论与前史</text>
+<path d="M550,1289.0 H585.0 V1209.0 H620" fill="none" stroke="#475569" stroke-width="1.2" opacity="0.8"/>
 <rect x="620" y="1194" width="210" height="30" rx="6" fill="#ffffff" stroke="#475569" stroke-width="1.2"/>
-<text x="632" y="1214.0" font-size="13.5" font-weight="600" fill="#111827">ICL 机制理论</text>
+<text x="632" y="1214.0" font-size="13.5" font-weight="600" fill="#111827">LLM ICL 与涌现之争</text>
 <line x1="830" y1="1209.0" x2="872" y2="1209.0" stroke="#475569" stroke-width="1" opacity="0.6"/>
-<text x="880" y="1214.0" font-size="12.5" fill="#111827">Bayesian ICL · Induction Heads · ICL≡GD</text>
-<path d="M550,1249.0 H585.0 V1249.0 H620" fill="none" stroke="#475569" stroke-width="1.2" opacity="0.8"/>
+<text x="880" y="1214.0" font-size="12.5" fill="#111827">GPT-3 · Emergent Abilities · Mirage</text>
+<path d="M550,1289.0 H585.0 V1249.0 H620" fill="none" stroke="#475569" stroke-width="1.2" opacity="0.8"/>
 <rect x="620" y="1234" width="210" height="30" rx="6" fill="#ffffff" stroke="#475569" stroke-width="1.2"/>
-<text x="632" y="1254.0" font-size="13.5" font-weight="600" fill="#111827">视觉 ICL 前史</text>
+<text x="632" y="1254.0" font-size="13.5" font-weight="600" fill="#111827">ICL 机制理论</text>
 <line x1="830" y1="1249.0" x2="872" y2="1249.0" stroke="#475569" stroke-width="1" opacity="0.6"/>
-<text x="880" y="1254.0" font-size="12.5" fill="#111827">Visual Prompting · Painter · LVM</text>
-<path d="M550,1249.0 H585.0 V1289.0 H620" fill="none" stroke="#475569" stroke-width="1.2" opacity="0.8"/>
+<text x="880" y="1254.0" font-size="12.5" fill="#111827">Bayesian ICL · Induction Heads · ICL≡GD</text>
+<path d="M550,1289.0 H585.0 V1289.0 H620" fill="none" stroke="#475569" stroke-width="1.2" opacity="0.8"/>
 <rect x="620" y="1274" width="210" height="30" rx="6" fill="#ffffff" stroke="#475569" stroke-width="1.2"/>
-<text x="632" y="1294.0" font-size="13.5" font-weight="600" fill="#111827">上下文 RL 前史</text>
+<text x="632" y="1294.0" font-size="13.5" font-weight="600" fill="#111827">视觉 ICL 前史</text>
 <line x1="830" y1="1289.0" x2="872" y2="1289.0" stroke="#475569" stroke-width="1" opacity="0.6"/>
-<text x="880" y="1294.0" font-size="12.5" fill="#111827">Decision Tf · Prompt-DT · Algorithm Distill.</text>
-<path d="M550,1249.0 H585.0 V1329.0 H620" fill="none" stroke="#475569" stroke-width="1.2" opacity="0.8"/>
+<text x="880" y="1294.0" font-size="12.5" fill="#111827">Visual Prompting · Painter · LVM</text>
+<path d="M550,1289.0 H585.0 V1329.0 H620" fill="none" stroke="#475569" stroke-width="1.2" opacity="0.8"/>
 <rect x="620" y="1314" width="210" height="30" rx="6" fill="#ffffff" stroke="#475569" stroke-width="1.2"/>
-<text x="632" y="1334.0" font-size="13.5" font-weight="600" fill="#111827">OSIL 源头 · 动作头</text>
+<text x="632" y="1334.0" font-size="13.5" font-weight="600" fill="#111827">上下文 RL 前史</text>
 <line x1="830" y1="1329.0" x2="872" y2="1329.0" stroke="#475569" stroke-width="1" opacity="0.6"/>
-<text x="880" y="1334.0" font-size="12.5" fill="#111827">Duan'17 · Finn'17 · IMOP · Diffusion Policy · ACT/ALOHA</text>
+<text x="880" y="1334.0" font-size="12.5" fill="#111827">Decision Tf · Prompt-DT · Algorithm Distill.</text>
+<path d="M550,1289.0 H585.0 V1369.0 H620" fill="none" stroke="#475569" stroke-width="1.2" opacity="0.8"/>
+<rect x="620" y="1354" width="210" height="30" rx="6" fill="#ffffff" stroke="#475569" stroke-width="1.2"/>
+<text x="632" y="1374.0" font-size="13.5" font-weight="600" fill="#111827">OSIL 源头 · 动作头</text>
+<line x1="830" y1="1369.0" x2="872" y2="1369.0" stroke="#475569" stroke-width="1" opacity="0.6"/>
+<text x="880" y="1374.0" font-size="12.5" fill="#111827">Duan'17 · Finn'17 · IMOP · Diffusion Policy · ACT/ALOHA</text>
 </svg><div class="figcap">图 2 · 具身上下文学习的分类体系：七个一级维度、26 个子类，与本报告 Part A–G 一一对应。</div></div>
-<div class="divider"><div class="k">PART 0</div><div class="t">执行摘要：趋势、洞察、研究机会与口径账本</div><div class="d">十条一页结论 · 六大趋势 · 十三条洞察 · 七条可证伪预测 · 22 个研究机会（各配最小可行实验）· 25 个头条数字的口径账本——全部结论先行，细节见后续各章。</div><ol><li>趋势与洞察：机器人 One-Shot 技能习得的 2026 拐点</li><li>研究机会清单：22 项待验证问题，每项配一个起步实验</li><li>数字口径账本：本调研引用的头条数字，逐条标注它们到底在测什么</li></ol></div><article><h1
+<div class="divider"><div class="k">PART 0</div><div class="t">执行摘要：趋势、洞察、研究机会与口径账本</div><div class="d">十条一页结论 · 六大趋势 · 十三条洞察 · 七条可证伪预测 · 22 个研究机会（各配最小可行实验）· 26 个头条数字的口径账本——全部结论先行，细节见后续各章。</div><ol><li>趋势与洞察：机器人 One-Shot 技能习得的 2026 拐点</li><li>研究机会清单：22 项待验证问题，每项配一个起步实验</li><li>数字口径账本：本调研引用的头条数字，逐条标注它们到底在测什么</li></ol></div><article><h1
 id="趋势与洞察机器人-one-shot-技能习得的-2026-拐点">趋势与洞察：机器人
 One-Shot 技能习得的 2026 拐点</h1>
 <blockquote>
@@ -484,7 +491,7 @@ ICL（notes/35）、检索增强与技能库（notes/36）、视觉 ICL
 补齐潜动作、上下文 RL 前史、人类共训、基准地基、具身安全 19
 项，并据此修正预测 P5；09-04 补齐几何编码、规划层 ICL、检索与技能库 9
 项；09-05 补齐视觉 ICL 前史、开源高效 VLA、适应旋钮两端 8 项；09-06 增补
-Zeva 与后训练干扰两篇；09-07 增补 SmoothRL）</p>
+Zeva 与后训练干扰两篇；09-07 增补 SmoothRL；09-08 增补 DemoMimic）</p>
 </blockquote>
 <hr />
 <h2 id="0-一页结论执行摘要">0. 一页结论（执行摘要）</h2>
@@ -958,6 +965,12 @@ episode 抛掷 39→94%</td>
 73%；第四家</td>
 </tr>
 <tr>
+<td>2026-09-01</td>
+<td>DemoMimic（Stanford）</td>
+<td>演示的第三种归宿：进仿真 RL 的接触中心奖励，蒸馏出跨 16 物体 / 2
+种灵巧手的固定策略（71%，连续成功分）</td>
+</tr>
+<tr>
 <td>2026-04 / 08</td>
 <td>StarVLA / VLAct</td>
 <td>量化后训练干扰：动作单训 2
@@ -1241,7 +1254,10 @@ Retrieval）都不改权重——但前者需要语言指定任务、中者受�
 ICL 用同一段输入同时给出「做什么」与「怎么做」（notes/39）。另一端，真机
 RL（ConRFT）45–90 分钟把成功率推到 96.3%，SmoothRL 250 个 episode
 把三个任务推到 83–94%，GEN-1 的 99% mastery 同样靠改权重——ICL
-解决「能不能做」（59–66%），RL 后训练解决「做得多可靠」。SmoothRL
+解决「能不能做」（59–66%），RL 后训练解决「做得多可靠」。DemoMimic
+则给刻度盘开了一条新轴——演示用在训练管线的哪一环：不进上下文、不进权重，而是进仿真
+RL 的奖励，每任务一次小时级训练换来跨 16 物体、2
+种灵巧手的固定策略，并把纯视觉演示带不了的接触力用仿真奖励补上（notes/43）。SmoothRL
 另提醒了一个所有路线共有却无人审视的假设（notes/42）：VLA/WAM
 全部跑在「动作分块 +
 异步推理」上，策略输出的分块只有一部分真被执行——同步假设的在线 RL
@@ -1522,8 +1538,9 @@ NEXT 从机器人自身电机遥测估计外力矩，不能从人类 RGB
 演示视频补出力信号——它解决的是执行侧的力感知，演示侧的力信号须另行采集（力反馈遥操作、传感手套）并完成跨具身映射。两侧从未在
 one-shot 管线里组合。 MVE：先在 HOST 的执行侧接入 NEXT
 力矩反馈，在接触密集任务（插装、拧盖）上验证增益；再单独评估演示侧力信号（如
-RH20T 式力反馈遥操作演示）作为附加通道的价值。 相关：notes/18 §6、01
-§5。</p>
+RH20T 式力反馈遥操作演示）作为附加通道的价值。 另一条路：DemoMimic
+用仿真里的接触中心奖励把「力」补进策略而不依赖任何力传感（notes/43）——可对照「演示侧真实力信号」与「仿真接触奖励」两种补力方式在同一接触密集任务上的增益与成本。
+相关：notes/18 §6、01 §5、43 §6。</p>
 <h2 id="part-e--评测与口径">Part E · 评测与口径</h2>
 <p><strong>19. 真机 one-shot ICL 标准协议与基线披露标准</strong>
 缺口：RLBench-Oneshot（ManiLong-Shot）已是 one-shot
@@ -1564,7 +1581,9 @@ MVE）。它能顺带回答第 7 条（全注意力基线）的一部分。</p>
 </article><article><h1
 id="数字口径账本本调研引用的头条数字逐条标注它们到底在测什么">数字口径账本：本调研引用的头条数字，逐条标注它们到底在测什么</h1>
 <blockquote>
-<p>本仓库最常被违反的一条规则是「不同工作的成功率禁止直接比大小」。这张账本把所有被反复引用的头条数字放进同一张表，逐条标注任务集、泛化定义、计分与聚合方式、每方法每任务的试验次数、训练期与评测期的干预
+<p>本仓库最常被违反的一条规则是「不同工作的成功率禁止直接比大小」。这张账本把
+26
+个被反复引用的头条数字放进同一张表，逐条标注任务集、泛化定义、计分与聚合方式、每方法每任务的试验次数、训练期与评测期的干预
 / 重试 / 权重更新、独立性与证据形式，并给出 notes
 来源。用法：只有当任务、平台、计分方式、演示与更新预算等关键条件可比时，两个数字才能作性能比较；其余情况只能是定性定位。notes
 未说明的项一律写「notes 未说明」，不写「无」。</p>
@@ -1612,9 +1631,10 @@ id="数字口径账本本调研引用的头条数字逐条标注它们到底在�
 </tr>
 <tr>
 <td>部分计分成功率</td>
-<td>子步骤按权重给分（如抓对 0.5 / 放对 1.0）</td>
+<td>子步骤按权重给分（如抓对 0.5 / 放对 1.0）或按相对偏差 /
+阶段计分</td>
 <td>高于严格二元</td>
-<td>ICRT</td>
+<td>ICRT、DemoMimic</td>
 </tr>
 <tr>
 <td>相对提升</td>
@@ -1938,6 +1958,20 @@ id="数字口径账本本调研引用的头条数字逐条标注它们到底在�
 <td>自家基线</td>
 <td>论文</td>
 <td>最早的物理提示</td>
+</tr>
+<tr>
+<td><strong>DemoMimic</strong></td>
+<td>71%（16 物体 / 4 任务 / 2 手）· 开盒曲面盖唇 39%</td>
+<td>双 Franka + Tesollo DF-5F / Sharpa 五指手；4 任务</td>
+<td>物体实例级（形状/尺度/质量/摩擦），任务见过</td>
+<td>任务特定连续成功分（相对偏差 / 移瓶四阶段 1/4 计分）+
+掉落率——非二元</td>
+<td>真机每物体 20 次；仿真 300 次 × 3 种子</td>
+<td>演示离线进仿真 RL 奖励；部署策略固定 · 评测无干预</td>
+<td>基线为作者改动作空间后的 HERMES* / DexMachina*，单一尺度对照</td>
+<td>论文</td>
+<td>Sharpa 76% / Tesollo 65%；仿真成绩低于基线但 sim-to-real
+掉幅最小（notes/43）</td>
 </tr>
 <tr>
 <td><strong>LocoFormer</strong></td>
@@ -2760,7 +2794,7 @@ notes/33
 给「零更新」刻度加了第三个维度——ICL 花演示、测试时计算花算力、Zeva
 花<strong>尝试次数</strong>，四次尝试换 47 个点的累计增益，与 ConRFT
 一小时 RL 换 96% 之间的成本-收益对照值得专门测。</p>
-</article><div class="divider"><div class="k">PART B</div><div class="t">具身 ICL 方法：演示怎么被策略用上</div><div class="d">结构派、快权重、纯上下文、数据配方四条学术路线；几何编码、规划层 ICL、检索三种非像素上下文；以及适应刻度盘两端。</div><ol><li>Instant Policy 深度解读：把 in-context 模仿学习变成图扩散，用仿真伪演示喂出即时策略</li><li>ICRT 深度解读：next-token prediction 原教旨主义的机器人 in-context learning 配方</li><li>RoboTTT 深度解读：把 Test-Time Training 装进机器人策略，上下文扩到 8K 步</li><li>BPP 深度解读：一条演示当 prompt，任务多样性是 in-context 操作的第一驱动力</li><li>RICL 深度解读：给预训练 VLA 事后注入 in-context 学习能力</li><li>Vid2Robot 深度解读：端到端视频条件策略的 Google 规模实践</li><li>Zero-WAM 深度解读：把人类视频「造」出来当任务规格，再用 IFP 逼模型真的去看</li><li>WAM-TTT 深度解读：把人类演示写进快权重记忆，且只许写在感知侧</li><li>StellaVLA 深度解读：把演示翻译成「为什么」，四篇里唯一真零梯度</li><li>LocoFormer 深度解读：S1 的前夜——上下文当适应机制在运动控制域先走通</li><li>ManiLong-Shot 深度解读：OSIL 第一个像样的公开基准，和一个 30.2% 的现实</li><li>演示的另一种编码三篇合集：轨迹草图、点轨迹、物体光流当提示</li><li>规划层 ICL 三篇合集：LLM 自己的 few-shot 能力，直接拿来控机器人</li><li>检索增强与技能库三篇合集：上下文从哪里来——非参数记忆与 ICL 的边界</li><li>适应旋钮两端两篇合集：不改权重的测试时计算，与改权重的 RL 后训练</li><li>SmoothRL 深度解读：在部署用的异步循环里做在线 RL——「策略输出的动作」与「机器人执行的动作」不再是同一个东西</li></ol></div><article><h1
+</article><div class="divider"><div class="k">PART B</div><div class="t">具身 ICL 方法：演示怎么被策略用上</div><div class="d">结构派、快权重、纯上下文、数据配方四条学术路线；几何编码、规划层 ICL、检索三种非像素上下文；适应刻度盘两端；以及演示进仿真 RL 奖励的第三种归宿。</div><ol><li>Instant Policy 深度解读：把 in-context 模仿学习变成图扩散，用仿真伪演示喂出即时策略</li><li>ICRT 深度解读：next-token prediction 原教旨主义的机器人 in-context learning 配方</li><li>RoboTTT 深度解读：把 Test-Time Training 装进机器人策略，上下文扩到 8K 步</li><li>BPP 深度解读：一条演示当 prompt，任务多样性是 in-context 操作的第一驱动力</li><li>RICL 深度解读：给预训练 VLA 事后注入 in-context 学习能力</li><li>Vid2Robot 深度解读：端到端视频条件策略的 Google 规模实践</li><li>Zero-WAM 深度解读：把人类视频「造」出来当任务规格，再用 IFP 逼模型真的去看</li><li>WAM-TTT 深度解读：把人类演示写进快权重记忆，且只许写在感知侧</li><li>StellaVLA 深度解读：把演示翻译成「为什么」，四篇里唯一真零梯度</li><li>LocoFormer 深度解读：S1 的前夜——上下文当适应机制在运动控制域先走通</li><li>ManiLong-Shot 深度解读：OSIL 第一个像样的公开基准，和一个 30.2% 的现实</li><li>演示的另一种编码三篇合集：轨迹草图、点轨迹、物体光流当提示</li><li>规划层 ICL 三篇合集：LLM 自己的 few-shot 能力，直接拿来控机器人</li><li>检索增强与技能库三篇合集：上下文从哪里来——非参数记忆与 ICL 的边界</li><li>适应旋钮两端两篇合集：不改权重的测试时计算，与改权重的 RL 后训练</li><li>SmoothRL 深度解读：在部署用的异步循环里做在线 RL——「策略输出的动作」与「机器人执行的动作」不再是同一个东西</li><li>DemoMimic 深度解读：一段演示、多个物体——演示不进上下文也不进权重，而是进仿真 RL 的奖励</li></ol></div><article><h1
 id="instant-policy-深度解读把-in-context-模仿学习变成图扩散用仿真伪演示喂出即时策略">Instant
 Policy 深度解读：把 in-context
 模仿学习变成图扩散，用仿真伪演示喂出即时策略</h1>
@@ -4677,6 +4711,102 @@ RL（不截断）」这个最关键的对照，也缺与 GRRL
 四次尝试换 47 个点，SmoothRL 250 个 episode 换 55–75
 个点，哪个更省是可以直接测的问题。<strong>对涌现之争无直接贡献</strong>，但对本调研的评测批判（notes/32）添一例：单次运行、每配置一次评估、无异步基线——真机
 RL 论文的口径问题与 ICL 论文同款。</p>
+</article><article><h1
+id="demomimic-深度解读一段演示多个物体演示不进上下文也不进权重而是进仿真-rl-的奖励">DemoMimic
+深度解读：一段演示、多个物体——演示不进上下文也不进权重，而是进仿真 RL
+的奖励</h1>
+<blockquote>
+<p><strong>One Demonstration, Many Objects: Generalizing Manipulation
+via Local Contact Geometry</strong> arXiv 2609.01938v2（2026-09-01，v2
+09-03）· Stanford（Satvik Sharma, Samrat Sahoo, Huang Huang, Fei-Fei Li,
+Jiajun Wu, Dorsa Sadigh, Jeannette Bohg） 关键词：灵巧操作 · sim-to-real
+RL · 局部接触几何</p>
+</blockquote>
+<h2 id="1-一句话定位">1. 一句话定位</h2>
+<p>DemoMimic
+用一段人类演示教多指灵巧手操作，但它与本仓库所有「一段演示」工作走的都不是同一条路：演示不放进策略的上下文（HOST/S1/Zero-WAM），也不直接微调权重（GR-3），而是被当作<strong>仿真
+RL
+的行为先验与任务规格</strong>——人类的物体状态轨迹与手部关键点重定向为参考关节轨迹，残差
+RL 策略在其上学修正，奖励以「接触」为中心（对齐奖励 + 持续接触奖励 +
+任务奖励），再把 RL 教师蒸馏成只依赖第一人称 RGB-D
+的学生策略。结果是<strong>一个真机策略跨 16 个物体、4 个任务、2
+种五指灵巧手（Tesollo DF-5F、Sharpa）平均 71%</strong>，且在与两个
+sim-to-real RL 基线的对照中 sim-to-real
+掉幅最小。它给本调研的「演示怎么被用上」坐标系补上了第三种归宿：演示 →
+仿真奖励 → 蒸馏后的泛化策略。</p>
+<h2 id="2-要解决的问题">2. 要解决的问题</h2>
+<p>多指手的数据难采，从人类演示学是可扩展替代——但现有 sim-to-real RL
+方法要么奖励里没有显式鼓励<strong>精确接触</strong>（导致仿真里好、真机上接触不稳），要么只在训练物体实例上成立、换个形状就崩。两者的共同根源：把演示当运动学轨迹去跟踪（motion
+tracking）或用粗粒度的接触门控，学到的是「手在哪」而不是「手怎么和物体接触」。DemoMimic
+的赌注是：跨物体泛化所需的不变量在<strong>接触点附近的局部几何</strong>（盒盖的边、瓶身的曲面），只要局部接触结构一致，形状、尺度、质量、摩擦都可以变。</p>
+<h2 id="3-方法">3. 方法</h2>
+<p><strong>演示解析</strong>：一段人类演示给出物体状态序列（位置、四元数、铰接角）与手部关键点序列；对增广后的关键点轨迹做运动学重定向得到参考关节轨迹（沿用
+DexMachina 的重定向）。<strong>残差
+RL</strong>：策略输出相对参考轨迹的关节修正量（动作 54 维：每臂 7 维 +
+每手 20 维；观测 652
+维含关节误差、关键点、腕位姿、参考关节目标等），仿真中强域随机化（初始物体位姿、尺度等）。<strong>接触中心奖励</strong>：每项界在
+[0,1]——任务奖励（物体轨迹跟踪）、<strong>对齐奖励
+AR</strong>（指尖法向与物体表面对齐、接触位置正确）、<strong>持续接触奖励
+SCR</strong>（接触一旦建立就维持，不许抖）、平滑惩罚。<strong>蒸馏</strong>：RL
+教师在仿真滚出数据集，训练两个学生——低层腕部深度策略（读局部接触几何，是跨物体泛化的载体）与高层
+RGB 策略（提供语义与全局引导）；推理时只用第一人称 RGB-D
+与腕部立体相机，不需要物体位姿估计、不开环回放。</p>
+<h2 id="4-实验结果">4. 实验结果</h2>
+<p><strong>平台与任务</strong>：双 Franka 臂 + 两种五指手（Tesollo DF-5F
+/
+Sharpa），四个任务——开盒（按住盒盖两侧开合）、掀盖（用突出的唇边顶起并控制）、推盒、移瓶（抓起、空中搬运、放到目标）。<strong>指标口径（重要）</strong>：不是二元成功率而是<strong>任务特定的连续成功分</strong>——开盒/掀盖为
+1
+减去「达到的最大铰接角与人类演示之差的相对偏差」（过冲与不足都扣分）；推盒类似用推距；移瓶按四阶段各计
+1/4；另报掉落率。真机每物体 20 次 rollout，仿真 300 次 × 3
+种子。<strong>多物体泛化</strong>：16 个物体（材质、重量、尺寸各异）平均
+71%；掀盖、推盒、移瓶跨实例稳定，唯一明显下滑是开盒任务里的「机器人手玩具盒」——曲面盖唇改变了局部接触几何，掉到
+39%——这恰是论文假设的边界实证。<strong>跨手</strong>：Sharpa 上
+76%，Tesollo 上 65%。<strong>与基线对照</strong>（改用同一动作空间的
+HERMES* 与
+DexMachina*，单一物体尺度）：两基线在仿真里开盒表现好，真机成功率低、掉落率高——HERMES*
+接触位置错、DexMachina* 对齐较好但力不够；DemoMimic
+仿真成绩反而低于基线，但 sim-to-real
+掉幅最小。<strong>奖励消融</strong>：去掉 SCR
+的两个变体在开盒任务上掉落率接近
+100%——过多的手指动作在仿真里因接触建模误差看起来稳定，到真机就丢接触；去掉
+AR
+则对齐差、力波动大。两项奖励解决互补的失败模式，且这些差异在仿真里几乎看不出来（所有变体仿真接近天花板）。</p>
+<h2 id="5-局限">5. 局限</h2>
+<p>作者的框架依赖仿真中可建模的刚体/铰接物体与准确的手部关键点重定向；任务集为四个、真机每物体
+20
+次。延伸批判：其一，<strong>指标不是成功率</strong>——连续成功分与阶段分会显著高于二元完成率，「71%」与本仓库其他工作的数字不可并排（详见
+insights/12
+口径账本）；其二，泛化边界由「局部接触几何是否一致」定义，这是一个事后可解释但事前难以判定的条件——用户拿到一个新物体前，无法知道它是否在策略的泛化域内；其三，每个任务仍需一次完整的仿真
+RL
+训练与蒸馏（不是秒级），演示的作用是<strong>离线</strong>指定任务与塑造奖励，部署后策略是固定的——它解决的是「一段演示换一个泛化技能」，不是「一段演示立即执行」；其四，基线是作者修改动作空间后的
+HERMES*/DexMachina*，且只在单一物体尺度对照，公平性有折扣；其五，人类演示部分取自已有动作捕捉数据集，「一段演示」的采集成本在真机场景里未量化。</p>
+<h2 id="6-与调研主线的关系">6. 与调研主线的关系</h2>
+<p><strong>演示的第三种归宿</strong>：本仓库此前的「一段演示」分两类——进上下文（HOST/S1/GEN-1.5/Zero-WAM/Zeva，零更新、秒级）与进权重（GR-3
+的 10 条 VR 轨迹微调、RICL 的可选微调）。DemoMimic
+是第三类：演示进<strong>仿真 RL
+的奖励与参考轨迹</strong>，产出一个不再依赖演示的泛化策略。三类的成本结构完全不同：ICL
+部署秒级但每次都要演示在场；微调分钟到小时；DemoMimic 每任务一次仿真
+RL（小时到天）但换来跨物体、跨手的固定策略。在 notes/39
+的适应刻度盘上，它不在「改不改权重」这条轴上，而是开了一条新轴——<strong>演示用在训练管线的哪一环</strong>。</p>
+<p><strong>与 ICL 路线的互补而非竞争</strong>：DemoMimic 解决的正是 ICL
+论文回避的两件事——多指灵巧手（HOST/S1/Zero-WAM
+全是平行夹爪或简单末端）与接触力（本调研洞察 I4
+的信息瓶颈：纯视觉演示带不了力，DemoMimic
+用仿真里的接触奖励把力「补」进策略）。反过来，它的固定策略没有 ICL
+的即时性与任务级泛化——四个任务各训一次。一个自然的组合：DemoMimic
+式接触中心蒸馏做底层灵巧原语，ICL 做任务级组合与指定——LingBot-VA 2.0
+的层级结构（notes/19）与 ManiLong-Shot
+的原语分解（notes/21）都指向这里。</p>
+<p><strong>对「局部几何决定泛化」的旁证</strong>：Im2Flow2Act
+用物体光流当跨具身接口（notes/34）、ATM 用任意点轨迹（notes/34）、ReKep
+用关键点约束（notes/35）——都在把任务表示压到「物体上哪些点怎么动」；DemoMimic
+把同一思想推进到接触层：<strong>决定泛化的不是物体是什么，是接触处的局部几何</strong>。它的
+39% 反例（曲面盖唇）比 71%
+的均值更有信息量——它给出了这一类表示的失效边界。</p>
+<p><strong>对口径账本的贡献</strong>：这是本仓库第一篇以「相对偏差成功分
++ 阶段分」计分的工作，与 S1 的累计逐步成功率、Zeva 的 CSR@K、WAM-TTT 的
+progress
+并列为「不是二元成功率」的第四种口径；同时它给出了一个应被推广的做法——<strong>同时报掉落率</strong>，把「完成」与「稳定」分开计量。</p>
 </article><div class="divider"><div class="k">PART C</div><div class="t">底座与世界模型：ICL 站在谁的肩上</div><div class="d">基座 VLA 与第二梯队、世界-动作模型及其视频生成上游、同代对照组，以及后训练怎样吃掉前面的能力。</div><ol><li>基座 VLA 三篇合集：ICL 工作站在谁的肩上</li><li>开源高效 VLA 三篇合集：基线的基线——ICL 论文脚注里那些名字</li><li>外围论文速览：one-shot 技能习得调研的五个坐标</li><li>GR-3 深度解读：few-shot 微调流派的工业标杆，ICL 要消灭的正是它</li><li>EgoWAM 深度解读：换掉世界预测目标，人类数据才不「漏毒」进动作头</li><li>WALL-WM 深度解读：把世界-动作建模「循事件关节」下刀</li><li>LingBot-VA 两代深度解读：把「测试时想象」坚持到底的世界-动作模型</li><li>视频-动作模型同代对照组三篇合集：WAM 战场的其他玩家</li><li>世界模型谱系三篇合集：从像素想象到表征预测再到平台化</li><li>后训练干扰两篇合集：后面的任务训练，怎样吃掉前面学到的能力</li></ol></div><article><h1 id="基座-vla-三篇合集icl-工作站在谁的肩上">基座 VLA 三篇合集：ICL
 工作站在谁的肩上</h1>
 <blockquote>

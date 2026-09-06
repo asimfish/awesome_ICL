@@ -1,7 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="2200" height="854" viewBox="0 0 2200 854" font-family="-apple-system,Helvetica,Arial,'PingFang SC','Noto Sans CJK SC',sans-serif">
 <rect width="2200" height="854" fill="#0b0f17"/>
 <text x="36" y="42" font-size="24" font-weight="700" fill="#e6edf3">Figure 1a · Embodied In-Context Learning：46 项工作的时间线（2017–2024）</text>
-<text x="36" y="68" font-size="13.5" fill="#9aa4b2">按九个家族分泳道、按发表年月定位；★ 为四个主角工作（HOST · S1 · GEN-1.5 · Zeva）。2024–2026 三年集中了 66 项——低层控制进入上下文的爆发期。</text>
+<text x="36" y="68" font-size="13.5" fill="#9aa4b2">按九个家族分泳道、按发表年月定位；★ 为四个主角工作（HOST · S1 · GEN-1.5 · Zeva）。2024–2026 三年集中了 67 项——低层控制进入上下文的爆发期。</text>
 <rect x="300" y="108" width="150" height="686" fill="#101722"/>
 <line x1="300" y1="108" x2="300" y2="796" stroke="#243040" stroke-dasharray="3 4"/>
 <text x="375" y="822" font-size="15" font-weight="700" text-anchor="middle" fill="#e6edf3">2017</text>

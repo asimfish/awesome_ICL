@@ -3,7 +3,7 @@
 > **HOST: Robots Acquire Manipulation Skills in Seconds from a Single Human Video**
 > arXiv 2607.20033v4（2026-08-20 更新）· 北京理工大学 + X SQUARE ROBOT（自变量机器人）+ 清华大学
 > 作者：Guangyan Chen 等；项目负责：Xiaofan Li；通讯：Hao Wang、Mengyin Fu、Yi Yang、Yufeng Yue
-> 2026-08-03 起论文、代码、模型权重全部开源（GitHub / HuggingFace）
+> 论文、代码、模型权重均已公开（GitHub CGuangyan-BIT/HOST · HuggingFace Guangyan/HOST）
 
 ---
 
@@ -125,6 +125,6 @@ HOST 出现在一个有趣的时间点：同月（2026-08）Generalist AI 发布
 
 两条路线构成上下界：GEN 系证明数据够大能力自己长出来，HOST 证明数据不够可以靠结构设计补。对绝大多数没有 50 万小时私有数据的团队，HOST 给出的配方是可复制的：先在自己的机器人数据上做同具身「跟随」预训练，再用少量跨域配对适配——这个模式不限于人类视频，理论上可以推广到任何演示模态（仿真轨迹、其他机器人、甚至动画）。
 
-而且这个配方是真开源：2026-08-03 起论文、代码和模型权重全部上线 GitHub（X-Square-Robot 组织）与 HuggingFace。发布方自变量机器人（X SQUARE ROBOT，C 轮）把 HOST 定位为其「推理时技能获取」战略的公开落子——该公司同时维护 WALL-A（百亿级 VLA+世界模型旗舰）、Wall-OSS（开源 VLA，即 HOST 论文里最强微调基线）和 X-Tokenizer（SRQ 动作分词器，2.4M 轨迹预训练）等产品线。学术界拿到的不只是一篇论文，而是一套可以直接跑的推理时技能习得栈。
+而且这个配方是真开源：论文、代码与模型权重已公开——官方实现在第一作者账号 GitHub（CGuangyan-BIT/HOST，含数据预处理、进度对齐、策略训练三部分）、权重在 HuggingFace（Guangyan/HOST）。发布方自变量机器人（X SQUARE ROBOT，C 轮）把 HOST 定位为其「推理时技能获取」战略的公开落子——该公司同时维护 WALL-A（百亿级 VLA+世界模型旗舰）、Wall-OSS（开源 VLA，即 HOST 论文里最强微调基线）和 X-Tokenizer（SRQ 动作分词器，2.4M 轨迹预训练）等产品线。学术界拿到的不只是一篇论文，而是一套可以直接跑的推理时技能习得栈。
 
 方法论上最值得借鉴的两点：**把「对齐」从隐式期望变成显式模块**（用 SDTW+TCC 学进度流形，而不是指望 transformer 自己领悟时间对应），以及**把跨域翻译从动作空间挪到观测空间**（先预测「我自己做这件事会看到什么」，再从观测导出动作——比直接回归动作多了一个自我参照的中间表征）。

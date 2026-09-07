@@ -469,7 +469,7 @@ hr{border:none;border-top:1px solid #dde5ea;margin:16px 0}
 <line x1="830" y1="1369.0" x2="872" y2="1369.0" stroke="#475569" stroke-width="1" opacity="0.6"/>
 <text x="880" y="1374.0" font-size="12.5" fill="#111827">Duan'17 · Finn'17 · IMOP · Diffusion Policy · ACT/ALOHA</text>
 </svg><div class="figcap">图 2 · 具身上下文学习的分类体系：七个一级维度、26 个子类，与本报告 Part A–G 一一对应。</div></div>
-<div class="divider"><div class="k">PART 0</div><div class="t">执行摘要：趋势、洞察、研究机会与口径账本</div><div class="d">十条一页结论 · 六大趋势 · 十三条洞察 · 七条可证伪预测 · 22 个研究机会（各配最小可行实验）· 26 个头条数字的口径账本——全部结论先行，细节见后续各章。</div><ol><li>趋势与洞察：机器人 One-Shot 技能习得的 2026 拐点</li><li>研究机会清单：22 项待验证问题，每项配一个起步实验</li><li>数字口径账本：本调研引用的头条数字，逐条标注它们到底在测什么</li></ol></div><article><h1
+<div class="divider"><div class="k">PART 0</div><div class="t">执行摘要：趋势、洞察、研究机会与口径账本</div><div class="d">十条一页结论 · 六大趋势 · 十三条洞察 · 七条可证伪预测 · 22 个研究机会（各配最小可行实验）· 26 个头条数字的口径账本与 53 项工作的开源状态核实表——全部结论先行，细节见后续各章。</div><ol><li>趋势与洞察：机器人 One-Shot 技能习得的 2026 拐点</li><li>研究机会清单：22 项待验证问题，每项配一个起步实验</li><li>数字口径账本：本调研引用的头条数字，逐条标注它们到底在测什么</li></ol></div><article><h1
 id="趋势与洞察机器人-one-shot-技能习得的-2026-拐点">趋势与洞察：机器人
 One-Shot 技能习得的 2026 拐点</h1>
 <blockquote>
@@ -491,7 +491,8 @@ ICL（notes/35）、检索增强与技能库（notes/36）、视觉 ICL
 补齐潜动作、上下文 RL 前史、人类共训、基准地基、具身安全 19
 项，并据此修正预测 P5；09-04 补齐几何编码、规划层 ICL、检索与技能库 9
 项；09-05 补齐视觉 ICL 前史、开源高效 VLA、适应旋钮两端 8 项；09-06 增补
-Zeva 与后训练干扰两篇；09-07 增补 SmoothRL；09-08 增补 DemoMimic）</p>
+Zeva 与后训练干扰两篇；09-07 增补 SmoothRL；09-08 增补
+DemoMimic，并逐条核实 Part A–C 开源状态、补 HOST 复现成本）</p>
 </blockquote>
 <hr />
 <h2 id="0-一页结论执行摘要">0. 一页结论（执行摘要）</h2>
@@ -1143,12 +1144,23 @@ id="趋势六开源在加速吃掉先发优势">趋势六：开源在加速吃�
 <p>2026 年的开源节奏：AgiBot World 数据集（智元）→
 Wall-OSS/Wall-OSS-0.5（自变量）→ X-Tokenizer（自变量，SRQ 动作分词器）→
 EgoSmith 数据流水线（开源，9 倍于 HaWoR 吞吐）→ HOST
-全栈（论文+代码+权重）。闭源阵营只剩数据壁垒（Generalist 的 50
-万小时、Physical Intelligence 的采集网络）。</p>
+全栈（论文+代码+权重）→ Zeva 代码 + 权重（清华
+AIR，08-31）。闭源阵营只剩数据壁垒（Generalist 的 50 万小时、Physical
+Intelligence 的采集网络）。</p>
+<p>但开源并不均匀。2026-09-08 逐条核实（insights/12 §四）：Part A/B 的
+29 项 ICL 工作里 17 项有官方代码、3 项只有承诺（Vid2Robot
+两年未兑现、Zero-WAM 称 09-15 前、DemoMimic 标 soon）、9
+项无代码；而无代码的 9 项里集中了本调研最强的几条主张——GEN-1.5
+的涌现、S1 的未见长时程、RoboTTT 的上下文 scaling、WAM-TTT
+的快权重技能包。开源的是配方（HOST、Zeva、ICRT、RICL、Instant
+Policy），闭源的是结论；「开源吃掉先发优势」目前只在底座层成立（Wall-OSS、LingBot-VA、DreamZero、GR00T
+N1 全开），在 ICL 主张层尚未发生。</p>
 <p>自变量的策略清晰可读：用开源抢生态位。HOST
 开源意味着任何拥有中等规模机器人数据（10
 万条轨迹级）的团队都能复刻推理时技能获取——这直接把「one-shot
-能力」从竞争壁垒降格为公共基础设施，逼迫闭源玩家在数据规模和工程系统上继续拉开差距。</p>
+能力」从竞争壁垒降格为公共基础设施，逼迫闭源玩家在数据规模和工程系统上继续拉开差距。复刻的真实门票（notes/01
+§8）：约 20 万条同具身真机轨迹 + 约 6 千段与之配对的人类视频 + 64 卡跑
+60 万步（推算 1–2 万 GPU 小时）——卡不是主要门槛，配对数据才是。</p>
 <h2 id="3-七条核心洞察">3. 七条核心洞察</h2>
 <p><strong>Insight
 1：技能的存储位置从参数空间迁移到上下文空间，技能因此变成资产。</strong>
@@ -1586,7 +1598,9 @@ id="数字口径账本本调研引用的头条数字逐条标注它们到底在�
 个被反复引用的头条数字放进同一张表，逐条标注任务集、泛化定义、计分与聚合方式、每方法每任务的试验次数、训练期与评测期的干预
 / 重试 / 权重更新、独立性与证据形式，并给出 notes
 来源。用法：只有当任务、平台、计分方式、演示与更新预算等关键条件可比时，两个数字才能作性能比较；其余情况只能是定性定位。notes
-未说明的项一律写「notes 未说明」，不写「无」。</p>
+未说明的项一律写「notes 未说明」，不写「无」。第四节另附 Part A–C 全部
+53 项工作的开源状态（代码 /
+权重）核实表——引用一个数字前先看它能不能被复现。</p>
 </blockquote>
 <h2 id="一指标类型速查">一、指标类型速查</h2>
 <table>
@@ -1672,8 +1686,8 @@ id="数字口径账本本调研引用的头条数字逐条标注它们到底在�
 <td>零参数更新 · 评测无干预</td>
 <td>自建任务，成功判定人工</td>
 <td>论文 + 代码 + 权重</td>
-<td>四主角中已公开代码与权重的一家；Wall-OSS SFT 基线 56%，经 SFT
-后旧任务性能保留原值 43%（notes/01）</td>
+<td>四主角中与 Zeva 一同公开代码与权重（见 §四）；Wall-OSS SFT 基线
+56%，经 SFT 后旧任务性能保留原值 43%（notes/01）</td>
 </tr>
 <tr>
 <td><strong>GEN-1.5</strong></td>
@@ -1987,7 +2001,7 @@ id="数字口径账本本调研引用的头条数字逐条标注它们到底在�
 </tr>
 </tbody>
 </table>
-<h2 id="三三条使用规则">三、三条使用规则</h2>
+<h2 id="三四条使用规则">三、四条使用规则</h2>
 <ol type="1">
 <li><strong>禁止并排的组合</strong>：二元成功率与 progress / rubric /
 CSR@K / 部分计分；任务级未见与配置级 /
@@ -2004,8 +2018,527 @@ Zero-WAM、RoboTTT 与 ManiLong-Shot、ICRT 与 HOST 都属此类。</li>
 类）、失败后重试（Zeva、ICRT）三者性质不同，任何一项 notes
 未说明就写「未说明」。</li>
 </ol>
+<h2 id="四可复现性一览开源状态">四、可复现性一览（开源状态）</h2>
 <blockquote>
-<p>更新约定：新增工作时在第二节追加一行，并在对应解读的「局限」节写明口径；本表与
+<p>2026-09-08 逐条核实 Part A–C 的 53
+项工作。「代码」指官方实现（非第三方复现），「权重」指可下载的模型
+checkpoint；判定依据是论文发布声明 + 项目页链接 + GitHub / HuggingFace
+仓库内容（是否有安装说明、是否有 checkpoint、README 是否标 coming
+soon）。论文里的「we will release」不算开源，只记为「承诺」。状态：✅
+代码 + 权重 · 🟡 仅代码 · ⏳ 承诺未放 · 🔒 无官方代码。</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>工作</th>
+<th>位置</th>
+<th>代码</th>
+<th>权重</th>
+<th>状态</th>
+<th>核实依据</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>HOST</td>
+<td>A1</td>
+<td><a
+href="https://github.com/CGuangyan-BIT/HOST">CGuangyan-BIT/HOST</a></td>
+<td><a
+href="https://huggingface.co/Guangyan/HOST">Guangyan/HOST</a></td>
+<td>✅</td>
+<td>仓库含数据预处理 / 进度对齐 / 策略训练三部分与
+environment.yml；权重页可访问。此前 notes 写「X-Square-Robot
+组织」有误，该组织下无 HOST 仓库</td>
+</tr>
+<tr>
+<td>GEN-0 / 1 / 1.5</td>
+<td>A1</td>
+<td>—</td>
+<td>—</td>
+<td>🔒</td>
+<td>仅公司博客，无论文、无仓库、无 API</td>
+</tr>
+<tr>
+<td>S1</td>
+<td>A1</td>
+<td>—</td>
+<td>—</td>
+<td>🔒</td>
+<td>仅公司博客</td>
+</tr>
+<tr>
+<td>Zeva</td>
+<td>A1</td>
+<td><a
+href="https://github.com/air-embodied-brain/Zeva">air-embodied-brain/Zeva</a></td>
+<td><a
+href="https://huggingface.co/chen123fu/zeva-robocasa">chen123fu/zeva-robocasa</a></td>
+<td>✅</td>
+<td>训练代码 + RoboCasa 权重；README 有运行说明</td>
+</tr>
+<tr>
+<td>Instant Policy</td>
+<td>B1</td>
+<td><a
+href="https://github.com/vv19/instant_policy">vv19/instant_policy</a></td>
+<td>见仓库 README</td>
+<td>✅</td>
+<td>README 提供安装步骤与预训练 checkpoint 下载</td>
+</tr>
+<tr>
+<td>Vid2Robot</td>
+<td>B1</td>
+<td>—</td>
+<td>—</td>
+<td>⏳</td>
+<td>论文写「We will release the model code and trained
+checkpoints」，两年未放；HOST 明言因其未开源而自行复现</td>
+</tr>
+<tr>
+<td>SOTA（ViVLA）</td>
+<td>B1</td>
+<td>—</td>
+<td>—</td>
+<td>🔒</td>
+<td>论文与 arXiv 页均无代码链接，GitHub 搜索无官方仓库</td>
+</tr>
+<tr>
+<td>ManiLong-Shot</td>
+<td>B1</td>
+<td>—</td>
+<td>—</td>
+<td>🔒</td>
+<td>实验基于开源 IMOP 代码库，但自身实现与 RLBench-Oneshot
+基准未放；项目页（sites.google）无代码链接</td>
+</tr>
+<tr>
+<td>RoboTTT</td>
+<td>B2</td>
+<td>—</td>
+<td>—</td>
+<td>🔒</td>
+<td>NVIDIA 仅项目页与视频；<code>lucidrains/robo_ttt</code>
+为第三方复现</td>
+</tr>
+<tr>
+<td>WAM-TTT</td>
+<td>B2</td>
+<td>—</td>
+<td>—</td>
+<td>🔒</td>
+<td>无代码、无项目页、无数据集（notes/14 已批评）</td>
+</tr>
+<tr>
+<td>LocoFormer</td>
+<td>B2</td>
+<td>—</td>
+<td>—</td>
+<td>🔒</td>
+<td>项目页无代码链接；<code>lucidrains/locoformer</code>
+为第三方复现</td>
+</tr>
+<tr>
+<td>ICRT</td>
+<td>B3</td>
+<td><a href="https://github.com/Max-Fu/icrt">Max-Fu/icrt</a></td>
+<td><a href="https://huggingface.co/mlfu7/ICRT">mlfu7/ICRT</a></td>
+<td>✅</td>
+<td>代码 + 权重 + ICRT-MT 数据集齐全</td>
+</tr>
+<tr>
+<td>StellaVLA</td>
+<td>B3</td>
+<td><a
+href="https://github.com/StellEdge-AI/StellaVLA">StellEdge-AI/StellaVLA</a></td>
+<td><a
+href="https://huggingface.co/StellarEdge/StellaVLA">StellarEdge/StellaVLA</a></td>
+<td>✅（评测）</td>
+<td>放出的是评测代码 + checkpoint + Docker（LIBERO / LIBERO-Plus /
+VLA-Arena 复现），训练代码未见</td>
+</tr>
+<tr>
+<td>Zero-WAM</td>
+<td>B3</td>
+<td><a
+href="https://github.com/robbyant-research/Zero-WAM">robbyant-research/Zero-WAM</a>（仅项目页）</td>
+<td>—</td>
+<td>⏳</td>
+<td>仓库 285★ 但只有项目页源码，README 徽章写「Code: expected before Sep
+15, 2026」</td>
+</tr>
+<tr>
+<td>Behavior Prompting Policy</td>
+<td>B4</td>
+<td><a
+href="https://github.com/real-stanford/behavior_prompting">real-stanford/behavior_prompting</a>
+· 硬件 <a href="https://github.com/real-stanford/iPhUMI">iPhUMI</a></td>
+<td>见仓库 README</td>
+<td>✅</td>
+<td>策略仓库 + iPhUMI 硬件与 iOS 应用开源</td>
+</tr>
+<tr>
+<td>RICL</td>
+<td>B4</td>
+<td><a
+href="https://github.com/ricl-vla/ricl_openpi">ricl-vla/ricl_openpi</a></td>
+<td><a
+href="https://huggingface.co/ricl-vla/pi0_fast_droid_ricl_checkpoint">ricl-vla/pi0_fast_droid_ricl_checkpoint</a></td>
+<td>✅</td>
+<td>基于 openpi 的 RICL-π0-FAST 代码 + 权重 + 数据</td>
+</tr>
+<tr>
+<td>RT-Trajectory</td>
+<td>B5</td>
+<td>—</td>
+<td>—</td>
+<td>🔒</td>
+<td>Google，仅项目页</td>
+</tr>
+<tr>
+<td>ATM</td>
+<td>B5</td>
+<td><a
+href="https://github.com/Large-Trajectory-Model/ATM">Large-Trajectory-Model/ATM</a></td>
+<td>见仓库 README</td>
+<td>✅</td>
+<td>README 有安装与 checkpoint 说明</td>
+</tr>
+<tr>
+<td>Im2Flow2Act</td>
+<td>B5</td>
+<td><a
+href="https://github.com/real-stanford/im2Flow2Act">real-stanford/im2Flow2Act</a></td>
+<td>见仓库 README</td>
+<td>✅</td>
+<td>README 有安装与 checkpoint 说明</td>
+</tr>
+<tr>
+<td>Code as Policies</td>
+<td>B6</td>
+<td><a
+href="https://github.com/google-research/google-research/tree/master/code_as_policies">google-research/…/code_as_policies</a></td>
+<td>不适用（调用 LLM API）</td>
+<td>🟡</td>
+<td>google-research 单体仓库内的 notebook 与 prompt</td>
+</tr>
+<tr>
+<td>VoxPoser</td>
+<td>B6</td>
+<td><a
+href="https://github.com/huangwl18/VoxPoser">huangwl18/VoxPoser</a></td>
+<td>不适用（调用 LLM API）</td>
+<td>🟡</td>
+<td>官方实现</td>
+</tr>
+<tr>
+<td>ReKep</td>
+<td>B6</td>
+<td><a
+href="https://github.com/huangwl18/ReKep">huangwl18/ReKep</a></td>
+<td>不适用（调用 GPT-4o）</td>
+<td>🟡</td>
+<td>官方实现</td>
+</tr>
+<tr>
+<td>Behavior Retrieval</td>
+<td>B7</td>
+<td><a
+href="https://github.com/MaxDu17/BehaviorRetrieval">MaxDu17/BehaviorRetrieval</a></td>
+<td>—</td>
+<td>🟡</td>
+<td>一作账号下的官方代码，无预训练权重</td>
+</tr>
+<tr>
+<td>STRAP</td>
+<td>B7</td>
+<td><a
+href="https://github.com/WEIRDLabUW/STRAP">WEIRDLabUW/STRAP</a></td>
+<td>—</td>
+<td>🟡</td>
+<td>检索代码 + robomimic 分支，无权重</td>
+</tr>
+<tr>
+<td>AgiBot World / GO-1</td>
+<td>B7</td>
+<td><a
+href="https://github.com/OpenDriveLab/AgiBot-World">OpenDriveLab/AgiBot-World</a></td>
+<td><a href="https://huggingface.co/agibot-world">agibot-world</a></td>
+<td>✅</td>
+<td>数据集 + GO-1 / GO-1-Air 权重</td>
+</tr>
+<tr>
+<td>RoboMonkey</td>
+<td>B8</td>
+<td><a
+href="https://github.com/robomonkey-vla/RoboMonkey">robomonkey-vla/RoboMonkey</a></td>
+<td><a
+href="https://huggingface.co/robomonkey-vla/monkey-verifier-7b">monkey-verifier-7b</a></td>
+<td>✅</td>
+<td>代码 + 验证器权重 + 合成数据集</td>
+</tr>
+<tr>
+<td>ConRFT</td>
+<td>B8</td>
+<td><a
+href="https://github.com/cccedric/conrft">cccedric/conrft</a></td>
+<td>—</td>
+<td>🟡</td>
+<td>官方 RL 微调代码，无权重</td>
+</tr>
+<tr>
+<td>SmoothRL</td>
+<td>B8</td>
+<td>—</td>
+<td>—</td>
+<td>🔒</td>
+<td>星尘智能，仅项目页</td>
+</tr>
+<tr>
+<td>DemoMimic</td>
+<td>B9</td>
+<td>—</td>
+<td>—</td>
+<td>⏳</td>
+<td>项目页标「code soon」</td>
+</tr>
+<tr>
+<td>OpenVLA</td>
+<td>C1</td>
+<td><a
+href="https://github.com/openvla/openvla">openvla/openvla</a></td>
+<td><a
+href="https://huggingface.co/openvla/openvla-7b">openvla/openvla-7b</a></td>
+<td>✅</td>
+<td>代码 + 权重 + 数据配方</td>
+</tr>
+<tr>
+<td>π0</td>
+<td>C1</td>
+<td><a
+href="https://github.com/Physical-Intelligence/openpi">Physical-Intelligence/openpi</a></td>
+<td>openpi 提供 pi0_base / pi0_fast_base</td>
+<td>✅</td>
+<td>论文发表时未开源，2025 年 openpi 才放出</td>
+</tr>
+<tr>
+<td>GR00T N1</td>
+<td>C1</td>
+<td><a
+href="https://github.com/NVIDIA/Isaac-GR00T">NVIDIA/Isaac-GR00T</a></td>
+<td><a
+href="https://huggingface.co/nvidia/GR00T-N1-2B">nvidia/GR00T-N1-2B</a></td>
+<td>✅</td>
+<td>权重 + 数据 + 仿真环境</td>
+</tr>
+<tr>
+<td>RDT-1B</td>
+<td>C2</td>
+<td><a
+href="https://github.com/thu-ml/RoboticsDiffusionTransformer">thu-ml/RoboticsDiffusionTransformer</a></td>
+<td><a
+href="https://huggingface.co/robotics-diffusion-transformer/rdt-1b">rdt-1b</a></td>
+<td>✅</td>
+<td>代码 + 权重 + 数据集</td>
+</tr>
+<tr>
+<td>OpenVLA-OFT</td>
+<td>C2</td>
+<td><a
+href="https://github.com/moojink/openvla-oft">moojink/openvla-oft</a></td>
+<td><a href="https://huggingface.co/moojink">moojink</a></td>
+<td>✅</td>
+<td>代码 + 各 LIBERO 套件微调权重</td>
+</tr>
+<tr>
+<td>SmolVLA</td>
+<td>C2</td>
+<td><a
+href="https://github.com/huggingface/lerobot">huggingface/lerobot</a></td>
+<td><a
+href="https://huggingface.co/lerobot/smolvla_base">lerobot/smolvla_base</a></td>
+<td>✅</td>
+<td>代码 + 权重 + 社区数据</td>
+</tr>
+<tr>
+<td>π0.5</td>
+<td>C3</td>
+<td><a
+href="https://github.com/Physical-Intelligence/openpi">Physical-Intelligence/openpi</a></td>
+<td>openpi 提供 pi05_base</td>
+<td>✅</td>
+<td>同 π0</td>
+</tr>
+<tr>
+<td>Wall-OSS</td>
+<td>C3</td>
+<td><a
+href="https://github.com/X-Square-Robot/wall-x">X-Square-Robot/wall-x</a></td>
+<td><a
+href="https://huggingface.co/x-square-robot">x-square-robot</a></td>
+<td>✅</td>
+<td>wall-oss-flow / -fast / -0.5 权重</td>
+</tr>
+<tr>
+<td>EgoScale</td>
+<td>C3</td>
+<td>—</td>
+<td>—</td>
+<td>🔒</td>
+<td>NVIDIA 项目页仅论文链接</td>
+</tr>
+<tr>
+<td>GR-3</td>
+<td>C3</td>
+<td>—</td>
+<td>—</td>
+<td>🔒</td>
+<td>字节 Seed 技术报告，无代码无权重</td>
+</tr>
+<tr>
+<td>FACTR 2</td>
+<td>C3</td>
+<td><a
+href="https://github.com/philiphan0109/factr2_next">philiphan0109/factr2_next</a></td>
+<td>—</td>
+<td>🟡</td>
+<td>项目页链接的 NEXT 力估计官方实现</td>
+</tr>
+<tr>
+<td>Fast-WAM</td>
+<td>C4</td>
+<td><a
+href="https://github.com/yuantianyuan01/FastWAM">yuantianyuan01/FastWAM</a></td>
+<td><a
+href="https://huggingface.co/yuanty/fastwam">yuanty/fastwam</a></td>
+<td>✅</td>
+<td>1448★，代码 + 权重 + 数据</td>
+</tr>
+<tr>
+<td>WALL-WM</td>
+<td>C4</td>
+<td><a
+href="https://github.com/X-Square-Robot/wall-wm">X-Square-Robot/wall-wm</a></td>
+<td>⏳ coming soon</td>
+<td>🟡</td>
+<td>README 写「checkpoints: coming soon at
+huggingface.co/x-square-robot」</td>
+</tr>
+<tr>
+<td>EgoWAM</td>
+<td>C4</td>
+<td><a
+href="https://github.com/GaTech-RL2/EgoWAM">GaTech-RL2/EgoWAM</a></td>
+<td><a
+href="https://huggingface.co/boeyyyy/EgoWAM-checkpoints">boeyyyy/EgoWAM-checkpoints</a></td>
+<td>✅</td>
+<td>代码 + 权重</td>
+</tr>
+<tr>
+<td>LingBot-VA</td>
+<td>C4</td>
+<td><a
+href="https://github.com/Robbyant/lingbot-va">Robbyant/lingbot-va</a></td>
+<td><a
+href="https://huggingface.co/robbyant/lingbot-va-base">robbyant/lingbot-va-base</a></td>
+<td>✅</td>
+<td>1859★，base + 后训练权重</td>
+</tr>
+<tr>
+<td>LingBot-VA 2.0</td>
+<td>C4</td>
+<td>—</td>
+<td>—</td>
+<td>🔒</td>
+<td>官方页只链回 v1 仓库，未见 2.0 代码或模型条目</td>
+</tr>
+<tr>
+<td>DreamZero</td>
+<td>C5</td>
+<td><a
+href="https://github.com/dreamzero0/dreamzero">dreamzero0/dreamzero</a></td>
+<td><a
+href="https://huggingface.co/GEAR-Dreams/DreamZero-DROID">GEAR-Dreams/DreamZero-DROID</a></td>
+<td>✅（推理）</td>
+<td>权重 + 推理代码 + 评测脚本；训练数据待放</td>
+</tr>
+<tr>
+<td>Motus</td>
+<td>C5</td>
+<td><a href="https://github.com/thu-ml/Motus">thu-ml/Motus</a></td>
+<td><a
+href="https://huggingface.co/motus-robotics/Motus">motus-robotics/Motus</a></td>
+<td>✅</td>
+<td>代码 + 预训练权重</td>
+</tr>
+<tr>
+<td>DVA</td>
+<td>C5</td>
+<td>—</td>
+<td>—</td>
+<td>🔒</td>
+<td>仅博客</td>
+</tr>
+<tr>
+<td>UniPi</td>
+<td>C6</td>
+<td>—</td>
+<td>—</td>
+<td>🔒</td>
+<td>Google，仅项目页</td>
+</tr>
+<tr>
+<td>V-JEPA 2</td>
+<td>C6</td>
+<td><a
+href="https://github.com/facebookresearch/vjepa2">facebookresearch/vjepa2</a></td>
+<td><a
+href="https://huggingface.co/facebook/vjepa2-vitl-fpc64-256">facebook/vjepa2-*</a></td>
+<td>✅</td>
+<td>代码 + 多尺寸权重</td>
+</tr>
+<tr>
+<td>Cosmos</td>
+<td>C6</td>
+<td><a href="https://github.com/NVIDIA/Cosmos">NVIDIA/Cosmos</a></td>
+<td><a
+href="https://huggingface.co/nvidia/Cosmos-1.0-Diffusion-7B-Text2World">nvidia/Cosmos-1.0-*</a></td>
+<td>✅</td>
+<td>开源开放权重，宽松许可</td>
+</tr>
+<tr>
+<td>StarVLA</td>
+<td>C7</td>
+<td><a
+href="https://github.com/starVLA/starVLA">starVLA/starVLA</a></td>
+<td><a href="https://huggingface.co/StarVLA">StarVLA</a></td>
+<td>✅</td>
+<td>代码库 + 权重集合</td>
+</tr>
+<tr>
+<td>VLAct</td>
+<td>C7</td>
+<td><a href="https://github.com/starVLA/VLAct">starVLA/VLAct</a></td>
+<td><a href="https://huggingface.co/StarVLA">StarVLA/VLAct-*</a></td>
+<td>✅</td>
+<td>代码 + 多基准微调权重</td>
+</tr>
+</tbody>
+</table>
+<p><strong>怎么读这张表</strong>：Part A/B 的 29 项 ICL 工作里，17
+项有官方代码、3 项只有承诺、9 项无代码；Part C 的 24 项底座里 19
+项开源、5 项闭源。分布不是随机的——2026-08 拐点月前后的头条 ICL
+主张里，公司出品的（GEN-1.5、S1、RoboTTT、WAM-TTT、SmoothRL）闭源，唯一例外是
+StellaVLA 放出了评测代码与权重；学术组的（HOST 北理工一作、Zeva、Instant
+Policy、ICRT、RICL）全部放出。而公司在<strong>底座</strong>层却普遍开源（Wall-OSS、LingBot-VA、DreamZero、GR00T
+N1）——NVIDIA 同时是 RoboTTT 闭源与 DreamZero / GR00T
+开源的出品方，说明被锁住的是 ICL
+主张本身，不是机构习惯。这意味着本仓库里「涌现」「未见长时程」这两条最强主张（GEN-1.5、S1）至今没有任何第三方复核渠道，而「结构派可以做到
+62%」（HOST）与「上下文内因果学习」（Zeva）可以复现。引用前者时必须附「不可复核」限定（见规则
+3）。</p>
+<blockquote>
+<p>更新约定：新增工作时在第二节追加一行，并在对应解读的「局限」节写明口径；Part
+A–C 的新增条目同时在第四节补开源状态（链接须实际打开核实）；本表与
 notes/32（基准与数据地基）互为索引。</p>
 </blockquote>
 </article><div class="divider"><div class="k">PART A</div><div class="t">主线：2026-08 拐点与四个主角</div><div class="d">HOST（开源结构派）· GEN 系列（规模涌现派）· S1（未见长时程）· Zeva（学自己的交互后果）。四家数字落在同一区间纯属口径巧合。</div><ol><li>HOST 深度解读：机器人从一段人类视频里秒级习得操作技能</li><li>GEN 系列深度解读：Generalist AI 的具身基础模型三部曲</li><li>S1 与「涌现之争」：2026 年 8 月具身 ICL 三连发的完整拼图</li><li>Zeva 深度解读：冻结策略从自己的失败里学——In-Context Causal Learning</li></ol></div><article><h1 id="host-深度解读机器人从一段人类视频里秒级习得操作技能">HOST
@@ -2015,8 +2548,8 @@ notes/32（基准与数据地基）互为索引。</p>
 Single Human Video</strong> arXiv 2607.20033v4（2026-08-20 更新）·
 北京理工大学 + X SQUARE ROBOT（自变量机器人）+ 清华大学 作者：Guangyan
 Chen 等；项目负责：Xiaofan Li；通讯：Hao Wang、Mengyin Fu、Yi
-Yang、Yufeng Yue 2026-08-03 起论文、代码、模型权重全部开源（GitHub /
-HuggingFace）</p>
+Yang、Yufeng Yue 论文、代码、模型权重均已公开（GitHub CGuangyan-BIT/HOST
+· HuggingFace Guangyan/HOST）</p>
 </blockquote>
 <hr />
 <h2 id="1-一句话定位">1. 一句话定位</h2>
@@ -2222,16 +2755,106 @@ GEN-1.5，宣布 one-shot 物理技能学习作为<strong>涌现能力</strong>�
 证明数据不够可以靠结构设计补。对绝大多数没有 50
 万小时私有数据的团队，HOST
 给出的配方是可复制的：先在自己的机器人数据上做同具身「跟随」预训练，再用少量跨域配对适配——这个模式不限于人类视频，理论上可以推广到任何演示模态（仿真轨迹、其他机器人、甚至动画）。</p>
-<p>而且这个配方是真开源：2026-08-03 起论文、代码和模型权重全部上线
-GitHub（X-Square-Robot 组织）与 HuggingFace。发布方自变量机器人（X
-SQUARE ROBOT，C 轮）把 HOST
-定位为其「推理时技能获取」战略的公开落子——该公司同时维护 WALL-A（百亿级
-VLA+世界模型旗舰）、Wall-OSS（开源 VLA，即 HOST 论文里最强微调基线）和
-X-Tokenizer（SRQ 动作分词器，2.4M
+<p>而且这个配方是真开源：论文、代码与模型权重已公开——官方实现在第一作者账号
+GitHub（CGuangyan-BIT/HOST，含数据预处理、进度对齐、策略训练三部分）、权重在
+HuggingFace（Guangyan/HOST）。发布方自变量机器人（X SQUARE ROBOT，C
+轮）把 HOST 定位为其「推理时技能获取」战略的公开落子——该公司同时维护
+WALL-A（百亿级 VLA+世界模型旗舰）、Wall-OSS（开源 VLA，即 HOST
+论文里最强微调基线）和 X-Tokenizer（SRQ 动作分词器，2.4M
 轨迹预训练）等产品线。学术界拿到的不只是一篇论文，而是一套可以直接跑的推理时技能习得栈。</p>
 <p>方法论上最值得借鉴的两点：<strong>把「对齐」从隐式期望变成显式模块</strong>（用
 SDTW+TCC 学进度流形，而不是指望 transformer
 自己领悟时间对应），以及<strong>把跨域翻译从动作空间挪到观测空间</strong>（先预测「我自己做这件事会看到什么」，再从观测导出动作——比直接回归动作多了一个自我参照的中间表征）。</p>
+<h2 id="8-复现成本数据量模型规模与算力">8.
+复现成本：数据量、模型规模与算力</h2>
+<p>「做一个 HOST 这样的工作需要多少数据、多少卡」——论文附录 B
+给了训练配置，但没给卡型号、总时长和总 GPU
+小时。下表把<strong>论文原文数字</strong>与<strong>本仓库的推算</strong>分开列；推算只用于量级判断。</p>
+<table>
+<thead>
+<tr>
+<th>项目</th>
+<th>论文数字（附录 B / 仓库 README）</th>
+<th>推算与备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Stage 1 数据</td>
+<td>193,462 条真机轨迹、229 个任务，全部来自自家双臂平台（2× ARX R5 +
+平行夹爪，3 路 RGB，20 维动作 / 20 维本体）；同一批数据也用于训练 π0.5 /
+Wall-OSS 的 SFT 基线</td>
+<td>论文未给总小时数。按每条轨迹 30–60 秒粗估约 <strong>1,600–3,200
+小时</strong>。对照：GEN-0 27 万小时、GEN-1 超 50 万小时、π0 约 1
+万小时；ICRT 自采仅 1,098 条 + DROID 子集。HOST 比 GEN
+小两个数量级，比学术 ICL 工作大三个数量级</td>
+</tr>
+<tr>
+<td>Stage 2 数据</td>
+<td>5,847 段自采人类演示视频，与同任务机器人轨迹配对</td>
+<td>这是方法成立的关键配对数据，也是自采成本最高的一部分；Zero-WAM
+的消融（notes/12）说明没有配对约束时人类视频是净负收益</td>
+</tr>
+<tr>
+<td>部署数据</td>
+<td>每个新任务 1 段人类视频（50 个未见任务 = 50 段）</td>
+<td>—</td>
+</tr>
+<tr>
+<td>模型</td>
+<td>双专家 Mixture-of-Transformers，建在 Wan 视频扩散骨干上：视频专家从
+<strong>Wan2.2-TI2V-5B</strong> 初始化，动作专家同深度但更窄；观测经 Wan
+VAE 编码；语言经 UMT5-XXL；进度对齐模块建在
+<strong>Qwen3-VL-Embedding-8B</strong> 上端到端训练</td>
+<td>论文未给总参数量。两专家合计约 <strong>6–10B</strong>
+量级（估计，动作专家更窄），另加 8B 对齐模块与文本编码器</td>
+</tr>
+<tr>
+<td>主策略训练</td>
+<td><strong>64 张 GPU</strong>，每卡 batch 2、有效 batch 128，bf16 +
+DeepSpeed ZeRO-1，全参数更新；AdamW（β 0.9 / 0.95）、恒定学习率
+1e-5、权重衰减 1e-2、梯度裁剪 1.0、无 EMA；Stage 1 <strong>50
+万步</strong>，Stage 2 <strong>10 万步</strong>；损失权重 λo / λa / λp =
+1 / 10 / 1；演示窗口 192 帧（6×32），动作块 32 步，动作-视频下采样
+8:1</td>
+<td>卡型号、单步耗时、总 GPU 小时均未公开。5B 级视频 DiT 处理 192 帧 × 3
+路相机，在 H100 / H800 一档上单步约 1–2 秒，60 万步即 <strong>64 卡跑
+1–2 周，约 1–2 万 GPU 小时</strong>（推算）。与同路线 Zero-WAM 公开的
+15,360 GPU 小时基本吻合</td>
+</tr>
+<tr>
+<td>对齐模块训练</td>
+<td>64 张 GPU × 每卡 batch 4（有效 256），1 万步，bf16 +
+ZeRO-3，AdamW（β 0.9 / 0.999）、学习率 1e-5 余弦（100 步 warmup，最低
+0.3）、梯度裁剪 3.0</td>
+<td>相对主策略是零头（数百 GPU 小时量级，推算）</td>
+</tr>
+<tr>
+<td>软件环境</td>
+<td>GitHub 仓库分三部分（数据预处理 / 对齐 / 策略训练），对齐用 PyTorch
+2.4 + CUDA 12.4，策略用 PyTorch 2.6 + CUDA 12.4，DeepSpeed 入口</td>
+<td>README 未写显存要求</td>
+</tr>
+<tr>
+<td>推理</td>
+<td>未报告每步延迟；29 秒是「录视频 +
+推理准备」的技能获取时间，不是控制频率</td>
+<td>5B 视频专家 bf16 权重约 10 GB，加动作专家、VAE、8B 对齐模块，单张 80
+GB 卡应可容纳（推算）；实时性是论文未回答的问题</td>
+</tr>
+</tbody>
+</table>
+<p><strong>门槛排序</strong>（如果想做同类工作）：第一是 <strong>Stage 2
+的人类–机器人配对数据</strong>——5.8k
+段人类视频要与同任务真机轨迹一一配对，这是自采成本最高、也是方法能成立的前提；第二是
+<strong>20
+万条同具身真机轨迹</strong>——这是公司级数据引擎的产出，学术组通常只能退到
+DROID / AgiBot World 等公开数据，但会失去「同具身」这个 Stage 1
+的前提；第三才是卡——64 张 80 GB 卡不算离谱，用 LoRA 或更小的视频骨干（如
+Wan2.1 的 1.3B 版）可以压到 8–16 卡，代价是复现不了
+62%。一个有用的参照：ICRT 用 4×A100 跑 19
+小时证明「上下文内模仿」配方成立（notes/04），HOST 用 64
+卡把它做到可用——两者的差距主要花在数据规模和视频骨干上，而不在算法本身。</p>
 </article><article><h1 id="gen-系列深度解读generalist-ai-的具身基础模型三部曲">GEN
 系列深度解读：Generalist AI 的具身基础模型三部曲</h1>
 <blockquote>
@@ -2467,7 +3090,8 @@ insight 报告）。</p>
 <tr>
 <td>可复现性</td>
 <td>不可（私有数据+闭源）</td>
-<td>完全开源（2026-08-03 起代码+权重上线 GitHub/HuggingFace）</td>
+<td>完全开源（代码 GitHub CGuangyan-BIT/HOST + 权重 HuggingFace
+Guangyan/HOST）</td>
 </tr>
 <tr>
 <td>证据形式</td>
@@ -2695,7 +3319,9 @@ id="zeva-深度解读冻结策略从自己的失败里学in-context-causal-learn
 Manipulation</strong> arXiv 2608.30880（2026-08-31）·
 清华大学智能产业研究院（AIR）+ Z-Trans AI（域变换） 作者：Fu Chen*、Xin
 Ding*（共同一作）……Hao Wu、Ting Cao（通讯，Ting Cao 项目负责）· 项目页
-air-embodied-brain.github.io/Zeva
+air-embodied-brain.github.io/Zeva 代码与权重已公开（GitHub
+air-embodied-brain/Zeva · HuggingFace
+chen123fu/zeva-robocasa），四个主角中与 HOST 同为可复现的一家
 中文报道：量子位「模型不更新，能力却持续增长」（sources/wx_new_20260905.txt）</p>
 </blockquote>
 <h2 id="1-一句话定位">1. 一句话定位</h2>

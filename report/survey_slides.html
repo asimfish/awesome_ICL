@@ -1287,7 +1287,7 @@ ul.tight.amber li::before{background:var(--amber)}
       <tr><td><strong>HOST</strong></td><td class="num">62%</td><td>任务级未见，人类视频 one-shot</td><td>二元成功率</td><td>50 任务 × 20 次</td><td>无</td><td>论文 + 代码 + 权重</td></tr>
       <tr><td><strong>GEN-1.5</strong></td><td class="num">59% ± 10</td><td>演示当 prompt；未外部审计</td><td>二元（厂商判定）</td><td>10 任务，次数未披露</td><td>83% 为 10 步梯度</td><td>博客</td></tr>
       <tr><td><strong>S1</strong></td><td class="num">66% vs 9%</td><td>预训练任务清单未公开</td><td><strong>累计逐步成功率</strong></td><td>内部 benchmark</td><td><strong>允许人工干预恢复计分</strong></td><td>博客</td></tr>
-      <tr><td><strong>Zeva</strong></td><td class="num">26% → 73%</td><td>未见物理条件（非任务级）</td><td><strong>CSR@4</strong>（四次内至少一次）</td><td>50 episode/任务</td><td>固定 episode 重置 4 次</td><td>论文；基线 CSR@4 未并排</td></tr>
+      <tr><td><strong>Zeva</strong></td><td class="num">26% → 73%</td><td>未见物理条件（非任务级）</td><td><strong>CSR@4</strong>（四次内至少一次）</td><td>50 episode/任务</td><td>固定 episode 重置 4 次</td><td>论文 + 代码 + 权重；基线 CSR@4 未并排</td></tr>
       <tr><td>Zero-WAM</td><td class="num">46.95%</td><td>任务级留出 43/7</td><td>二元</td><td>3 种子 × 100</td><td>无</td><td>论文；基线为同组前作</td></tr>
       <tr><td>WAM-TTT</td><td class="num">46.2</td><td>场景级未见</td><td><strong>progress 部分给分</strong></td><td>9 任务 × 25</td><td>部署前 1 步 SGD</td><td>论文，无代码</td></tr>
       <tr><td>RoboTTT</td><td class="num">43.9 → 71.5</td><td><strong>配置级</strong>（同电路板）</td><td><strong>rubric 完成分</strong></td><td>3 任务 × 20</td><td>快权重每步更新</td><td>论文 + 项目页</td></tr>
@@ -1296,7 +1296,7 @@ ul.tight.amber li::before{background:var(--amber)}
       <tr><td>DemoMimic</td><td class="num">71%</td><td>物体实例级</td><td><strong>连续成功分</strong>（相对偏差 / 阶段）+ 掉落率</td><td>真机每物体 20 次</td><td>演示离线进仿真奖励</td><td>论文；基线为改动作空间的 HERMES*/DexMachina*</td></tr>
     </table>
     <div class="callout" style="border-color:var(--amber)">
-      <p><strong>三条使用规则：</strong>二元成功率与 progress / rubric / CSR@K / 连续成功分禁止并排；任务级未见与配置级 / 扰动级禁止并排；有干预与无干预禁止并排。可以并排的只有同一论文内的对照、同一基准同一复现者的对照、受控消融。博客数字须附三个限定：无同行评审、任务清单未公开、试验数未披露。完整 25 行账本见 insights/12_numbers_ledger_zh.md。</p>
+      <p><strong>三条使用规则：</strong>二元成功率与 progress / rubric / CSR@K / 连续成功分禁止并排；任务级未见与配置级 / 扰动级禁止并排；有干预与无干预禁止并排。可以并排的只有同一论文内的对照、同一基准同一复现者的对照、受控消融。博客数字须附三个限定：无同行评审、任务清单未公开、试验数未披露。完整 26 行账本，以及 Part A–C 全部 53 项工作的开源状态核实表（29 项 ICL 工作中 17 项有官方代码、3 项仅承诺、9 项无代码；GEN-1.5 / S1 / RoboTTT / WAM-TTT 均不可复核）见 insights/12_numbers_ledger_zh.md。</p>
     </div>
   </div>
   <div class="foot"><span>来源：insights/12；notes/32</span><span class="num">33 / 34</span></div>

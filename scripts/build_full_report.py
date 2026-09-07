@@ -8,7 +8,7 @@ repo = pathlib.Path(__file__).resolve().parent.parent
 N = lambda name: repo / "notes" / name
 
 PARTS = [
- ("0", "执行摘要：趋势、洞察、研究机会与口径账本", "十条一页结论 · 六大趋势 · 十三条洞察 · 七条可证伪预测 · 22 个研究机会（各配最小可行实验）· 26 个头条数字的口径账本——全部结论先行，细节见后续各章。",
+ ("0", "执行摘要：趋势、洞察、研究机会与口径账本", "十条一页结论 · 六大趋势 · 十三条洞察 · 七条可证伪预测 · 22 个研究机会（各配最小可行实验）· 26 个头条数字的口径账本与 53 项工作的开源状态核实表——全部结论先行，细节见后续各章。",
   [repo/"insights/10_trends_insights_zh.md", repo/"insights/11_open_problems_zh.md", repo/"insights/12_numbers_ledger_zh.md"]),
  ("A", "主线：2026-08 拐点与四个主角", "HOST（开源结构派）· GEN 系列（规模涌现派）· S1（未见长时程）· Zeva（学自己的交互后果）。四家数字落在同一区间纯属口径巧合。",
   [N("01_HOST_zh.md"), N("02_GEN_series_zh.md"), N("16_S1_EICL_wave_zh.md"), N("40_Zeva_zh.md")]),

@@ -1,7 +1,7 @@
 # 趋势与洞察：机器人 One-Shot 技能习得的 2026 拐点
 
 > 本报告基于对 HOST（arXiv 2607.20033）、GEN-0/1/1.5、Skild S1、Zeva、LocoFormer、Instant Policy、ICRT、RoboTTT、WAM-TTT、StellaVLA、Zero-WAM、LingBot-VA（两代）、BPP、RICL、Vid2Robot、EgoScale、EgoWAM、WALL-WM、GR-3、ManiLong-Shot、FACTR 2、π0.5、Wall-OSS、Fast-WAM 等工作的深度解读，外加十五个纵深专题：ICL 机制理论（notes/22）、世界模型上游谱系（notes/23）、基座 VLA（notes/24）、One-Shot 模仿源头 2017→（notes/25）、生成式动作头奠基（notes/26）、人类数据管线（notes/27）、视频-动作同代对照组（notes/28）、潜动作桥梁（notes/29）、上下文 RL 前史（notes/30）、人类视频共训（notes/31）、评测基准与数据地基（notes/32）、具身安全与提示注入（notes/33）、演示的几何编码（notes/34）、规划层 ICL（notes/35）、检索增强与技能库（notes/36）、视觉 ICL 前史（notes/37）、开源高效 VLA 对照（notes/38）、适应旋钮两端（notes/39）、后训练干扰（notes/41）。
-> 写作时间：2026-08-31（09-01 增补 S1 与四篇 EICL 论文；09-02 增补 EICL 直系 6 项 + 理论与谱系专题；09-02 晚由 5 路子 agent 并行补齐历史源头、底座、动作头、数据管线、同代对照 13 项；09-03 补齐潜动作、上下文 RL 前史、人类共训、基准地基、具身安全 19 项，并据此修正预测 P5；09-04 补齐几何编码、规划层 ICL、检索与技能库 9 项；09-05 补齐视觉 ICL 前史、开源高效 VLA、适应旋钮两端 8 项；09-06 增补 Zeva 与后训练干扰两篇；09-07 增补 SmoothRL；09-08 增补 DemoMimic）
+> 写作时间：2026-08-31（09-01 增补 S1 与四篇 EICL 论文；09-02 增补 EICL 直系 6 项 + 理论与谱系专题；09-02 晚由 5 路子 agent 并行补齐历史源头、底座、动作头、数据管线、同代对照 13 项；09-03 补齐潜动作、上下文 RL 前史、人类共训、基准地基、具身安全 19 项，并据此修正预测 P5；09-04 补齐几何编码、规划层 ICL、检索与技能库 9 项；09-05 补齐视觉 ICL 前史、开源高效 VLA、适应旋钮两端 8 项；09-06 增补 Zeva 与后训练干扰两篇；09-07 增补 SmoothRL；09-08 增补 DemoMimic，并逐条核实 Part A–C 开源状态、补 HOST 复现成本）
 
 ---
 
@@ -163,9 +163,11 @@ Sutton 的 bitter lesson 预言通用方法+算力终将碾压手工设计。GEN
 
 ### 趋势六：开源在加速吃掉先发优势
 
-2026 年的开源节奏：AgiBot World 数据集（智元）→ Wall-OSS/Wall-OSS-0.5（自变量）→ X-Tokenizer（自变量，SRQ 动作分词器）→ EgoSmith 数据流水线（开源，9 倍于 HaWoR 吞吐）→ HOST 全栈（论文+代码+权重）。闭源阵营只剩数据壁垒（Generalist 的 50 万小时、Physical Intelligence 的采集网络）。
+2026 年的开源节奏：AgiBot World 数据集（智元）→ Wall-OSS/Wall-OSS-0.5（自变量）→ X-Tokenizer（自变量，SRQ 动作分词器）→ EgoSmith 数据流水线（开源，9 倍于 HaWoR 吞吐）→ HOST 全栈（论文+代码+权重）→ Zeva 代码 + 权重（清华 AIR，08-31）。闭源阵营只剩数据壁垒（Generalist 的 50 万小时、Physical Intelligence 的采集网络）。
 
-自变量的策略清晰可读：用开源抢生态位。HOST 开源意味着任何拥有中等规模机器人数据（10 万条轨迹级）的团队都能复刻推理时技能获取——这直接把「one-shot 能力」从竞争壁垒降格为公共基础设施，逼迫闭源玩家在数据规模和工程系统上继续拉开差距。
+但开源并不均匀。2026-09-08 逐条核实（insights/12 §四）：Part A/B 的 29 项 ICL 工作里 17 项有官方代码、3 项只有承诺（Vid2Robot 两年未兑现、Zero-WAM 称 09-15 前、DemoMimic 标 soon）、9 项无代码；而无代码的 9 项里集中了本调研最强的几条主张——GEN-1.5 的涌现、S1 的未见长时程、RoboTTT 的上下文 scaling、WAM-TTT 的快权重技能包。开源的是配方（HOST、Zeva、ICRT、RICL、Instant Policy），闭源的是结论；「开源吃掉先发优势」目前只在底座层成立（Wall-OSS、LingBot-VA、DreamZero、GR00T N1 全开），在 ICL 主张层尚未发生。
+
+自变量的策略清晰可读：用开源抢生态位。HOST 开源意味着任何拥有中等规模机器人数据（10 万条轨迹级）的团队都能复刻推理时技能获取——这直接把「one-shot 能力」从竞争壁垒降格为公共基础设施，逼迫闭源玩家在数据规模和工程系统上继续拉开差距。复刻的真实门票（notes/01 §8）：约 20 万条同具身真机轨迹 + 约 6 千段与之配对的人类视频 + 64 卡跑 60 万步（推算 1–2 万 GPU 小时）——卡不是主要门槛，配对数据才是。
 
 ## 3. 七条核心洞察
 

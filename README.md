@@ -11,10 +11,10 @@
 | 想要 | 打开 | 说明 |
 |---|---|---|
 | **15 分钟拿到全部结论** | [`report/survey_slides.html`](report/survey_slides.html) · [PDF](report/survey_slides.pdf) | 34 页汇总 PPT，浏览器打开 ← → 翻页、F 全屏 |
-| **系统研读** | [`report/survey_full_report.pdf`](report/survey_full_report.pdf) | 118 页全文报告：总览图 + 趋势洞察 + 42 份解读按七维度分部合订 |
+| **系统研读** | [`report/survey_full_report.pdf`](report/survey_full_report.pdf) | 121 页全文报告：总览图 + 趋势洞察 + 42 份解读按七维度分部合订 |
 | **趋势与洞察** | [`insights/10_trends_insights_zh.md`](insights/10_trends_insights_zh.md) | 六大趋势 · 十三条洞察 · 七条可证伪预测（P5 已被打脸并修正）· 开放问题清单 |
 | **研究机会清单** | [`insights/11_open_problems_zh.md`](insights/11_open_problems_zh.md) | 22 个无人占位的空白，按 Part A–G 排列，每条配「为什么重要 + 最小可行实验 + 相关解读」；只做一件事就做第 4 条 |
-| **数字口径账本** | [`insights/12_numbers_ledger_zh.md`](insights/12_numbers_ledger_zh.md) | 26 个头条数字逐条标注任务集 / 未见定义 / 指标类型 / 试验规模 / 干预 / 独立性 / 证据形式——并排任何两个数字前先查此表 |
+| **数字口径账本 · 开源状态** | [`insights/12_numbers_ledger_zh.md`](insights/12_numbers_ledger_zh.md) | 26 个头条数字逐条标注任务集 / 未见定义 / 指标类型 / 试验规模 / 干预 / 独立性 / 证据形式——并排任何两个数字前先查此表；§四为 Part A–C 全部 53 项工作的代码 / 权重开源状态核实表 |
 | **总览图** | [图 1 时间线](assets/fig1_timeline.svg) · [图 2 分类树](assets/fig2_taxonomy.svg) | 矢量 SVG；`scripts/make_figures.py` 生成，深色版见 `assets/*_dark*.svg` |
 | **四个主角的深读** | [HOST](notes/01_HOST_zh.md) · [GEN 系列](notes/02_GEN_series_zh.md) · [S1 与涌现之争](notes/16_S1_EICL_wave_zh.md) · [Zeva](notes/40_Zeva_zh.md) | 每篇含机制拆解 / 关键数字与口径 / 局限 / 关系定位 |
 | **论文原文与中译** | [`papers/pdf/`](papers/pdf/) · [`papers/zh/`](papers/zh/) | 87 篇英文原版 · 80 篇 [SuperTranslate](https://github.com/asimfish/super_translate) 保版式中译 |
@@ -123,25 +123,27 @@
 
 ## Part A · 主线：2026-08 拐点与四个主角
 
+> **开源标记**（2026-09-08 核实）：`[code]` 官方代码 · `[weights]` 公开权重 · ⏳ 论文/项目页承诺但尚未放出 · 🔒 无官方代码。覆盖 Part A–C 全部条目（ICL 主线及其底座）；依据是论文发布声明、项目页链接，以及 GitHub / HuggingFace 的仓库内容核查（有无安装说明、权重、coming soon 标记），逐条核实表见 [insights/12 §四](insights/12_numbers_ledger_zh.md#四可复现性一览开源状态)。
+
 *Headline Works* — 一个月内四家互不相识的机构汇合于同一能力点。先读这里，再按兴趣进入 B–G。
 
 ### A1. Industry Releases & Headline Works
 
-四个主角：HOST 是唯一论文 + 代码 + 权重全开源、口径可复查的一家；GEN-1.5 与 S1 为公司技术博客（无同行评审、无开源、内部 benchmark，证据是 demo 视频与内部曲线）；Zeva 是唯一把上下文从「他人演示」扩到「自身交互后果」的工作。四家 62% / 59% / 66% / 73%（累计）落在同一区间纯属口径巧合，禁止直接比。
+四个主角：HOST 与 Zeva 论文 + 代码 + 权重全开源、口径可复查；GEN-1.5 与 S1 为公司技术博客（无同行评审、无开源、内部 benchmark，证据是 demo 视频与内部曲线）；Zeva 还是唯一把上下文从「他人演示」扩到「自身交互后果」的工作。四家 62% / 59% / 66% / 73%（累计）落在同一区间纯属口径巧合，禁止直接比。
 
-1. **HOST: Robots Acquire Manipulation Skills in Seconds from a Single Human Video.** arXiv, 2026. [paper](https://arxiv.org/abs/2607.20033) [📄解读](notes/01_HOST_zh.md) [🈶中译](papers/zh/HOST_2607.20033_zh.pdf) ⭐
+1. **HOST: Robots Acquire Manipulation Skills in Seconds from a Single Human Video.** arXiv, 2026. [paper](https://arxiv.org/abs/2607.20033) [📄解读](notes/01_HOST_zh.md) [🈶中译](papers/zh/HOST_2607.20033_zh.pdf) [code](https://github.com/CGuangyan-BIT/HOST) [weights](https://huggingface.co/Guangyan/HOST) ⭐
 
-    *Guangyan Chen et al. — 北京理工大学 · X SQUARE ROBOT（自变量机器人）· 清华大学 · 2026-08-03 论文/代码/权重全开源，产业系工作中唯一可复核*
+    *Guangyan Chen et al. — 北京理工大学 · X SQUARE ROBOT（自变量机器人）· 清华大学 · 2026-08-03 论文/代码/权重全开源，产业系主角中唯一可复核*
 
-2. **GEN-0 / GEN-1 / GEN-1.5: Embodied Foundation Models are One-Shot Learners.** Generalist AI Blog, 2025-11 / 2026-04 / 2026-08. [blog](https://generalistai.com/blog/gen-1.5) [📄解读](notes/02_GEN_series_zh.md) ⭐
+2. **GEN-0 / GEN-1 / GEN-1.5: Embodied Foundation Models are One-Shot Learners.** Generalist AI Blog, 2025-11 / 2026-04 / 2026-08. [blog](https://generalistai.com/blog/gen-1.5) [📄解读](notes/02_GEN_series_zh.md) 🔒 未开源 ⭐
 
     *Generalist AI Team — 50 万小时数据；「physical prompting」命名确立者；涌现叙事代表*
 
-3. **Introducing S1: In-Context Learning for Robotics.** Skild AI Blog, 2026-08-18. [blog](https://www.skild.ai/blogs/s1) [📄解读](notes/16_S1_EICL_wave_zh.md) [存档](sources/skild_s1_blog.txt) ⭐
+3. **Introducing S1: In-Context Learning for Robotics.** Skild AI Blog, 2026-08-18. [blog](https://www.skild.ai/blogs/s1) [📄解读](notes/16_S1_EICL_wave_zh.md) [存档](sources/skild_s1_blog.txt) 🔒 未开源 ⭐
 
     *Skild AI Team — 唯一同时主张「任务未见 × 10 分钟长时程」两轴；单条演示 ≈ 380 条后训练示范*
 
-4. **Zeva: In-Context Causal Learning for Generalizable Embodied Manipulation.** arXiv, 2026-08-31. [paper](https://arxiv.org/abs/2608.30880) [📄解读](notes/40_Zeva_zh.md) [🈶中译](papers/zh/Zeva_2608.30880_zh.pdf) ⭐
+4. **Zeva: In-Context Causal Learning for Generalizable Embodied Manipulation.** arXiv, 2026-08-31. [paper](https://arxiv.org/abs/2608.30880) [📄解读](notes/40_Zeva_zh.md) [🈶中译](papers/zh/Zeva_2608.30880_zh.pdf) [code](https://github.com/air-embodied-brain/Zeva) [weights](https://huggingface.co/chen123fu/zeva-robocasa) ⭐
 
     *Fu Chen, Xin Ding, et al. — 清华 AIR · Z-Trans AI（域变换）· 上下文从「他人演示」扩到「自己的交互后果」：因果交互编码 + 双时间尺度记忆（BIT/PIM）+ 检索注入冻结策略；RoboCasa365-Atomic5 76.8% 超 Fast-WAM 72.4%，四次尝试内累计 26% → 73%，真机 ChemLab-Evo 三级全胜；人类演示叠加再 +15%——Algorithm Distillation「上下文内 RL」在操作域的首个完整实现，注意 CSR@K 口径需与独立重试基线对照*
 
@@ -153,19 +155,19 @@
 
 结构派：把「对齐」「跨域翻译」显式设计进模型，小数据可达。
 
-1. **Instant Policy: In-Context Imitation Learning via Graph Diffusion.** ICLR 2025. [paper](https://arxiv.org/abs/2411.12633) [📄解读](notes/03_InstantPolicy_zh.md) [🈶中译](papers/zh/InstantPolicy_2411.12633_zh.pdf)
+1. **Instant Policy: In-Context Imitation Learning via Graph Diffusion.** ICLR 2025. [paper](https://arxiv.org/abs/2411.12633) [📄解读](notes/03_InstantPolicy_zh.md) [🈶中译](papers/zh/InstantPolicy_2411.12633_zh.pdf) [code](https://github.com/vv19/instant_policy)
 
     *Vitalis Vosylius, Edward Johns — Imperial College London · 图扩散 + 仿真伪演示无限生成*
 
-2. **Vid2Robot: End-to-end Video-conditioned Policy Learning with Cross-Attention Transformers.** RSS 2024. [paper](https://arxiv.org/abs/2403.12943) [📄解读](notes/08_Vid2Robot_zh.md) [🈶中译](papers/zh/Vid2Robot_2403.12943_zh.pdf)
+2. **Vid2Robot: End-to-end Video-conditioned Policy Learning with Cross-Attention Transformers.** RSS 2024. [paper](https://arxiv.org/abs/2403.12943) [📄解读](notes/08_Vid2Robot_zh.md) [🈶中译](papers/zh/Vid2Robot_2403.12943_zh.pdf) ⏳ 承诺未放
 
     *Vidhi Jain, Maria Attarian, et al. — Google DeepMind · CMU · Toronto · TCC 作辅助损失的前辈路线，HOST 口径下 19%*
 
-3. **SOTA (ViVLA): See Once, Then Act.** arXiv, 2025. [paper](https://arxiv.org/abs/2512.07582) [📄解读](notes/09_related_quick_reviews_zh.md) [🈶中译](papers/zh/SOTA_SeeOnceThenAct_2512.07582_zh.pdf)
+3. **SOTA (ViVLA): See Once, Then Act.** arXiv, 2025. [paper](https://arxiv.org/abs/2512.07582) [📄解读](notes/09_related_quick_reviews_zh.md) [🈶中译](papers/zh/SOTA_SeeOnceThenAct_2512.07582_zh.pdf) 🔒 未开源
 
     *Guangyan Chen et al. — 北京理工大学 · HOST 一作团队直系前作，隐动作端到端路线*
 
-4. **ManiLong-Shot: Interaction-Aware One-Shot Imitation Learning for Long-Horizon Manipulation.** AAAI 2026. [paper](https://arxiv.org/abs/2512.16302) [📄解读](notes/21_ManiLongShot_zh.md) [🈶中译](papers/zh/ManiLongShot_2512.16302_zh.pdf)
+4. **ManiLong-Shot: Interaction-Aware One-Shot Imitation Learning for Long-Horizon Manipulation.** AAAI 2026. [paper](https://arxiv.org/abs/2512.16302) [📄解读](notes/21_ManiLongShot_zh.md) [🈶中译](papers/zh/ManiLongShot_2512.16302_zh.pdf) 🔒 未开源
 
     *附 RLBench-Oneshot 基准（10 短程 + 20 长程三档）· 交互原语分解 + 不变区域匹配；未见长程任务 30.2% vs IMOP 7.4%——标准协议下长程 one-shot 的真实水位*
 
@@ -173,15 +175,15 @@
 
 快权重与长上下文派：演示（或自身历史）写进测试时可更新的记忆，主干冻结。
 
-1. **RoboTTT: Context Scaling for Robot Policies.** arXiv, 2026. [paper](https://arxiv.org/abs/2607.15275) [📄解读](notes/05_RoboTTT_zh.md) [🈶中译](papers/zh/RoboTTT_2607.15275_zh.pdf)
+1. **RoboTTT: Context Scaling for Robot Policies.** arXiv, 2026. [paper](https://arxiv.org/abs/2607.15275) [📄解读](notes/05_RoboTTT_zh.md) [🈶中译](papers/zh/RoboTTT_2607.15275_zh.pdf) 🔒 未开源（[第三方复现](https://github.com/lucidrains/robo_ttt)）
 
     *Yunfan Jiang, Yevgen Chebotar, Ruijie Zheng, et al. — NVIDIA GEAR · Stanford · UT Austin · 上下文 8K 步无饱和；快权重=每步递归更新的工作记忆*
 
-2. **WAM-TTT: Steering World-Action Models by Watching Human Play at Test Time.** arXiv, 2026. [paper](https://arxiv.org/abs/2607.06988) [📄解读](notes/14_WAMTTT_zh.md) [🈶中译](papers/zh/WAMTTT_2607.06988_zh.pdf)
+2. **WAM-TTT: Steering World-Action Models by Watching Human Play at Test Time.** arXiv, 2026. [paper](https://arxiv.org/abs/2607.06988) [📄解读](notes/14_WAMTTT_zh.md) [🈶中译](papers/zh/WAMTTT_2607.06988_zh.pdf) 🔒 未开源
 
     *北京大学 · 银河通用 Galbot · 中科院自动化所 · 清华大学 · 快权重=部署前装好的技能包；KVM 损失等价无 softmax 线性注意力；配对人类数据 1:1 顶替机器人数据*
 
-3. **LocoFormer: Generalist Locomotion via Long-context Adaptation.** CoRL 2025. [paper](https://arxiv.org/abs/2509.23745) [📄解读](notes/17_LocoFormer_zh.md) [🈶中译](papers/zh/LocoFormer_2509.23745_zh.pdf)
+3. **LocoFormer: Generalist Locomotion via Long-context Adaptation.** CoRL 2025. [paper](https://arxiv.org/abs/2509.23745) [📄解读](notes/17_LocoFormer_zh.md) [🈶中译](papers/zh/LocoFormer_2509.23745_zh.pdf) 🔒 未开源（[第三方复现](https://github.com/lucidrains/locoformer)）
 
     *Min Liu, Deepak Pathak, Ananye Agarwal — Skild AI · S1 直系前作：TXL 跨 episode 长上下文 + 程序化生成机器人大规模 RL；锁膝/断腿/上高跷 2-3 trial 内涌现适应*
 
@@ -189,15 +191,15 @@
 
 纯上下文派：模型参数一个不动，只改输入。GEN-1.5 与 S1 主张的路线落在此格。
 
-1. **In-Context Imitation Learning via Next-Token Prediction (ICRT).** ICRA 2025. [paper](https://arxiv.org/abs/2408.15980) [📄解读](notes/04_ICRT_zh.md) [🈶中译](papers/zh/ICRT_2408.15980_zh.pdf)
+1. **In-Context Imitation Learning via Next-Token Prediction (ICRT).** ICRA 2025. [paper](https://arxiv.org/abs/2408.15980) [📄解读](notes/04_ICRT_zh.md) [🈶中译](papers/zh/ICRT_2408.15980_zh.pdf) [code](https://github.com/Max-Fu/icrt) [weights](https://huggingface.co/mlfu7/ICRT)
 
     *Letian Fu, Huang Huang, Gaurav Datta, et al. — UC Berkeley · Autodesk · NTP 最小可行原型：1098 条结构对的数据 > 1 万条单任务数据*
 
-2. **StellaVLA: In-Context Structured Demonstration for Generalizable Vision-Language-Action Models.** arXiv, 2026. [paper](https://arxiv.org/abs/2608.11671) [📄解读](notes/15_StellaVLA_zh.md) [🈶中译](papers/zh/StellaVLA_2608.11671_zh.pdf)
+2. **StellaVLA: In-Context Structured Demonstration for Generalizable Vision-Language-Action Models.** arXiv, 2026. [paper](https://arxiv.org/abs/2608.11671) [📄解读](notes/15_StellaVLA_zh.md) [🈶中译](papers/zh/StellaVLA_2608.11671_zh.pdf) [code](https://github.com/StellEdge-AI/StellaVLA) [weights](https://huggingface.co/StellarEdge/StellaVLA)
 
     *StellarEdge AI — 演示离线转译成结构化语言（做了什么→为什么）；首创三向干预实验：对 98.8 / 无 62.4 / 错 44.9*
 
-3. **Zero-WAM: In-Context World-Action Modeling from Human Videos for Open-Ended Task Generalization.** arXiv, 2026. [paper](https://arxiv.org/abs/2608.26103) [📄解读](notes/12_ZeroWAM_zh.md) [🈶中译](papers/zh/ZeroWAM_2608.26103_zh.pdf)
+3. **Zero-WAM: In-Context World-Action Modeling from Human Videos for Open-Ended Task Generalization.** arXiv, 2026. [paper](https://arxiv.org/abs/2608.26103) [📄解读](notes/12_ZeroWAM_zh.md) [🈶中译](papers/zh/ZeroWAM_2608.26103_zh.pdf) ⏳ 代码待放（[仓库](https://github.com/robbyant-research/Zero-WAM)称 2026-09-15 前）
 
     *Zhou et al. — Robbyant · HKUST(GZ) · HKUST · 唯一正面攻打未见任务（46.95% vs 17.45%）；HumanGen 合成 74.2K 人-机配对；IFP 消融证明纯上下文路线需要显式反捷径机制*
 
@@ -205,11 +207,11 @@
 
 数据配方派与事后注入派：驱动 ICL 的不是数据量而是数据结构；预训练 VLA 可事后加装 ICL。
 
-1. **Behavior Prompting Policy: Demonstrations as Prompts for Manipulation (BPP).** arXiv, 2026. [paper](https://arxiv.org/abs/2606.30457) [📄解读](notes/06_BPP_zh.md) [🈶中译](papers/zh/BPP_2606.30457_zh.pdf)
+1. **Behavior Prompting Policy: Demonstrations as Prompts for Manipulation (BPP).** arXiv, 2026. [paper](https://arxiv.org/abs/2606.30457) [📄解读](notes/06_BPP_zh.md) [🈶中译](papers/zh/BPP_2606.30457_zh.pdf) [code](https://github.com/real-stanford/behavior_prompting) [hardware](https://github.com/real-stanford/iPhUMI)
 
     *Austin Patel, Ben Pekarek, Joel Enrique Castro Hernandez, Shuran Song — Stanford · UC Berkeley · 任务多样性定律：固定预算下 2000 任务 × 5 条完胜少任务 × 多条*
 
-2. **RICL: Adding In-Context Adaptability to Pre-Trained Vision-Language-Action Models.** CoRL 2025. [paper](https://arxiv.org/abs/2508.02062) [📄解读](notes/07_RICL_zh.md) [🈶中译](papers/zh/RICL_2508.02062_zh.pdf)
+2. **RICL: Adding In-Context Adaptability to Pre-Trained Vision-Language-Action Models.** CoRL 2025. [paper](https://arxiv.org/abs/2508.02062) [📄解读](notes/07_RICL_zh.md) [🈶中译](papers/zh/RICL_2508.02062_zh.pdf) [code](https://github.com/ricl-vla/ricl_openpi) [weights](https://huggingface.co/ricl-vla/pi0_fast_droid_ricl_checkpoint)
 
     *Kaustubh Sridhar, Souradeep Dutta, Dinesh Jayaraman, Insup Lee — UPenn · UBC · 400 条演示给 π0-FAST 后装 ICL：2.5% → 31.25%（零更新）*
 
@@ -217,15 +219,15 @@
 
 「演示的另一种编码」——末端轨迹草图、任意点轨迹、物体光流当提示：外观与具身不变、空间精度高、人可读可画（详见 [notes/34](notes/34_visual_prompt_intermediates_zh.md)）。
 
-1. **RT-Trajectory: Robotic Task Generalization via Hindsight Trajectory Sketches.** ICLR 2024. [paper](https://arxiv.org/abs/2311.01977) [📄解读](notes/34_visual_prompt_intermediates_zh.md) [🈶中译](papers/zh/RTTrajectory_2311.01977_zh.pdf)
+1. **RT-Trajectory: Robotic Task Generalization via Hindsight Trajectory Sketches.** ICLR 2024. [paper](https://arxiv.org/abs/2311.01977) [📄解读](notes/34_visual_prompt_intermediates_zh.md) [🈶中译](papers/zh/RTTrajectory_2311.01977_zh.pdf) 🔒 未开源
 
     *Jiayuan Gu, Sean Kirmani, et al. — Google DeepMind · 人手画一条末端轨迹草图当任务条件，未见任务 2D 50% / 2.5D 67% vs RT-2 11.1%；提示可来自手画/LLM 代码/人类手部姿态/检索——2023 年最接近「物理提示」的工作*
 
-2. **ATM: Any-point Trajectory Modeling for Policy Learning.** RSS 2024. [paper](https://arxiv.org/abs/2401.00025) [📄解读](notes/34_visual_prompt_intermediates_zh.md) [🈶中译](papers/zh/ATM_2401.00025_zh.pdf)
+2. **ATM: Any-point Trajectory Modeling for Policy Learning.** RSS 2024. [paper](https://arxiv.org/abs/2401.00025) [📄解读](notes/34_visual_prompt_intermediates_zh.md) [🈶中译](papers/zh/ATM_2401.00025_zh.pdf) [code](https://github.com/Large-Trajectory-Model/ATM)
 
     *Chuan Wen, Xingyu Lin, et al. — Berkeley 等 · 从无动作视频预训练任意点未来轨迹模型，轨迹当稠密控制引导；130 余任务平均超视频预训练基线 80%，可从人类与异形态机器人视频迁移*
 
-3. **Im2Flow2Act: Flow as the Cross-Domain Manipulation Interface.** CoRL 2024. [paper](https://arxiv.org/abs/2407.15208) [📄解读](notes/34_visual_prompt_intermediates_zh.md) [🈶中译](papers/zh/Im2Flow2Act_2407.15208_zh.pdf)
+3. **Im2Flow2Act: Flow as the Cross-Domain Manipulation Interface.** CoRL 2024. [paper](https://arxiv.org/abs/2407.15208) [📄解读](notes/34_visual_prompt_intermediates_zh.md) [🈶中译](papers/zh/Im2Flow2Act_2407.15208_zh.pdf) [code](https://github.com/real-stanford/im2Flow2Act)
 
     *Mengda Xu, et al. — Columbia 等 · 物体光流作人-机接口，在接口层直接去掉具身信息；真实人类视频 + 仿真机器人玩耍数据，零真机数据达四任务平均 81%*
 
@@ -233,15 +235,15 @@
 
 「LLM 自己的 few-shot 能力直接拿来控机器人」——ICL 发生在规划层而非策略层，2022 年即零训练实现「教机器人不用训练」，但天花板由原语库与规划器决定（详见 [notes/35](notes/35_planner_level_icl_zh.md)）。
 
-1. **Code as Policies: Language Model Programs for Embodied Control.** ICRA 2023. [paper](https://arxiv.org/abs/2209.07753) [📄解读](notes/35_planner_level_icl_zh.md) [🈶中译](papers/zh/CodeAsPolicies_2209.07753_zh.pdf)
+1. **Code as Policies: Language Model Programs for Embodied Control.** ICRA 2023. [paper](https://arxiv.org/abs/2209.07753) [📄解读](notes/35_planner_level_icl_zh.md) [🈶中译](papers/zh/CodeAsPolicies_2209.07753_zh.pdf) [code](https://github.com/google-research/google-research/tree/master/code_as_policies)
 
     *Jacky Liang, Wenlong Huang, et al. — Google · few-shot 提示让 LLM 为新指令写机器人程序（感知 API + 控制 API + NumPy/Shapely）；层级代码生成同时把 HumanEval 推到 39.8%——「演示当 prompt」的文本版鼻祖*
 
-2. **VoxPoser: Composable 3D Value Maps for Robotic Manipulation with Language Models.** CoRL 2023. [paper](https://arxiv.org/abs/2307.05973) [📄解读](notes/35_planner_level_icl_zh.md) [🈶中译](papers/zh/VoxPoser_2307.05973_zh.pdf)
+2. **VoxPoser: Composable 3D Value Maps for Robotic Manipulation with Language Models.** CoRL 2023. [paper](https://arxiv.org/abs/2307.05973) [📄解读](notes/35_planner_level_icl_zh.md) [🈶中译](papers/zh/VoxPoser_2307.05973_zh.pdf) [code](https://github.com/huangwl18/VoxPoser)
 
     *Wenlong Huang, Chen Wang, et al. — Stanford · LLM 写代码合成 3D 值图，运动规划器零样本求轨迹；真机日常任务 88.0%（干扰下 70.0%）vs 原语基线 24.0%——ICL 输出从程序推进到连续空间场*
 
-3. **ReKep: Spatio-Temporal Reasoning of Relational Keypoint Constraints for Robotic Manipulation.** CoRL 2024. [paper](https://arxiv.org/abs/2409.01652) [📄解读](notes/35_planner_level_icl_zh.md) [🈶中译](papers/zh/ReKep_2409.01652_zh.pdf)
+3. **ReKep: Spatio-Temporal Reasoning of Relational Keypoint Constraints for Robotic Manipulation.** CoRL 2024. [paper](https://arxiv.org/abs/2409.01652) [📄解读](notes/35_planner_level_icl_zh.md) [🈶中译](papers/zh/ReKep_2409.01652_zh.pdf) [code](https://github.com/huangwl18/ReKep)
 
     *Wenlong Huang, Chen Wang, et al. — Stanford · DINOv2+SAM 提关键点、GPT-4o 看图写分阶段约束函数、层级优化实时求解；双臂与移动平台七任务自动标注版 68.6% vs VoxPoser 10.0%；分阶段约束与 HOST 进度流形描述同一时间结构*
 
@@ -249,15 +251,15 @@
 
 「上下文从哪里来」——非参数记忆库是 ICL 的上游、替代品与攻击面（详见 [notes/36](notes/36_retrieval_and_skill_libraries_zh.md)）。
 
-1. **Behavior Retrieval: Few-Shot Imitation Learning by Querying Unlabeled Datasets.** RSS 2023. [paper](https://arxiv.org/abs/2304.08742) [📄解读](notes/36_retrieval_and_skill_libraries_zh.md) [🈶中译](papers/zh/BehaviorRetrieval_2304.08742_zh.pdf)
+1. **Behavior Retrieval: Few-Shot Imitation Learning by Querying Unlabeled Datasets.** RSS 2023. [paper](https://arxiv.org/abs/2304.08742) [📄解读](notes/36_retrieval_and_skill_libraries_zh.md) [🈶中译](papers/zh/BehaviorRetrieval_2304.08742_zh.pdf) [code](https://github.com/MaxDu17/BehaviorRetrieval)
 
     *Maximilian Du, Suraj Nair, Dorsa Sadigh, Chelsea Finn — Stanford · 少量专家数据当查询，VAE 嵌入空间从无标注离线库检索相关转移并过滤次优数据——「上下文该放什么」的第一个系统回答*
 
-2. **STRAP: Robot Sub-Trajectory Retrieval for Augmented Policy Learning.** arXiv, 2024. [paper](https://arxiv.org/abs/2412.15182) [📄解读](notes/36_retrieval_and_skill_libraries_zh.md) [🈶中译](papers/zh/STRAP_2412.15182_zh.pdf)
+2. **STRAP: Robot Sub-Trajectory Retrieval for Augmented Policy Learning.** arXiv, 2024. [paper](https://arxiv.org/abs/2412.15182) [📄解读](notes/36_retrieval_and_skill_libraries_zh.md) [🈶中译](papers/zh/STRAP_2412.15182_zh.pdf) [code](https://github.com/WEIRDLabUW/STRAP)
 
     *Marius Memmel, Jacob Berg, et al. — UW · Bosch · CMU · 子轨迹粒度检索 + DINOv2 嵌入 + 子序列 DTW，主张「部署时训练」而非零样本；与 HOST 的 SDTW 同工具异用，指向「长时程演示应切片进上下文」*
 
-3. **AgiBot World Colosseo: A Large-scale Manipulation Platform for Scalable and Intelligent Embodied Systems (GO-1).** arXiv, 2025. [paper](https://arxiv.org/abs/2503.06669) [📄解读](notes/36_retrieval_and_skill_libraries_zh.md) [🈶中译](papers/zh/AgiBotGO1_2503.06669_zh.pdf)
+3. **AgiBot World Colosseo: A Large-scale Manipulation Platform for Scalable and Intelligent Embodied Systems (GO-1).** arXiv, 2025. [paper](https://arxiv.org/abs/2503.06669) [📄解读](notes/36_retrieval_and_skill_libraries_zh.md) [🈶中译](papers/zh/AgiBotGO1_2503.06669_zh.pdf) [code](https://github.com/OpenDriveLab/AgiBot-World) [weights](https://huggingface.co/agibot-world)
 
     *智元机器人 — 100 万+ 轨迹 / 217 任务 / 五类场景，预训练超 OXE 30%、十分之一小时数即 +18%；GO-1 的 ViLLA 三段架构（潜动作模型 + 潜动作规划器 + 动作专家）具备 ICL 化的两个前提却尚未做 ICL——与 HOST、Zero-WAM 形成各缺一角的三角*
 
@@ -265,15 +267,15 @@
 
 「适应预算旋钮」的两个新刻度：不改权重的测试时计算，与改权重的真机 RL（详见 [notes/39](notes/39_adaptation_dial_extremes_zh.md)）。
 
-1. **RoboMonkey: Scaling Test-Time Sampling and Verification for VLA Models.** arXiv, 2025. [paper](https://arxiv.org/abs/2506.17811) [📄解读](notes/39_adaptation_dial_extremes_zh.md) [🈶中译](papers/zh/RoboMonkey_2506.17811_zh.pdf)
+1. **RoboMonkey: Scaling Test-Time Sampling and Verification for VLA Models.** arXiv, 2025. [paper](https://arxiv.org/abs/2506.17811) [📄解读](notes/39_adaptation_dial_extremes_zh.md) [🈶中译](papers/zh/RoboMonkey_2506.17811_zh.pdf) [code](https://github.com/robomonkey-vla/RoboMonkey) [weights](https://huggingface.co/robomonkey-vla/monkey-verifier-7b)
 
     *Jacky Kwok, et al. — Stanford · Berkeley · NVIDIA · 动作误差随采样数呈幂律——推理时 scaling law；采样 + 高斯扰动投票 + VLM 验证器，分布外 +25% / 分布内 +9%；验证器即 notes/33 所需「独立于演示通道的安全裁决器」的现成形态*
 
-2. **ConRFT: A Reinforced Fine-tuning Method for VLA Models via Consistency Policy.** RSS 2025. [paper](https://arxiv.org/abs/2502.05450) [📄解读](notes/39_adaptation_dial_extremes_zh.md) [🈶中译](papers/zh/ConRFT_2502.05450_zh.pdf)
+2. **ConRFT: A Reinforced Fine-tuning Method for VLA Models via Consistency Policy.** RSS 2025. [paper](https://arxiv.org/abs/2502.05450) [📄解读](notes/39_adaptation_dial_extremes_zh.md) [🈶中译](papers/zh/ConRFT_2502.05450_zh.pdf) [code](https://github.com/cccedric/conrft)
 
     *Yuhui Chen, et al. — 中科院自动化所 · 一致性目标的离线 + 人在环在线两阶段 RL 微调，八个真机任务 45–90 分钟到 96.3%（较监督 +144%）——ICL 解决「能不能做」，RL 后训练解决「做得多可靠」*
 
-3. **SmoothRL: Online Reinforcement Learning During Asynchronous Execution.** arXiv, 2026-08-30. [paper](https://arxiv.org/abs/2608.29768) [📄解读](notes/42_SmoothRL_zh.md) [🈶中译](papers/zh/SmoothRL_2608.29768_zh.pdf)
+3. **SmoothRL: Online Reinforcement Learning During Asynchronous Execution.** arXiv, 2026-08-30. [paper](https://arxiv.org/abs/2608.29768) [📄解读](notes/42_SmoothRL_zh.md) [🈶中译](papers/zh/SmoothRL_2608.29768_zh.pdf) 🔒 未开源
 
     *Astribot Team（星尘智能）— 指出真机在线 RL 的训练-部署错位：动作分块 + 异步推理下每块只有一部分被执行，同步假设的值梯度流进从未进入环境的动作（梯度污染）；解法是 committed / execution / discarded 三段划分 + 只对 execution 段回传值梯度 + critic 看全跨度 + 训练时就跑异步循环。冻结 π0.5 外挂轻量残差 actor-critic，Astribot S1 三任务 250 episode：抛掷 39→94%、笔帽 8→83%、开箱 30→90%，加速度/jerk RMS 降 52%/47%；单次运行、缺异步基线与消融*
 
@@ -281,7 +283,7 @@
 
 演示的第三种归宿：不进上下文、不直接进权重，而是作为仿真 RL 的参考轨迹与奖励先验，产出一个不再依赖演示的泛化策略（详见 [notes/43](notes/43_DemoMimic_zh.md)）。
 
-1. **DemoMimic: One Demonstration, Many Objects — Generalizing Manipulation via Local Contact Geometry.** arXiv, 2026-09-01. [paper](https://arxiv.org/abs/2609.01938) [📄解读](notes/43_DemoMimic_zh.md) [🈶中译](papers/zh/DemoMimic_2609.01938_zh.pdf)
+1. **DemoMimic: One Demonstration, Many Objects — Generalizing Manipulation via Local Contact Geometry.** arXiv, 2026-09-01. [paper](https://arxiv.org/abs/2609.01938) [📄解读](notes/43_DemoMimic_zh.md) [🈶中译](papers/zh/DemoMimic_2609.01938_zh.pdf) ⏳ 代码待放
 
     *Satvik Sharma, Samrat Sahoo, Huang Huang, Fei-Fei Li, Jiajun Wu, Dorsa Sadigh, Jeannette Bohg — Stanford · 一段人类演示重定向为参考轨迹，残差 RL 配接触中心奖励（对齐 AR + 持续接触 SCR），蒸馏成只读第一人称 RGB-D 的学生策略；单一真机策略跨 16 物体 / 4 任务 / 2 种五指手平均 71%（连续成功分，非二元），sim-to-real 掉幅最小；泛化边界由局部接触几何决定（曲面盖唇处掉到 39%）*
 
@@ -293,15 +295,15 @@
 
 「ICL 工作站在谁的肩上」——被本仓库多篇工作用作主干或基线的三个基座模型（详见 [notes/24](notes/24_foundation_VLAs_zh.md)）。
 
-1. **OpenVLA: An Open-Source Vision-Language-Action Model.** CoRL 2024. [paper](https://arxiv.org/abs/2406.09246) [📄解读](notes/24_foundation_VLAs_zh.md) [🈶中译](papers/zh/OpenVLA_2406.09246_zh.pdf)
+1. **OpenVLA: An Open-Source Vision-Language-Action Model.** CoRL 2024. [paper](https://arxiv.org/abs/2406.09246) [📄解读](notes/24_foundation_VLAs_zh.md) [🈶中译](papers/zh/OpenVLA_2406.09246_zh.pdf) [code](https://github.com/openvla/openvla) [weights](https://huggingface.co/openvla/openvla-7b)
 
     *Moo Jin Kim, Karl Pertsch, Siddharth Karamcheti, et al. — Stanford · UC Berkeley · 7B 自回归离散 token VLA（97 万条 OXE 轨迹）；ICRT 与 π0 的公共基线；单图/无历史/无动作块的结构使其成为「语言接口传达不了运动模式」的对照组*
 
-2. **π0: A Vision-Language-Action Flow Model for General Robot Control.** arXiv, 2024. [paper](https://arxiv.org/abs/2410.24164) [📄解读](notes/24_foundation_VLAs_zh.md) [🈶中译](papers/zh/pi0_2410.24164_zh.pdf)
+2. **π0: A Vision-Language-Action Flow Model for General Robot Control.** arXiv, 2024. [paper](https://arxiv.org/abs/2410.24164) [📄解读](notes/24_foundation_VLAs_zh.md) [🈶中译](papers/zh/pi0_2410.24164_zh.pdf) [code+weights](https://github.com/Physical-Intelligence/openpi)
 
     *Physical Intelligence — PaliGemma 3B + 300M flow matching 动作专家（H=50，50Hz），约 1 万小时专有数据确立「VLM + 连续动作块」范式；RICL 的底座、GR-3 的对照、π0.5 的前作、GR00T N1 的设计上游*
 
-3. **GR00T N1: An Open Foundation Model for Generalist Humanoid Robots.** arXiv, 2025. [paper](https://arxiv.org/abs/2503.14734) [📄解读](notes/24_foundation_VLAs_zh.md) [🈶中译](papers/zh/GR00TN1_2503.14734_zh.pdf)
+3. **GR00T N1: An Open Foundation Model for Generalist Humanoid Robots.** arXiv, 2025. [paper](https://arxiv.org/abs/2503.14734) [📄解读](notes/24_foundation_VLAs_zh.md) [🈶中译](papers/zh/GR00TN1_2503.14734_zh.pdf) [code](https://github.com/NVIDIA/Isaac-GR00T) [weights](https://huggingface.co/nvidia/GR00T-N1-2B)
 
     *NVIDIA — 2.2B 双系统（Eagle-2 VLM + 跨注意力 DiT，H=16，4 步去噪），8,376 小时四层数据金字塔（真机仅 88 小时）；System 1 自足的解耦结构正是 RoboTTT 能只在动作侧插 TTT 层的前提*
 
@@ -309,37 +311,37 @@
 
 「基线的基线」——被 ICL 论文当对照的第二梯队，以及「微调配方比模型本身更影响数字」的实证（详见 [notes/38](notes/38_open_efficient_VLAs_zh.md)）。
 
-1. **RDT-1B: A Diffusion Foundation Model for Bimanual Manipulation.** ICLR 2025. [paper](https://arxiv.org/abs/2410.07864) [📄解读](notes/38_open_efficient_VLAs_zh.md) [🈶中译](papers/zh/RDT1B_2410.07864_zh.pdf)
+1. **RDT-1B: A Diffusion Foundation Model for Bimanual Manipulation.** ICLR 2025. [paper](https://arxiv.org/abs/2410.07864) [📄解读](notes/38_open_efficient_VLAs_zh.md) [🈶中译](papers/zh/RDT1B_2410.07864_zh.pdf) [code](https://github.com/thu-ml/RoboticsDiffusionTransformer) [weights](https://huggingface.co/robotics-diffusion-transformer/rdt-1b)
 
     *Songming Liu, et al. — 清华 TSAIL · 1.2B 纯扩散双臂基座（46 数据集 / 100 万+ 轨迹 / 21TB），物理可解释统一动作空间；真机超基线 56%，1–5 样本学新技能；GO-1 与 OpenVLA-OFT 的对照基线*
 
-2. **OpenVLA-OFT: Fine-Tuning Vision-Language-Action Models — Optimizing Speed and Success.** arXiv, 2025. [paper](https://arxiv.org/abs/2502.19645) [📄解读](notes/38_open_efficient_VLAs_zh.md) [🈶中译](papers/zh/OpenVLAOFT_2502.19645_zh.pdf)
+2. **OpenVLA-OFT: Fine-Tuning Vision-Language-Action Models — Optimizing Speed and Success.** arXiv, 2025. [paper](https://arxiv.org/abs/2502.19645) [📄解读](notes/38_open_efficient_VLAs_zh.md) [🈶中译](papers/zh/OpenVLAOFT_2502.19645_zh.pdf) [code](https://github.com/moojink/openvla-oft) [weights](https://huggingface.co/moojink)
 
     *Moo Jin Kim, Chelsea Finn, Percy Liang — Stanford · 同一 OpenVLA 换微调配方（并行解码 + 连续动作 + L1 + 分块）：LIBERO 76.5% → 97.1%，吞吐 26 倍——「基线配方决定数字」最干净的证据，也把 LIBERO 推到饱和*
 
-3. **SmolVLA: A Vision-Language-Action Model for Affordable and Efficient Robotics.** arXiv, 2025. [paper](https://arxiv.org/abs/2506.01844) [📄解读](notes/38_open_efficient_VLAs_zh.md) [🈶中译](papers/zh/SmolVLA_2506.01844_zh.pdf)
+3. **SmolVLA: A Vision-Language-Action Model for Affordable and Efficient Robotics.** arXiv, 2025. [paper](https://arxiv.org/abs/2506.01844) [📄解读](notes/38_open_efficient_VLAs_zh.md) [🈶中译](papers/zh/SmolVLA_2506.01844_zh.pdf) [code](https://github.com/huggingface/lerobot) [weights](https://huggingface.co/lerobot/smolvla_base)
 
     *Mustafa Shukor, et al. — Hugging Face · 4.5 亿参数、不到 3 万条社区数据、消费级 GPU/CPU 可跑，与 10 倍大 VLA 可比；参数量不是能力代理——涌现之争中「规模」需拆成数据小时、任务覆盖、参数量三维*
 
 ### C3. VLA Baselines, Force & Human-Data Scaling
 
-1. **π0.5: A Vision-Language-Action Model with Open-World Generalization.** arXiv, 2025. [paper](https://arxiv.org/abs/2504.16054) [📄解读](notes/09_related_quick_reviews_zh.md) [🈶中译](papers/zh/pi05_2504.16054_zh.pdf)
+1. **π0.5: A Vision-Language-Action Model with Open-World Generalization.** arXiv, 2025. [paper](https://arxiv.org/abs/2504.16054) [📄解读](notes/09_related_quick_reviews_zh.md) [🈶中译](papers/zh/pi05_2504.16054_zh.pdf) [code+weights](https://github.com/Physical-Intelligence/openpi)
 
     *Physical Intelligence — 语言条件零样本 IL 的上限对照（HOST 口径 ≤17%）*
 
-2. **Wall-OSS: Igniting VLMs toward the Embodied Space.** arXiv, 2025. [paper](https://arxiv.org/abs/2509.11766) [📄解读](notes/09_related_quick_reviews_zh.md) [🈶中译](papers/zh/WallOSS_2509.11766_zh.pdf)
+2. **Wall-OSS: Igniting VLMs toward the Embodied Space.** arXiv, 2025. [paper](https://arxiv.org/abs/2509.11766) [📄解读](notes/09_related_quick_reviews_zh.md) [🈶中译](papers/zh/WallOSS_2509.11766_zh.pdf) [code](https://github.com/X-Square-Robot/wall-x) [weights](https://huggingface.co/x-square-robot)
 
     *X Square Robot Team（自变量）— 最强 SFT 微调基线（56%，旧技能存留 43%），开源*
 
-3. **EgoScale: Scaling Egocentric Human Videos for Vision-Language-Action Pre-Training.** arXiv, 2026. [paper](https://arxiv.org/abs/2602.16710) [📄解读](notes/09_related_quick_reviews_zh.md) [🈶中译](papers/zh/EgoScale_2602.16710_zh.pdf)
+3. **EgoScale: Scaling Egocentric Human Videos for Vision-Language-Action Pre-Training.** arXiv, 2026. [paper](https://arxiv.org/abs/2602.16710) [📄解读](notes/09_related_quick_reviews_zh.md) [🈶中译](papers/zh/EgoScale_2602.16710_zh.pdf) 🔒 未开源
 
     *NVIDIA GEAR · UC Berkeley · UMD — 20,854 小时第一人称人类视频；log-linear scaling law（R²=0.998）*
 
-4. **GR-3 Technical Report.** arXiv, 2025. [paper](https://arxiv.org/abs/2507.15493) [📄解读](notes/20_GR3_zh.md) [🈶中译](papers/zh/GR3_2507.15493_zh.pdf)
+4. **GR-3 Technical Report.** arXiv, 2025. [paper](https://arxiv.org/abs/2507.15493) [📄解读](notes/20_GR3_zh.md) [🈶中译](papers/zh/GR3_2507.15493_zh.pdf) 🔒 未开源
 
     *字节跳动 Seed — few-shot 微调流派工业标杆：4B MoT VLA + 三源数据配方，每新物体仅 10 条 VR 人类轨迹适配；ICL 阵营要淘汰的正是这个工作流的最强版本*
 
-5. **FACTR 2: Learning External Force Sensing for Commodity Robot Arms Improves Policy Learning.** arXiv, 2026. [paper](https://arxiv.org/abs/2606.12406) [📄解读](notes/18_FACTR2_zh.md) [🈶中译](papers/zh/FACTR2_2606.12406_zh.pdf)
+5. **FACTR 2: Learning External Force Sensing for Commodity Robot Arms Improves Policy Learning.** arXiv, 2026. [paper](https://arxiv.org/abs/2606.12406) [📄解读](notes/18_FACTR2_zh.md) [🈶中译](papers/zh/FACTR2_2606.12406_zh.pdf) [code](https://github.com/philiphan0109/factr2_next)
 
     *Steven Oh, Jason Jingzhou Liu, et al. — CMU · 早稻田 · NEXT 零硬件力估计（10 分钟数据/1 分钟训练）+ FIRST 力知情重采样（+17%）；被 S1 博客外推引用为「预训练价值有限」的证据——本仓库核实该引用为弱支撑（见解读 §6）*
 
@@ -347,23 +349,23 @@
 
 WAM 底座层：不直接做 ICL，决定 ICL 的上限——监督单元、世界表征与「要不要想象」。
 
-1. **Fast-WAM: World Action Models Do Not Need Test-Time Video Modeling.** arXiv, 2026. [paper](https://arxiv.org/abs/2603.16666) [📄解读](notes/09_related_quick_reviews_zh.md) [🈶中译](papers/zh/FastWAM_2603.16666_zh.pdf)
+1. **Fast-WAM: World Action Models Do Not Need Test-Time Video Modeling.** arXiv, 2026. [paper](https://arxiv.org/abs/2603.16666) [📄解读](notes/09_related_quick_reviews_zh.md) [🈶中译](papers/zh/FastWAM_2603.16666_zh.pdf) [code](https://github.com/yuantianyuan01/FastWAM) [weights](https://huggingface.co/yuanty/fastwam)
 
     *清华大学 IIIS — 视频建模收益在训练时而非测试时；MoT 双专家架构是 HOST 主干来源*
 
-2. **WALL-WM: Carving World Action Modeling at the Event Joints.** arXiv, 2026. [paper](https://arxiv.org/abs/2606.01955) [📄解读](notes/13_WALLWM_zh.md) [🈶中译](papers/zh/WALLWM_2606.01955_zh.pdf)
+2. **WALL-WM: Carving World Action Modeling at the Event Joints.** arXiv, 2026. [paper](https://arxiv.org/abs/2606.01955) [📄解读](notes/13_WALLWM_zh.md) [🈶中译](papers/zh/WALLWM_2606.01955_zh.pdf) [code](https://github.com/X-Square-Robot/wall-wm) ⏳ 权重待放
 
     *Shalfun Li et al. — X Square Robot Team（自变量，Wall-OSS 同门）· 「语义事件」替代固定 chunk 作原子单元；多样操作 75.86 vs π0.5 55.64（progress 口径）*
 
-3. **EgoWAM: World Action Models Beyond Pixels with In-the-Wild Egocentric Human Data.** arXiv, 2026. [paper](https://arxiv.org/abs/2607.08436) [📄解读](notes/11_EgoWAM_zh.md) [🈶中译](papers/zh/EgoWAM_2607.08436_zh.pdf)
+3. **EgoWAM: World Action Models Beyond Pixels with In-the-Wild Egocentric Human Data.** arXiv, 2026. [paper](https://arxiv.org/abs/2607.08436) [📄解读](notes/11_EgoWAM_zh.md) [🈶中译](papers/zh/EgoWAM_2607.08436_zh.pdf) [code](https://github.com/GaTech-RL2/EgoWAM) [weights](https://huggingface.co/boeyyyy/EgoWAM-checkpoints)
 
     *Baoyu Li, Xinchen Yin, Mengying Lin, Yixin Zhang, Danfei Xu — Georgia Tech · 受控对比 Pixel/DINO/3D flow 三种世界表征：DINO OOD 最高 4 倍，3D flow 域内 +20–30%*
 
-4. **LingBot-VA: Causal World Modeling for Robot Control.** RSS 2026. [paper](https://arxiv.org/abs/2601.21998) [📄解读](notes/19_LingBotVA_zh.md) [🈶中译](papers/zh/LingBotVA_2601.21998_zh.pdf)
+4. **LingBot-VA: Causal World Modeling for Robot Control.** RSS 2026. [paper](https://arxiv.org/abs/2601.21998) [📄解读](notes/19_LingBotVA_zh.md) [🈶中译](papers/zh/LingBotVA_2601.21998_zh.pdf) [code](https://github.com/Robbyant/lingbot-va) [weights](https://huggingface.co/robbyant/lingbot-va-base)
 
     *Lin Li, Qihang Zhang, Yiming Luo, et al. — 蚂蚁 Robbyant · 「测试时保留完整想象」路线代表；RoboTwin 2.0 五十任务 92.93/91.55 超 π0.5；Zero-WAM 同门前作，开源*
 
-5. **LingBot-VA 2.0: Native Video-Action Pretraining for Generalizable Robot Control.** arXiv, 2026. [paper](https://arxiv.org/abs/2607.08639) [📄解读](notes/19_LingBotVA_zh.md) [🈶中译](papers/zh/LingBotVA2_2607.08639_zh.pdf)
+5. **LingBot-VA 2.0: Native Video-Action Pretraining for Generalizable Robot Control.** arXiv, 2026. [paper](https://arxiv.org/abs/2607.08639) [📄解读](notes/19_LingBotVA_zh.md) [🈶中译](papers/zh/LingBotVA2_2607.08639_zh.pdf) 🔒 2.0 未见代码/权重
 
     *蚂蚁 Robbyant · 判「改造视频生成模型」死刑：从头因果预训练 + 语义视觉-动作 tokenizer + 稀疏 MoE + Foresight Reasoning 225Hz；收编 Zero-WAM 式视频 ICL*
 
@@ -371,15 +373,15 @@ WAM 底座层：不直接做 ICL，决定 ICL 的上限——监督单元、世�
 
 「WAM 战场的其他玩家」——被反复当基线或并列引用、却未被单独审视的同代对照组（详见 [notes/28](notes/28_video_action_contemporaries_zh.md)）。
 
-1. **DreamZero: World Action Models are Zero-shot Policies.** arXiv, 2026. [paper](https://arxiv.org/abs/2602.15922) [📄解读](notes/28_video_action_contemporaries_zh.md) [🈶中译](papers/zh/DreamZero_2602.15922_zh.pdf)
+1. **DreamZero: World Action Models are Zero-shot Policies.** arXiv, 2026. [paper](https://arxiv.org/abs/2602.15922) [📄解读](notes/28_video_action_contemporaries_zh.md) [🈶中译](papers/zh/DreamZero_2602.15922_zh.pdf) [code](https://github.com/dreamzero0/dreamzero) [weights](https://huggingface.co/GEAR-Dreams/DreamZero-DROID)
 
     *Seonghyeon Ye, et al.（Yuke Zhu, Jim Fan, Joel Jang 领导）— NVIDIA GEAR · 像素想象派旗舰：14B Wan 骨干、视频-动作单流共享时间步联合去噪，38 倍加速买回 7Hz；无 ICL，是 WAM 装上 ICL 机制前的「素体」；WALL-WM 的数字基线*
 
-2. **Motus: A Unified Latent Action World Model.** arXiv, 2025. [paper](https://arxiv.org/abs/2512.13030) [📄解读](notes/28_video_action_contemporaries_zh.md) [🈶中译](papers/zh/Motus_2512.13030_zh.pdf)
+2. **Motus: A Unified Latent Action World Model.** arXiv, 2025. [paper](https://arxiv.org/abs/2512.13030) [📄解读](notes/28_video_action_contemporaries_zh.md) [🈶中译](papers/zh/Motus_2512.13030_zh.pdf) [code](https://github.com/thu-ml/Motus) [weights](https://huggingface.co/motus-robotics/Motus)
 
     *Hongzhe Bi, Hengkai Tan, et al. — 清华 · 北大 · 地平线 · 一模型五模式（VLA/WM/IDM/VGM/联合）的 8B MoT，光流潜动作作跨具身桥；RoboTwin 2.0 上被 LingBot-VA 两代与 Fast-WAM 一致超越——同一 π0.5 基线在其论文复现 43、在 LingBot-VA 复现 83，40 分离散让所有「+N%」落进噪声区*
 
-3. **DVA: Causal Video Models Are Data-Efficient Robot Policy Learners.** Rhoda AI Blog, 2026-03. [blog 存档](sources/rhoda_dva_blog.txt) [📄解读](notes/28_video_action_contemporaries_zh.md)
+3. **DVA: Causal Video Models Are Data-Efficient Robot Policy Learners.** Rhoda AI Blog, 2026-03. [blog 存档](sources/rhoda_dva_blog.txt) [📄解读](notes/28_video_action_contemporaries_zh.md) 🔒 未开源
 
     *Rhoda AI Research — 仅博客无论文：从零因果视频模型 + 每具身 10 小时逆动力学，「把人类演示注入上下文」即 ICL，无对齐模块、无反捷径目标、无任何数字；LingBot-VA 2.0 引入视频 ICL 时与 Zero-WAM 并列引用；证据形态应与 S1/GEN-1.5 同等对待*
 
@@ -387,15 +389,15 @@ WAM 底座层：不直接做 ICL，决定 ICL 的上限——监督单元、世�
 
 「视频先验进入机器人」的三代上游谱系（详见 [notes/23](notes/23_worldmodel_lineage_zh.md)）：像素想象当策略 → 表征空间预测 → 平台化。
 
-1. **UniPi: Learning Universal Policies via Text-Guided Video Generation.** NeurIPS 2023. [paper](https://arxiv.org/abs/2302.00111) [📄解读](notes/23_worldmodel_lineage_zh.md) [🈶中译](papers/zh/UniPi_2302.00111_zh.pdf)
+1. **UniPi: Learning Universal Policies via Text-Guided Video Generation.** NeurIPS 2023. [paper](https://arxiv.org/abs/2302.00111) [📄解读](notes/23_worldmodel_lineage_zh.md) [🈶中译](papers/zh/UniPi_2302.00111_zh.pdf) 🔒 未开源
 
     *Yilun Du, et al. — MIT · Google · 「生成未来影像→逆动力学解动作」模板的开山；其慢与冗余两大病灶催生了整条 WAM 修正路线*
 
-2. **V-JEPA 2: Self-Supervised Video Models Enable Understanding, Prediction and Planning.** Meta, 2025. [paper](https://arxiv.org/abs/2506.09985) [📄解读](notes/23_worldmodel_lineage_zh.md) [🈶中译](papers/zh/VJEPA2_2506.09985_zh.pdf)
+2. **V-JEPA 2: Self-Supervised Video Models Enable Understanding, Prediction and Planning.** Meta, 2025. [paper](https://arxiv.org/abs/2506.09985) [📄解读](notes/23_worldmodel_lineage_zh.md) [🈶中译](papers/zh/VJEPA2_2506.09985_zh.pdf) [code](https://github.com/facebookresearch/vjepa2) [weights](https://huggingface.co/facebook/vjepa2-vitl-fpc64-256)
 
     *Meta FAIR — 100 万小时视频自监督 + 62 小时无标注机器人视频后训练 → Franka 零样本抓放；表征空间预测路线代表，EgoWAM 三准则的天然满足者*
 
-3. **Cosmos World Foundation Model Platform for Physical AI.** NVIDIA, 2025. [paper](https://arxiv.org/abs/2501.03575) [📄解读](notes/23_worldmodel_lineage_zh.md) [🈶中译](papers/zh/Cosmos_2501.03575_zh.pdf)
+3. **Cosmos World Foundation Model Platform for Physical AI.** NVIDIA, 2025. [paper](https://arxiv.org/abs/2501.03575) [📄解读](notes/23_worldmodel_lineage_zh.md) [🈶中译](papers/zh/Cosmos_2501.03575_zh.pdf) [code](https://github.com/NVIDIA/Cosmos) [weights](https://huggingface.co/nvidia/Cosmos-1.0-Diffusion-7B-Text2World)
 
     *NVIDIA — 世界模型当基础设施而非策略：tokenizer + 扩散/自回归双族 WFM + 后训练管线，开源开放权重；合成配对路线（Zero-WAM HumanGen）的上游依赖*
 
@@ -403,11 +405,11 @@ WAM 底座层：不直接做 ICL，决定 ICL 的上限——监督单元、世�
 
 「后面的任务训练怎样吃掉前面学到的能力」——ICL「不改权重所以不遗忘」这一卖点的反面量化：动作微调几千步内侵蚀 VLM 接地能力、单头持续预训练令主干表征坍缩（详见 [notes/41](notes/41_posttraining_interference_zh.md)）。
 
-1. **StarVLA: A Lego-like Codebase for Vision-Language-Action Model Developing.** arXiv, 2026. [paper](https://arxiv.org/abs/2604.05014) [📄解读](notes/41_posttraining_interference_zh.md) [🈶中译](papers/zh/StarVLA_2604.05014_zh.pdf)
+1. **StarVLA: A Lego-like Codebase for Vision-Language-Action Model Developing.** arXiv, 2026. [paper](https://arxiv.org/abs/2604.05014) [📄解读](notes/41_posttraining_interference_zh.md) [🈶中译](papers/zh/StarVLA_2604.05014_zh.pdf) [code](https://github.com/starVLA/starVLA) [weights](https://huggingface.co/StarVLA)
 
     *模块化 VLA 代码库（主干 × 四种动作头可换，五基准统一评测）；§6 量化动作单训遗忘：RefCOCO-g 接地 2 万步内跌至接近随机，空间引导共训保住约 70% 并令操作反升（WidowX 54.7 → 73.2）*
 
-2. **VLAct: Beyond Data Scaling — Representation-Centric Continued Pre-training for VLA Models.** arXiv, 2026. [paper](https://arxiv.org/abs/2608.27550) [📄解读](notes/41_posttraining_interference_zh.md) [🈶中译](papers/zh/VLAct_2608.27550_zh.pdf)
+2. **VLAct: Beyond Data Scaling — Representation-Centric Continued Pre-training for VLA Models.** arXiv, 2026. [paper](https://arxiv.org/abs/2608.27550) [📄解读](notes/41_posttraining_interference_zh.md) [🈶中译](papers/zh/VLAct_2608.27550_zh.pdf) [code](https://github.com/starVLA/VLAct) [weights](https://huggingface.co/StarVLA)
 
     *Qwen3-VL-4B 持续预训练配方：引子实验发现单一动作头预训练使主干表征坍缩（OFT 预训练主干接 PI/GR00T 头即失效——「同头性能强夸大主干可复用性」）；浅层保护 + 字幕混训 + 多头共监督；LIBERO-Plus 82.6% 比同主干 Qwen3VL-OFT 高 7.6，RoboTwin 2.0 基础设定 92.5/90.8*
 
@@ -646,7 +648,7 @@ awesome_ICL/
 | **15 分钟** | [`report/survey_slides.html`](report/survey_slides.html)（34 页 PPT）——执行摘要 → 总览图 → 四主角 → 证据链 → 涌现之争 → 五个纵深专题 → 趋势 / 洞察 / 预测 / 缺口 |
 | **1 小时** | [`insights/10_trends_insights_zh.md`](insights/10_trends_insights_zh.md) §0 十条执行摘要 + [`insights/12`](insights/12_numbers_ledger_zh.md) 口径账本 → Part A 四篇主角解读：[HOST](notes/01_HOST_zh.md) · [GEN 系列](notes/02_GEN_series_zh.md) · [S1 与涌现之争](notes/16_S1_EICL_wave_zh.md) · [Zeva](notes/40_Zeva_zh.md) |
 | **半天** | 再加 [`insights/11`](insights/11_open_problems_zh.md) 研究机会清单、Part B 的四篇 EICL 学术论文（[RoboTTT](notes/05_RoboTTT_zh.md) · [Zero-WAM](notes/12_ZeroWAM_zh.md) · [WAM-TTT](notes/14_WAMTTT_zh.md) · [StellaVLA](notes/15_StellaVLA_zh.md)）与 Part E 的口径专题（[基准与数据地基](notes/32_benchmarks_and_data_foundations_zh.md)） |
-| **系统研读** | [`report/survey_full_report.pdf`](report/survey_full_report.pdf)（118 页）——趋势报告前置，42 份解读按 Part A–G 分部合订；或按下方 Part 顺序逐节阅读 README |
+| **系统研读** | [`report/survey_full_report.pdf`](report/survey_full_report.pdf)（121 页）——趋势报告前置，42 份解读按 Part A–G 分部合订；或按下方 Part 顺序逐节阅读 README |
 
 按兴趣直达：想知道 **ICL 到底是什么** → Part G（[理论四篇](notes/22_ICL_theory_zh.md)、[视觉 ICL 前史](notes/37_visual_icl_precursors_zh.md)）；想知道 **人类视频怎么进机器人** → Part D 三条桥 + [EgoWAM](notes/11_EgoWAM_zh.md)；想知道 **ICL 与微调/RL 的关系** → [B8 适应刻度盘](notes/39_adaptation_dial_extremes_zh.md) + [C7 后训练干扰](notes/41_posttraining_interference_zh.md)；想知道 **安全** → [F1](notes/33_embodied_safety_zh.md)。每份解读的「延伸批判」与「关系定位」两节是与论文摘要差异最大的增量内容。
 
@@ -684,11 +686,11 @@ python3 scripts/make_figures.py
 欢迎 PR 补充新论文。条目格式：
 
 ```markdown
-N. **论文标题.** Venue, 年份. [paper](arXiv 链接), [code](代码链接)
+N. **论文标题.** Venue, 年份. [paper](arXiv 链接) [code](代码链接) [weights](权重链接)   ← 无官方代码写 🔒 未开源，仅承诺写 ⏳ 代码待放
 
     *作者 — 机构 · 一句话定位*
 ```
 
-要求：(1) 归入 Part A–G 下 28 个子类中最贴切的一个；(2) 一句话定位需说明与「演示如何被策略用上」这条主线的关系；(3) 成功率数字必须注明任务集与判定口径。
+要求：(1) 归入 Part A–G 下 28 个子类中最贴切的一个；(2) 一句话定位需说明与「演示如何被策略用上」这条主线的关系；(3) 成功率数字必须注明任务集与判定口径；(4) Part A–C 条目须标开源状态，且代码 / 权重链接需实际打开核实（不是论文里的承诺）。
 
 > 注：知乎文章（p/2077872253551878182，涌现之争主题）因 JS 反爬无法存档正文，其引用文献 [1]–[8] 已全部纳入本仓库；两篇微信深度文章存档于 [`sources/`](sources/)。

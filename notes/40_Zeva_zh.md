@@ -3,6 +3,7 @@
 > **Zeva: In-Context Causal Learning for Generalizable Embodied Manipulation**
 > arXiv 2608.30880（2026-08-31）· 清华大学智能产业研究院（AIR）+ Z-Trans AI（域变换）
 > 作者：Fu Chen*、Xin Ding*（共同一作）……Hao Wu、Ting Cao（通讯，Ting Cao 项目负责）· 项目页 air-embodied-brain.github.io/Zeva
+> 代码与权重已公开（GitHub air-embodied-brain/Zeva · HuggingFace chen123fu/zeva-robocasa），四个主角中与 HOST 同为可复现的一家
 > 中文报道：量子位「模型不更新，能力却持续增长」（sources/wx_new_20260905.txt）
 
 ## 1. 一句话定位

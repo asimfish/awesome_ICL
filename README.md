@@ -14,6 +14,7 @@
 | **系统研读** | [`report/survey_full_report.pdf`](report/survey_full_report.pdf) | 121 页全文报告：总览图 + 趋势洞察 + 42 份解读按七维度分部合订 |
 | **趋势与洞察** | [`insights/10_trends_insights_zh.md`](insights/10_trends_insights_zh.md) | 六大趋势 · 十三条洞察 · 七条可证伪预测（P5 已被打脸并修正）· 开放问题清单 |
 | **研究机会清单** | [`insights/11_open_problems_zh.md`](insights/11_open_problems_zh.md) | 22 个无人占位的空白，按 Part A–G 排列，每条配「为什么重要 + 最小可行实验 + 相关解读」；只做一件事就做第 4 条 |
+| **研究选题报告** | [`idea-stage/IDEA_REPORT.md`](idea-stage/IDEA_REPORT.md) | ARIS `/idea-discovery-robot` 全流程产物：在「无法复现 HOST 级预训练」约束下，双模型生成 24 条候选 → 去重 21 条 → 跨模型陪审排名 → 前三名查新 + CoRL/RSS 外审 + sim-first 验证包；首选「同一终点、两种程序」程序读取审计（外审 8/10） |
 | **数字口径账本 · 开源状态** | [`insights/12_numbers_ledger_zh.md`](insights/12_numbers_ledger_zh.md) | 26 个头条数字逐条标注任务集 / 未见定义 / 指标类型 / 试验规模 / 干预 / 独立性 / 证据形式——并排任何两个数字前先查此表；§四为 Part A–C 全部 53 项工作的代码 / 权重开源状态核实表 |
 | **总览图** | [图 1 时间线](assets/fig1_timeline.svg) · [图 2 分类树](assets/fig2_taxonomy.svg) | 矢量 SVG；`scripts/make_figures.py` 生成，深色版见 `assets/*_dark*.svg` |
 | **四个主角的深读** | [HOST](notes/01_HOST_zh.md) · [GEN 系列](notes/02_GEN_series_zh.md) · [S1 与涌现之争](notes/16_S1_EICL_wave_zh.md) · [Zeva](notes/40_Zeva_zh.md) | 每篇含机制拆解 / 关键数字与口径 / 局限 / 关系定位 |
@@ -633,9 +634,10 @@ awesome_ICL/
 ├── assets/                    ← 图 1 时间线 / 图 2 分类树 SVG（浅色 README 版 + 深色 PPT 版）
 ├── notes/                     ← 42 份深度解读（01–43，中文；全文报告按 Part A–G 分部合订）
 ├── insights/                  ← 趋势与洞察（10）· 研究机会清单（11）· 数字口径账本（12）
+├── idea-stage/                ← ARIS 选题流水线产物：问题框架 / 21 条候选 / 陪审排名 / 查新 / 外审 / IDEA_REPORT
 ├── sources/                   ← S1 博客、Rhoda DVA 博客、微信深读存档；reviews/ 为 Codex 终审报告
 ├── report/                    ← 汇总 HTML PPT / PPT PDF / 全文报告 HTML+PDF
-├── scripts/                   ← 翻译队列与报告构建脚本
+├── scripts/                   ← 翻译队列、报告构建与查新检索脚本
 └── tools/                     ← 工具仓库（super_translate 等，不入库）
 ```
 

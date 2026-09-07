@@ -11,7 +11,7 @@
 | 想要 | 打开 | 说明 |
 |---|---|---|
 | **15 分钟拿到全部结论** | [`report/survey_slides.html`](report/survey_slides.html) · [PDF](report/survey_slides.pdf) | 34 页汇总 PPT，浏览器打开 ← → 翻页、F 全屏 |
-| **系统研读** | [`report/survey_full_report.pdf`](report/survey_full_report.pdf) | 118 页全文报告：总览图 + 趋势洞察 + 41 份解读按七维度分部合订 |
+| **系统研读** | [`report/survey_full_report.pdf`](report/survey_full_report.pdf) | 118 页全文报告：总览图 + 趋势洞察 + 42 份解读按七维度分部合订 |
 | **趋势与洞察** | [`insights/10_trends_insights_zh.md`](insights/10_trends_insights_zh.md) | 六大趋势 · 十三条洞察 · 七条可证伪预测（P5 已被打脸并修正）· 开放问题清单 |
 | **研究机会清单** | [`insights/11_open_problems_zh.md`](insights/11_open_problems_zh.md) | 22 个无人占位的空白，按 Part A–G 排列，每条配「为什么重要 + 最小可行实验 + 相关解读」；只做一件事就做第 4 条 |
 | **数字口径账本** | [`insights/12_numbers_ledger_zh.md`](insights/12_numbers_ledger_zh.md) | 26 个头条数字逐条标注任务集 / 未见定义 / 指标类型 / 试验规模 / 干预 / 独立性 / 证据形式——并排任何两个数字前先查此表 |
@@ -646,7 +646,7 @@ awesome_ICL/
 | **15 分钟** | [`report/survey_slides.html`](report/survey_slides.html)（34 页 PPT）——执行摘要 → 总览图 → 四主角 → 证据链 → 涌现之争 → 五个纵深专题 → 趋势 / 洞察 / 预测 / 缺口 |
 | **1 小时** | [`insights/10_trends_insights_zh.md`](insights/10_trends_insights_zh.md) §0 十条执行摘要 + [`insights/12`](insights/12_numbers_ledger_zh.md) 口径账本 → Part A 四篇主角解读：[HOST](notes/01_HOST_zh.md) · [GEN 系列](notes/02_GEN_series_zh.md) · [S1 与涌现之争](notes/16_S1_EICL_wave_zh.md) · [Zeva](notes/40_Zeva_zh.md) |
 | **半天** | 再加 [`insights/11`](insights/11_open_problems_zh.md) 研究机会清单、Part B 的四篇 EICL 学术论文（[RoboTTT](notes/05_RoboTTT_zh.md) · [Zero-WAM](notes/12_ZeroWAM_zh.md) · [WAM-TTT](notes/14_WAMTTT_zh.md) · [StellaVLA](notes/15_StellaVLA_zh.md)）与 Part E 的口径专题（[基准与数据地基](notes/32_benchmarks_and_data_foundations_zh.md)） |
-| **系统研读** | [`report/survey_full_report.pdf`](report/survey_full_report.pdf)（118 页）——趋势报告前置，41 份解读按 Part A–G 分部合订；或按下方 Part 顺序逐节阅读 README |
+| **系统研读** | [`report/survey_full_report.pdf`](report/survey_full_report.pdf)（118 页）——趋势报告前置，42 份解读按 Part A–G 分部合订；或按下方 Part 顺序逐节阅读 README |
 
 按兴趣直达：想知道 **ICL 到底是什么** → Part G（[理论四篇](notes/22_ICL_theory_zh.md)、[视觉 ICL 前史](notes/37_visual_icl_precursors_zh.md)）；想知道 **人类视频怎么进机器人** → Part D 三条桥 + [EgoWAM](notes/11_EgoWAM_zh.md)；想知道 **ICL 与微调/RL 的关系** → [B8 适应刻度盘](notes/39_adaptation_dial_extremes_zh.md) + [C7 后训练干扰](notes/41_posttraining_interference_zh.md)；想知道 **安全** → [F1](notes/33_embodied_safety_zh.md)。每份解读的「延伸批判」与「关系定位」两节是与论文摘要差异最大的增量内容。
 
